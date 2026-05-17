@@ -28,45 +28,111 @@ async def generate_azure_tts(
     try:
         # 1. Làm sạch sơ bộ
         text = re.sub(r'/[^/]+/', '', text) # Xóa IPA
-        # Loại bỏ tất cả emoji (dải Unicode) để ngăn TTS đọc tên emoji như "đinh ghim tròn"
+        # Loại bỏ tất cả emoji (dải Unicode) để ngăn TTS đọc tên emoji
         text = re.sub(r'[\U00010000-\U0010ffff]', '', text)
-        # Loại bỏ các ký hiệu đặc biệt khác và thẻ cảnh báo
+        # Loại bỏ các ký hiệu đặc biệt khác
         text = re.sub(r'[❌✅💡📝🗣️😊👍🌟💪✨🎉👏📊📌📍⚠️•|*#\-]', '', text)
-        text = text.strip()
         
-        if not text:
+        # 2. Tách văn bản thành các phân đoạn ngôn ngữ thông minh
+        sentences = re.split(r'(?<=[.?!])\s+|\n+', text)
+        raw_parts = []
+        
+        for sentence in sentences:
+            sentence = sentence.strip()
+            if not sentence:
+                continue
+                
+            # Tách các cụm tiếng Anh dựa vào: dấu nháy bọc ngoài HOẶC cụm từ Latin thuần túy đứng sau dấu hai chấm (:) hoặc trong dấu ngoặc
+            sub_parts = re.split(r'([\"\'“][^\"\'“”]+[\"\'”]|(?<=:\s)[A-Za-z\s,\.\?\!]+(?=\s*(?:\(|$)))', sentence)
+            
+            for sub in sub_parts:
+                if not sub:
+                    continue
+                sub = sub.strip()
+                # Xóa dấu nháy bọc ngoài nếu có
+                sub_clean = re.sub(r'^[\"\'“]|[\"\'”]$', '', sub).strip()
+                if not sub_clean:
+                    continue
+                    
+                # Phán đoán ngôn ngữ: Nếu chứa nguyên âm tiếng Việt có dấu, thì là tiếng Việt (vi), ngược lại là tiếng Anh (en)
+                is_vi = bool(re.search(r'[àáảãạăằắẳẵặâầấẩẫậèéẻẽẹêềếểễệđìíỉĩịòóỏõọôồốổỗộơờớởỡợùúủũụưừứửữựỳýỷỹỵ]', sub_clean.lower()))
+                lang = "vi" if is_vi else "en"
+                raw_parts.append({"text": sub_clean, "lang": lang})
+
+        if not raw_parts:
+            raw_parts = [{"text": text, "lang": "vi"}]
+ 
+        # 3. Gộp các phần cùng ngôn ngữ liên tiếp để giảm request
+        parts = []
+        current_part = raw_parts[0]
+        for next_part in raw_parts[1:]:
+            if next_part["lang"] == current_part["lang"]:
+                current_part["text"] += " " + next_part["text"]
+            else:
+                parts.append(current_part)
+                current_part = next_part
+        parts.append(current_part)
+ 
+        # 4. Tổng hợp âm thanh đa giọng đọc chuyên biệt với khả năng tự phục hồi bằng Multilingual
+        raw_pcm_data = bytearray()
+        
+        for part in parts:
+            p_text = part["text"]
+            p_lang = part["lang"]
+            
+            # Bỏ qua nếu chỉ chứa ký tự đặc biệt/trống
+            if not re.search(r'[a-zA-ZÀ-ỹ0-9]', p_text):
+                continue
+ 
+            if p_lang == "vi":
+                v_name = "vi-VN-HoaiMyNeural"
+                p_rate = "+0%"
+            else:
+                # Sử dụng giọng đọc chuẩn Anh-Anh (British English) quý phái, rõ ràng, dễ nghe
+                v_name = "en-GB-SoniaNeural"
+                p_rate = "-5%" # Độ chậm vừa phải để học viên nghe rõ
+            
+            print(f"DEBUG Smart Hybrid TTS: [{p_lang}] {p_text}")
+            
+            try:
+                communicate = edge_tts.Communicate(p_text, v_name, rate=p_rate)
+                audio_data = b""
+                async for chunk in communicate.stream():
+                    if chunk["type"] == "audio":
+                        audio_data += chunk["data"]
+                
+                # Nếu giọng đọc tiếng Việt của Microsoft bị lỗi, tự động chuyển sang dùng giọng đa ngôn ngữ cứu hộ
+                if not audio_data and p_lang == "vi":
+                    print(f"WARN: Native {v_name} failed. Activating Multilingual Rescue Voice for: {p_text}")
+                    rescue_communicate = edge_tts.Communicate(p_text, "en-US-AvaMultilingualNeural", rate="-4%")
+                    async for chunk in rescue_communicate.stream():
+                        if chunk["type"] == "audio":
+                            audio_data += chunk["data"]
+
+                # Lọc bỏ ID3 tag để ghép nối MP3 mượt mà
+                if audio_data.startswith(b"ID3"):
+                    size_bytes = audio_data[6:10]
+                    tag_size = (size_bytes[0] << 21) | (size_bytes[1] << 14) | (size_bytes[2] << 7) | size_bytes[3]
+                    total_id3_size = 10 + tag_size
+                    audio_data = audio_data[total_id3_size:]
+                    
+                raw_pcm_data.extend(audio_data)
+            except Exception as inner_e:
+                print(f"WARN: edge_tts failed for part '{p_text}': {inner_e}")
+                # Thử cứu hộ bằng giọng Multilingual một lần nữa ở khối try-except ngoài cùng
+                try:
+                    rescue_communicate = edge_tts.Communicate(p_text, "en-US-AvaMultilingualNeural", rate="-4%")
+                    async for chunk in rescue_communicate.stream():
+                        if chunk["type"] == "audio":
+                            raw_pcm_data.extend(chunk["data"])
+                except Exception as rescue_e:
+                    print(f"FAILED Rescue: {rescue_e}")
+                continue
+
+        if not raw_pcm_data:
             return Response(content=b"", status_code=204)
 
-        # 2. Sử dụng giọng đọc đa ngôn ngữ (Multilingual) cao cấp của Microsoft Edge TTS
-        v_name = voice if voice else "en-US-AvaMultilingualNeural"
-        p_rate = "-4%" # Độ chậm vừa phải để học viên nghe rõ cả hai ngôn ngữ
-
-        print(f"DEBUG Multilingual TTS (PCM): {text}")
-        
-        communicate = edge_tts.Communicate(text, v_name, rate=p_rate)
-        audio_data = b""
-        async for chunk in communicate.stream():
-            if chunk["type"] == "audio":
-                audio_data += chunk["data"]
-        
-        if not audio_data:
-            print("WARN: AvaMultilingual failed, trying fallback AndrewMultilingual...")
-            communicate = edge_tts.Communicate(text, "en-US-AndrewMultilingualNeural", rate=p_rate)
-            async for chunk in communicate.stream():
-                if chunk["type"] == "audio":
-                    audio_data += chunk["data"]
-
-        if not audio_data:
-            return Response(content=b"", status_code=204)
-
-        # Lọc bỏ ID3 tag để ghép nối MP3 mượt mà
-        if audio_data.startswith(b"ID3"):
-            size_bytes = audio_data[6:10]
-            tag_size = (size_bytes[0] << 21) | (size_bytes[1] << 14) | (size_bytes[2] << 7) | size_bytes[3]
-            total_id3_size = 10 + tag_size
-            audio_data = audio_data[total_id3_size:]
-
-        return Response(content=bytes(audio_data), media_type="audio/mpeg")
+        return Response(content=bytes(raw_pcm_data), media_type="audio/mpeg")
         
     except Exception as e:
         print(f"TTS Error: {e}")
