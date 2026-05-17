@@ -335,13 +335,22 @@ async def realtime_voice_endpoint(
                         )
                     
                     full_welcome = ""
-                    async for chunk in gemini_service.get_tutor_response(
-                        compact_context="Học viên vừa tham gia bài học.",
-                        user_message=welcome_prompt,
-                        custom_instruction=current_instruction
-                    ):
-                        full_welcome += chunk
-                        await manager.send_json({"type": "delta", "content": chunk}, websocket)
+                    try:
+                        async for chunk in gemini_service.get_tutor_response(
+                            compact_context="Học viên vừa tham gia bài học.",
+                            user_message=welcome_prompt,
+                            custom_instruction=current_instruction
+                        ):
+                            full_welcome += chunk
+                            await manager.send_json({"type": "delta", "content": chunk}, websocket)
+                    except Exception as e:
+                        print(f"WARN: Realtime welcome response failed: {e}")
+                        if mode == "roleplay":
+                            full_welcome = f"Chào mừng bạn đến với tình huống nhập vai '{topic}'! Mình đã sẵn sàng rồi. Hãy bắt đầu cuộc hội thoại nhé! 🚀"
+                        else:
+                            full_welcome = "Xin chào! Mình là AI English Coach của bạn. Hôm nay chúng ta sẽ cùng đàm thoại tự do để tăng phản xạ nhé! How are you doing today? 😊"
+                        
+                        await manager.send_json({"type": "delta", "content": full_welcome}, websocket)
                     
                     # Lưu chào mừng vào lịch sử hội thoại của memory
                     conversation_memory.add_turn(user_id, "[System welcome initiation]", full_welcome)
