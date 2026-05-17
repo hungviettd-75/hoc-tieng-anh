@@ -57,6 +57,23 @@ class _HomePageState extends ConsumerState<HomePage> {
     "Declining an Invitation Politely",
     "Ordering a Drink at a Busy Bar",
     "Renting an Apartment from a Landlord",
+    "Reporting a Car Accident to the Insurance Agent",
+    "Asking for a Refund for a Cancelled Flight",
+    "Ordering Flowers at a Florist for Mother's Day",
+    "Applying for a Visa at a Consulate Office",
+    "Adopting a Pet from an Animal Shelter",
+    "Discussing Homework with a Teacher",
+    "Reporting a Stolen Wallet to a Police Officer",
+    "Registering a Child at a Local School",
+    "Reserving a Seat on a Scenic Tour Bus",
+    "Buying a Smart TV at an Electronics Store",
+    "Asking for a Pay Raise during a Performance Review",
+    "Booking a Ticket for a Broadway Show",
+    "Discussing a Meal Recipe with a Professional Chef",
+    "Reporting a Leaky Pipe to a Plumber",
+    "Planning a Charity Event with a Volunteer",
+    "Ordering a Tailor-made Suit at a Fashion Boutique",
+    "Asking for a Second Opinion from a Nutritionist",
   ];
 
   @override
