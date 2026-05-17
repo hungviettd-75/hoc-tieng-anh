@@ -82,12 +82,12 @@ class RecommendationService:
             return [
                 RecommendationItem(
                     id=str(uuid.uuid4()),
-                    topic="Daily Vocabulary Mix",
+                    topic="Luyện Từ Vựng Mỗi Ngày",
                     content_type="vocabulary",
                     difficulty_level="Intermediate",
                     estimated_minutes=5,
-                    description="Review 10 common vocabulary words.",
-                    reason="Keep your daily habit."
+                    description="Ôn tập 10 từ vựng tiếng Anh giao tiếp phổ biến hàng ngày.",
+                    reason="Duy trì thói quen học tập đều đặn mỗi ngày."
                 )
             ]
 

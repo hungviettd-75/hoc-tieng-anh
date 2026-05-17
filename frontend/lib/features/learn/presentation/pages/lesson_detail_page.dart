@@ -19,6 +19,26 @@ class _LessonDetailPageState extends ConsumerState<LessonDetailPage> {
   bool _isCompleted = false;
   bool _isLoading = false;
 
+  String _translateDifficulty(String difficulty) {
+    switch (difficulty.toLowerCase()) {
+      case 'beginner': return 'Cơ bản (Beginner)';
+      case 'intermediate': return 'Trung cấp (Intermediate)';
+      case 'advanced': return 'Nâng cao (Advanced)';
+      default: return difficulty;
+    }
+  }
+
+  String _translateContentType(String contentType) {
+    switch (contentType.toLowerCase()) {
+      case 'grammar': return 'NGỮ PHÁP';
+      case 'vocabulary': return 'TỪ VỰNG';
+      case 'roleplay': return 'NHẬP VAI';
+      case 'listening': return 'LUYỆN NGHE';
+      case 'speaking': return 'LUYỆN NÓI';
+      default: return contentType.toUpperCase();
+    }
+  }
+
   Future<void> _completeLesson() async {
     setState(() => _isLoading = true);
     try {
@@ -36,7 +56,7 @@ class _LessonDetailPageState extends ConsumerState<LessonDetailPage> {
         
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Lesson "${widget.recommendation.topic}" completed! Skill boosted.'),
+            content: Text('Bài học "${widget.recommendation.topic}" đã hoàn thành! Điểm kỹ năng đã được nâng cấp. 🎉'),
             backgroundColor: Colors.green,
           ),
         );
@@ -48,7 +68,7 @@ class _LessonDetailPageState extends ConsumerState<LessonDetailPage> {
       if (mounted) {
         setState(() => _isLoading = false);
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Error: $e'), backgroundColor: Colors.redAccent),
+          SnackBar(content: Text('Lỗi: $e'), backgroundColor: Colors.redAccent),
         );
       }
     }
@@ -65,7 +85,7 @@ class _LessonDetailPageState extends ConsumerState<LessonDetailPage> {
           icon: const Icon(Icons.arrow_back_ios_new_rounded, color: Colors.white),
           onPressed: () => context.pop(),
         ),
-        title: Text(widget.recommendation.contentType.toUpperCase(), 
+        title: Text(_translateContentType(widget.recommendation.contentType), 
           style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold, letterSpacing: 2)),
         centerTitle: true,
       ),
@@ -91,16 +111,16 @@ class _LessonDetailPageState extends ConsumerState<LessonDetailPage> {
                 ),
                 child: Column(
                   children: [
-                    _buildInfoRow(Icons.timer_outlined, 'Duration', '${widget.recommendation.estimatedMinutes} minutes'),
+                    _buildInfoRow(Icons.timer_outlined, 'Thời lượng', '${widget.recommendation.estimatedMinutes} phút'),
                     const Divider(color: Colors.white12, height: 24),
-                    _buildInfoRow(Icons.bolt_rounded, 'Difficulty', widget.recommendation.difficultyLevel),
+                    _buildInfoRow(Icons.bolt_rounded, 'Độ khó', _translateDifficulty(widget.recommendation.difficultyLevel)),
                   ],
                 ),
               ),
             ),
             const SizedBox(height: 32),
             const Text(
-              'What you will learn',
+              'Nội dung bài học',
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
             ),
             const SizedBox(height: 12),
@@ -124,7 +144,7 @@ class _LessonDetailPageState extends ConsumerState<LessonDetailPage> {
                       Icon(Icons.auto_awesome, color: AppColors.primary, size: 20),
                       const SizedBox(width: 8),
                       const Text(
-                        'AI Recommendation Reason',
+                        'Lý do đề xuất từ AI',
                         style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
                       ),
                     ],
@@ -144,11 +164,11 @@ class _LessonDetailPageState extends ConsumerState<LessonDetailPage> {
                     children: [
                       const Icon(Icons.check_circle_rounded, color: Colors.greenAccent, size: 64),
                       const SizedBox(height: 16),
-                      const Text('Lesson Completed!', style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold)),
+                      const Text('Bài học đã hoàn thành!', style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold)),
                       const SizedBox(height: 8),
                       TextButton(
                         onPressed: () => context.pop(),
-                        child: const Text('Back to Dashboard'),
+                        child: const Text('Quay lại Lộ trình'),
                       ),
                     ],
                   )
@@ -165,7 +185,7 @@ class _LessonDetailPageState extends ConsumerState<LessonDetailPage> {
                       ),
                       child: _isLoading 
                         ? const CircularProgressIndicator(color: Colors.white)
-                        : const Text('Mark as Completed', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                        : const Text('Đánh dấu hoàn thành', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
                     ),
                   ),
             ),
