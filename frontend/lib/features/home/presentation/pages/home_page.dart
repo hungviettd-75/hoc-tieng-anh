@@ -307,7 +307,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                 Icons.mic_rounded, 
                 'Luyện nói', 
                 AppColors.primary,
-                onTap: () => context.push('/voice-chat'),
+                onTap: () => context.push('/voice-chat?mode=free_talk'),
               ),
               _buildActionItem(
                 Icons.psychology_rounded, 
@@ -325,7 +325,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                 Icons.groups_rounded, 
                 'Nhập vai', 
                 Colors.green, 
-                onTap: () => context.push('/voice-chat'),
+                onTap: () => context.push('/voice-chat?mode=roleplay&topic=${Uri.encodeComponent("Order food in a Restaurant")}'),
               ),
             ],
           ),

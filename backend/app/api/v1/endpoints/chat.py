@@ -213,6 +213,8 @@ async def realtime_voice_endpoint(
     Smart Hybrid AI Pipeline:
     User Text → Local NLP → AI Router → (LLM nếu cần) → Vietnamese Tutor → Response
     """
+    if not mode or mode == "null":
+        mode = "free_talk"
     print(f"DEBUG: New Realtime WebSocket connection for user_id: {user_id}, mode: {mode}, level: {level}, topic: {topic}")
     await manager.connect(websocket)
 
