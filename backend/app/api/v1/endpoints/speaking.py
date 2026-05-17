@@ -33,47 +33,49 @@ async def generate_azure_tts(
         # Loại bỏ các ký hiệu đặc biệt khác và thẻ cảnh báo
         text = re.sub(r'[❌✅💡📝🗣️😊👍🌟💪✨🎉👏📊📌📍⚠️•|*#\-]', '', text)
         
-        # 2. Tách ngôn ngữ dựa trên dấu nháy đơn hoặc phân tích Unicode
+        # 2. Tách văn bản thành các câu đơn lẻ để phân đoạn ngôn ngữ chuẩn xác
+        sentences = re.split(r'(?<=[.?!])\s+|\n+', text)
         raw_parts = []
-        last_idx = 0
         
-        # Tìm các cụm từ trong nháy đơn '...'
-        for match in re.finditer(r"\'([^\']+)\'", text):
-            # Phần tiếng Việt trước đó
-            vi_part = text[last_idx:match.start()].strip()
-            if vi_part:
-                raw_parts.append({"text": vi_part, "lang": "vi"})
-            
-            # Phần tiếng Anh trong nháy (đây là từ cần phát âm chuẩn)
-            en_part = match.group(1).strip()
-            if en_part:
-                raw_parts.append({"text": en_part, "lang": "en"})
-            
-            last_idx = match.end()
-        
-        # Phần còn lại cuối cùng
-        remaining = text[last_idx:].strip()
-        if remaining:
-            if re.search(r'[À-ỹ]', remaining):
-                raw_parts.append({"text": remaining, "lang": "vi"})
-            else:
-                raw_parts.append({"text": remaining, "lang": "en"})
+        for sentence in sentences:
+            sentence = sentence.strip()
+            if not sentence:
+                continue
+                
+            last_idx = 0
+            # Tìm các cụm từ tiếng Anh bọc trong nháy đơn, nháy kép hoặc ngoặc kép nổi bật
+            for match in re.finditer(r"['\"“]([^'\"“”]+)['\"”]", sentence):
+                before = sentence[last_idx:match.start()].strip()
+                if before:
+                    lang = "vi" if re.search(r'[À-ỹ]', before) else "en"
+                    raw_parts.append({"text": before, "lang": lang})
+                
+                inside = match.group(1).strip()
+                if inside:
+                    raw_parts.append({"text": inside, "lang": "en"})
+                
+                last_idx = match.end()
+                
+            remaining = sentence[last_idx:].strip()
+            if remaining:
+                lang = "vi" if re.search(r'[À-ỹ]', remaining) else "en"
+                raw_parts.append({"text": remaining, "lang": lang})
 
         if not raw_parts:
             raw_parts = [{"text": text, "lang": "vi"}]
-
+ 
         # 3. Gộp các phần cùng ngôn ngữ liên tiếp để giảm số lượng request tới server TTS
         parts = []
         if raw_parts:
             current_part = raw_parts[0]
             for next_part in raw_parts[1:]:
                 if next_part["lang"] == current_part["lang"]:
-                    current_part["text"] += ". " + next_part["text"]
+                    current_part["text"] += " " + next_part["text"]
                 else:
                     parts.append(current_part)
                     current_part = next_part
             parts.append(current_part)
-
+ 
         # 4. Tổng hợp âm thanh đa giọng đọc chuyên biệt
         raw_pcm_data = bytearray()
         
@@ -84,13 +86,14 @@ async def generate_azure_tts(
             # Bỏ qua nếu text chỉ chứa ký tự đặc biệt/trống
             if not re.search(r'[a-zA-ZÀ-ỹ0-9]', p_text):
                 continue
-
+ 
             if p_lang == "vi":
                 v_name = "vi-VN-HoaiMyNeural"
                 p_rate = "+0%"
             else:
-                v_name = "en-US-JennyNeural"
-                p_rate = "-10%" # Giảm độ chậm lại một chút cho dễ nghe
+                # Sử dụng giọng đọc chuẩn Anh-Anh (British English) cực kỳ quý phái, rõ ràng, dễ nghe
+                v_name = "en-GB-SoniaNeural"
+                p_rate = "-5%" # Độ chậm vừa phải để học viên nghe rõ
             
             print(f"DEBUG Hybrid TTS (PCM): [{p_lang}] {p_text}")
             
