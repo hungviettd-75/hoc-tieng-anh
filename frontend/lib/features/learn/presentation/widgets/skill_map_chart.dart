@@ -42,19 +42,19 @@ class SkillMapChart extends StatelessWidget {
             String text;
             switch (index) {
               case 0:
-                text = 'Vocabulary';
+                text = 'Từ vựng';
                 break;
               case 1:
-                text = 'Grammar';
+                text = 'Ngữ pháp';
                 break;
               case 2:
-                text = 'Pronun.';
+                text = 'Phát âm';
                 break;
               case 3:
-                text = 'Listening';
+                text = 'Nghe hiểu';
                 break;
               case 4:
-                text = 'Fluency';
+                text = 'Lưu loát';
                 break;
               default:
                 text = '';

@@ -62,7 +62,7 @@ class _ScoreRadarChartState extends State<ScoreRadarChart>
                 widget.confidence * _animation.value,
                 widget.intonation * _animation.value,
               ],
-              labels: ['Fluency', 'Pronunciation', 'Confidence', 'Intonation'],
+              labels: ['Trôi chảy', 'Phát âm', 'Tự tin', 'Ngữ điệu'],
             ),
           ),
         );

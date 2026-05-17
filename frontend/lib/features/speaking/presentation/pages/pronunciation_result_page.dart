@@ -27,7 +27,7 @@ class PronunciationResultPage extends ConsumerWidget {
             context.go('/speaking');
           },
         ),
-        title: const Text('Results',
+        title: const Text('Kết quả',
             style: TextStyle(color: AppColors.textPrimary, fontSize: 18, fontWeight: FontWeight.w600)),
         centerTitle: true,
       ),
@@ -76,17 +76,17 @@ class PronunciationResultPage extends ConsumerWidget {
         Text(_getScoreLabel(score),
             style: TextStyle(color: color, fontSize: 18, fontWeight: FontWeight.bold)),
         const SizedBox(height: 4),
-        Text('Overall Score', style: TextStyle(color: AppColors.textSecondary, fontSize: 13)),
+        Text('Điểm tổng quan', style: TextStyle(color: AppColors.textSecondary, fontSize: 13)),
       ]),
     );
   }
 
   Widget _buildMetricBars() {
     final metrics = [
-      ('🗣️ Fluency', result.fluencyScore),
-      ('🔤 Pronunciation', result.pronunciationScore),
-      ('💪 Confidence', result.confidenceScore),
-      ('🎵 Intonation', result.intonationScore),
+      ('🗣️ Trôi chảy', result.fluencyScore),
+      ('🔤 Phát âm', result.pronunciationScore),
+      ('💪 Tự tin', result.confidenceScore),
+      ('🎵 Ngữ điệu', result.intonationScore),
     ];
     return Container(
       padding: const EdgeInsets.all(20),
@@ -97,7 +97,7 @@ class PronunciationResultPage extends ConsumerWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text('Detailed Scores',
+          const Text('Chi tiết điểm số',
               style: TextStyle(color: AppColors.textPrimary, fontSize: 16, fontWeight: FontWeight.w600)),
           const SizedBox(height: 16),
           ...metrics.map((m) => _buildMetricBar(m.$1, m.$2)),
@@ -146,7 +146,7 @@ class PronunciationResultPage extends ConsumerWidget {
         borderRadius: BorderRadius.circular(20),
       ),
       child: Column(children: [
-        const Text('Score Overview',
+        const Text('Biểu đồ kỹ năng',
             style: TextStyle(color: AppColors.textPrimary, fontSize: 16, fontWeight: FontWeight.w600)),
         const SizedBox(height: 8),
         Center(
@@ -174,13 +174,13 @@ class PronunciationResultPage extends ConsumerWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text('Word Analysis',
+          const Text('Phân tích từ vựng',
               style: TextStyle(color: AppColors.textPrimary, fontSize: 16, fontWeight: FontWeight.w600)),
           const SizedBox(height: 6),
-          Text('Target: "${result.targetText}"',
+          Text('Câu mẫu: "${result.targetText}"',
               style: TextStyle(color: AppColors.textSecondary, fontSize: 12)),
           if (result.transcribedText.isNotEmpty)
-            Text('You said: "${result.transcribedText}"',
+            Text('Bạn đã nói: "${result.transcribedText}"',
                 style: TextStyle(color: AppColors.textSecondary, fontSize: 12)),
           const SizedBox(height: 14),
           WordHighlightWidget(wordScores: result.wordScores),
@@ -208,7 +208,7 @@ class PronunciationResultPage extends ConsumerWidget {
           const Row(children: [
             Icon(Icons.lightbulb_rounded, color: Color(0xFFF59E0B), size: 20),
             SizedBox(width: 8),
-            Text('AI Coach Feedback',
+            Text('Nhận xét từ AI Coach',
                 style: TextStyle(color: AppColors.textPrimary, fontSize: 15, fontWeight: FontWeight.w600)),
           ]),
           const SizedBox(height: 10),
@@ -237,7 +237,7 @@ class PronunciationResultPage extends ConsumerWidget {
               border: Border.all(color: Colors.white10),
             ),
             child: const Center(
-              child: Text('Try Again',
+              child: Text('Luyện lại',
                   style: TextStyle(color: AppColors.textPrimary, fontWeight: FontWeight.w600, fontSize: 15)),
             ),
           ),
@@ -257,7 +257,7 @@ class PronunciationResultPage extends ConsumerWidget {
               borderRadius: BorderRadius.circular(16),
             ),
             child: const Center(
-              child: Text('Next Sentence',
+              child: Text('Câu tiếp theo',
                   style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600, fontSize: 15)),
             ),
           ),
