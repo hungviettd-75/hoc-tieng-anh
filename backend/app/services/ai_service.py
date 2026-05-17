@@ -145,11 +145,22 @@ Format ONLY as valid JSON (no markdown):
         try:
             response = await self.model.generate_content_async(prompt)
             text = self._get_text_safely(response).strip()
-            if text.startswith("```"):
-                import re
-                text = re.sub(r'^```(?:json)?\s*', '', text)
+            
+            import re
+            # Trích xuất phần JSON mảng từ [ đến ] một cách mạnh mẽ nhất
+            match = re.search(r'\[.*\]', text, re.DOTALL)
+            if match:
+                text = match.group(0)
+            else:
+                # Nếu không tìm thấy cặp [], cố gắng làm sạch markdown thủ công
+                text = re.sub(r'^```(?:json)?\s*', '', text, flags=re.IGNORECASE)
                 text = re.sub(r'\s*```$', '', text)
-            return json.loads(text)
+            
+            cleaned_text = text.strip()
+            if not cleaned_text or cleaned_text == "[]":
+                return []
+                
+            return json.loads(cleaned_text)
         except Exception as e:
             print(f"ERROR parsing structured correction: {e}")
             return []
