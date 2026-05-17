@@ -72,9 +72,7 @@ class RealtimeChatNotifier extends StateNotifier<RealtimeChatState> {
   final AudioPlayer _audioPlayer = AudioPlayer();
   StreamSubscription? _subscription;
 
-  RealtimeChatNotifier(this._chatService) : super(RealtimeChatState(messages: [])) {
-    _init();
-  }
+  RealtimeChatNotifier(this._chatService) : super(RealtimeChatState(messages: []));
 
   final List<String> _speechQueue = [];
   bool _isSpeaking = false;
@@ -131,9 +129,6 @@ class RealtimeChatNotifier extends StateNotifier<RealtimeChatState> {
     }
   }
 
-  void _init() {
-    _listenToMessages();
-  }
 
   void connectWithContext({String? mode, String? level, String? topic}) {
     print('DEBUG: Reconnecting to Realtime chat WebSocket with mode: $mode, level: $level, topic: $topic');
