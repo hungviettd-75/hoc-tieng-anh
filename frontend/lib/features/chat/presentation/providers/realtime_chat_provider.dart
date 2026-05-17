@@ -74,13 +74,40 @@ class RealtimeChatNotifier extends StateNotifier<RealtimeChatState> {
 
   RealtimeChatNotifier(this._chatService) : super(RealtimeChatState(messages: []));
 
+  String _sanitizeTtsText(String text) {
+    String sanitized = text;
+
+    // 1. Loại bỏ gợi ý tiếng Việt bọc trong dấu ngoặc đơn dạng *(Gợi ý:...)*
+    sanitized = sanitized.replaceAll(RegExp(r'\*?\(gợi ý:[^\)]*\)\*?', caseSensitive: false), '');
+    sanitized = sanitized.replaceAll(RegExp(r'\*?\(gợi ý thực hành:[^\)]*\)\*?', caseSensitive: false), '');
+    
+    // 2. Loại bỏ các cặp dấu ngoặc đơn chứa giải thích hoặc hướng dẫn phụ trợ dạng *(...)*
+    sanitized = sanitized.replaceAll(RegExp(r'\*?\([^\)]*\)\*?'), '');
+
+    // 3. Loại bỏ ký tự định dạng Markdown
+    sanitized = sanitized.replaceAll('**', '');
+    sanitized = sanitized.replaceAll('*', '');
+    sanitized = sanitized.replaceAll('_', '');
+    sanitized = sanitized.replaceAll('`', '');
+
+    // 4. Loại bỏ các tiền tố hội thoại để giọng đọc AI tự nhiên hơn
+    sanitized = sanitized.replaceAll(RegExp(r'^(waiter|customer|coach|student|ai|user):\s*', caseSensitive: false), '');
+
+    // 5. Chuẩn hóa khoảng trắng và loại bỏ xuống dòng gây lỗi URL
+    sanitized = sanitized.replaceAll(RegExp(r'\n+'), ' ');
+    sanitized = sanitized.replaceAll(RegExp(r'\s+'), ' ');
+
+    return sanitized.trim();
+  }
+
   final List<String> _speechQueue = [];
   bool _isSpeaking = false;
 
   Future<void> _speakBilingual(String text) async {
-    if (text.trim().isEmpty) return;
+    final sanitizedText = _sanitizeTtsText(text);
+    if (sanitizedText.isEmpty) return;
     
-    _speechQueue.add(text);
+    _speechQueue.add(sanitizedText);
     if (_isSpeaking) return;
 
     _processNextInQueue();
