@@ -151,31 +151,74 @@ class _VoiceConversationPageState extends ConsumerState<VoiceConversationPage> w
           // AI Avatar ở giữa
           Center(child: _buildAIAvatar(state.status)),
 
-          // Ô phụ đề
+          // Ô phụ đề song hành (Dual-Subtitle Layout) không che khuất câu hỏi của AI
           Positioned(
             bottom: 200,
             left: 20,
             right: 20,
             child: Container(
-              padding: const EdgeInsets.all(20),
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 18),
               decoration: BoxDecoration(
-                color: Colors.black.withOpacity(0.75),
+                color: Colors.black.withOpacity(0.85),
                 borderRadius: BorderRadius.circular(24),
                 border: Border.all(color: Colors.white12),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.3),
+                    blurRadius: 15,
+                    offset: const Offset(0, 5),
+                  )
+                ],
               ),
-              child: Text(
-                _isListening
-                    ? (_lastWords.isEmpty ? '🎤 Listening...' : _lastWords)
-                    : (state.currentSubtitle.isEmpty
-                        ? (state.status == AIStatus.thinking ? '🤔 AI is thinking...' : '👋 Tap mic to talk')
-                        : state.currentSubtitle),
-                textAlign: TextAlign.center,
-                style: const TextStyle(
-                  color: Colors.white, 
-                  fontSize: 18,
-                  fontWeight: FontWeight.w500,
-                  height: 1.4,
-                ),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  // 1. Phụ đề của AI Coach - Luôn hiển thị để học viên nhìn làm điểm tựa giao tiếp
+                  Text(
+                    state.currentSubtitle.isEmpty
+                        ? (state.status == AIStatus.thinking ? '🤔 AI đang suy nghĩ...' : '👋 Hãy nhấn Mic để bắt đầu trò chuyện!')
+                        : state.currentSubtitle,
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
+                      color: Colors.white, 
+                      fontSize: 17,
+                      fontWeight: FontWeight.w600,
+                      height: 1.4,
+                    ),
+                  ),
+                  
+                  // 2. Nội dung nhận diện giọng nói của Học viên (Chỉ hiển thị khi đang ghi âm)
+                  if (_isListening) ...[
+                    const SizedBox(height: 14),
+                    Container(
+                      width: double.infinity,
+                      height: 1,
+                      color: Colors.white10,
+                    ),
+                    const SizedBox(height: 14),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Icon(Icons.mic_rounded, color: Colors.greenAccent, size: 16),
+                        const SizedBox(width: 8),
+                        Expanded(
+                          child: Text(
+                            _lastWords.isEmpty ? 'Đang lắng nghe... Hãy nói tiếng Anh!' : _lastWords,
+                            textAlign: TextAlign.center,
+                            style: const TextStyle(
+                              color: Colors.greenAccent, 
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold,
+                              fontStyle: FontStyle.italic,
+                              height: 1.3,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ],
               ),
             ),
           ),
