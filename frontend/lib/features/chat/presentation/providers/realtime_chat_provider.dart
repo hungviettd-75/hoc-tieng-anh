@@ -200,10 +200,7 @@ class RealtimeChatNotifier extends StateNotifier<RealtimeChatState> {
           formattedCorrectionText: formattedText,
         );
         
-        // CHỈ ĐỌC NỘI DUNG AI CORRECTION
-        if (formattedText.isNotEmpty) {
-          _speakBilingual(formattedText);
-        }
+        // Thẻ vàng AI Correction sẽ chỉ hiển thị trực quan bằng mắt, không đọc bằng âm thanh để tránh làm loãng hội thoại và xung đột luồng audio
       } else if (type == 'done') {
         final fullContent = decoded['full_content'] ?? '';
         final grammarNotes = decoded['grammar_notes'];

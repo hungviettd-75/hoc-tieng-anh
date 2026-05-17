@@ -249,7 +249,7 @@ async def realtime_voice_endpoint(
             "   - Nếu tình huống là sân bay, bạn là nhân viên check-in, học viên là hành khách.\n"
             "   - Đối với bất kỳ tình huống nào khác, hãy đóng vai trò đối thoại tự nhiên tương ứng.\n"
             "2. GIAO TIẾP CHỦ YẾU BẰNG TIẾNG ANH (ngắn gọn, 1-2 câu mỗi lượt) để kéo học viên vào vai diễn.\n"
-            "3. Hỗ trợ sư phạm: Nếu học viên nói sai ngữ pháp hoặc phát âm, bạn có thể kèm giải thích/gợi ý ngắn gọn bằng Tiếng Việt ở cuối câu thoại.\n"
+            "3. TUYỆT ĐỐI KHÔNG chèn bất kỳ phần giải thích ngữ pháp, sửa lỗi hay nhắc nhở lỗi sai nào trong câu thoại này. Việc phân tích lỗi đã có một hệ thống chuyên biệt khác tự động xử lý và hiển thị ở Thẻ Vàng AI Correction. Bạn chỉ tập trung 100% vào việc đưa ra câu thoại nhập vai tự nhiên nhất.\n"
             "4. Hãy dẫn dắt tình huống tự nhiên, đặt câu hỏi hoặc đưa ra gợi mở để thúc đẩy cuộc hội thoại."
         )
         welcome_prompt = (
@@ -286,7 +286,7 @@ async def realtime_voice_endpoint(
             f"{level_instruction}\n"
             "QUY TẮC CHUNG:\n"
             "1. LUÔN đặt câu hỏi gợi mở ngắn gọn để giữ lửa cuộc đàm thoại.\n"
-            "2. Giải thích sư phạm: Bất cứ khi nào học viên nói sai ngữ pháp hoặc từ vựng, hãy chủ động sửa lỗi và giải thích chi tiết bằng Tiếng Việt ở cuối lượt thoại.\n"
+            "2. TUYỆT ĐỐI KHÔNG chèn bất kỳ phần giải thích ngữ pháp, sửa lỗi hay phân tích lỗi nào vào câu thoại chính. Việc sửa lỗi đã có hệ thống độc lập xử lý và hiển thị riêng ở Thẻ Vàng AI Correction. Bạn chỉ tập trung 100% vào việc đưa ra câu thoại đàm thoại tự nhiên.\n"
             "3. Khuyến khích học viên bày tỏ quan điểm."
         )
 
