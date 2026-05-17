@@ -28,8 +28,10 @@ async def generate_azure_tts(
     try:
         # 1. Làm sạch sơ bộ
         text = re.sub(r'/[^/]+/', '', text) # Xóa IPA
-        # Loại bỏ các emoji và ký hiệu đặc biệt
-        text = re.sub(r'[❌✅💡📝🗣️😊👍🌟💪✨🎉👏📊•]', '', text)
+        # Loại bỏ tất cả emoji (dải Unicode) để ngăn TTS đọc tên emoji như "đinh ghim tròn"
+        text = re.sub(r'[\U00010000-\U0010ffff]', '', text)
+        # Loại bỏ các ký hiệu đặc biệt khác và thẻ cảnh báo
+        text = re.sub(r'[❌✅💡📝🗣️😊👍🌟💪✨🎉👏📊📌📍⚠️•|*#\-]', '', text)
         
         # 2. Tách ngôn ngữ dựa trên dấu nháy đơn hoặc phân tích Unicode
         raw_parts = []
