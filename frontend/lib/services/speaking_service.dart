@@ -15,7 +15,7 @@ class SpeakingService {
     required Uint8List audioBytes,
     required String targetText,
     int userId = 1,
-    String filename = 'recording.webm',
+    String filename = 'recording.m4a',
   }) async {
     final uri = Uri.parse('$_baseUrl/analyze');
     final request = http.MultipartRequest('POST', uri);

@@ -34,14 +34,14 @@ class PronunciationService:
         except Exception as e:
             print(f"DEBUG: Could not list models: {e}")
 
-        # Ưu tiên chọn model 'gemini-flash-latest' - khả năng cao nhất có quota ổn định
-        target_model = 'models/gemini-flash-latest'
-        if 'models/gemini-flash-latest' in available_models:
+        # Ưu tiên chọn model 'gemini-1.5-flash' cứng để được hưởng quota 1500 req/ngày của Free Tier, tránh 429
+        target_model = 'models/gemini-1.5-flash'
+        if 'models/gemini-1.5-flash' in available_models:
+            target_model = 'models/gemini-1.5-flash'
+        elif 'models/gemini-flash-latest' in available_models:
             target_model = 'models/gemini-flash-latest'
         elif 'models/gemini-2.0-flash' in available_models:
             target_model = 'models/gemini-2.0-flash'
-        elif 'models/gemini-1.5-flash' in available_models:
-            target_model = 'models/gemini-1.5-flash'
         elif available_models:
             target_model = available_models[0]
             
@@ -57,9 +57,9 @@ class PronunciationService:
         """
         try:
             suffix = os.path.splitext(audio_filename)[1] or ".webm"
-            mime_type = self._get_mime_type(suffix)
+            mime_type = self._detect_mime_type_from_bytes(audio_bytes, suffix)
             
-            print(f"DEBUG PronunciationService: Single-call analysis ({len(audio_bytes)} bytes)")
+            print(f"DEBUG PronunciationService: Single-call analysis ({len(audio_bytes)} bytes, detected MIME: {mime_type})")
 
             prompt = f"""You are an expert English pronunciation coach. 
 1. Listen to the attached audio and transcribe it exactly.
@@ -123,6 +123,15 @@ Return your response as a JSON object ONLY:
 
         except Exception as e:
             print(f"DEBUG PronunciationService: Analysis error: {str(e)}")
+            try:
+                # Ghi log lỗi chi tiết phục vụ chẩn đoán
+                with open("E:/Project/Hoc/hoc-tieng-anh/backend/error_log.txt", "w", encoding="utf-8") as f:
+                    import traceback
+                    f.write(f"Exception in PronunciationService: {str(e)}\n")
+                    f.write(f"Traceback:\n{traceback.format_exc()}\n")
+            except Exception as log_err:
+                print(f"DEBUG: Could not write error log: {log_err}")
+
             if "429" in str(e):
                 return {
                     "overall_score": 0.0,
@@ -289,6 +298,45 @@ Return your response as a JSON object ONLY (no markdown, no code blocks):
             ".flac": "audio/flac",
         }
         return mime_map.get(suffix.lower(), "audio/webm")
+
+    def _detect_mime_type_from_bytes(self, audio_bytes: bytes, fallback_suffix: str) -> str:
+        """
+        Tự động phát hiện MIME type chính xác của file âm thanh dựa trên Magic Bytes ở đầu file.
+        Giúp triệt tiêu hoàn toàn lỗi lệch định dạng giữa Frontend và Backend.
+        """
+        if not audio_bytes or len(audio_bytes) < 12:
+            return "audio/webm"
+            
+        # EBML Header (WebM / Matroska): 1A 45 DF A3
+        if audio_bytes.startswith(b"\x1a\x45\xdf\xa3"):
+            return "audio/webm"
+            
+        # RIFF WAVE Header: RIFF (bytes 0-4) and WAVE (bytes 8-12)
+        if audio_bytes.startswith(b"RIFF") and b"WAVE" in audio_bytes[8:12]:
+            return "audio/wav"
+            
+        # MP4/M4A Header: ftyp (bytes 4-8)
+        if b"ftyp" in audio_bytes[4:12]:
+            return "audio/mp4"
+            
+        # AAC Header: ADTS frame sync (12 bits: 1111 1111 1111 = FF F)
+        if audio_bytes[0] == 0xFF and (audio_bytes[1] & 0xF0) == 0xF0:
+            return "audio/aac"
+            
+        # ID3/MP3 Header
+        if audio_bytes.startswith(b"ID3") or (audio_bytes[0] == 0xFF and (audio_bytes[1] & 0xE0) == 0xE0):
+            return "audio/mpeg"
+            
+        # OGG Header: OggS
+        if audio_bytes.startswith(b"OggS"):
+            return "audio/ogg"
+            
+        # FLAC Header: fLaC
+        if audio_bytes.startswith(b"fLaC"):
+            return "audio/flac"
+            
+        # Nếu không phát hiện được bằng magic bytes, sử dụng fallback dựa vào suffix
+        return self._get_mime_type(fallback_suffix)
 
 
 # Danh sách câu luyện tập theo level
