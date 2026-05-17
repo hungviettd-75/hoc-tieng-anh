@@ -156,22 +156,25 @@ class _VoiceConversationPageState extends ConsumerState<VoiceConversationPage> w
             bottom: 200,
             left: 20,
             right: 20,
-            child: FadeInUp(
-              child: Container(
-                padding: const EdgeInsets.all(20),
-                decoration: BoxDecoration(
-                  color: Colors.black.withOpacity(0.6),
-                  borderRadius: BorderRadius.circular(24),
-                  border: Border.all(color: Colors.white10),
-                ),
-                child: Text(
-                  _isListening
-                      ? (_lastWords.isEmpty ? '🎤 Listening...' : _lastWords)
-                      : (state.currentSubtitle.isEmpty
-                          ? (state.status == AIStatus.thinking ? '🤔 AI is thinking...' : '👋 Tap mic to talk')
-                          : state.currentSubtitle),
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(color: Colors.white, fontSize: 18),
+            child: Container(
+              padding: const EdgeInsets.all(20),
+              decoration: BoxDecoration(
+                color: Colors.black.withOpacity(0.75),
+                borderRadius: BorderRadius.circular(24),
+                border: Border.all(color: Colors.white12),
+              ),
+              child: Text(
+                _isListening
+                    ? (_lastWords.isEmpty ? '🎤 Listening...' : _lastWords)
+                    : (state.currentSubtitle.isEmpty
+                        ? (state.status == AIStatus.thinking ? '🤔 AI is thinking...' : '👋 Tap mic to talk')
+                        : state.currentSubtitle),
+                textAlign: TextAlign.center,
+                style: const TextStyle(
+                  color: Colors.white, 
+                  fontSize: 18,
+                  fontWeight: FontWeight.w500,
+                  height: 1.4,
                 ),
               ),
             ),
