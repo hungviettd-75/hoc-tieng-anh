@@ -53,7 +53,11 @@ final routerProvider = Provider<GoRouter>((ref) {
       ),
       GoRoute(
         path: '/voice-chat',
-        builder: (context, state) => const VoiceConversationPage(),
+        builder: (context, state) {
+          final mode = state.uri.queryParameters['mode'];
+          final level = state.uri.queryParameters['level'];
+          return VoiceConversationPage(mode: mode, level: level);
+        },
       ),
       // Speaking practice & result - fullscreen (ngoài ShellRoute)
       GoRoute(

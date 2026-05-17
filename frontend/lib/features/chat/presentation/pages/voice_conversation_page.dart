@@ -10,7 +10,14 @@ import '../providers/realtime_chat_provider.dart';
 import '../widgets/realtime_correction_widget.dart';
 
 class VoiceConversationPage extends ConsumerStatefulWidget {
-  const VoiceConversationPage({super.key});
+  final String? mode;
+  final String? level;
+
+  const VoiceConversationPage({
+    super.key,
+    this.mode,
+    this.level,
+  });
 
   @override
   ConsumerState<VoiceConversationPage> createState() => _VoiceConversationPageState();
@@ -120,8 +127,13 @@ class _VoiceConversationPageState extends ConsumerState<VoiceConversationPage> w
           ],
         ),
       ),
-      body: Stack(
+      body: Column(
         children: [
+          if (widget.mode == 'vocabulary_practice' && widget.level != null)
+            _buildTargetKeywordsBanner(),
+          Expanded(
+            child: Stack(
+              children: [
           // AI Avatar ở giữa
           Center(child: _buildAIAvatar(state.status)),
 
@@ -202,7 +214,8 @@ class _VoiceConversationPageState extends ConsumerState<VoiceConversationPage> w
                 ),
               ),
             ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -253,6 +266,79 @@ class _VoiceConversationPageState extends ConsumerState<VoiceConversationPage> w
         child: Icon(icon, color: Colors.white, size: 28),
       ),
       onPressed: onTap,
+    );
+  }
+
+  Widget _buildTargetKeywordsBanner() {
+    final Map<String, List<String>> vocabMap = {
+      'A1': ['Beginner', 'Practice', 'Vocabulary', 'Improve'],
+      'A2': ['Journey', 'Confident', 'Habit', 'Encourage'],
+      'B1': ['Persistent', 'Collaborate', 'Effective', 'Challenge'],
+      'B2': ['Substantial', 'Fluency', 'Analyze', 'Evaluate'],
+      'C1': ['Pragmatic', 'Eloquent', 'Cognitive', 'Sophisticated'],
+    };
+
+    final levelKey = widget.level?.toUpperCase() ?? 'B1';
+    final keywords = vocabMap[levelKey] ?? vocabMap['B1']!;
+    final state = ref.watch(realtimeChatProvider);
+
+    return Container(
+      width: double.infinity,
+      margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+      decoration: BoxDecoration(
+        color: AppColors.surface.withOpacity(0.8),
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: AppColors.primary.withOpacity(0.3)),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Text(
+            '🎯 Từ vựng mục tiêu cần nói:',
+            style: TextStyle(color: Colors.white70, fontSize: 13, fontWeight: FontWeight.bold),
+          ),
+          const SizedBox(height: 8),
+          Wrap(
+            spacing: 10,
+            runSpacing: 8,
+            children: keywords.map((word) {
+              final isSpoken = _lastWords.toLowerCase().contains(word.toLowerCase()) ||
+                  state.currentSubtitle.toLowerCase().contains(word.toLowerCase());
+              return Container(
+                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                decoration: BoxDecoration(
+                  color: isSpoken ? Colors.green.withOpacity(0.2) : Colors.black26,
+                  borderRadius: BorderRadius.circular(20),
+                  border: Border.all(
+                    color: isSpoken ? Colors.green : Colors.white24,
+                    width: 1,
+                  ),
+                ),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(
+                      isSpoken ? Icons.check_circle_outline_rounded : Icons.radio_button_unchecked_rounded,
+                      color: isSpoken ? Colors.green : Colors.white54,
+                      size: 14,
+                    ),
+                    const SizedBox(width: 6),
+                    Text(
+                      word,
+                      style: TextStyle(
+                         color: isSpoken ? Colors.greenAccent : Colors.white70,
+                         fontSize: 13,
+                         fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
+                ),
+              );
+            }).toList(),
+          ),
+        ],
+      ),
     );
   }
 }

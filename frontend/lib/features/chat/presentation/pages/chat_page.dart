@@ -62,12 +62,14 @@ class _ChatPageState extends ConsumerState<ChatPage> {
         actions: [
           IconButton(
             icon: const Icon(Icons.mic, color: AppColors.primary),
-            onPressed: () => context.push('/voice-chat'),
+            onPressed: () => context.push('/voice-chat?mode=${widget.mode}&level=${widget.level}'),
           ),
         ],
       ),
       body: Column(
         children: [
+          if (widget.mode == 'vocabulary_practice' && widget.level != null)
+            _buildTargetKeywordsBanner(messages.messages),
           Expanded(
             child: ListView.builder(
               controller: _scrollController,
@@ -178,5 +180,78 @@ class _ChatPageState extends ConsumerState<ChatPage> {
       _controller.clear();
       _scrollToBottom();
     }
+  }
+
+  Widget _buildTargetKeywordsBanner(List<ChatMessage> messageList) {
+    final Map<String, List<String>> vocabMap = {
+      'A1': ['Beginner', 'Practice', 'Vocabulary', 'Improve'],
+      'A2': ['Journey', 'Confident', 'Habit', 'Encourage'],
+      'B1': ['Persistent', 'Collaborate', 'Effective', 'Challenge'],
+      'B2': ['Substantial', 'Fluency', 'Analyze', 'Evaluate'],
+      'C1': ['Pragmatic', 'Eloquent', 'Cognitive', 'Sophisticated'],
+    };
+
+    final levelKey = widget.level?.toUpperCase() ?? 'B1';
+    final keywords = vocabMap[levelKey] ?? vocabMap['B1']!;
+
+    return Container(
+      width: double.infinity,
+      margin: const EdgeInsets.fromLTRB(20, 10, 20, 0),
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+      decoration: BoxDecoration(
+        color: AppColors.surface,
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: AppColors.primary.withOpacity(0.3)),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Text(
+            '🎯 Từ vựng mục tiêu cần nói:',
+            style: TextStyle(color: Colors.white70, fontSize: 13, fontWeight: FontWeight.bold),
+          ),
+          const SizedBox(height: 8),
+          Wrap(
+            spacing: 10,
+            runSpacing: 8,
+            children: keywords.map((word) {
+              // Kiểm tra xem học viên đã từng gõ từ khóa này chưa trong lịch sử chat
+              final isSpoken = messageList.any((msg) =>
+                  !msg.isAI && msg.content.toLowerCase().contains(word.toLowerCase()));
+              return Container(
+                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                decoration: BoxDecoration(
+                  color: isSpoken ? Colors.green.withOpacity(0.2) : Colors.black26,
+                  borderRadius: BorderRadius.circular(20),
+                  border: Border.all(
+                    color: isSpoken ? Colors.green : Colors.white24,
+                    width: 1,
+                  ),
+                ),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(
+                      isSpoken ? Icons.check_circle_outline_rounded : Icons.radio_button_unchecked_rounded,
+                      color: isSpoken ? Colors.green : Colors.white54,
+                      size: 14,
+                    ),
+                    const SizedBox(width: 6),
+                    Text(
+                      word,
+                      style: TextStyle(
+                        color: isSpoken ? Colors.greenAccent : Colors.white70,
+                        fontSize: 13,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
+                ),
+              );
+            }).toList(),
+          ),
+        ],
+      ),
+    );
   }
 }
