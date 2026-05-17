@@ -34,6 +34,26 @@ class GeminiService:
             "- TUYỆT ĐỐI KHÔNG sửa lỗi trong lúc đang trò chuyện (hệ thống UI sẽ tự hiển thị thẻ sửa lỗi)."
         )
 
+    def _get_text_safely(self, response_or_chunk) -> str:
+        """
+        Lấy văn bản phản hồi từ Gemini một cách an toàn để tránh lỗi 'Invalid operation: response.text quick accessor...'
+        """
+        try:
+            # 1. Kiểm tra nếu có thuộc tính candidates
+            if hasattr(response_or_chunk, "candidates") and response_or_chunk.candidates:
+                candidate = response_or_chunk.candidates[0]
+                if hasattr(candidate, "content") and candidate.content.parts:
+                    part = candidate.content.parts[0]
+                    if hasattr(part, "text") and part.text:
+                        return part.text
+            
+            # 2. Cố gắng lấy qua quick accessor với try-except
+            if hasattr(response_or_chunk, "text") and response_or_chunk.text:
+                return response_or_chunk.text
+        except Exception:
+            pass
+        return ""
+
     async def get_streaming_response(
         self, history: List[Dict[str, str]], user_message: str, custom_instruction: str = None
     ) -> AsyncGenerator[str, None]:
@@ -53,8 +73,9 @@ class GeminiService:
             response = await chat.send_message_async(prompt, stream=True)
             
             async for chunk in response:
-                if chunk.text:
-                    yield chunk.text
+                chunk_text = self._get_text_safely(chunk)
+                if chunk_text:
+                    yield chunk_text
         except Exception as e:
             print(f"ERROR in Gemini streaming: {str(e)}")
             raise e
@@ -72,8 +93,9 @@ class GeminiService:
         try:
             response = await self.model.generate_content_async(prompt, stream=True)
             async for chunk in response:
-                if chunk.text:
-                    yield chunk.text
+                chunk_text = self._get_text_safely(chunk)
+                if chunk_text:
+                    yield chunk_text
         except Exception as e:
             print(f"ERROR in tutor streaming: {str(e)}")
             raise e
@@ -92,7 +114,7 @@ class GeminiService:
         )
         try:
             response = await self.model.generate_content_async(prompt)
-            return response.text.strip()
+            return self._get_text_safely(response).strip()
         except Exception as e:
             print(f"ERROR in tutor correction: {str(e)}")
             return ""
@@ -119,7 +141,7 @@ Format ONLY as valid JSON (no markdown):
 ]"""
         try:
             response = await self.model.generate_content_async(prompt)
-            text = response.text.strip()
+            text = self._get_text_safely(response).strip()
             if text.startswith("```"):
                 import re
                 text = re.sub(r'^```(?:json)?\s*', '', text)
