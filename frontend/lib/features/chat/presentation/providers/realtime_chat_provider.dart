@@ -205,6 +205,14 @@ class RealtimeChatNotifier extends StateNotifier<RealtimeChatState> {
         }
       }
     });
+
+    // Báo Server là Client đã kết nối hoàn tất và sẵn sàng lắng nghe!
+    Future.delayed(const Duration(milliseconds: 300), () {
+      _chatService.sendRealtimeAction({
+        "type": "client_ready"
+      });
+      print('DEBUG: Sent client_ready to Server');
+    });
   }
 
   void sendVoiceMessage(String text) {

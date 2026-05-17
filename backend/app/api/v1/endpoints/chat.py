@@ -269,33 +269,36 @@ async def realtime_voice_endpoint(
         )
 
     try:
-        # Nếu có welcome_prompt, chủ động tạo và phát tin nhắn chào mừng ngay khi học viên kết nối!
-        if welcome_prompt:
-            await manager.send_json({"type": "status", "status": "thinking"}, websocket)
-            await manager.send_json({"type": "status", "status": "speaking"}, websocket)
-            
-            full_welcome = ""
-            async for chunk in gemini_service.get_streaming_response(
-                history=[], user_message=welcome_prompt, custom_instruction=custom_instruction
-            ):
-                full_welcome += chunk
-                await manager.send_json({"type": "delta", "content": chunk}, websocket)
-            
-            # Lưu chào mừng vào lịch sử hội thoại của memory
-            conversation_memory.add_turn(user_id, "[System welcome initiation]", full_welcome)
-            
-            await manager.send_json({
-                "type": "done",
-                "full_content": full_welcome,
-                "grammar_notes": "",
-                "route_used": "llm_welcome_initiate"
-            }, websocket)
-            await manager.send_json({"type": "status", "status": "idle"}, websocket)
-
         while True:
             data = await websocket.receive_text()
+            print(f"DEBUG: Realtime voice endpoint received: {data}")
             message_data = json.loads(data)
             
+            if message_data.get("type") == "client_ready":
+                print(f"DEBUG: Client is ready. Initiating welcome greeting...")
+                if welcome_prompt:
+                    await manager.send_json({"type": "status", "status": "thinking"}, websocket)
+                    await manager.send_json({"type": "status", "status": "speaking"}, websocket)
+                    
+                    full_welcome = ""
+                    async for chunk in gemini_service.get_streaming_response(
+                        history=[], user_message=welcome_prompt, custom_instruction=custom_instruction
+                    ):
+                        full_welcome += chunk
+                        await manager.send_json({"type": "delta", "content": chunk}, websocket)
+                    
+                    # Lưu chào mừng vào lịch sử hội thoại của memory
+                    conversation_memory.add_turn(user_id, "[System welcome initiation]", full_welcome)
+                    
+                    await manager.send_json({
+                        "type": "done",
+                        "full_content": full_welcome,
+                        "grammar_notes": "",
+                        "route_used": "llm_welcome_initiate"
+                    }, websocket)
+                    await manager.send_json({"type": "status", "status": "idle"}, websocket)
+                continue
+
             if message_data.get("type") == "voice_start":
                 continue
 
