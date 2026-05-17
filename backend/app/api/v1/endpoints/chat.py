@@ -258,18 +258,50 @@ async def realtime_voice_endpoint(
             "của bạn (tối đa 1 câu ngắn) để dẫn dắt học viên nhập vai ngay lập tức. TUYỆT ĐỐI không viết gợi ý hay hướng dẫn dài dòng."
         )
     elif mode == "free_talk":
+        # Điều chỉnh chỉ thị hệ thống dựa trên trình độ học viên lựa chọn
+        level_instruction = ""
+        if level in ["A1", "A2"]:
+            level_instruction = (
+                "BẮT BUỘC SỬ DỤNG TIẾNG ANH SIÊU ĐƠN GIẢN (Trình độ A1-A2):\n"
+                "1. Bạn PHẢI nói cực kỳ chậm rãi, sử dụng các từ vựng căn bản và câu thoại siêu ngắn gọn (chỉ 1 câu ngắn mỗi lượt).\n"
+                "2. Ở cuối mỗi câu thoại tiếng Anh, bạn BẮT BUỘC phải kèm theo bản dịch Tiếng Việt trong ngoặc đơn dạng '(Dịch: ...)' để học viên dễ hiểu và theo kịp.\n"
+                "3. Đặt câu hỏi cực kỳ dễ trả lời."
+            )
+        elif level in ["B1", "B2"]:
+            level_instruction = (
+                "SỬ DỤNG TIẾNG ANH TRUNG CẤP (Trình độ B1-B2):\n"
+                "1. Nói tốc độ vừa phải, dùng từ vựng giao tiếp thông dụng hàng ngày.\n"
+                "2. Câu thoại ngắn gọn, rõ ràng (1-2 câu).\n"
+                "3. Không cần dịch tiếng Việt trừ khi giải thích lỗi ngữ pháp."
+            )
+        else:  # Nâng cao C1/C2
+            level_instruction = (
+                "SỬ DỤNG TIẾNG ANH NÂNG CAO (Trình độ C1-C2):\n"
+                "1. Nói tốc độ tự nhiên của người bản xứ, dùng từ vựng học thuật, thành ngữ (idioms) phong phú.\n"
+                "2. Đặt các câu hỏi mở mang tính tư duy phản biện cao."
+            )
+
         custom_instruction = (
             "Bạn là AI English Coach đàm thoại tự do bằng Tiếng Anh.\n"
-            "QUY TẮC:\n"
-            "1. LUÔN đặt câu hỏi gợi mở ngắn gọn (1-2 câu tiếng Anh) để giữ lửa cuộc đàm thoại.\n"
+            f"{level_instruction}\n"
+            "QUY TẮC CHUNG:\n"
+            "1. LUÔN đặt câu hỏi gợi mở ngắn gọn để giữ lửa cuộc đàm thoại.\n"
             "2. Giải thích sư phạm: Bất cứ khi nào học viên nói sai ngữ pháp hoặc từ vựng, hãy chủ động sửa lỗi và giải thích chi tiết bằng Tiếng Việt ở cuối lượt thoại.\n"
-            "3. Khuyến khích học viên bày tỏ quan điểm của mình."
+            "3. Khuyến khích học viên bày tỏ quan điểm."
         )
-        welcome_prompt = (
-            "Hãy gửi lời chào bằng Tiếng Việt siêu ngắn gọn (tối đa 1 câu ngắn), "
-            "giới thiệu bạn là AI English Coach. Sau đó, đưa ra ngay 1 câu hỏi gợi mở tiếng Anh siêu ngắn gọn (1 câu) "
-            "về một chủ đề thú vị để bắt đầu cuộc trò chuyện tự do."
-        )
+
+        if level in ["A1", "A2"]:
+            welcome_prompt = (
+                "Hãy gửi lời chào bằng Tiếng Việt siêu ngắn gọn (tối đa 1 câu ngắn), "
+                "giới thiệu bạn là AI English Coach và hôm nay sẽ cùng luyện nói mức độ Cơ bản dễ dàng. "
+                "Sau đó, đưa ra ngay 1 câu hỏi tiếng Anh siêu ngắn và dễ kèm bản dịch Tiếng Việt trong ngoặc đơn."
+            )
+        else:
+            welcome_prompt = (
+                "Hãy gửi lời chào bằng Tiếng Việt siêu ngắn gọn (tối đa 1 câu ngắn), "
+                "giới thiệu bạn là AI English Coach. Sau đó, đưa ra ngay 1 câu hỏi gợi mở tiếng Anh siêu ngắn gọn (1 câu) "
+                "về một chủ đề thú vị để bắt đầu cuộc trò chuyện tự do."
+            )
 
     try:
         while True:

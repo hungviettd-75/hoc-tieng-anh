@@ -361,7 +361,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                 Icons.mic_rounded, 
                 'Giao tiếp', 
                 AppColors.primary,
-                onTap: () => context.push('/voice-chat?mode=free_talk'),
+                onTap: () => _showGiaoTiepLevelSelector(context),
               ),
               _buildActionItem(
                 Icons.psychology_rounded, 
@@ -501,5 +501,137 @@ class _HomePageState extends ConsumerState<HomePage> {
       case 'vocabulary': return Icons.translate_rounded;
       default: return Icons.star_rounded;
     }
+  }
+
+  void _showGiaoTiepLevelSelector(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: Colors.transparent,
+      isScrollControlled: true,
+      builder: (context) {
+        return Container(
+          padding: const EdgeInsets.all(24),
+          decoration: const BoxDecoration(
+            color: AppColors.surface,
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(32),
+              topRight: Radius.circular(32),
+            ),
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Center(
+                child: Container(
+                  width: 48,
+                  height: 5,
+                  decoration: BoxDecoration(
+                    color: Colors.white.withOpacity(0.1),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 24),
+              const Text(
+                'Chọn Trình độ Giao tiếp 🎯',
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
+              ),
+              const SizedBox(height: 8),
+              const Text(
+                'AI Coach sẽ tự động điều tiết tốc độ nói và từ vựng phù hợp nhất với bạn.',
+                style: TextStyle(fontSize: 14, color: AppColors.textSecondary),
+              ),
+              const SizedBox(height: 24),
+              _buildLevelOption(
+                context,
+                title: 'Cơ bản (A1 - A2)',
+                description: 'AI nói cực kỳ chậm, câu ngắn đơn giản và có dịch Tiếng Việt hỗ trợ.',
+                icon: Icons.sentiment_satisfied_alt_rounded,
+                color: Colors.green,
+                levelCode: 'A1',
+              ),
+              const SizedBox(height: 16),
+              _buildLevelOption(
+                context,
+                title: 'Trung cấp (B1 - B2)',
+                description: 'AI nói tốc độ vừa phải, dùng từ giao tiếp đời sống thông dụng.',
+                icon: Icons.sentiment_neutral_rounded,
+                color: Colors.orange,
+                levelCode: 'B1',
+              ),
+              const SizedBox(height: 16),
+              _buildLevelOption(
+                context,
+                title: 'Nâng cao (C1 - C2)',
+                description: 'AI nói tốc độ tự nhiên bản xứ, dùng từ vựng phong phú & thành ngữ.',
+                icon: Icons.sentiment_very_satisfied_rounded,
+                color: Colors.purple,
+                levelCode: 'C1',
+              ),
+              const SizedBox(height: 16),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  Widget _buildLevelOption(
+    BuildContext context, {
+    required String title,
+    required String description,
+    required IconData icon,
+    required Color color,
+    required String levelCode,
+  }) {
+    return Material(
+      color: Colors.transparent,
+      child: InkWell(
+        onTap: () {
+          Navigator.pop(context); // Đóng Bottom Sheet
+          context.push('/voice-chat?mode=free_talk&level=$levelCode');
+        },
+        borderRadius: BorderRadius.circular(20),
+        child: Container(
+          padding: const EdgeInsets.all(18),
+          decoration: BoxDecoration(
+            color: color.withOpacity(0.05),
+            borderRadius: BorderRadius.circular(20),
+            border: Border.all(color: color.withOpacity(0.15)),
+          ),
+          child: Row(
+            children: [
+              Container(
+                padding: const EdgeInsets.all(12),
+                decoration: BoxDecoration(
+                  color: color.withOpacity(0.1),
+                  shape: BoxShape.circle,
+                ),
+                child: Icon(icon, color: color, size: 28),
+              ),
+              const SizedBox(width: 16),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      title,
+                      style: TextStyle(fontWeight: FontWeight.bold, color: color, fontSize: 16),
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      description,
+                      style: const TextStyle(color: AppColors.textSecondary, fontSize: 12),
+                    ),
+                  ],
+                ),
+              ),
+              const Icon(Icons.arrow_forward_ios_rounded, color: AppColors.textSecondary, size: 16),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }
