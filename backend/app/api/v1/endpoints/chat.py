@@ -220,6 +220,9 @@ async def realtime_voice_endpoint(
         mode = "free_talk"
     print(f"DEBUG: New Realtime WebSocket connection for user_id: {user_id}, mode: {mode}, level: {level}, topic: {topic}")
     await manager.connect(websocket)
+    
+    # Bắt buộc dọn dẹp bộ nhớ hội thoại cũ của user để đảm bảo mỗi lần mở lại phòng là một session mới tươi nguyên, 100% hiện giới thiệu tiếng Việt dẫn dắt!
+    conversation_memory.clear(user_id)
 
     # Cấu hình custom System Instruction tùy theo chế độ
     custom_instruction = None
