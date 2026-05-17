@@ -116,8 +116,10 @@ class LearnPage extends ConsumerWidget {
                     ...data.recommendations.map((rec) => LessonFeedCard(
                           recommendation: rec,
                           onTap: () {
-                            if (rec.contentType == 'roleplay' || rec.contentType == 'speaking') {
-                              context.push('/voice-chat');
+                            if (rec.contentType == 'roleplay') {
+                              context.push('/voice-chat?mode=roleplay&topic=${Uri.encodeComponent(rec.title)}');
+                            } else if (rec.contentType == 'speaking') {
+                              context.push('/voice-chat?mode=free_talk');
                             } else {
                               context.push('/learn/lesson', extra: rec);
                             }

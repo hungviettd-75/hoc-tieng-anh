@@ -48,16 +48,19 @@ async def websocket_endpoint(
     websocket: WebSocket, 
     user_id: int,
     mode: str = None,
-    level: str = None
+    level: str = None,
+    topic: str = None
 ):
-    print(f"DEBUG: New WebSocket connection for user_id: {user_id}, mode: {mode}, level: {level}")
+    print(f"DEBUG: New WebSocket connection for user_id: {user_id}, mode: {mode}, level: {level}, topic: {topic}")
     await manager.connect(websocket)
     
     # Khởi tạo history hội thoại cho session này
     history = []
     
-    # Cấu hình custom System Instruction nếu ở chế độ luyện từ vựng thông minh
+    # Cấu hình custom System Instruction tùy theo chế độ
     custom_instruction = None
+    welcome_prompt = None
+
     if mode == "vocabulary_practice" and level:
         vocab_words = VOCAB_LISTS.get(level.upper(), VOCAB_LISTS["B1"])
         words_str = ", ".join([f"'{w}'" for w in vocab_words])
@@ -71,18 +74,44 @@ async def websocket_endpoint(
             "   - Nếu không: Hãy khéo léo nhắc nhở hoặc gợi ý họ áp dụng từ khóa vào câu tiếp theo.\n"
             "3. Hướng dẫn học viên cách dùng chuẩn bằng các ví dụ tiếng Anh ngắn gọn."
         )
+        welcome_prompt = (
+            f"Học viên vừa tham gia lớp học từ vựng trình độ {level}. "
+            f"Hãy gửi lời chào đón bằng Tiếng Việt nồng ấm, giới thiệu nhiệm vụ hôm nay là thực hành các từ khóa: {words_str}. "
+            "Đưa ra 1 câu hỏi gợi mở ngắn bằng Tiếng Anh để bắt đầu cuộc hội thoại."
+        )
+    elif mode == "roleplay" and topic:
+        custom_instruction = (
+            f"Bạn là AI chuyên gia nhập vai tiếng Anh trong tình huống giao tiếp thực tế: '{topic}'.\n"
+            "QUY TẮC:\n"
+            "1. Bạn PHẢI đóng đúng vai trò hội thoại phù hợp với tình huống này.\n"
+            "   - Nếu tình huống là nhà hàng, bạn là nhân viên phục vụ (Waiter/Waitress), học viên là khách hàng.\n"
+            "   - Nếu tình huống là sân bay, bạn là nhân viên check-in, học viên là hành khách.\n"
+            "   - Đối với bất kỳ tình huống nào khác, hãy đóng vai trò đối thoại tự nhiên tương ứng.\n"
+            "2. GIAO TIẾP CHỦ YẾU BẰNG TIẾNG ANH (ngắn gọn, 1-2 câu mỗi lượt) để kéo học viên vào vai diễn.\n"
+            "3. Hỗ trợ sư phạm: Nếu học viên nói sai ngữ pháp hoặc phát âm, bạn có thể kèm giải thích/gợi ý ngắn gọn bằng Tiếng Việt ở cuối câu thoại.\n"
+            "4. Hãy dẫn dắt tình huống tự nhiên, đặt câu hỏi hoặc đưa ra gợi mở để thúc đẩy cuộc hội thoại."
+        )
+        welcome_prompt = (
+            f"Học viên vừa tham gia tình huống nhập vai thực tế: '{topic}'. "
+            "Hãy gửi lời chào chào mừng bằng Tiếng Việt nồng ấm, giới thiệu rõ vai diễn của bạn và vai diễn của học viên trong tình huống này. "
+            "Sau đó đưa ra câu thoại tiếng Anh đầu tiên để dẫn dắt học viên bắt đầu nhập vai."
+        )
+    elif mode == "free_talk":
+        custom_instruction = (
+            "Bạn là AI English Coach đàm thoại tự do bằng Tiếng Anh.\n"
+            "QUY TẮC:\n"
+            "1. LUÔN đặt câu hỏi gợi mở ngắn gọn (1-2 câu tiếng Anh) để giữ lửa cuộc đàm thoại.\n"
+            "2. Giải thích sư phạm: Bất cứ khi nào học viên nói sai ngữ pháp hoặc từ vựng, hãy chủ động sửa lỗi và giải thích chi tiết bằng Tiếng Việt ở cuối lượt thoại.\n"
+            "3. Khuyến khích học viên bày tỏ quan điểm của mình."
+        )
+        welcome_prompt = (
+            "Học viên vừa bắt đầu phòng luyện nói tự do. Hãy gửi lời chào bằng Tiếng Việt nồng ấm, "
+            "giới thiệu bản thân là người bạn đồng hành luyện nói tiếng Anh và đưa ra 1 chủ đề giao tiếp gợi mở thú vị bằng Tiếng Anh."
+        )
 
     try:
-        # Nếu ở chế độ luyện từ vựng, chủ động gửi lời chào chào mừng đầu tiên cùng các từ khóa!
-        if mode == "vocabulary_practice" and level:
-            vocab_words = VOCAB_LISTS.get(level.upper(), VOCAB_LISTS["B1"])
-            words_str = ", ".join([f"'{w}'" for w in vocab_words])
-            welcome_prompt = (
-                f"Học viên vừa tham gia lớp học từ vựng trình độ {level}. "
-                f"Hãy gửi lời chào đón bằng Tiếng Việt nồng ấm, giới thiệu nhiệm vụ hôm nay là thực hành các từ khóa: {words_str}. "
-                "Đưa ra 1 câu hỏi gợi mở ngắn bằng Tiếng Anh để bắt đầu cuộc hội thoại."
-            )
-            
+        # Nếu có welcome prompt (ở bất kỳ chế độ học động nào), chủ động gửi lời chào đầu tiên!
+        if welcome_prompt:
             full_welcome = ""
             async for chunk in gemini_service.get_streaming_response(
                 history=history, user_message=welcome_prompt, custom_instruction=custom_instruction

@@ -56,7 +56,8 @@ final routerProvider = Provider<GoRouter>((ref) {
         builder: (context, state) {
           final mode = state.uri.queryParameters['mode'];
           final level = state.uri.queryParameters['level'];
-          return VoiceConversationPage(mode: mode, level: level);
+          final topic = state.uri.queryParameters['topic'];
+          return VoiceConversationPage(mode: mode, level: level, topic: topic);
         },
       ),
       // Speaking practice & result - fullscreen (ngoài ShellRoute)
@@ -102,7 +103,8 @@ final routerProvider = Provider<GoRouter>((ref) {
             builder: (context, state) {
               final mode = state.uri.queryParameters['mode'];
               final level = state.uri.queryParameters['level'];
-              return ChatPage(mode: mode, level: level);
+              final topic = state.uri.queryParameters['topic'];
+              return ChatPage(mode: mode, level: level, topic: topic);
             },
           ),
           GoRoute(

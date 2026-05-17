@@ -13,11 +13,13 @@ import 'package:ai_english_coach/features/learn/presentation/providers/learn_pro
 class VoiceConversationPage extends ConsumerStatefulWidget {
   final String? mode;
   final String? level;
+  final String? topic;
 
   const VoiceConversationPage({
     super.key,
     this.mode,
     this.level,
+    this.topic,
   });
 
   @override

@@ -9,11 +9,13 @@ import 'package:ai_english_coach/features/learn/presentation/providers/learn_pro
 class ChatPage extends ConsumerStatefulWidget {
   final String? mode;
   final String? level;
+  final String? topic;
 
   const ChatPage({
     super.key,
     this.mode,
     this.level,
+    this.topic,
   });
 
   @override
@@ -31,6 +33,7 @@ class _ChatPageState extends ConsumerState<ChatPage> {
       ref.read(chatProvider.notifier).connectWithContext(
         mode: widget.mode,
         level: widget.level,
+        topic: widget.topic,
       );
     });
   }
@@ -71,7 +74,10 @@ class _ChatPageState extends ConsumerState<ChatPage> {
         actions: [
           IconButton(
             icon: const Icon(Icons.mic, color: AppColors.primary),
-            onPressed: () => context.push('/voice-chat?mode=${widget.mode}&level=${widget.level}'),
+            onPressed: () {
+              final topicParam = widget.topic != null ? '&topic=${Uri.encodeComponent(widget.topic!)}' : '';
+              context.push('/voice-chat?mode=${widget.mode}&level=${widget.level}$topicParam');
+            },
           ),
         ],
       ),

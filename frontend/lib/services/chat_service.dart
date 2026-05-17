@@ -5,12 +5,17 @@ class ChatService {
   WebSocketChannel? _channel;
   WebSocketChannel? _realtimeChannel;
 
-  void connect(int userId, {String? mode, String? level}) {
+  void connect(int userId, {String? mode, String? level, String? topic}) {
     // Sử dụng localhost để tương thích với trình duyệt
     const String ipAddress = '127.0.0.1'; 
     String urlStr = 'ws://$ipAddress:8000/api/v1/ws/$userId';
-    if (mode != null && level != null) {
-      urlStr += '?mode=$mode&level=$level';
+    final List<String> params = [];
+    if (mode != null) params.add('mode=$mode');
+    if (level != null) params.add('level=$level');
+    if (topic != null) params.add('topic=${Uri.encodeComponent(topic)}');
+
+    if (params.isNotEmpty) {
+      urlStr += '?${params.join('&')}';
     }
     final url = Uri.parse(urlStr);
 
