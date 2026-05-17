@@ -1,6 +1,9 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:http/http.dart' as http;
 import 'package:ai_english_coach/theme/app_colors.dart';
+import 'package:ai_english_coach/core/api_config.dart';
 import 'package:animate_do/animate_do.dart';
 
 class VocabularyListPage extends StatefulWidget {
@@ -17,20 +20,48 @@ class VocabularyListPage extends StatefulWidget {
 
 class _VocabularyListPageState extends State<VocabularyListPage> {
   String _selectedLevel = 'B1';
-  
-  // Dữ liệu mẫu phân theo trình độ và tiến trình
-  final List<Map<String, dynamic>> allVocab = [
-    {'word': 'Beginner', 'ipa': '/bɪˈɡɪnə(r)/', 'meaning': 'Người bắt đầu', 'level': 'A1', 'status': 'Mastered', 'example': 'This class is for total beginners.'},
-    {'word': 'Persistent', 'ipa': '/pəˈsɪstənt/', 'meaning': 'Kiên trì, bền bỉ', 'level': 'B1', 'status': 'Learning', 'example': 'She is persistent in her efforts.'},
-    {'word': 'Collaborate', 'ipa': '/kəˈlæbəreɪt/', 'meaning': 'Cộng tác, hợp tác', 'level': 'B1', 'status': 'New', 'example': 'Researchers are collaborating to develop a new vaccine.'},
-    {'word': 'Substantial', 'ipa': '/səbˈstænʃl/', 'meaning': 'Đáng kể, quan trọng', 'level': 'B2', 'status': 'New', 'example': 'A substantial amount of money.'},
-    {'word': 'Pragmatic', 'ipa': '/præɡˈmætɪk/', 'meaning': 'Thực dụng, thực tế', 'level': 'C1', 'status': 'New', 'example': 'We need a pragmatic approach to this problem.'},
-  ];
+  bool _isLoading = false;
+  String _errorMessage = '';
+  List<Map<String, dynamic>> _vocabList = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchVocabulary();
+  }
+
+  Future<void> _fetchVocabulary() async {
+    setState(() {
+      _isLoading = true;
+      _errorMessage = '';
+    });
+    try {
+      final response = await http.get(
+        Uri.parse('${ApiConfig.baseUrl}/learn/vocabulary?level=$_selectedLevel'),
+      ).timeout(const Duration(seconds: 10));
+
+      if (response.statusCode == 200) {
+        final List<dynamic> data = jsonDecode(utf8.decode(response.bodyBytes));
+        setState(() {
+          _vocabList = data.map((item) => Map<String, dynamic>.from(item)).toList();
+          _isLoading = false;
+        });
+      } else {
+        setState(() {
+          _errorMessage = 'Không thể tải dữ liệu từ server';
+          _isLoading = false;
+        });
+      }
+    } catch (e) {
+      setState(() {
+        _errorMessage = 'Lỗi kết nối. Vui lòng kiểm tra lại mạng';
+        _isLoading = false;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    final filteredList = allVocab.where((v) => v['level'] == _selectedLevel).toList();
-
     return Scaffold(
       backgroundColor: AppColors.background,
       appBar: AppBar(
@@ -48,19 +79,23 @@ class _VocabularyListPageState extends State<VocabularyListPage> {
           Expanded(
             child: Stack(
               children: [
-                filteredList.isEmpty 
-                  ? _buildEmptyState()
-                  : ListView.builder(
-                      padding: const EdgeInsets.fromLTRB(20, 10, 20, 100),
-                      itemCount: filteredList.length,
-                      itemBuilder: (context, index) {
-                        final item = filteredList[index];
-                        return FadeInUp(
-                          delay: Duration(milliseconds: 100 * index),
-                          child: _buildVocabCard(item),
-                        );
-                      },
-                    ),
+                _isLoading
+                  ? const Center(child: CircularProgressIndicator(color: AppColors.primary))
+                  : _errorMessage.isNotEmpty
+                    ? _buildErrorState()
+                    : _vocabList.isEmpty 
+                      ? _buildEmptyState()
+                      : ListView.builder(
+                          padding: const EdgeInsets.fromLTRB(20, 10, 20, 100),
+                          itemCount: _vocabList.length,
+                          itemBuilder: (context, index) {
+                            final item = _vocabList[index];
+                            return FadeInUp(
+                              delay: Duration(milliseconds: 100 * index),
+                              child: _buildVocabCard(item),
+                            );
+                          },
+                        ),
                 _buildAICoachButton(),
               ],
             ),
@@ -88,7 +123,10 @@ class _VocabularyListPageState extends State<VocabularyListPage> {
               label: Text(level),
               selected: isSelected,
               onSelected: (selected) {
-                if (selected) setState(() => _selectedLevel = level);
+                if (selected) {
+                  setState(() => _selectedLevel = level);
+                  _fetchVocabulary();
+                }
               },
               selectedColor: AppColors.primary,
               backgroundColor: AppColors.surface,
@@ -124,6 +162,32 @@ class _VocabularyListPageState extends State<VocabularyListPage> {
     );
   }
 
+  Widget _buildErrorState() {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          const Icon(Icons.cloud_off_rounded, size: 64, color: Colors.white24),
+          const SizedBox(height: 16),
+          Text(
+            _errorMessage,
+            style: const TextStyle(color: Colors.white54, fontSize: 15),
+          ),
+          const SizedBox(height: 12),
+          ElevatedButton.icon(
+            onPressed: _fetchVocabulary,
+            icon: const Icon(Icons.refresh),
+            label: const Text('Thử lại'),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: AppColors.primary,
+              foregroundColor: Colors.white,
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
   Widget _buildAICoachButton() {
     return Positioned(
       bottom: 20,
@@ -131,7 +195,10 @@ class _VocabularyListPageState extends State<VocabularyListPage> {
       right: 20,
       child: FadeInUp(
         child: ElevatedButton(
-          onPressed: () => context.push('/chat'),
+          onPressed: () {
+            // Context-aware deep linking to vocabulary practice chat session
+            context.push('/chat?mode=vocabulary_practice&level=$_selectedLevel');
+          },
           style: ElevatedButton.styleFrom(
             backgroundColor: AppColors.primary,
             foregroundColor: Colors.white,
@@ -142,9 +209,9 @@ class _VocabularyListPageState extends State<VocabularyListPage> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(Icons.psychology_rounded),
+              const Icon(Icons.psychology_rounded),
               const SizedBox(width: 12),
-              Text('Luyện tập từ vựng trình độ $_selectedLevel', style: TextStyle(fontWeight: FontWeight.bold)),
+              Text('Luyện tập từ vựng trình độ $_selectedLevel cùng AI', style: const TextStyle(fontWeight: FontWeight.bold)),
             ],
           ),
         ),
