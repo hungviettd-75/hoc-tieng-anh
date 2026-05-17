@@ -269,10 +269,10 @@ async def realtime_voice_endpoint(
         level_instruction = ""
         if level in ["A1", "A2"]:
             level_instruction = (
-                "BẮT BUỘC SỬ DỤNG TIẾNG ANH SIÊU ĐƠN GIẢN (Trình độ A1-A2):\n"
+                "BẮT BUỘC SỬ DỤNG TIẾNG ANH SIÊU ĐƠN GIẢN (Phù hợp với học sinh Lớp 6 tại Việt Nam):\n"
                 "1. Bạn PHẢI nói cực kỳ chậm rãi, sử dụng các từ vựng căn bản và câu thoại siêu ngắn gọn (chỉ 1 câu ngắn mỗi lượt).\n"
                 "2. Ở cuối mỗi câu thoại tiếng Anh, bạn BẮT BUỘC phải kèm theo bản dịch Tiếng Việt trong ngoặc đơn dạng '(Dịch: ...)' để học viên dễ hiểu và theo kịp.\n"
-                "3. Đặt câu hỏi cực kỳ dễ trả lời."
+                "3. Đặt câu hỏi cực kỳ dễ trả lời và quen thuộc với học sinh phổ thông như 'How are you?', 'What is your name?', 'Do you like school?', 'What is your favorite color?'. TUYỆT ĐỐI KHÔNG dùng các cấu trúc bản xứ phức tạp như 'How are you doing today?' hay 'What's up?'."
             )
         elif level in ["B1", "B2"]:
             level_instruction = (
@@ -348,7 +348,10 @@ async def realtime_voice_endpoint(
                         if mode == "roleplay":
                             full_welcome = f"Chào mừng bạn đến với tình huống nhập vai '{topic}'! Mình đã sẵn sàng rồi. Hãy bắt đầu cuộc hội thoại nhé! 🚀"
                         else:
-                            full_welcome = "Xin chào! Mình là AI English Coach của bạn. Hôm nay chúng ta sẽ cùng đàm thoại tự do để tăng phản xạ nhé! How are you doing today? 😊"
+                            if level in ["A1", "A2"]:
+                                full_welcome = "Xin chào! Mình là AI English Coach của bạn. Hôm nay chúng ta sẽ cùng đàm thoại tự do để tăng phản xạ nhé! How are you? (Dịch: Bạn khỏe không?) 😊"
+                            else:
+                                full_welcome = "Xin chào! Mình là AI English Coach của bạn. Hôm nay chúng ta sẽ cùng đàm thoại tự do để tăng phản xạ nhé! How are you doing today? 😊"
                         
                         await manager.send_json({"type": "delta", "content": full_welcome}, websocket)
                     
