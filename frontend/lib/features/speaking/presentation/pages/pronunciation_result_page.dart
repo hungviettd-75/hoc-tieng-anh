@@ -8,6 +8,7 @@ import '../../models/pronunciation_models.dart';
 import '../providers/speaking_provider.dart';
 import '../widgets/score_radar_chart.dart';
 import '../widgets/word_highlight_widget.dart';
+import 'package:ai_english_coach/features/learn/presentation/providers/learn_provider.dart';
 
 class PronunciationResultPage extends ConsumerWidget {
   final PronunciationResult result;
@@ -24,6 +25,7 @@ class PronunciationResultPage extends ConsumerWidget {
           icon: const Icon(Icons.close, color: Colors.white),
           onPressed: () {
             ref.read(speakingProvider.notifier).reset();
+            ref.invalidate(learningDashboardProvider);
             context.go('/speaking');
           },
         ),
@@ -248,6 +250,7 @@ class PronunciationResultPage extends ConsumerWidget {
         child: GestureDetector(
           onTap: () {
             ref.read(speakingProvider.notifier).reset();
+            ref.invalidate(learningDashboardProvider);
             context.go('/speaking');
           },
           child: Container(

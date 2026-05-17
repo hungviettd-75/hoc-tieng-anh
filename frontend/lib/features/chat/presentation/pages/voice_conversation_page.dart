@@ -8,6 +8,7 @@ import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:ai_english_coach/services/web_speech_recognizer.dart';
 import '../providers/realtime_chat_provider.dart';
 import '../widgets/realtime_correction_widget.dart';
+import 'package:ai_english_coach/features/learn/presentation/providers/learn_provider.dart';
 
 class VoiceConversationPage extends ConsumerStatefulWidget {
   final String? mode;
@@ -110,7 +111,10 @@ class _VoiceConversationPageState extends ConsumerState<VoiceConversationPage> w
         elevation: 0,
         leading: IconButton(
           icon: const Icon(Icons.close, color: Colors.white),
-          onPressed: () => Navigator.of(context).pop(),
+          onPressed: () {
+            ref.invalidate(learningDashboardProvider);
+            Navigator.of(context).pop();
+          },
         ),
         title: Row(
           mainAxisSize: MainAxisSize.min,

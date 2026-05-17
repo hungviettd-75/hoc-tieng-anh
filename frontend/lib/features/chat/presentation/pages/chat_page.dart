@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ai_english_coach/theme/app_colors.dart';
 import '../providers/chat_provider.dart';
+import 'package:ai_english_coach/features/learn/presentation/providers/learn_provider.dart';
 
 class ChatPage extends ConsumerStatefulWidget {
   final String? mode;
@@ -32,6 +33,14 @@ class _ChatPageState extends ConsumerState<ChatPage> {
         level: widget.level,
       );
     });
+  }
+
+  @override
+  void dispose() {
+    ref.invalidate(learningDashboardProvider);
+    _controller.dispose();
+    _scrollController.dispose();
+    super.dispose();
   }
 
   void _scrollToBottom() {
