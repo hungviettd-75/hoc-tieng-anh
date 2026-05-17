@@ -250,7 +250,8 @@ async def realtime_voice_endpoint(
             "   - Đối với bất kỳ tình huống nào khác, hãy đóng vai trò đối thoại tự nhiên tương ứng.\n"
             "2. GIAO TIẾP CHỦ YẾU BẰNG TIẾNG ANH (ngắn gọn, 1-2 câu mỗi lượt) để kéo học viên vào vai diễn.\n"
             "3. TUYỆT ĐỐI KHÔNG chèn bất kỳ phần giải thích ngữ pháp, sửa lỗi hay nhắc nhở lỗi sai nào trong câu thoại này. Việc phân tích lỗi đã có một hệ thống chuyên biệt khác tự động xử lý và hiển thị ở Thẻ Vàng AI Correction. Bạn chỉ tập trung 100% vào việc đưa ra câu thoại nhập vai tự nhiên nhất.\n"
-            "4. Hãy dẫn dắt tình huống tự nhiên, đặt câu hỏi hoặc đưa ra gợi mở để thúc đẩy cuộc hội thoại."
+            "4. Hãy dẫn dắt tình huống tự nhiên, đặt câu hỏi hoặc đưa ra gợi mở để thúc đẩy cuộc hội thoại.\n"
+            "5. HỖ TRỢ KHI BẾ TẮC: Nếu học viên nói 'I don't know', 'I don't understand' hoặc im lặng/bế tắc, bạn BẮT BUỘC phải nói 1 câu Tiếng Việt động viên ngắn gọn, sau đó gợi ý cho họ 2 câu thoại Tiếng Anh mẫu siêu đơn giản phù hợp tình huống (ví dụ: 'Yes, please' hoặc 'Here you go') để họ tự tin bắt chước nói theo."
         )
         welcome_prompt = (
             f"Hãy gửi lời chào bằng Tiếng Việt siêu ngắn gọn (tối đa 1-2 câu ngắn) giới thiệu vai diễn của bạn và của học viên "
@@ -287,7 +288,8 @@ async def realtime_voice_endpoint(
             "QUY TẮC CHUNG:\n"
             "1. LUÔN đặt câu hỏi gợi mở ngắn gọn để giữ lửa cuộc đàm thoại.\n"
             "2. TUYỆT ĐỐI KHÔNG chèn bất kỳ phần giải thích ngữ pháp, sửa lỗi hay phân tích lỗi nào vào câu thoại chính. Việc sửa lỗi đã có hệ thống độc lập xử lý và hiển thị riêng ở Thẻ Vàng AI Correction. Bạn chỉ tập trung 100% vào việc đưa ra câu thoại đàm thoại tự nhiên.\n"
-            "3. Khuyến khích học viên bày tỏ quan điểm."
+            "3. Khuyến khích học viên bày tỏ quan điểm.\n"
+            "4. HỖ TRỢ KHI BẾ TẮC: Nếu học viên nói 'I don't know', 'I don't understand' hoặc im lặng/bế tắc, bạn BẮT BUỘC phải nói 1 câu Tiếng Việt động viên nồng ấm, gợi ý cho họ 2-3 câu trả lời mẫu Tiếng Anh siêu đơn giản (ví dụ: 'I like music' hoặc 'I want to sleep') hoặc chuyển hướng cuộc trò chuyện sang 1 câu hỏi mới cực kỳ dễ để học viên tự tin bắt đầu lại."
         )
 
         if level in ["A1", "A2"]:
@@ -424,7 +426,12 @@ async def realtime_voice_endpoint(
                         await manager.send_json({"type": "delta", "content": chunk}, websocket)
                 except Exception as e:
                     print(f"WARN: Gemini response failed: {e}")
-                    full_response = f"You said: \"{user_message}\". Keep going! 🚀"
+                    full_response = (
+                        "Đừng lo lắng khi chưa biết nói gì nhé! Hãy thử nói các câu mẫu sau:\n"
+                        "1. \"I am doing good, thank you!\" (Dịch: Mình khỏe, cảm ơn bạn!)\n"
+                        "2. \"I like listening to music in my free time.\" (Dịch: Mình thích nghe nhạc khi rảnh rỗi.)\n"
+                        "Hãy bấm giữ Mic và thử chọn một câu để nói nhé! Bạn làm được mà! 🚀"
+                    )
                     await manager.send_json({"type": "delta", "content": full_response}, websocket)
 
                 # Đảm bảo task sửa lỗi đã xong hẳn
