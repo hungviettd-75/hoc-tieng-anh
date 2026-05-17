@@ -349,7 +349,7 @@ async def realtime_voice_endpoint(
                         if mode == "roleplay":
                             topic_lower = topic.lower()
                             if "restaurant" in topic_lower or "dining" in topic_lower or "food" in topic_lower:
-                                full_welcome = f"Chào mừng bạn nhỏ đến với nhà hàng! Hôm nay chúng mình sẽ cùng nhập vai: mình là người phục vụ bàn còn bạn là vị khách đáng yêu đến ăn tối nhé! 🍽️✨ Hello! Welcome to our restaurant. Are you ready to order?"
+                                full_welcome = f"Chào mừng bạn đến với nhà hàng! Hôm nay chúng mình sẽ cùng nhập vai: mình là người phục vụ bàn còn bạn là vị khách đáng yêu đến ăn tối nhé! 🍽️✨ Hello! Welcome to our restaurant. Are you ready to order?"
                             elif "airport" in topic_lower or "flight" in topic_lower or "travel" in topic_lower:
                                 full_welcome = f"Chào bạn! Hôm nay chúng mình sẽ cùng nhập vai tại Sân bay nhé: mình sẽ là nhân viên tại quầy check-in, còn bạn là hành khách chuẩn bị bay! ✈️💼 Good morning! May I see your ticket and passport, please?"
                             elif "direction" in topic_lower or "lost" in topic_lower or "street" in topic_lower:
@@ -357,7 +357,7 @@ async def realtime_voice_endpoint(
                             elif "shopping" in topic_lower or "store" in topic_lower or "market" in topic_lower:
                                 full_welcome = f"Chào bạn! Hôm nay chúng mình sẽ nhập vai đi Mua sắm nhé: mình là nhân viên bán hàng thân thiện, còn bạn là khách hàng mua sắm! 🛍️✨ Hello! How can I help you today?"
                             else:
-                                full_welcome = f"Chào mừng bạn nhỏ đến với tình huống nhập vai '{topic}'! Trong tình huống này, mình sẽ đóng vai trò dẫn dắt đối thoại còn bạn nhập vai nhân vật tương ứng nhé! 🌟 Hello! I'm so excited to roleplay with you. Shall we start?"
+                                full_welcome = f"Chào mừng bạn đến với tình huống nhập vai '{topic}'! Trong tình huống này, mình sẽ đóng vai trò dẫn dắt đối thoại còn bạn nhập vai nhân vật tương ứng nhé! 🌟 Hello! I'm so excited to roleplay with you. Shall we start?"
                         else:
                             if level in ["A1", "A2"]:
                                 full_welcome = "Xin chào! Mình là AI English Coach của bạn. Hôm nay chúng ta sẽ cùng đàm thoại tự do để tăng phản xạ nhé! How are you? (Dịch: Bạn khỏe không?) 😊"
@@ -468,7 +468,7 @@ async def realtime_voice_endpoint(
                     else:  # free_talk hoặc vocabulary_practice
                         if level in ["A1", "A2"]:
                             a1_a2_fallbacks = [
-                                "Chào bạn nhỏ! Mình rất vui được luyện nói tiếng Anh cùng bạn. Hãy nói cho mình biết nhé: What is your favorite food? (Dịch: Món ăn yêu thích của bạn là gì?) Bạn có thích ăn pizza hay hamburger không? 🍕🍔",
+                                "Chào bạn! Mình rất vui được luyện nói tiếng Anh cùng bạn. Hãy nói cho mình biết nhé: What is your favorite food? (Dịch: Món ăn yêu thích của bạn là gì?) Bạn có thích ăn pizza hay hamburger không? 🍕🍔",
                                 "Ồ, giọng của bạn nghe rất dễ thương và ấm áp! Hãy chia sẻ một chút nhé: Do you like animals? (Dịch: Bạn có thích động vật không?) Bạn có nuôi chú chó hay chú mèo đáng yêu nào ở nhà không? 🐶🐱",
                                 "Tuyệt vời lắm! Chúng mình hãy cùng tiếp tục câu chuyện nhé: What do you like to do in your free time? (Dịch: Bạn thích làm gì vào thời gian rảnh?) Bạn thích xem phim hoạt hình hay chơi trò chơi nè? 🎬🎮"
                             ]
