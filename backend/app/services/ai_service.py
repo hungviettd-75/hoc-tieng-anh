@@ -10,8 +10,8 @@ class GeminiService:
         print(f"DEBUG: Initializing GeminiService with API Key starting with: {key_preview}")
         
         genai.configure(api_key=settings.GEMINI_API_KEY)
-        # Sử dụng gemini-2.5-flash (phiên bản tiên tiến hơn theo yêu cầu)
-        self.model = genai.GenerativeModel('gemini-2.5-flash')
+        # Sử dụng gemini-flash-latest (chính là alias của gemini-1.5-flash) để được hưởng quota 1500 req/ngày, tránh 429
+        self.model = genai.GenerativeModel('gemini-flash-latest')
 
         
         self.system_instruction = (
