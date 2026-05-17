@@ -80,13 +80,16 @@ class GeminiService:
             print(f"ERROR in Gemini streaming: {str(e)}")
             raise e
 
-    async def get_tutor_response(self, compact_context: str, user_message: str) -> AsyncGenerator[str, None]:
+    async def get_tutor_response(
+        self, compact_context: str, user_message: str, custom_instruction: str = None
+    ) -> AsyncGenerator[str, None]:
         """
         Streaming response với compressed context cho Vietnamese tutor.
         Tiết kiệm ~60% tokens so với get_streaming_response.
         """
+        system_instruction = custom_instruction or self.tutor_instruction
         prompt = (
-            f"{self.tutor_instruction}\n\n"
+            f"{system_instruction}\n\n"
             f"{compact_context}\n\n"
             f"User: {user_message}\nCoach:"
         )

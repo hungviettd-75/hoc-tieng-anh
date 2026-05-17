@@ -132,7 +132,20 @@ class RealtimeChatNotifier extends StateNotifier<RealtimeChatState> {
   }
 
   void _init() {
-    _chatService.connectRealtime(1);
+    _listenToMessages();
+  }
+
+  void connectWithContext({String? mode, String? level, String? topic}) {
+    print('DEBUG: Reconnecting to Realtime chat WebSocket with mode: $mode, level: $level, topic: $topic');
+    _subscription?.cancel();
+    _chatService.disconnect();
+    state = RealtimeChatState(messages: [], status: AIStatus.idle);
+    _chatService.connectRealtime(1, mode: mode, level: level, topic: topic);
+    _listenToMessages();
+  }
+
+  void _listenToMessages() {
+    _subscription?.cancel();
     _subscription = _chatService.realtimeMessages.listen((data) {
       final decoded = jsonDecode(data);
       final type = decoded['type'];
@@ -170,8 +183,9 @@ class RealtimeChatNotifier extends StateNotifier<RealtimeChatState> {
           _speakBilingual(formattedText);
         }
       } else if (type == 'done') {
-        final fullContent = decoded['full_content'];
+        final fullContent = decoded['full_content'] ?? '';
         final grammarNotes = decoded['grammar_notes'];
+        final routeUsed = decoded['route_used'];
         
         final aiMessage = ChatMessage(
           content: fullContent,
@@ -185,7 +199,10 @@ class RealtimeChatNotifier extends StateNotifier<RealtimeChatState> {
           status: AIStatus.idle,
         );
         
-        // BỎ LỆNH ĐỌC FULL CONTENT Ở ĐÂY ĐỂ TRÁNH NGẮT LỜI AI CORRECTION VÀ TUÂN THỦ YÊU CẦU
+        // NẾU LÀ TIN NHẮN CHÀO MỪNG KHỞI TẠO (welcome initiation), BẮT BUỘC AI PHẢI ĐỌC THOẠI!
+        if (routeUsed == 'llm_welcome_initiate' && fullContent.isNotEmpty) {
+          _speakBilingual(fullContent);
+        }
       }
     });
   }

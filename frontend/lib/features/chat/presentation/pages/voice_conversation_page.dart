@@ -48,6 +48,14 @@ class _VoiceConversationPageState extends ConsumerState<VoiceConversationPage> w
         print('DEBUG: Web Speech init result: $ok');
       });
     }
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      ref.read(realtimeChatProvider.notifier).connectWithContext(
+        mode: widget.mode,
+        level: widget.level,
+        topic: widget.topic,
+      );
+    });
   }
 
   @override

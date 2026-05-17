@@ -23,9 +23,18 @@ class ChatService {
     _channel = WebSocketChannel.connect(url);
   }
 
-  void connectRealtime(int userId) {
+  void connectRealtime(int userId, {String? mode, String? level, String? topic}) {
     const String ipAddress = '127.0.0.1'; 
-    final url = Uri.parse('ws://$ipAddress:8000/api/v1/ws/realtime/$userId');
+    String urlStr = 'ws://$ipAddress:8000/api/v1/ws/realtime/$userId';
+    final List<String> params = [];
+    if (mode != null) params.add('mode=$mode');
+    if (level != null) params.add('level=$level');
+    if (topic != null) params.add('topic=${Uri.encodeComponent(topic)}');
+
+    if (params.isNotEmpty) {
+      urlStr += '?${params.join('&')}';
+    }
+    final url = Uri.parse(urlStr);
 
     print('Connecting to Realtime WebSocket: $url');
     _realtimeChannel = WebSocketChannel.connect(url);

@@ -201,14 +201,97 @@ async def websocket_endpoint(
         manager.disconnect(websocket)
 
 @router.websocket("/ws/realtime/{user_id}")
-async def realtime_voice_endpoint(websocket: WebSocket, user_id: int):
+async def realtime_voice_endpoint(
+    websocket: WebSocket, 
+    user_id: int,
+    mode: str = None,
+    level: str = None,
+    topic: str = None
+):
     """
     WebSocket endpoint chuyên biệt cho trải nghiệm Voice Realtime.
     Smart Hybrid AI Pipeline:
     User Text → Local NLP → AI Router → (LLM nếu cần) → Vietnamese Tutor → Response
     """
+    print(f"DEBUG: New Realtime WebSocket connection for user_id: {user_id}, mode: {mode}, level: {level}, topic: {topic}")
     await manager.connect(websocket)
+
+    # Cấu hình custom System Instruction tùy theo chế độ
+    custom_instruction = None
+    welcome_prompt = None
+
+    if mode == "vocabulary_practice" and level:
+        vocab_words = VOCAB_LISTS.get(level.upper(), VOCAB_LISTS["B1"])
+        words_str = ", ".join([f"'{w}'" for w in vocab_words])
+        custom_instruction = (
+            "Bạn là AI English Coach chuyên hỗ trợ học viên Luyện tập Từ vựng Thông minh.\n"
+            f"Nhiệm vụ của bạn là bắt buộc học viên thực hành các từ khóa trình độ {level}: {words_str}.\n"
+            "QUY TẮC:\n"
+            "1. LUÔN GIAO TIẾP BẰNG TIẾNG VIỆT thân thiện, ngắn gọn (max 2-3 câu mỗi lượt).\n"
+            "2. KIỂM TRA TỪ KHÓA: Trong mỗi câu trả lời của học viên, hãy kiểm tra xem họ có sử dụng bất kỳ từ khóa nào ở trên không.\n"
+            "   - Nếu có: Hãy lập tức khen ngợi nồng nhiệt kèm dấu tick xanh lá (ví dụ: 'Tuyệt vời! Bạn đã sử dụng từ khóa B1 thành công ✅').\n"
+            "   - Nếu không: Hãy khéo léo nhắc nhở hoặc gợi ý họ áp dụng từ khóa vào câu tiếp theo.\n"
+            "3. Hướng dẫn học viên cách dùng chuẩn bằng các ví dụ tiếng Anh ngắn gọn."
+        )
+        welcome_prompt = (
+            f"Học viên vừa tham gia lớp học từ vựng trình độ {level}. "
+            f"Hãy gửi lời chào đón bằng Tiếng Việt nồng ấm, giới thiệu nhiệm vụ hôm nay là thực hành các từ khóa: {words_str}. "
+            "Đưa ra 1 câu hỏi gợi mở ngắn bằng Tiếng Anh để bắt đầu cuộc hội thoại."
+        )
+    elif mode == "roleplay" and topic:
+        custom_instruction = (
+            f"Bạn là AI chuyên gia nhập vai tiếng Anh trong tình huống giao tiếp thực tế: '{topic}'.\n"
+            "QUY TẮC:\n"
+            "1. Bạn PHẢI đóng đúng vai trò hội thoại phù hợp với tình huống này.\n"
+            "   - Nếu tình huống là nhà hàng, bạn là nhân viên phục vụ (Waiter/Waitress), học viên là khách hàng.\n"
+            "   - Nếu tình huống là sân bay, bạn là nhân viên check-in, học viên là hành khách.\n"
+            "   - Đối với bất kỳ tình huống nào khác, hãy đóng vai trò đối thoại tự nhiên tương ứng.\n"
+            "2. GIAO TIẾP CHỦ YẾU BẰNG TIẾNG ANH (ngắn gọn, 1-2 câu mỗi lượt) để kéo học viên vào vai diễn.\n"
+            "3. Hỗ trợ sư phạm: Nếu học viên nói sai ngữ pháp hoặc phát âm, bạn có thể kèm giải thích/gợi ý ngắn gọn bằng Tiếng Việt ở cuối câu thoại.\n"
+            "4. Hãy dẫn dắt tình huống tự nhiên, đặt câu hỏi hoặc đưa ra gợi mở để thúc đẩy cuộc hội thoại."
+        )
+        welcome_prompt = (
+            f"Học viên vừa tham gia tình huống nhập vai thực tế: '{topic}'. "
+            "Hãy gửi lời chào chào mừng bằng Tiếng Việt nồng ấm, giới thiệu rõ vai diễn của bạn và vai diễn của học viên trong tình huống này. "
+            "Sau đó đưa ra câu thoại tiếng Anh đầu tiên để dẫn dắt học viên bắt đầu nhập vai."
+        )
+    elif mode == "free_talk":
+        custom_instruction = (
+            "Bạn là AI English Coach đàm thoại tự do bằng Tiếng Anh.\n"
+            "QUY TẮC:\n"
+            "1. LUÔN đặt câu hỏi gợi mở ngắn gọn (1-2 câu tiếng Anh) để giữ lửa cuộc đàm thoại.\n"
+            "2. Giải thích sư phạm: Bất cứ khi nào học viên nói sai ngữ pháp hoặc từ vựng, hãy chủ động sửa lỗi và giải thích chi tiết bằng Tiếng Việt ở cuối lượt thoại.\n"
+            "3. Khuyến khích học viên bày tỏ quan điểm của mình."
+        )
+        welcome_prompt = (
+            "Học viên vừa bắt đầu phòng luyện nói tự do. Hãy gửi lời chào bằng Tiếng Việt nồng ấm, "
+            "giới thiệu bản thân là người bạn đồng hành luyện nói tiếng Anh và đưa ra 1 chủ đề giao tiếp gợi mở thú vị bằng Tiếng Anh."
+        )
+
     try:
+        # Nếu có welcome_prompt, chủ động tạo và phát tin nhắn chào mừng ngay khi học viên kết nối!
+        if welcome_prompt:
+            await manager.send_json({"type": "status", "status": "thinking"}, websocket)
+            await manager.send_json({"type": "status", "status": "speaking"}, websocket)
+            
+            full_welcome = ""
+            async for chunk in gemini_service.get_streaming_response(
+                history=[], user_message=welcome_prompt, custom_instruction=custom_instruction
+            ):
+                full_welcome += chunk
+                await manager.send_json({"type": "delta", "content": chunk}, websocket)
+            
+            # Lưu chào mừng vào lịch sử hội thoại của memory
+            conversation_memory.add_turn(user_id, "[System welcome initiation]", full_welcome)
+            
+            await manager.send_json({
+                "type": "done",
+                "full_content": full_welcome,
+                "grammar_notes": "",
+                "route_used": "llm_welcome_initiate"
+            }, websocket)
+            await manager.send_json({"type": "status", "status": "idle"}, websocket)
+
         while True:
             data = await websocket.receive_text()
             message_data = json.loads(data)
@@ -284,7 +367,7 @@ async def realtime_voice_endpoint(websocket: WebSocket, user_id: int):
                 
                 try:
                     async for chunk in gemini_service.get_tutor_response(
-                        compact_context=compact_ctx, user_message=user_message
+                        compact_context=compact_ctx, user_message=user_message, custom_instruction=custom_instruction
                     ):
                         full_response += chunk
                         await manager.send_json({"type": "delta", "content": chunk}, websocket)
