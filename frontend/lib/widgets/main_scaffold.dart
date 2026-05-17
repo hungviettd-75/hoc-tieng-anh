@@ -38,7 +38,7 @@ class MainScaffold extends StatelessWidget {
           },
           items: const [
             BottomNavigationBarItem(icon: Icon(Icons.home_filled), label: 'Trang chủ'),
-            BottomNavigationBarItem(icon: Icon(Icons.mic_rounded), label: 'Luyện nói'),
+            BottomNavigationBarItem(icon: Icon(Icons.mic_rounded), label: 'Phát âm'),
             BottomNavigationBarItem(icon: Icon(Icons.school_rounded), label: 'Học tập'),
             BottomNavigationBarItem(icon: Icon(Icons.bar_chart_rounded), label: 'Tiến độ'),
             BottomNavigationBarItem(icon: Icon(Icons.person_rounded), label: 'Cá nhân'),

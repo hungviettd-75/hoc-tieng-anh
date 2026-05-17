@@ -359,7 +359,7 @@ class _HomePageState extends ConsumerState<HomePage> {
               ),
               _buildActionItem(
                 Icons.mic_rounded, 
-                'Luyện nói', 
+                'Giao tiếp', 
                 AppColors.primary,
                 onTap: () => context.push('/voice-chat?mode=free_talk'),
               ),
