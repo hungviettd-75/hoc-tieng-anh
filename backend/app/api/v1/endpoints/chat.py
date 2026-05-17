@@ -487,6 +487,45 @@ async def realtime_voice_endpoint(
                 final_corrections = final_corrections_tuple[0]
                 route_used = final_corrections_tuple[1]
 
+                # Tự động đồng bộ và lưu các lỗi sai thành WeakPoint vào Database để cá nhân hóa lộ trình xuyên suốt
+                if final_corrections:
+                    from app.models.models import WeakPoint
+                    db = SessionLocal()
+                    try:
+                        for c in final_corrections:
+                            # Thu gọn description của điểm yếu cho cô đọng
+                            desc = c.explanation_vi if len(c.explanation_vi) < 180 else c.explanation_vi[:177] + "..."
+                            weak_desc = f"'{c.original}' -> '{c.correction}' ({desc})"
+                            if len(weak_desc) > 255:
+                                weak_desc = weak_desc[:252] + "..."
+                            
+                            # Tìm xem lỗi tương tự đã có chưa
+                            existing_wp = db.query(WeakPoint).filter(
+                                WeakPoint.user_id == user_id,
+                                WeakPoint.category == c.error_type,
+                                WeakPoint.is_resolved == False,
+                                WeakPoint.description.like(f"%{c.original}%")
+                            ).first()
+                            
+                            if existing_wp:
+                                existing_wp.frequency += 1
+                            else:
+                                new_wp = WeakPoint(
+                                    user_id=user_id,
+                                    category=c.error_type,
+                                    description=weak_desc,
+                                    frequency=1,
+                                    is_resolved=False
+                                )
+                                db.add(new_wp)
+                        db.commit()
+                        print(f"DEBUG: Successfully synced {len(final_corrections)} WeakPoints to DB for User {user_id}")
+                    except Exception as db_err:
+                        print(f"WARN: Failed to save WeakPoints to DB: {db_err}")
+                        db.rollback()
+                    finally:
+                        db.close()
+
                 conversation_memory.add_turn(user_id, user_message, full_response)
                 grammar_notes = "; ".join([c.explanation_vi for c in final_corrections if c.error_type == "grammar"])
                 
