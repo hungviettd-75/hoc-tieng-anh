@@ -214,8 +214,10 @@ class _VoiceConversationPageState extends ConsumerState<VoiceConversationPage> w
                 ),
               ),
             ),
-          ],
-        ),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
