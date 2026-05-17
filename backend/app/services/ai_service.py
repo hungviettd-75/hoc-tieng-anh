@@ -25,13 +25,13 @@ class GeminiService:
 
         # Vietnamese Tutor system instruction (dùng cho realtime voice)
         self.tutor_instruction = (
-            "Bạn là AI English Coach chuyên hỗ trợ học viên Việt Nam luyện nói.\n"
-            "QUY TẮC:\n"
-            "- TRẢ LỜI BẰNG TIẾNG VIỆT để học viên dễ tiếp cận.\n"
-            "- Chỉ dùng tiếng Anh khi đưa ra các mẫu câu luyện tập hoặc các đoạn hội thoại thực hành.\n"
-            "- Thân thiện, dùng emoji phù hợp, câu trả lời ngắn gọn (max 2-3 câu).\n"
-            "- Luôn khen ngợi và động viên khi học viên cố gắng nói tiếng Anh.\n"
-            "- TUYỆT ĐỐI KHÔNG sửa lỗi trong lúc đang trò chuyện (hệ thống UI sẽ tự hiển thị thẻ sửa lỗi)."
+            "Bạn là AI English Coach chuyên hỗ trợ học viên Việt Nam luyện nói đàm thoại hai chiều.\n"
+            "QUY TẮC ĐÀM THOẠI SONG NGỮ BẮT BUỘC:\n"
+            "1. LUÔN TRẢ LỜI SONG NGỮ (English first, Vietnamese second): Đầu tiên, trả lời học viên bằng 1-2 câu tiếng Anh siêu ngắn gọn, từ vựng dễ hiểu (phù hợp học sinh lớp 6 trình độ A1-A2). Ngay sau đó, viết bản dịch tiếng Việt tương ứng trong dấu ngoặc đơn để hỗ trợ học viên.\n"
+            "   Ví dụ: 'Oh, that's great! What is your dog's name? (Dịch: Ồ, tuyệt quá! Chú chó của bạn tên là gì thế?)'\n"
+            "2. ĐÀM THOẠI LINH HOẠT, KHÔNG DÙNG CÂU MẪU CỨNG: Tuyệt đối không đưa ra các câu gợi ý dạng 1, 2, 3 và bắt học viên chọn đọc theo. Hãy trò chuyện tự nhiên, luôn đặt 1 câu hỏi mở đơn giản ở cuối để dẫn dắt học viên tự suy nghĩ câu trả lời.\n"
+            "3. THÂN THIỆN & ĐỘNG VIÊN: Sử dụng emoji sinh động (🐶, 🍕, 🎨,...), câu thoại ngắn gọn để học viên không bị ngợp.\n"
+            "4. KHÔNG SỬA LỖI NGỮ PHÁP TRỰC TIẾP TRONG LỜI NÓI: Tuyệt đối không nhận xét lỗi sai ngữ pháp hay phát âm bằng lời nói, vì giao diện UI của ứng dụng đã tự hiển thị Thẻ Vàng sửa lỗi rất rõ ràng rồi."
         )
 
     def _get_text_safely(self, response_or_chunk) -> str:
@@ -94,13 +94,21 @@ class GeminiService:
             f"User: {user_message}\nCoach:"
         )
         try:
-            response = await self.model.generate_content_stream_async(prompt)
+            chat = self.model.start_chat(history=[])
+            response = await chat.send_message_async(prompt, stream=True)
             async for chunk in response:
                 chunk_text = self._get_text_safely(chunk)
                 if chunk_text:
                     yield chunk_text
         except Exception as e:
             print(f"ERROR in tutor streaming: {str(e)}")
+            try:
+                with open("E:/Project/Hoc/hoc-tieng-anh/backend/error_log.txt", "w", encoding="utf-8") as f:
+                    import traceback
+                    f.write(f"Exception message: {str(e)}\n")
+                    f.write(f"Traceback:\n{traceback.format_exc()}\n")
+            except Exception as log_err:
+                print(f"Failed to write error log: {log_err}")
             raise e
 
     async def get_tutor_correction(self, user_text: str, errors_summary: str, user_level: str = "A2") -> str:
