@@ -1,0 +1,37 @@
+
+
+services:
+  db:
+    image: postgres:15-alpine
+    container_name: ai_coach_db
+    restart: always
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-admin}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-password123}
+      POSTGRES_DB: ${POSTGRES_DB:-ai_coach}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  redis:
+    image: redis:7-alpine
+    container_name: ai_coach_redis
+    ports:
+      - "6379:6379"
+
+  backend:
+    build: ./backend
+    container_name: ai_coach_backend
+    volumes:
+      - ./backend:/app
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    depends_on:
+      - db
+      - redis
+
+volumes:
+  postgres_data:

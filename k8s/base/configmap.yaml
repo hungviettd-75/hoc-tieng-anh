@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ai-coach-config
+  namespace: ai-coach-prod
+data:
+  ENVIRONMENT: "production"
+  POSTGRES_DB: "ai_coach"
+  POSTGRES_SERVER: "postgres.ai-coach-prod.svc.cluster.local"
+  REDIS_URL: "redis://redis.ai-coach-prod.svc.cluster.local:6379/0"
+  FRONTEND_URL: "https://ai-coach.example.com"

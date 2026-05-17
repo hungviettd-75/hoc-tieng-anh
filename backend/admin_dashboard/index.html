@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="AI English Coach - Admin Dashboard & Analytics">
+    <title>AI English Coach - Admin Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- LOGIN SCREEN -->
+    <div id="loginScreen" class="login-screen">
+        <!-- Animated Background Orbs -->
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+
+        <div class="login-card">
+            <div class="login-logo">
+                <div class="logo-icon-wrapper">
+                    <span class="logo-icon">🎓</span>
+                </div>
+                <h1>AI English Coach</h1>
+                <p>Welcome back, Admin</p>
+            </div>
+            <form id="loginForm" onsubmit="return handleLogin(event)">
+                <div class="form-group">
+                    <label for="loginEmail">Email Address</label>
+                    <div class="input-wrapper">
+                        <span class="input-icon">✉️</span>
+                        <input type="email" id="loginEmail" placeholder="admin@aicoach.com" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Password</label>
+                    <div class="input-wrapper">
+                        <span class="input-icon">🔑</span>
+                        <input type="password" id="loginPassword" placeholder="••••••••" required>
+                    </div>
+                </div>
+                <button type="submit" class="btn-primary" id="loginBtn">
+                    <span class="btn-text">Sign In to Dashboard</span>
+                    <span class="btn-loader" style="display:none;">⏳</span>
+                </button>
+                <p id="loginError" class="error-text" style="display:none;"></p>
+            </form>
+        </div>
+    </div>
+
+    <!-- MAIN DASHBOARD -->
+    <div id="dashboardApp" class="dashboard-app" style="display:none;">
+        <!-- SIDEBAR -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <span class="logo-icon">🎓</span>
+                <h2>AI Coach</h2>
+                <span class="badge">Admin</span>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="#" class="nav-item active" data-section="overview" onclick="switchSection('overview', this)">
+                    <span class="nav-icon">📊</span>
+                    <span class="nav-label">Tổng quan</span>
+                </a>
+                <a href="#" class="nav-item" data-section="users" onclick="switchSection('users', this)">
+                    <span class="nav-icon">👥</span>
+                    <span class="nav-label">Quản lý Users</span>
+                </a>
+                <a href="#" class="nav-item" data-section="lessons" onclick="switchSection('lessons', this)">
+                    <span class="nav-icon">📚</span>
+                    <span class="nav-label">Lesson Analytics</span>
+                </a>
+                <a href="#" class="nav-item" data-section="ai-usage" onclick="switchSection('ai-usage', this)">
+                    <span class="nav-icon">🤖</span>
+                    <span class="nav-label">AI Usage</span>
+                </a>
+                <a href="#" class="nav-item" data-section="subscriptions" onclick="switchSection('subscriptions', this)">
+                    <span class="nav-icon">💳</span>
+                    <span class="nav-label">Subscriptions</span>
+                </a>
+                <a href="#" class="nav-item" data-section="retention" onclick="switchSection('retention', this)">
+                    <span class="nav-icon">🔄</span>
+                    <span class="nav-label">Retention</span>
+                </a>
+                <a href="#" class="nav-item" data-section="speaking" onclick="switchSection('speaking', this)">
+                    <span class="nav-icon">🎤</span>
+                    <span class="nav-label">Speaking Stats</span>
+                </a>
+            </nav>
+            <div class="sidebar-footer">
+                <div class="admin-info">
+                    <div class="admin-avatar">👤</div>
+                    <div class="admin-details">
+                        <span class="admin-name" id="adminName">Admin</span>
+                        <span class="admin-role">Super Admin</span>
+                    </div>
+                </div>
+                <button class="btn-logout" onclick="handleLogout()">🚪 Đăng xuất</button>
+            </div>
+        </aside>
+
+        <!-- MAIN CONTENT -->
+        <main class="main-content">
+            <!-- HEADER -->
+            <header class="top-header">
+                <div class="header-left">
+                    <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
+                    <h1 id="sectionTitle">Tổng quan</h1>
+                </div>
+                <div class="header-right">
+                    <div class="refresh-indicator" id="refreshIndicator">
+                        <span class="pulse-dot"></span>
+                        <span>Live</span>
+                    </div>
+                    <select id="dateRange" onchange="onDateRangeChange()" class="date-range-select">
+                        <option value="7">7 ngày</option>
+                        <option value="30" selected>30 ngày</option>
+                        <option value="60">60 ngày</option>
+                        <option value="90">90 ngày</option>
+                    </select>
+                </div>
+            </header>
+
+            <!-- CONTENT SECTIONS -->
+            <div class="content-area">
+                <!-- OVERVIEW SECTION -->
+                <section id="section-overview" class="section active">
+                    <div class="kpi-grid">
+                        <div class="kpi-card" style="--accent: #00d4ff;">
+                            <div class="kpi-icon">👥</div>
+                            <div class="kpi-info">
+                                <span class="kpi-value" id="kpiTotalUsers">—</span>
+                                <span class="kpi-label">Tổng Users</span>
+                            </div>
+                        </div>
+                        <div class="kpi-card" style="--accent: #7c3aed;">
+                            <div class="kpi-icon">🟢</div>
+                            <div class="kpi-info">
+                                <span class="kpi-value" id="kpiActiveToday">—</span>
+                                <span class="kpi-label">Active hôm nay</span>
+                            </div>
+                        </div>
+                        <div class="kpi-card" style="--accent: #10b981;">
+                            <div class="kpi-icon">💬</div>
+                            <div class="kpi-info">
+                                <span class="kpi-value" id="kpiConversations">—</span>
+                                <span class="kpi-label">Conversations</span>
+                            </div>
+                        </div>
+                        <div class="kpi-card" style="--accent: #f59e0b;">
+                            <div class="kpi-icon">🎤</div>
+                            <div class="kpi-info">
+                                <span class="kpi-value" id="kpiSpeaking">—</span>
+                                <span class="kpi-label">Speaking Sessions</span>
+                            </div>
+                        </div>
+                        <div class="kpi-card" style="--accent: #ef4444;">
+                            <div class="kpi-icon">🎯</div>
+                            <div class="kpi-info">
+                                <span class="kpi-value" id="kpiAvgScore">—</span>
+                                <span class="kpi-label">Điểm TB Phát âm</span>
+                            </div>
+                        </div>
+                        <div class="kpi-card" style="--accent: #06b6d4;">
+                            <div class="kpi-icon">⭐</div>
+                            <div class="kpi-info">
+                                <span class="kpi-value" id="kpiTotalXP">—</span>
+                                <span class="kpi-label">Tổng XP</span>
+                            </div>
+                        </div>
+                        <div class="kpi-card" style="--accent: #8b5cf6;">
+                            <div class="kpi-icon">📨</div>
+                            <div class="kpi-info">
+                                <span class="kpi-value" id="kpiMessages">—</span>
+                                <span class="kpi-label">Tổng Messages</span>
+                            </div>
+                        </div>
+                        <div class="kpi-card" style="--accent: #ec4899;">
+                            <div class="kpi-icon">💎</div>
+                            <div class="kpi-info">
+                                <span class="kpi-value" id="kpiSubscriptions">—</span>
+                                <span class="kpi-label">Active Subs</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="charts-grid">
+                        <div class="chart-card">
+                            <h3>📈 User Growth</h3>
+                            <canvas id="chartUserGrowth"></canvas>
+                        </div>
+                        <div class="chart-card">
+                            <h3>📊 Daily Activities</h3>
+                            <canvas id="chartActivities"></canvas>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- USERS SECTION -->
+                <section id="section-users" class="section">
+                    <div class="section-toolbar">
+                        <div class="search-box">
+                            <span class="search-icon">🔍</span>
+                            <input type="text" id="userSearch" placeholder="Tìm theo email hoặc tên..." oninput="debounceSearch()">
+                        </div>
+                        <div class="filter-group">
+                            <select id="userStatusFilter" onchange="loadUsers()">
+                                <option value="">Tất cả</option>
+                                <option value="active">Active</option>
+                                <option value="banned">Banned</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="table-container">
+                        <table class="data-table" id="usersTable">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Email</th>
+                                    <th>Tên</th>
+                                    <th>Level</th>
+                                    <th>XP</th>
+                                    <th>Streak</th>
+                                    <th>Plan</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="usersTableBody">
+                                <tr><td colspan="9" class="loading-cell">Đang tải...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="pagination" id="usersPagination"></div>
+                </section>
+
+                <!-- LESSONS SECTION -->
+                <section id="section-lessons" class="section">
+                    <div class="charts-grid">
+                        <div class="chart-card">
+                            <h3>📚 Activity by Type</h3>
+                            <canvas id="chartActivityTypes"></canvas>
+                        </div>
+                        <div class="chart-card">
+                            <h3>📈 Daily Activity Trend</h3>
+                            <canvas id="chartActivityTrend"></canvas>
+                        </div>
+                    </div>
+                    <div class="stats-cards-grid">
+                        <div class="stat-card glass">
+                            <span class="stat-icon">📊</span>
+                            <span class="stat-value" id="avgDailyActivities">—</span>
+                            <span class="stat-label">Avg Daily Activities</span>
+                        </div>
+                        <div class="stat-card glass">
+                            <span class="stat-icon">⏰</span>
+                            <span class="stat-value" id="peakHour">—</span>
+                            <span class="stat-label">Peak Hour</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- AI USAGE SECTION -->
+                <section id="section-ai-usage" class="section">
+                    <div class="stats-cards-grid four-cols">
+                        <div class="stat-card glass">
+                            <span class="stat-icon">💬</span>
+                            <span class="stat-value" id="aiConversations">—</span>
+                            <span class="stat-label">Total Conversations</span>
+                        </div>
+                        <div class="stat-card glass">
+                            <span class="stat-icon">📨</span>
+                            <span class="stat-value" id="aiMessages">—</span>
+                            <span class="stat-label">Total Messages</span>
+                        </div>
+                        <div class="stat-card glass">
+                            <span class="stat-icon">📊</span>
+                            <span class="stat-value" id="aiAvgMsgs">—</span>
+                            <span class="stat-label">Avg Msgs/Conv</span>
+                        </div>
+                        <div class="stat-card glass">
+                            <span class="stat-icon">🧠</span>
+                            <span class="stat-value" id="aiMemories">—</span>
+                            <span class="stat-label">AI Memories</span>
+                        </div>
+                    </div>
+                    <div class="charts-grid">
+                        <div class="chart-card">
+                            <h3>💬 Daily Conversations</h3>
+                            <canvas id="chartDailyConversations"></canvas>
+                        </div>
+                        <div class="chart-card">
+                            <h3>📨 Daily Messages</h3>
+                            <canvas id="chartDailyMessages"></canvas>
+                        </div>
+                    </div>
+                    <div class="chart-card full-width">
+                        <h3>🔥 Popular Topics</h3>
+                        <div id="popularTopicsList" class="topics-list"></div>
+                    </div>
+                </section>
+
+                <!-- SUBSCRIPTIONS SECTION -->
+                <section id="section-subscriptions" class="section">
+                    <div class="stats-cards-grid four-cols">
+                        <div class="stat-card glass">
+                            <span class="stat-icon">💎</span>
+                            <span class="stat-value" id="subActive">—</span>
+                            <span class="stat-label">Active Subs</span>
+                        </div>
+                        <div class="stat-card glass">
+                            <span class="stat-icon">💰</span>
+                            <span class="stat-value" id="subMRR">—</span>
+                            <span class="stat-label">MRR</span>
+                        </div>
+                        <div class="stat-card glass">
+                            <span class="stat-icon">❌</span>
+                            <span class="stat-value" id="subChurn">—</span>
+                            <span class="stat-label">Churn Rate</span>
+                        </div>
+                        <div class="stat-card glass">
+                            <span class="stat-icon">📅</span>
+                            <span class="stat-value" id="subTotal">—</span>
+                            <span class="stat-label">Total Subs</span>
+                        </div>
+                    </div>
+                    <div class="charts-grid">
+                        <div class="chart-card">
+                            <h3>📊 Plan Distribution</h3>
+                            <canvas id="chartPlanDistribution"></canvas>
+                        </div>
+                        <div class="chart-card">
+                            <h3>📈 New Subscriptions</h3>
+                            <canvas id="chartNewSubs"></canvas>
+                        </div>
+                    </div>
+                    <div class="stats-cards-grid">
+                        <div class="stat-card glass">
+                            <span class="stat-icon">💵</span>
+                            <span class="stat-value" id="subRevenueMonthly">—</span>
+                            <span class="stat-label">Revenue Monthly</span>
+                        </div>
+                        <div class="stat-card glass">
+                            <span class="stat-icon">💵</span>
+                            <span class="stat-value" id="subRevenueYearly">—</span>
+                            <span class="stat-label">Revenue Yearly</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- RETENTION SECTION -->
+                <section id="section-retention" class="section">
+                    <div class="stats-cards-grid four-cols">
+                        <div class="stat-card glass">
+                            <span class="stat-icon">📅</span>
+                            <span class="stat-value" id="retDAU">—</span>
+                            <span class="stat-label">DAU</span>
+                        </div>
+                        <div class="stat-card glass">
+                            <span class="stat-icon">📆</span>
+                            <span class="stat-value" id="retWAU">—</span>
+                            <span class="stat-label">WAU</span>
+                        </div>
+                        <div class="stat-card glass">
+                            <span class="stat-icon">🗓️</span>
+                            <span class="stat-value" id="retMAU">—</span>
+                            <span class="stat-label">MAU</span>
+                        </div>
+                        <div class="stat-card glass">
+                            <span class="stat-icon">📊</span>
+                            <span class="stat-value" id="retRatio">—</span>
+                            <span class="stat-label">DAU/MAU Ratio</span>
+                        </div>
+                    </div>
+                    <div class="charts-grid">
+                        <div class="chart-card full-width">
+                            <h3>📈 Daily Active Users Trend</h3>
+                            <canvas id="chartRetention"></canvas>
+                        </div>
+                    </div>
+                    <div class="stats-cards-grid">
+                        <div class="stat-card glass">
+                            <span class="stat-icon">📉</span>
+                            <span class="stat-value" id="retChurn">—</span>
+                            <span class="stat-label">Churn Rate</span>
+                        </div>
+                        <div class="stat-card glass">
+                            <span class="stat-icon">⏱️</span>
+                            <span class="stat-value" id="retAvgDuration">—</span>
+                            <span class="stat-label">Avg Session</span>
+                        </div>
+                        <div class="stat-card glass">
+                            <span class="stat-icon">🔄</span>
+                            <span class="stat-value" id="retReturning">—</span>
+                            <span class="stat-label">Returning Rate</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- SPEAKING SECTION -->
+                <section id="section-speaking" class="section">
+                    <div class="stats-cards-grid four-cols">
+                        <div class="stat-card glass">
+                            <span class="stat-icon">🎤</span>
+                            <span class="stat-value" id="spkTotal">—</span>
+                            <span class="stat-label">Total Sessions</span>
+                        </div>
+                        <div class="stat-card glass">
+                            <span class="stat-icon">🎯</span>
+                            <span class="stat-value" id="spkAvg">—</span>
+                            <span class="stat-label">Avg Score</span>
+                        </div>
+                        <div class="stat-card glass">
+                            <span class="stat-icon">🗣️</span>
+                            <span class="stat-value" id="spkFluency">—</span>
+                            <span class="stat-label">Avg Fluency</span>
+                        </div>
+                        <div class="stat-card glass">
+                            <span class="stat-icon">👂</span>
+                            <span class="stat-value" id="spkIntonation">—</span>
+                            <span class="stat-label">Avg Intonation</span>
+                        </div>
+                    </div>
+                    <div class="charts-grid">
+                        <div class="chart-card">
+                            <h3>📊 Score Distribution</h3>
+                            <canvas id="chartScoreDistribution"></canvas>
+                        </div>
+                        <div class="chart-card">
+                            <h3>📈 Daily Sessions</h3>
+                            <canvas id="chartDailySpeaking"></canvas>
+                        </div>
+                    </div>
+                    <div class="chart-card full-width">
+                        <h3>🏆 Top Performers</h3>
+                        <div class="table-container">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Tên</th>
+                                        <th>Avg Score</th>
+                                        <th>Sessions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="topPerformersBody">
+                                    <tr><td colspan="4" class="loading-cell">Đang tải...</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <!-- USER DETAIL MODAL -->
+    <div id="userDetailModal" class="modal" style="display:none;">
+        <div class="modal-overlay" onclick="closeUserModal()"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Chi tiết User</h2>
+                <button class="modal-close" onclick="closeUserModal()">✕</button>
+            </div>
+            <div class="modal-body" id="userDetailBody">
+                <div class="loading-cell">Đang tải...</div>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

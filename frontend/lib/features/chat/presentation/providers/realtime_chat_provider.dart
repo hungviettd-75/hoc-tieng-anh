@@ -1,0 +1,222 @@
+import 'dart:async';
+import 'dart:convert';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:ai_english_coach/services/chat_service.dart';
+import 'package:audioplayers/audioplayers.dart';
+import 'package:ai_english_coach/core/api_config.dart';
+import 'chat_provider.dart';
+
+enum AIStatus { idle, thinking, speaking, correcting }
+
+class RealtimeCorrection {
+  final String original;
+  final String correction;
+  final String ipa;
+  final String explanationVi;
+
+  RealtimeCorrection({
+    required this.original,
+    required this.correction,
+    required this.ipa,
+    required this.explanationVi,
+  });
+
+  factory RealtimeCorrection.fromJson(Map<String, dynamic> json) {
+    return RealtimeCorrection(
+      original: json['original'] ?? '',
+      correction: json['correction'] ?? '',
+      ipa: json['ipa'] ?? '',
+      explanationVi: json['explanation_vi'] ?? '',
+    );
+  }
+}
+
+class RealtimeChatState {
+  final List<ChatMessage> messages;
+  final AIStatus status;
+  final String currentSubtitle;
+  final String? lastGrammarCorrection;
+  final List<RealtimeCorrection> currentCorrections;
+  final String formattedCorrectionText;
+
+  RealtimeChatState({
+    required this.messages,
+    this.status = AIStatus.idle,
+    this.currentSubtitle = '',
+    this.lastGrammarCorrection,
+    this.currentCorrections = const [],
+    this.formattedCorrectionText = '',
+  });
+
+  RealtimeChatState copyWith({
+    List<ChatMessage>? messages,
+    AIStatus? status,
+    String? currentSubtitle,
+    String? lastGrammarCorrection,
+    List<RealtimeCorrection>? currentCorrections,
+    String? formattedCorrectionText,
+  }) {
+    return RealtimeChatState(
+      messages: messages ?? this.messages,
+      status: status ?? this.status,
+      currentSubtitle: currentSubtitle ?? this.currentSubtitle,
+      lastGrammarCorrection: lastGrammarCorrection ?? this.lastGrammarCorrection,
+      currentCorrections: currentCorrections ?? this.currentCorrections,
+      formattedCorrectionText: formattedCorrectionText ?? this.formattedCorrectionText,
+    );
+  }
+}
+
+class RealtimeChatNotifier extends StateNotifier<RealtimeChatState> {
+  final ChatService _chatService;
+  final AudioPlayer _audioPlayer = AudioPlayer();
+  StreamSubscription? _subscription;
+
+  RealtimeChatNotifier(this._chatService) : super(RealtimeChatState(messages: [])) {
+    _init();
+  }
+
+  final List<String> _speechQueue = [];
+  bool _isSpeaking = false;
+
+  Future<void> _speakBilingual(String text) async {
+    if (text.trim().isEmpty) return;
+    
+    _speechQueue.add(text);
+    if (_isSpeaking) return;
+
+    _processNextInQueue();
+  }
+
+  Future<void> _processNextInQueue() async {
+    if (_speechQueue.isEmpty) {
+      _isSpeaking = false;
+      return;
+    }
+
+    _isSpeaking = true;
+    final text = _speechQueue.removeAt(0);
+    print('DEBUG: Speaking: "$text"');
+
+    try {
+      final url = '${ApiConfig.speaking}/tts?text=${Uri.encodeComponent(text)}';
+      
+      final completer = Completer<void>();
+      late StreamSubscription subscription;
+      
+      // Timeout 15 giây để tránh treo hàng đợi
+      Timer? timeoutTimer;
+
+      subscription = _audioPlayer.onPlayerComplete.listen((_) {
+        timeoutTimer?.cancel();
+        subscription.cancel();
+        if (!completer.isCompleted) completer.complete();
+      });
+
+      timeoutTimer = Timer(const Duration(seconds: 15), () {
+        print('DEBUG: Audio playback timeout');
+        subscription.cancel();
+        if (!completer.isCompleted) completer.complete();
+      });
+
+      await _audioPlayer.stop(); // Dừng câu trước nếu còn đang phát
+      await _audioPlayer.play(UrlSource(url));
+      await completer.future;
+    } catch (e) {
+      print('ERROR playing audio: $e');
+    } finally {
+      // Đợi một chút trước khi sang câu tiếp theo cho tự nhiên
+      await Future.delayed(const Duration(milliseconds: 300));
+      _processNextInQueue();
+    }
+  }
+
+  void _init() {
+    _chatService.connectRealtime(1);
+    _subscription = _chatService.realtimeMessages.listen((data) {
+      final decoded = jsonDecode(data);
+      final type = decoded['type'];
+
+      if (type == 'status') {
+        final statusStr = decoded['status'];
+        AIStatus newStatus = AIStatus.idle;
+        if (statusStr == 'thinking') newStatus = AIStatus.thinking;
+        if (statusStr == 'speaking') newStatus = AIStatus.speaking;
+        if (statusStr == 'correcting') newStatus = AIStatus.correcting;
+        state = state.copyWith(status: newStatus);
+        
+        if (newStatus == AIStatus.speaking) {
+          state = state.copyWith(currentSubtitle: '');
+        }
+      } else if (type == 'delta') {
+        final content = decoded['content'] ?? '';
+        
+        state = state.copyWith(currentSubtitle: state.currentSubtitle + content);
+        // HOÀN TOÀN KHÔNG ĐỌC DELTA (Ô CHAT) THEO YÊU CẦU NGƯỜI DÙNG
+        
+      } else if (type == 'realtime_correction') {
+        final correctionsJson = decoded['corrections'] as List;
+        final formattedText = decoded['formatted_text'] ?? '';
+        final corrections = correctionsJson.map((c) => RealtimeCorrection.fromJson(c)).toList();
+        
+        state = state.copyWith(
+          status: AIStatus.correcting,
+          currentCorrections: corrections,
+          formattedCorrectionText: formattedText,
+        );
+        
+        // CHỈ ĐỌC NỘI DUNG AI CORRECTION
+        if (formattedText.isNotEmpty) {
+          _speakBilingual(formattedText);
+        }
+      } else if (type == 'done') {
+        final fullContent = decoded['full_content'];
+        final grammarNotes = decoded['grammar_notes'];
+        
+        final aiMessage = ChatMessage(
+          content: fullContent,
+          isAI: true,
+          grammarNotes: grammarNotes,
+        );
+        
+        state = state.copyWith(
+          messages: [...state.messages, aiMessage],
+          lastGrammarCorrection: grammarNotes,
+          status: AIStatus.idle,
+        );
+        
+        // BỎ LỆNH ĐỌC FULL CONTENT Ở ĐÂY ĐỂ TRÁNH NGẮT LỜI AI CORRECTION VÀ TUÂN THỦ YÊU CẦU
+      }
+    });
+  }
+
+  void sendVoiceMessage(String text) {
+    if (text.trim().isEmpty) return;
+    
+    final userMessage = ChatMessage(content: text, isAI: false);
+    state = state.copyWith(
+      messages: [...state.messages, userMessage],
+      currentSubtitle: '...', // Reset subtitle for AI response
+      currentCorrections: [],
+      formattedCorrectionText: '',
+    );
+    
+    _chatService.sendRealtimeAction({
+      "type": "message",
+      "content": text,
+    });
+  }
+
+  @override
+  void dispose() {
+    _subscription?.cancel();
+    _chatService.disconnect();
+    _audioPlayer.stop();
+    _audioPlayer.dispose();
+    super.dispose();
+  }
+}
+
+final realtimeChatProvider = StateNotifierProvider<RealtimeChatNotifier, RealtimeChatState>((ref) {
+  return RealtimeChatNotifier(ref.watch(chatServiceProvider));
+});

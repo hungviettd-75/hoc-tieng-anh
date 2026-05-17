@@ -1,0 +1,101 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:15-alpine
+    container_name: ai_coach_db_prod
+    restart: always
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-admin}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-password123}
+      POSTGRES_DB: ${POSTGRES_DB:-ai_coach}
+    volumes:
+      - postgres_data_prod:/var/lib/postgresql/data
+    networks:
+      - ai_coach_net
+
+  redis:
+    image: redis:7-alpine
+    container_name: ai_coach_redis_prod
+    restart: always
+    networks:
+      - ai_coach_net
+
+  backend:
+    build: 
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: ai_coach_backend_prod
+    restart: always
+    env_file:
+      - .env
+    environment:
+      - REDIS_URL=redis://redis:6379/0
+      - ENVIRONMENT=production
+    depends_on:
+      - db
+      - redis
+    networks:
+      - ai_coach_net
+
+  celery_worker:
+    build: 
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: ai_coach_celery_prod
+    restart: always
+    command: celery -A app.worker.celery_app worker --loglevel=info
+    env_file:
+      - .env
+    environment:
+      - REDIS_URL=redis://redis:6379/0
+      - ENVIRONMENT=production
+    depends_on:
+      - db
+      - redis
+    networks:
+      - ai_coach_net
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: ai_coach_frontend_prod
+    restart: always
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    networks:
+      - ai_coach_net
+
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: ai_coach_prometheus
+    restart: always
+    volumes:
+      - ./k8s/monitoring/prometheus.yml:/etc/prometheus/prometheus.yml
+    ports:
+      - "9090:9090"
+    networks:
+      - ai_coach_net
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: ai_coach_grafana
+    restart: always
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+    depends_on:
+      - prometheus
+    networks:
+      - ai_coach_net
+
+volumes:
+  postgres_data_prod:
+
+networks:
+  ai_coach_net:
+    driver: bridge
