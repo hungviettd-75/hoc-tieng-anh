@@ -283,8 +283,10 @@ async def realtime_voice_endpoint(
                     await manager.send_json({"type": "status", "status": "speaking"}, websocket)
                     
                     full_welcome = ""
-                    async for chunk in gemini_service.get_streaming_response(
-                        history=[], user_message=welcome_prompt, custom_instruction=custom_instruction
+                    async for chunk in gemini_service.get_tutor_response(
+                        compact_context="Học viên vừa tham gia bài học.",
+                        user_message=welcome_prompt,
+                        custom_instruction=custom_instruction
                     ):
                         full_welcome += chunk
                         await manager.send_json({"type": "delta", "content": chunk}, websocket)
