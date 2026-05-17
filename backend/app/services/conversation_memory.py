@@ -65,20 +65,20 @@ class ConversationMemory:
         parts = []
 
         if session["summary"]:
-            parts.append(f"[Context] {session['summary']}")
+            parts.append(f"Background info about user: {session['summary']}")
 
         if session["mistakes"]:
             recent_mistakes = session["mistakes"][-5:]
             mistake_text = ", ".join([
-                f"{m.get('category', 'error')}: {m.get('original', '')}→{m.get('correction', '')}"
+                f"said '{m.get('original', '')}' but correct is '{m.get('correction', '')}'"
                 for m in recent_mistakes
             ])
-            parts.append(f"[Mistakes] {mistake_text}")
+            parts.append(f"Recent student grammar mistakes to note: {mistake_text}")
 
         for msg in session["history"]:
-            role = "U" if msg["role"] == "user" else "A"
+            role = "Student" if msg["role"] == "user" else "Coach"
             content = msg["content"][:100]  # Truncate long messages
-            parts.append(f"[{role}] {content}")
+            parts.append(f"{role}: {content}")
 
         return "\n".join(parts)
 
