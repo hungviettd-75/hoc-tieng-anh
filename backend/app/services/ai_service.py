@@ -94,7 +94,7 @@ class GeminiService:
             f"User: {user_message}\nCoach:"
         )
         try:
-            response = await self.model.generate_content_async(prompt, stream=True)
+            response = await self.model.generate_content_stream_async(prompt)
             async for chunk in response:
                 chunk_text = self._get_text_safely(chunk)
                 if chunk_text:
