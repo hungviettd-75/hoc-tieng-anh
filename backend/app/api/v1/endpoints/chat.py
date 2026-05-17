@@ -283,11 +283,22 @@ async def realtime_voice_endpoint(
                     await manager.send_json({"type": "status", "status": "thinking"}, websocket)
                     await manager.send_json({"type": "status", "status": "speaking"}, websocket)
                     
+                    # Thiết lập custom_instruction chuyên dụng cho lượt chào mừng đầu tiên để ép Gemini nói Tiếng Việt dẫn dắt
+                    current_instruction = custom_instruction
+                    if mode == "roleplay":
+                        current_instruction = (
+                            f"Bạn là AI chuyên gia nhập vai trong tình huống giao tiếp thực tế: '{topic}'.\n"
+                            "QUY TẮC BẮT BUỘC CHO LƯỢT CHÀO ĐẦU TIÊN:\n"
+                            "1. Bạn BẮT BUỘC phải nói bằng Tiếng Việt trước (tối đa 1-2 câu ngắn gọn) để chào mừng nồng nhiệt và giới thiệu rõ tình huống cũng như vai diễn của cả hai.\n"
+                            "2. Ngay sau đó, đưa ra câu thoại Tiếng Anh đầu tiên của vai diễn (tối đa 1 câu ngắn) để dẫn dắt học viên bắt đầu nhập vai.\n"
+                            "3. Tuyệt đối không viết thêm các lời dặn dò hay gợi ý thực hành dài dòng khác."
+                        )
+                    
                     full_welcome = ""
                     async for chunk in gemini_service.get_tutor_response(
                         compact_context="Học viên vừa tham gia bài học.",
                         user_message=welcome_prompt,
-                        custom_instruction=custom_instruction
+                        custom_instruction=current_instruction
                     ):
                         full_welcome += chunk
                         await manager.send_json({"type": "delta", "content": chunk}, websocket)
