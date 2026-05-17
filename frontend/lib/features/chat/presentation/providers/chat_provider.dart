@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ai_english_coach/services/chat_service.dart';
@@ -42,6 +43,7 @@ final chatServiceProvider = Provider((ref) => ChatService());
 // StateNotifier quản lý Chat
 class ChatNotifier extends StateNotifier<ChatState> {
   final ChatService _chatService;
+  StreamSubscription? _subscription;
 
   ChatNotifier(this._chatService) : super(ChatState(messages: [])) {
     _init();
@@ -49,9 +51,21 @@ class ChatNotifier extends StateNotifier<ChatState> {
 
   void _init() {
     _chatService.connect(1); // Mặc định User ID là 1
-    
-    // Theo dõi tin nhắn
-    _chatService.messages.listen((data) {
+    _listenToMessages();
+  }
+
+  void connectWithContext({String? mode, String? level}) {
+    print('DEBUG: Reconnecting to chat WebSocket with mode: $mode, level: $level');
+    _subscription?.cancel();
+    _chatService.disconnect();
+    state = ChatState(messages: [], isConnected: false);
+    _chatService.connect(1, mode: mode, level: level);
+    _listenToMessages();
+  }
+
+  void _listenToMessages() {
+    _subscription?.cancel();
+    _subscription = _chatService.messages.listen((data) {
       print('DEBUG: Received from WebSocket: $data');
       try {
         // Cập nhật trạng thái connected khi nhận được dữ liệu đầu tiên
@@ -123,6 +137,7 @@ class ChatNotifier extends StateNotifier<ChatState> {
 
   @override
   void dispose() {
+    _subscription?.cancel();
     _chatService.disconnect();
     super.dispose();
   }

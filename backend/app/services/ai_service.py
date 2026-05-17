@@ -34,9 +34,11 @@ class GeminiService:
             "- TUYỆT ĐỐI KHÔNG sửa lỗi trong lúc đang trò chuyện (hệ thống UI sẽ tự hiển thị thẻ sửa lỗi)."
         )
 
-    async def get_streaming_response(self, history: List[Dict[str, str]], user_message: str) -> AsyncGenerator[str, None]:
+    async def get_streaming_response(
+        self, history: List[Dict[str, str]], user_message: str, custom_instruction: str = None
+    ) -> AsyncGenerator[str, None]:
         """
-        Gửi tin nhắn tới Gemini và nhận phản hồi streaming.
+        Gửi tin nhắn tới Gemini và nhận phản hồi streaming. Hỗ trợ tùy biến system instruction.
         """
         # Chuyển đổi history sang định dạng Gemini
         gemini_history = []
@@ -46,7 +48,8 @@ class GeminiService:
         
         try:
             chat = self.model.start_chat(history=gemini_history)
-            prompt = f"{self.system_instruction}\n\nUser: {user_message}\nCoach:"
+            system_prompt = custom_instruction or self.system_instruction
+            prompt = f"{system_prompt}\n\nUser: {user_message}\nCoach:"
             response = await chat.send_message_async(prompt, stream=True)
             
             async for chunk in response:

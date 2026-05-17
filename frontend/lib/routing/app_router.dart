@@ -95,7 +95,11 @@ final routerProvider = Provider<GoRouter>((ref) {
           ),
           GoRoute(
             path: '/chat',
-            builder: (context, state) => const ChatPage(),
+            builder: (context, state) {
+              final mode = state.uri.queryParameters['mode'];
+              final level = state.uri.queryParameters['level'];
+              return ChatPage(mode: mode, level: level);
+            },
           ),
           GoRoute(
             path: '/progress',

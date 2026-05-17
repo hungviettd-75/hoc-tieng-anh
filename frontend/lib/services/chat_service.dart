@@ -5,10 +5,14 @@ class ChatService {
   WebSocketChannel? _channel;
   WebSocketChannel? _realtimeChannel;
 
-  void connect(int userId) {
+  void connect(int userId, {String? mode, String? level}) {
     // Sử dụng localhost để tương thích với trình duyệt
     const String ipAddress = '127.0.0.1'; 
-    final url = Uri.parse('ws://$ipAddress:8000/api/v1/ws/$userId');
+    String urlStr = 'ws://$ipAddress:8000/api/v1/ws/$userId';
+    if (mode != null && level != null) {
+      urlStr += '?mode=$mode&level=$level';
+    }
+    final url = Uri.parse(urlStr);
 
     print('Connecting to WebSocket: $url');
     _channel = WebSocketChannel.connect(url);

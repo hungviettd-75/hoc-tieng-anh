@@ -6,7 +6,14 @@ import 'package:ai_english_coach/theme/app_colors.dart';
 import '../providers/chat_provider.dart';
 
 class ChatPage extends ConsumerStatefulWidget {
-  const ChatPage({super.key});
+  final String? mode;
+  final String? level;
+
+  const ChatPage({
+    super.key,
+    this.mode,
+    this.level,
+  });
 
   @override
   ConsumerState<ChatPage> createState() => _ChatPageState();
@@ -15,6 +22,17 @@ class ChatPage extends ConsumerStatefulWidget {
 class _ChatPageState extends ConsumerState<ChatPage> {
   final TextEditingController _controller = TextEditingController();
   final ScrollController _scrollController = ScrollController();
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      ref.read(chatProvider.notifier).connectWithContext(
+        mode: widget.mode,
+        level: widget.level,
+      );
+    });
+  }
 
   void _scrollToBottom() {
     Future.delayed(const Duration(milliseconds: 100), () {

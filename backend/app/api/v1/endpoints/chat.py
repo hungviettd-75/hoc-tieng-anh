@@ -35,13 +35,74 @@ class ConnectionManager:
 
 manager = ConnectionManager()
 
+VOCAB_LISTS = {
+    "A1": ["Beginner", "Practice", "Vocabulary", "Improve"],
+    "A2": ["Journey", "Confident", "Habit", "Encourage"],
+    "B1": ["Persistent", "Collaborate", "Effective", "Challenge"],
+    "B2": ["Substantial", "Fluency", "Analyze", "Evaluate"],
+    "C1": ["Pragmatic", "Eloquent", "Cognitive", "Sophisticated"],
+}
+
 @router.websocket("/ws/{user_id}")
-async def websocket_endpoint(websocket: WebSocket, user_id: int):
-    print(f"DEBUG: New WebSocket connection for user_id: {user_id}")
+async def websocket_endpoint(
+    websocket: WebSocket, 
+    user_id: int,
+    mode: str = None,
+    level: str = None
+):
+    print(f"DEBUG: New WebSocket connection for user_id: {user_id}, mode: {mode}, level: {level}")
     await manager.connect(websocket)
+    
     # Khởi tạo history hội thoại cho session này
     history = []
+    
+    # Cấu hình custom System Instruction nếu ở chế độ luyện từ vựng thông minh
+    custom_instruction = None
+    if mode == "vocabulary_practice" and level:
+        vocab_words = VOCAB_LISTS.get(level.upper(), VOCAB_LISTS["B1"])
+        words_str = ", ".join([f"'{w}'" for w in vocab_words])
+        custom_instruction = (
+            "Bạn là AI English Coach chuyên hỗ trợ học viên Luyện tập Từ vựng Thông minh.\n"
+            f"Nhiệm vụ của bạn là bắt buộc học viên thực hành các từ khóa trình độ {level}: {words_str}.\n"
+            "QUY TẮC:\n"
+            "1. LUÔN GIAO TIẾP BẰNG TIẾNG VIỆT thân thiện, ngắn gọn (max 2-3 câu mỗi lượt).\n"
+            "2. KIỂM TRA TỪ KHÓA: Trong mỗi câu trả lời của học viên, hãy kiểm tra xem họ có sử dụng bất kỳ từ khóa nào ở trên không.\n"
+            "   - Nếu có: Hãy lập tức khen ngợi nồng nhiệt kèm dấu tick xanh lá (ví dụ: 'Tuyệt vời! Bạn đã sử dụng từ khóa B1 thành công ✅').\n"
+            "   - Nếu không: Hãy khéo léo nhắc nhở hoặc gợi ý họ áp dụng từ khóa vào câu tiếp theo.\n"
+            "3. Hướng dẫn học viên cách dùng chuẩn bằng các ví dụ tiếng Anh ngắn gọn."
+        )
+
     try:
+        # Nếu ở chế độ luyện từ vựng, chủ động gửi lời chào chào mừng đầu tiên cùng các từ khóa!
+        if mode == "vocabulary_practice" and level:
+            vocab_words = VOCAB_LISTS.get(level.upper(), VOCAB_LISTS["B1"])
+            words_str = ", ".join([f"'{w}'" for w in vocab_words])
+            welcome_prompt = (
+                f"Học viên vừa tham gia lớp học từ vựng trình độ {level}. "
+                f"Hãy gửi lời chào đón bằng Tiếng Việt nồng ấm, giới thiệu nhiệm vụ hôm nay là thực hành các từ khóa: {words_str}. "
+                "Đưa ra 1 câu hỏi gợi mở ngắn bằng Tiếng Anh để bắt đầu cuộc hội thoại."
+            )
+            
+            full_welcome = ""
+            async for chunk in gemini_service.get_streaming_response(
+                history=history, user_message=welcome_prompt, custom_instruction=custom_instruction
+            ):
+                full_welcome += chunk
+                await websocket.send_json({
+                    "type": "delta",
+                    "role": "assistant",
+                    "content": chunk
+                })
+            
+            await websocket.send_json({
+                "type": "completion",
+                "role": "assistant",
+                "content": full_welcome,
+                "grammar_notes": ""
+            })
+            
+            history.append({"role": "assistant", "content": full_welcome})
+
         while True:
             data = await websocket.receive_text()
             print(f"DEBUG: Received message from user {user_id}: {data}")
@@ -62,7 +123,9 @@ async def websocket_endpoint(websocket: WebSocket, user_id: int):
             # Streaming response from Gemini
             print(f"DEBUG: Starting Gemini streaming response...")
             full_response = ""
-            async for chunk in gemini_service.get_streaming_response(history=history, user_message=context_prompt):
+            async for chunk in gemini_service.get_streaming_response(
+                history=history, user_message=context_prompt, custom_instruction=custom_instruction
+            ):
                 full_response += chunk
                 await websocket.send_json({
                     "type": "delta",
@@ -79,16 +142,12 @@ async def websocket_endpoint(websocket: WebSocket, user_id: int):
             # Giới hạn history (ví dụ 10 lượt gần nhất)
             if len(history) > 20:
                 history = history[-20:]
-
-            # Tạm thời tắt Grammar Correction để tiết kiệm Quota API (Tránh lỗi 429)
-            # print(f"DEBUG: Getting grammar correction...")
-            # correction = await gemini_service.get_correction(user_message)
             
             await websocket.send_json({
                 "type": "completion",
                 "role": "assistant",
                 "content": full_response,
-                "grammar_notes": "" # Tạm thời để trống
+                "grammar_notes": ""
             })
 
             print(f"DEBUG: Completion sent to user {user_id}")
@@ -97,14 +156,12 @@ async def websocket_endpoint(websocket: WebSocket, user_id: int):
             if user_message.strip():
                 print(f"DEBUG: Storing interaction in long-term memory for user {user_id}...")
                 memory_text = f"User said: {user_message}. AI responded: {full_response}"
-                # Sử dụng asyncio.create_task để không làm chậm luồng chat chính
                 asyncio.create_task(memory_service.store_memory(
                     user_id=user_id, 
                     text=memory_text, 
                     metadata={"type": "chat_interaction", "timestamp": time.time()}
                 ))
 
-            
     except WebSocketDisconnect:
         manager.disconnect(websocket)
     except Exception as e:
