@@ -44,7 +44,7 @@ class VietnameseTutorEngine:
         error_rate: float = 0.5
     ) -> str:
         """
-        Tạo response thân thiện từ list corrections.
+        Tạo response thân thiện từ list corrections áp dụng Sandwich Feedback (Động viên -> Sửa lỗi -> Mẫu chuẩn).
         """
         if not corrections:
             import random
@@ -56,70 +56,79 @@ class VietnameseTutorEngine:
 
         parts = []
 
-        # Encouragement
+        # 1. ĐỘNG VIÊN (Encouragement) - Phần đầu của bánh kẹp Sandwich
         import random
-        if config["vi_ratio"] > 0.5:
-            parts.append(random.choice(self.ENCOURAGEMENTS_VI))
-        else:
-            parts.append(random.choice(self.ENCOURAGEMENTS_EN))
-
+        encouragement = random.choice(self.ENCOURAGEMENTS_VI) if config["vi_ratio"] > 0.5 else random.choice(self.ENCOURAGEMENTS_EN)
+        parts.append(f"✨ **{encouragement}**")
         parts.append("")
 
-        # Format corrections (max 3 để không overwhelm)
-        for c in corrections[:3]:
+        # 2. SỬA LỖI & MẪU CHUẨN (Corrections & Model Answers) - Phần nhân của bánh kẹp Sandwich
+        # Format corrections (max 3 lỗi để tránh bị quá tải nhận thức - cognitive overload)
+        for i, c in enumerate(corrections[:3]):
+            parts.append(f"### 📍 Điểm cần lưu ý #{i+1}:")
             parts.append(self._format_single_correction(c, config))
             parts.append("")
 
-        # Closing
+        # 3. GỢI MỞ & ĐỒNG HÀNH (Closing & Next Step Prompt) - Phần sau của bánh kẹp Sandwich
         if len(corrections) == 1:
-            parts.append("Hãy thử lại nhé! 😊" if config["vi_ratio"] > 0.5 else "Try again! 😊")
+            parts.append("💪 *Hãy thử nói lại câu trên để sửa lỗi nhé! Bạn làm được mà!*" if config["vi_ratio"] > 0.5 else "💪 *Let's try saying it again with the fix! You can do it!*")
         else:
             count = len(corrections)
             parts.append(
-                f"Có {count} chỗ cần sửa. Thử lại từng cái nhé! 💪"
+                f"💪 *Chúng ta có {count} lỗi nhỏ. Đừng lo lắng, hãy thử thực hành lại từng câu một nhé!*"
                 if config["vi_ratio"] > 0.5
-                else f"{count} corrections. Practice each one! 💪"
+                else f"💪 *We detected {count} minor errors. No worries, let's practice speaking them again one by one!*"
             )
 
         return "\n".join(parts)
 
     def _format_single_correction(self, c: CorrectionItem, config: Dict) -> str:
-        """Format 1 correction item."""
+        """Format 1 correction item thành cấu trúc Thẻ Vàng / Thẻ Xanh Markdown tối ưu."""
         lines = []
 
         if c.error_type == "pronunciation":
             if config["vi_ratio"] > 0.5:
-                lines.append(f"❌ Âm này chưa đúng: '{c.original}'")
-                lines.append(f"✅ Phải phát âm là: '{c.correction}' {c.ipa}")
+                lines.append(f"⚠️ **AI Correction [Thẻ Vàng]:**")
+                lines.append(f"> ❌ Từ phát âm chưa đúng: *'{c.original}'*")
+                lines.append(f"> ✅ Cách phát âm chuẩn: **'{c.correction}'** {c.ipa}")
                 if c.hint_vi and config["detail"] != "low":
-                    lines.append(f"💡 {c.hint_vi}")
+                    lines.append(f"> 💡 *Mẹo nhỏ [quick tip]:* {c.hint_vi}")
             else:
-                lines.append(f"❌ You mispronounced '{c.original}'")
-                lines.append(f"✅ It should be: '{c.correction}' {c.ipa}")
+                lines.append(f"⚠️ **AI Correction [Yellow Card]:**")
+                lines.append(f"> ❌ Mispronounced: *'{c.original}'*")
+                lines.append(f"> ✅ Correct pronunciation: **'{c.correction}'** {c.ipa}")
                 if c.hint_vi and config["detail"] == "high":
-                    lines.append(f"💡 {c.hint_vi}")
+                    lines.append(f"> 💡 *Quick tip:* {c.hint_vi}")
 
         elif c.error_type == "grammar":
             if config["vi_ratio"] > 0.5:
-                lines.append(f"📝 {c.explanation_vi}")
+                lines.append(f"⚠️ **AI Correction [Thẻ Vàng]:**")
+                lines.append(f"> ❌ Lỗi ngữ pháp: *'{c.original}'*")
+                lines.append(f"> 📝 Chi tiết lỗi: {c.explanation_vi}")
                 if c.correction:
-                    lines.append(f"✅ Bạn cần nói là: '{c.correction}'")
+                    lines.append(f"✅ **Perfect Way [Thẻ Xanh]:**")
+                    lines.append(f"> Nên nói là [better say]: **'{c.correction}'**")
             else:
-                lines.append(f"📝 {c.explanation_en or c.explanation_vi}")
+                lines.append(f"⚠️ **AI Correction [Yellow Card]:**")
+                lines.append(f"> ❌ Grammatical error: *'{c.original}'*")
+                lines.append(f"> 📝 Explanation: {c.explanation_en or c.explanation_vi}")
                 if c.correction:
-                    lines.append(f"✅ Say: '{c.correction}'")
+                    lines.append(f"✅ **Perfect Way [Green Card]:**")
+                    lines.append(f"> You should say: **'{c.correction}'**")
 
         elif c.error_type == "natural_speaking":
             if config["vi_ratio"] > 0.5:
-                lines.append(f"🗣️ Cách diễn đạt tự nhiên hơn:")
-                lines.append(f"✅ Người bản xứ thường nói thế này: '{c.correction}'")
+                lines.append(f"🗣️ **Natural Speaking [Diễn đạt tự nhiên]:**")
+                lines.append(f"> ❌ Cách bạn nói: *'{c.original}'* (hơi gượng hoặc giống dịch từng từ [word-by-word translation])")
+                lines.append(f"> ✅ Người bản xứ thường nói: **'{c.correction}'**")
                 if getattr(c, 'explanation_vi', ''):
-                    lines.append(f"💡 {c.explanation_vi}")
+                    lines.append(f"> 💡 *Giải thích thêm:* {c.explanation_vi}")
             else:
-                lines.append(f"🗣️ More natural expression:")
-                lines.append(f"✅ Native speakers usually say: '{c.correction}'")
+                lines.append(f"🗣️ **Natural Speaking [Native Expression]:**")
+                lines.append(f"> ❌ Your way: *'{c.original}'*")
+                lines.append(f"> ✅ Native way: **'{c.correction}'**")
                 if getattr(c, 'explanation_en', ''):
-                    lines.append(f"💡 {c.explanation_en}")
+                    lines.append(f"> 💡 *Note:* {c.explanation_en}")
 
         return "\n".join(lines)
 
