@@ -55,11 +55,11 @@ class _IELTSPageState extends ConsumerState<IELTSPage> {
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
               child: Row(
                 children: [
-                  _buildFilterButton('All', 'all'),
-                  _buildFilterButton('Part 1: Introduction & interview', 'ielts_p1'),
-                  _buildFilterButton('Part 2: Long Turn(invididual)', 'ielts_p2'),
-                  _buildFilterButton('Part 3: Tow-way discussison', 'ielts_p3'),
-                  _buildFilterButton('Part 4: Advanced Academic Topics', 'ielts_p4'),
+                  _buildFilterButton('Tất cả', 'all'),
+                  _buildFilterButton('Part 1: Giới thiệu & Phỏng vấn', 'ielts_p1'),
+                  _buildFilterButton('Part 2: Luyện nói cá nhân (Độc thoại)', 'ielts_p2'),
+                  _buildFilterButton('Part 3: Thảo luận hai chiều', 'ielts_p3'),
+                  _buildFilterButton('Part 4: Chủ đề học thuật nâng cao', 'ielts_p4'),
                 ],
               ),
             ),
@@ -135,7 +135,7 @@ class _IELTSPageState extends ConsumerState<IELTSPage> {
               ),
               const SizedBox(height: 12),
               const Text(
-                'Speaking Mastery',
+                'Làm chủ kỹ năng Nói',
                 style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white),
               ),
             ],
@@ -194,7 +194,7 @@ class _IELTSPageState extends ConsumerState<IELTSPage> {
         icon: const Icon(Icons.arrow_back_ios_new_rounded, color: Colors.white, size: 20),
         onPressed: () => Navigator.of(context).canPop() ? context.pop() : context.go('/'),
       ),
-      title: const Text('IELTS Practice', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+      title: const Text('Luyện thi IELTS', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
       centerTitle: true,
     );
   }
