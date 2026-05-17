@@ -117,7 +117,7 @@ class LearnPage extends ConsumerWidget {
                           recommendation: rec,
                           onTap: () {
                             if (rec.contentType == 'roleplay') {
-                              context.push('/voice-chat?mode=roleplay&topic=${Uri.encodeComponent(rec.title)}');
+                              context.push('/voice-chat?mode=roleplay&topic=${Uri.encodeComponent(rec.topic)}');
                             } else if (rec.contentType == 'speaking') {
                               context.push('/voice-chat?mode=free_talk');
                             } else {
