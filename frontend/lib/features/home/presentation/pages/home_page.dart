@@ -10,6 +10,7 @@ import 'package:ai_english_coach/features/gamification/providers/gamification_pr
 import 'package:ai_english_coach/features/gamification/screens/leaderboard_screen.dart';
 import 'package:ai_english_coach/features/gamification/screens/achievements_screen.dart';
 import 'package:confetti/confetti.dart';
+import 'dart:math';
 
 
 class HomePage extends ConsumerStatefulWidget {
@@ -21,6 +22,17 @@ class HomePage extends ConsumerStatefulWidget {
 
 class _HomePageState extends ConsumerState<HomePage> {
   late ConfettiController _confettiController;
+
+  static const List<String> _roleplayTopics = [
+    "Order food in a Restaurant",
+    "Check-in at the Airport",
+    "Book a Room at a Hotel",
+    "Ask for Directions on the Street",
+    "Job Interview for an English Company",
+    "Shopping for Clothes in a Mall",
+    "Doctor Consultation at a Clinic",
+    "Chatting with a Friend at a Coffee Shop",
+  ];
 
   @override
   void initState() {
@@ -325,7 +337,33 @@ class _HomePageState extends ConsumerState<HomePage> {
                 Icons.groups_rounded, 
                 'Nhập vai', 
                 Colors.green, 
-                onTap: () => context.push('/voice-chat?mode=roleplay&topic=${Uri.encodeComponent("Order food in a Restaurant")}'),
+                onTap: () {
+                  final random = Random();
+                  final randomTopic = _roleplayTopics[random.nextInt(_roleplayTopics.length)];
+                  
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Row(
+                        children: [
+                          const Icon(Icons.casino_rounded, color: Colors.white),
+                          const SizedBox(width: 8),
+                          Expanded(
+                            child: Text(
+                              'Chủ đề: $randomTopic',
+                              style: const TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                        ],
+                      ),
+                      backgroundColor: Colors.green,
+                      duration: const Duration(seconds: 2),
+                      behavior: SnackBarBehavior.floating,
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                    ),
+                  );
+                  
+                  context.push('/voice-chat?mode=roleplay&topic=${Uri.encodeComponent(randomTopic)}');
+                },
               ),
             ],
           ),
