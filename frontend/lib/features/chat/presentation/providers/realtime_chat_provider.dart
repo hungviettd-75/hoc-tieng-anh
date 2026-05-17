@@ -199,8 +199,9 @@ class RealtimeChatNotifier extends StateNotifier<RealtimeChatState> {
           status: AIStatus.idle,
         );
         
-        // NẾU LÀ TIN NHẮN CHÀO MỪNG KHỞI TẠO (welcome initiation), BẮT BUỘC AI PHẢI ĐỌC THOẠI!
-        if (routeUsed == 'llm_welcome_initiate' && fullContent.isNotEmpty) {
+        // Luôn luôn cất giọng đọc câu phản hồi của AI để duy trì đàm thoại liên tục!
+        // Hàng đợi _speechQueue sẽ tự động phát tuần tự sau khi đọc xong sửa lỗi tiếng Việt (nếu có).
+        if (fullContent.isNotEmpty) {
           _speakBilingual(fullContent);
         }
       }
