@@ -446,60 +446,27 @@ async def realtime_voice_endpoint(
                     import random
                     print(f"WARN: Gemini response failed: {e}")
                     
-                    # Bộ sinh phản hồi dự phòng ngẫu nhiên và linh hoạt dựa trên chế độ học để tránh prompt cứng nhắc
+                    # Bộ sinh phản hồi dự phòng ngẫu nhiên và linh hoạt dựa trên chế độ học để tránh prompt cứng nhắc, chuyển sang hội thoại tương tác 2 chiều thực thụ
                     if mode == "roleplay":
                         roleplay_fallbacks = [
-                            f"Mình đã nghe câu thoại của bạn. Để tiếp tục tình huống nhập vai '{topic}', bạn có thể thử nói các câu mẫu sau nhé:\n"
-                            "1. \"Can you help me with this?\" (Dịch: Bạn có thể giúp tôi việc này không?)\n"
-                            "2. \"Yes, that sounds perfect!\" (Dịch: Vâng, nghe tuyệt đấy!)\n"
-                            "Hãy thử chọn một câu để tiếp tục nhập vai nhé! ✨",
-                            
-                            f"Tình huống '{topic}' đang rất thú vị! Bạn có thể thử phản hồi bằng các mẫu câu đơn giản này nhé:\n"
-                            "1. \"Excuse me, could you tell me more?\" (Dịch: Xin lỗi, bạn có thể nói rõ hơn không?)\n"
-                            "2. \"Okay, I agree with you.\" (Dịch: Được rồi, tôi đồng ý với bạn.)\n"
-                            "Hãy bấm giữ Mic và nói thử xem nào! 🌟",
-                            
-                            f"Đừng lo lắng nhé! Đối với tình huống '{topic}', bạn có thể thử nói các câu đơn giản sau để tiếp tục diễn:\n"
-                            "1. \"How much does it cost?\" (Dịch: Cái này giá bao nhiêu vậy?)\n"
-                            "2. \"Thank you so much for your help.\" (Dịch: Cảm ơn bạn rất nhiều vì đã giúp đỡ.)\n"
-                            "Cố lên, bạn nói rất tốt mà! 🚀"
+                            f"Mình nghe rất rõ câu thoại của bạn rồi nhé! Để tiếp tục tình huống nhập vai '{topic}' của chúng mình, hãy cho mình biết bạn muốn nói câu tiếp theo như thế nào nhé? Mình đang rất mong chờ đấy! ✨🚀",
+                            f"Tình huống nhập vai '{topic}' đang diễn ra cực kỳ thú vị! Hãy cứ tự tin nhập vai và tiếp tục câu thoại tiếp theo của nhân vật của bạn nhé! Mình đã sẵn sàng lắng nghe rồi đây! 🌟",
+                            f"Bạn nhập vai rất xuất sắc! Hãy tiếp tục câu chuyện '{topic}' theo cách tự nhiên nhất của bạn nhé. Đừng lo lắng về việc đúng sai, cứ thoải mái lên nè! 🎭"
                         ]
                         full_response = random.choice(roleplay_fallbacks)
                     else:  # free_talk hoặc vocabulary_practice
                         if level in ["A1", "A2"]:
                             a1_a2_fallbacks = [
-                                "Không sao cả, hãy cứ tự nhiên nhé! Bạn có thể thử trả lời bằng các câu mẫu siêu đơn giản này:\n"
-                                "1. \"I love eating pizza and burgers.\" (Dịch: Mình thích ăn pizza và humberger.)\n"
-                                "2. \"The weather today is very nice.\" (Dịch: Thời tiết hôm nay rất đẹp.)\n"
-                                "Hãy chọn một câu bạn thích và nói vào Mic nhé! 🍕🌞",
-                                
-                                "Đừng ngại ngùng nhé! Để tiếp tục câu chuyện, bạn có thể nói về sở thích của mình:\n"
-                                "1. \"I like watching English movies.\" (Dịch: Mình thích xem phim tiếng Anh.)\n"
-                                "2. \"I usually go to bed at 10 PM.\" (Dịch: Mình thường đi ngủ lúc 10 giờ tối.)\n"
-                                "Hãy thử bấm Mic nói một câu nhé! 🎬🛌",
-                                
-                                "Hãy cứ thoải mái luyện tập nhé! Bạn có thể thử bắt đầu lại câu chuyện bằng các câu mẫu sau:\n"
-                                "1. \"I have a beautiful small pet dog.\" (Dịch: Mình có một chú chó cưng nhỏ rất đẹp.)\n"
-                                "2. \"I want to learn English to travel.\" (Dịch: Mình muốn học tiếng Anh để đi du lịch.)\n"
-                                "Bấm Mic và thử nói xem sao nhé! 🐶✈️"
+                                "Chào bạn nhỏ! Mình rất vui được luyện nói tiếng Anh cùng bạn. Hãy nói cho mình biết nhé: What is your favorite food? (Dịch: Món ăn yêu thích của bạn là gì?) Bạn có thích ăn pizza hay hamburger không? 🍕🍔",
+                                "Ồ, giọng của bạn nghe rất dễ thương và ấm áp! Hãy chia sẻ một chút nhé: Do you like animals? (Dịch: Bạn có thích động vật không?) Bạn có nuôi chú chó hay chú mèo đáng yêu nào ở nhà không? 🐶🐱",
+                                "Tuyệt vời lắm! Chúng mình hãy cùng tiếp tục câu chuyện nhé: What do you like to do in your free time? (Dịch: Bạn thích làm gì vào thời gian rảnh?) Bạn thích xem phim hoạt hình hay chơi trò chơi nè? 🎬🎮"
                             ]
                             full_response = random.choice(a1_a2_fallbacks)
                         else:  # B1/B2/C1/C2
                             b1_c2_fallbacks = [
-                                "That's an interesting point! To expand our conversation, you could say:\n"
-                                "1. \"In my opinion, learning languages opens new doors.\" (Dịch: Theo tôi, học ngôn ngữ mở ra những cánh cửa mới.)\n"
-                                "2. \"I enjoy spending time outdoors on weekends.\" (Dịch: Tôi thích dành thời gian ngoài trời vào cuối tuần.)\n"
-                                "Give it a try! You are doing great! 🚀",
-                                
-                                "Keep going! Here are some sample ideas you can use to express yourself:\n"
-                                "1. \"I usually manage my time by creating a daily to-do list.\" (Dịch: Tôi thường quản lý thời gian bằng cách lập danh sách việc cần làm.)\n"
-                                "2. \"Travelling helps me learn about different cultures.\" (Dịch: Du lịch giúp tôi tìm hiểu về các nền văn hóa khác nhau.)\n"
-                                "Choose one and speak to the mic! 🌟",
-                                
-                                "You're doing fantastic! Feel free to talk about your daily routines:\n"
-                                "1. \"I try to read at least ten pages of a book every day.\" (Dịch: Tôi cố gắng đọc ít nhất mười trang sách mỗi ngày.)\n"
-                                "2. \"Working in a team is both challenging and rewarding.\" (Dịch: Làm việc nhóm vừa thử thách vừa bổ ích.)\n"
-                                "Let's speak! 🚀"
+                                "That's wonderful! I really enjoy chatting with you. Tell me, what do you usually like to do to relax after a busy day? (Dịch: Bạn thường làm gì để thư giãn sau một ngày bận rộn?) 🎧📚",
+                                "Great response! Let's talk about our daily lives. How do you usually spend your weekends? Do you prefer staying indoors or going out with friends? 🚴‍♂️☕",
+                                "Awesome! I'd love to hear your thoughts: Do you think learning English is important for your future career? Why or why not? 🚀🌟"
                             ]
                             full_response = random.choice(b1_c2_fallbacks)
                     await manager.send_json({"type": "delta", "content": full_response}, websocket)
