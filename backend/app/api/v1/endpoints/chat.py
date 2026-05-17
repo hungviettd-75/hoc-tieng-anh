@@ -327,11 +327,12 @@ async def realtime_voice_endpoint(
                     current_instruction = custom_instruction
                     if mode == "roleplay":
                         current_instruction = (
-                            f"Bạn là AI chuyên gia nhập vai trong tình huống giao tiếp thực tế: '{topic}'.\n"
+                            f"Bạn là AI chuyên gia nhập vai trong tình huống giao tiếp thực tế sinh động: '{topic}'.\n"
                             "QUY TẮC BẮT BUỘC CHO LƯỢT CHÀO ĐẦU TIÊN:\n"
-                            "1. Bạn BẮT BUỘC phải nói bằng Tiếng Việt trước (tối đa 1-2 câu ngắn gọn) để chào mừng nồng nhiệt và giới thiệu rõ tình huống cũng như vai diễn của cả hai.\n"
-                            "2. Ngay sau đó, đưa ra câu thoại Tiếng Anh đầu tiên của vai diễn (tối đa 1 câu ngắn) để dẫn dắt học viên bắt đầu nhập vai.\n"
-                            "3. Tuyệt đối không viết thêm các lời dặn dò hay gợi ý thực hành dài dòng khác."
+                            "1. Bạn BẮT BUỘC phải nói bằng Tiếng Việt trước (tối đa 1-2 câu ngắn gọn) giới thiệu thật sinh động bối cảnh tình huống, xác định rõ AI đóng vai gì và học viên đóng vai gì.\n"
+                            "   Ví dụ: 'Chào mừng bạn đến với nhà hàng! Hôm nay chúng mình sẽ cùng nhập vai: mình là người phục vụ bàn còn bạn là vị khách đáng yêu đến ăn tối nhé! 🍽️✨'\n"
+                            "2. Ngay sau đó, cất câu thoại Tiếng Anh đầu tiên của vai diễn của bạn (tối đa 1 câu ngắn, từ vựng siêu dễ hiểu) để học viên bắt đầu nhập vai ngay lập tức.\n"
+                            "3. Tuyệt đối không viết thêm bất kỳ lời gợi ý, hướng dẫn hay dặn dò dài dòng nào khác."
                         )
                     
                     full_welcome = ""
@@ -346,7 +347,17 @@ async def realtime_voice_endpoint(
                     except Exception as e:
                         print(f"WARN: Realtime welcome response failed: {e}")
                         if mode == "roleplay":
-                            full_welcome = f"Chào mừng bạn đến với tình huống nhập vai '{topic}'! Mình đã sẵn sàng rồi. Hãy bắt đầu cuộc hội thoại nhé! 🚀"
+                            topic_lower = topic.lower()
+                            if "restaurant" in topic_lower or "dining" in topic_lower or "food" in topic_lower:
+                                full_welcome = f"Chào mừng bạn nhỏ đến với nhà hàng! Hôm nay chúng mình sẽ cùng nhập vai: mình là người phục vụ bàn còn bạn là vị khách đáng yêu đến ăn tối nhé! 🍽️✨ Hello! Welcome to our restaurant. Are you ready to order?"
+                            elif "airport" in topic_lower or "flight" in topic_lower or "travel" in topic_lower:
+                                full_welcome = f"Chào bạn! Hôm nay chúng mình sẽ cùng nhập vai tại Sân bay nhé: mình sẽ là nhân viên tại quầy check-in, còn bạn là hành khách chuẩn bị bay! ✈️💼 Good morning! May I see your ticket and passport, please?"
+                            elif "direction" in topic_lower or "lost" in topic_lower or "street" in topic_lower:
+                                full_welcome = f"Chào bạn! Hôm nay chúng mình sẽ nhập vai tình huống Hỏi đường nhé: bạn là một khách du lịch bị lạc, còn mình là người dân địa phương tốt bụng! 🗺️🚶‍♂️ Excuse me, can I help you find something?"
+                            elif "shopping" in topic_lower or "store" in topic_lower or "market" in topic_lower:
+                                full_welcome = f"Chào bạn! Hôm nay chúng mình sẽ nhập vai đi Mua sắm nhé: mình là nhân viên bán hàng thân thiện, còn bạn là khách hàng mua sắm! 🛍️✨ Hello! How can I help you today?"
+                            else:
+                                full_welcome = f"Chào mừng bạn nhỏ đến với tình huống nhập vai '{topic}'! Trong tình huống này, mình sẽ đóng vai trò dẫn dắt đối thoại còn bạn nhập vai nhân vật tương ứng nhé! 🌟 Hello! I'm so excited to roleplay with you. Shall we start?"
                         else:
                             if level in ["A1", "A2"]:
                                 full_welcome = "Xin chào! Mình là AI English Coach của bạn. Hôm nay chúng ta sẽ cùng đàm thoại tự do để tăng phản xạ nhé! How are you? (Dịch: Bạn khỏe không?) 😊"
