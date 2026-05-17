@@ -54,6 +54,9 @@ async def websocket_endpoint(
     print(f"DEBUG: New WebSocket connection for user_id: {user_id}, mode: {mode}, level: {level}, topic: {topic}")
     await manager.connect(websocket)
     
+    # Bắt buộc dọn dẹp bộ nhớ hội thoại cũ của user để đảm bảo mỗi lần mở lại phòng là một session mới tươi nguyên, 100% hiện giới thiệu tiếng Việt dẫn dắt!
+    conversation_memory.clear(user_id)
+    
     # Khởi tạo history hội thoại cho session này
     history = []
     
