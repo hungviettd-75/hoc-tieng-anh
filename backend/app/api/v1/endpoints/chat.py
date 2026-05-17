@@ -236,9 +236,9 @@ async def realtime_voice_endpoint(
             "3. Hướng dẫn học viên cách dùng chuẩn bằng các ví dụ tiếng Anh ngắn gọn."
         )
         welcome_prompt = (
-            f"Học viên vừa tham gia lớp học từ vựng trình độ {level}. "
-            f"Hãy gửi lời chào đón bằng Tiếng Việt nồng ấm, giới thiệu nhiệm vụ hôm nay là thực hành các từ khóa: {words_str}. "
-            "Đưa ra 1 câu hỏi gợi mở ngắn bằng Tiếng Anh để bắt đầu cuộc hội thoại."
+            f"Chào mừng học viên bằng Tiếng Việt siêu ngắn gọn (tối đa 1-2 câu ngắn), "
+            f"giới thiệu chủ đề từ vựng {level} hôm nay cần thực hành: {words_str}. "
+            "Sau đó, đưa ra ngay 1 câu hỏi tiếng Anh gợi mở siêu ngắn gọn để học viên bắt đầu."
         )
     elif mode == "roleplay" and topic:
         custom_instruction = (
@@ -253,9 +253,9 @@ async def realtime_voice_endpoint(
             "4. Hãy dẫn dắt tình huống tự nhiên, đặt câu hỏi hoặc đưa ra gợi mở để thúc đẩy cuộc hội thoại."
         )
         welcome_prompt = (
-            f"Học viên vừa tham gia tình huống nhập vai thực tế: '{topic}'. "
-            "Hãy gửi lời chào chào mừng bằng Tiếng Việt nồng ấm, giới thiệu rõ vai diễn của bạn và vai diễn của học viên trong tình huống này. "
-            "Sau đó đưa ra câu thoại tiếng Anh đầu tiên để dẫn dắt học viên bắt đầu nhập vai."
+            f"Hãy gửi lời chào bằng Tiếng Việt siêu ngắn gọn (tối đa 1-2 câu ngắn) giới thiệu vai diễn của bạn và của học viên "
+            f"trong tình huống '{topic}'. Sau đó, đưa ra ngay câu thoại tiếng Anh đầu tiên "
+            "của bạn (tối đa 1 câu ngắn) để dẫn dắt học viên nhập vai ngay lập tức. TUYỆT ĐỐI không viết gợi ý hay hướng dẫn dài dòng."
         )
     elif mode == "free_talk":
         custom_instruction = (
@@ -266,8 +266,9 @@ async def realtime_voice_endpoint(
             "3. Khuyến khích học viên bày tỏ quan điểm của mình."
         )
         welcome_prompt = (
-            "Học viên vừa bắt đầu phòng luyện nói tự do. Hãy gửi lời chào bằng Tiếng Việt nồng ấm, "
-            "giới thiệu bản thân là người bạn đồng hành luyện nói tiếng Anh và đưa ra 1 chủ đề giao tiếp gợi mở thú vị bằng Tiếng Anh."
+            "Hãy gửi lời chào bằng Tiếng Việt siêu ngắn gọn (tối đa 1 câu ngắn), "
+            "giới thiệu bạn là AI English Coach. Sau đó, đưa ra ngay 1 câu hỏi gợi mở tiếng Anh siêu ngắn gọn (1 câu) "
+            "về một chủ đề thú vị để bắt đầu cuộc trò chuyện tự do."
         )
 
     try:
