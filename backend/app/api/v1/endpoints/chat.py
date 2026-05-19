@@ -12,6 +12,43 @@ import time
 
 router = APIRouter()
 
+@router.get("/debug")
+async def debug_gemini_key():
+    import os
+    import google.generativeai as genai
+    from app.core.config import settings
+    
+    gemini_in_settings = settings.GEMINI_API_KEY
+    gemini_in_env = os.environ.get("GEMINI_API_KEY") or ""
+    
+    result = {
+        "settings_key_length": len(gemini_in_settings),
+        "settings_key_preview": gemini_in_settings[:6] + "..." + gemini_in_settings[-4:] if len(gemini_in_settings) > 10 else "None",
+        "env_key_length": len(gemini_in_env),
+        "env_key_preview": gemini_in_env[:6] + "..." + gemini_in_env[-4:] if len(gemini_in_env) > 10 else "None",
+    }
+    
+    try:
+        test_key = gemini_in_settings or gemini_in_env
+        if not test_key:
+            result["status"] = "ERROR: Both keys are empty!"
+            return result
+            
+        genai.configure(api_key=test_key)
+        models = []
+        for m in genai.list_models():
+            models.append(m.name)
+        result["status"] = "SUCCESS"
+        result["available_models"] = models[:3]
+    except Exception as e:
+        result["status"] = "FAILED"
+        result["error_message"] = str(e)
+        import traceback
+        result["traceback"] = traceback.format_exc()
+        
+    return result
+
+
 class ConnectionManager:
     def __init__(self):
         self.active_connections: list[WebSocket] = []
@@ -49,9 +86,10 @@ async def websocket_endpoint(
     user_id: int,
     mode: str = None,
     level: str = None,
-    topic: str = None
+    topic: str = None,
+    words: str = None
 ):
-    print(f"DEBUG: New WebSocket connection for user_id: {user_id}, mode: {mode}, level: {level}, topic: {topic}")
+    print(f"DEBUG: New WebSocket connection for user_id: {user_id}, mode: {mode}, level: {level}, topic: {topic}, words: {words}")
     await manager.connect(websocket)
     
     # Bắt buộc dọn dẹp bộ nhớ hội thoại cũ của user để đảm bảo mỗi lần mở lại phòng là một session mới tươi nguyên, 100% hiện giới thiệu tiếng Việt dẫn dắt!
@@ -65,7 +103,10 @@ async def websocket_endpoint(
     welcome_prompt = None
 
     if mode == "vocabulary_practice" and level:
-        vocab_words = VOCAB_LISTS.get(level.upper(), VOCAB_LISTS["B1"])
+        if words:
+            vocab_words = [w.strip() for w in words.split(",") if w.strip()]
+        else:
+            vocab_words = VOCAB_LISTS.get(level.upper(), VOCAB_LISTS["B1"])
         words_str = ", ".join([f"'{w}'" for w in vocab_words])
         custom_instruction = (
             "Bạn là AI English Coach chuyên hỗ trợ học viên Luyện tập Từ vựng Thông minh.\n"
@@ -209,7 +250,8 @@ async def realtime_voice_endpoint(
     user_id: int,
     mode: str = None,
     level: str = None,
-    topic: str = None
+    topic: str = None,
+    words: str = None
 ):
     """
     WebSocket endpoint chuyên biệt cho trải nghiệm Voice Realtime.
@@ -218,7 +260,7 @@ async def realtime_voice_endpoint(
     """
     if not mode or mode == "null":
         mode = "free_talk"
-    print(f"DEBUG: New Realtime WebSocket connection for user_id: {user_id}, mode: {mode}, level: {level}, topic: {topic}")
+    print(f"DEBUG: New Realtime WebSocket connection for user_id: {user_id}, mode: {mode}, level: {level}, topic: {topic}, words: {words}")
     await manager.connect(websocket)
     
     # Bắt buộc dọn dẹp bộ nhớ hội thoại cũ của user để đảm bảo mỗi lần mở lại phòng là một session mới tươi nguyên, 100% hiện giới thiệu tiếng Việt dẫn dắt!
@@ -229,7 +271,10 @@ async def realtime_voice_endpoint(
     welcome_prompt = None
 
     if mode == "vocabulary_practice" and level:
-        vocab_words = VOCAB_LISTS.get(level.upper(), VOCAB_LISTS["B1"])
+        if words:
+            vocab_words = [w.strip() for w in words.split(",") if w.strip()]
+        else:
+            vocab_words = VOCAB_LISTS.get(level.upper(), VOCAB_LISTS["B1"])
         words_str = ", ".join([f"'{w}'" for w in vocab_words])
         custom_instruction = (
             "Bạn là AI English Coach chuyên hỗ trợ học viên Luyện tập Từ vựng Thông minh.\n"
