@@ -29,6 +29,20 @@ class SkillMapChart extends StatelessWidget {
               ],
               borderWidth: 2,
             ),
+            // Invisible dataset to force scale boundaries from 0 to 100
+            RadarDataSet(
+              fillColor: Colors.transparent,
+              borderColor: Colors.transparent,
+              entryRadius: 0,
+              borderWidth: 0,
+              dataEntries: const [
+                RadarEntry(value: 100),
+                RadarEntry(value: 0),
+                RadarEntry(value: 100),
+                RadarEntry(value: 0),
+                RadarEntry(value: 0),
+              ],
+            ),
           ],
           radarBackgroundColor: Colors.transparent,
           borderData: FlBorderData(show: false),

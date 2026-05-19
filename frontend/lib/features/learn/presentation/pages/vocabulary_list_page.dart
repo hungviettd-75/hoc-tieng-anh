@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:http/http.dart' as http;
 import 'package:ai_english_coach/theme/app_colors.dart';
 import 'package:ai_english_coach/core/api_config.dart';
+import 'package:ai_english_coach/features/auth/services/auth_service.dart';
 import 'package:animate_do/animate_do.dart';
 
 class VocabularyListPage extends StatefulWidget {
@@ -36,8 +37,15 @@ class _VocabularyListPageState extends State<VocabularyListPage> {
       _errorMessage = '';
     });
     try {
+      final token = await AuthService().getAccessToken();
+      final headers = {
+        'Content-Type': 'application/json',
+        if (token != null) 'Authorization': 'Bearer $token',
+      };
+
       final response = await http.get(
         Uri.parse('${ApiConfig.baseUrl}/learn/vocabulary?level=$_selectedLevel'),
+        headers: headers,
       ).timeout(const Duration(seconds: 10));
 
       if (response.statusCode == 200) {
@@ -110,33 +118,65 @@ class _VocabularyListPageState extends State<VocabularyListPage> {
     return Container(
       height: 50,
       margin: const EdgeInsets.symmetric(vertical: 10),
-      child: ListView.builder(
-        scrollDirection: Axis.horizontal,
-        padding: const EdgeInsets.symmetric(horizontal: 16),
-        itemCount: levels.length,
-        itemBuilder: (context, index) {
-          final level = levels[index];
-          final isSelected = _selectedLevel == level;
-          return Padding(
-            padding: const EdgeInsets.only(right: 10),
-            child: ChoiceChip(
-              label: Text(level),
-              selected: isSelected,
-              onSelected: (selected) {
-                if (selected) {
-                  setState(() => _selectedLevel = level);
-                  _fetchVocabulary();
-                }
+      child: Row(
+        children: [
+          Expanded(
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              itemCount: levels.length,
+              itemBuilder: (context, index) {
+                final level = levels[index];
+                final isSelected = _selectedLevel == level;
+                return Padding(
+                  padding: const EdgeInsets.only(right: 10),
+                  child: ChoiceChip(
+                    label: Text(level),
+                    selected: isSelected,
+                    onSelected: (selected) {
+                      if (selected) {
+                        setState(() => _selectedLevel = level);
+                        _fetchVocabulary();
+                      }
+                    },
+                    selectedColor: AppColors.primary,
+                    backgroundColor: AppColors.surface,
+                    labelStyle: TextStyle(
+                      color: isSelected ? Colors.white : Colors.white54,
+                      fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+                    ),
+                  ),
+                );
               },
-              selectedColor: AppColors.primary,
-              backgroundColor: AppColors.surface,
-              labelStyle: TextStyle(
-                color: isSelected ? Colors.white : Colors.white54,
-                fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
-              ),
             ),
-          );
-        },
+          ),
+          // Nút "Đổi từ vựng 🔄" cao cấp, ngẫu nhiên hóa từ vựng hiện tại
+          Container(
+            margin: const EdgeInsets.only(right: 16),
+            child: IconButton(
+              icon: const Icon(Icons.cached_rounded, color: AppColors.primary, size: 24),
+              tooltip: 'Đổi từ vựng ngẫu nhiên',
+              style: IconButton.styleFrom(
+                backgroundColor: AppColors.surface,
+                padding: const EdgeInsets.all(12),
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                side: BorderSide(color: AppColors.primary.withOpacity(0.3)),
+              ),
+              onPressed: () {
+                _fetchVocabulary();
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: const Text('🔄 Đã làm mới và xáo trộn từ vựng thông minh!'),
+                    backgroundColor: AppColors.primary,
+                    duration: const Duration(seconds: 1),
+                    behavior: SnackBarBehavior.floating,
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                  ),
+                );
+              },
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -196,8 +236,14 @@ class _VocabularyListPageState extends State<VocabularyListPage> {
       child: FadeInUp(
         child: ElevatedButton(
           onPressed: () {
-            // Context-aware deep linking to vocabulary practice chat session
-            context.push('/chat?mode=vocabulary_practice&level=$_selectedLevel');
+            // Lấy danh sách các từ vựng gốc để đưa vào AI Coach
+            final List<String> currentWords = _vocabList
+                .map((item) => item['word'] as String)
+                .toList();
+            final String wordsParam = currentWords.join(',');
+            
+            // Context-aware deep linking to vocabulary practice chat session with current dynamic words
+            context.push('/chat?mode=vocabulary_practice&level=$_selectedLevel&words=${Uri.encodeComponent(wordsParam)}');
           },
           style: ElevatedButton.styleFrom(
             backgroundColor: AppColors.primary,

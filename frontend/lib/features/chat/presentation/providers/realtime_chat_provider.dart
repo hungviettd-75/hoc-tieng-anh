@@ -157,12 +157,12 @@ class RealtimeChatNotifier extends StateNotifier<RealtimeChatState> {
   }
 
 
-  void connectWithContext({String? mode, String? level, String? topic}) {
-    print('DEBUG: Reconnecting to Realtime chat WebSocket with mode: $mode, level: $level, topic: $topic');
+  void connectWithContext({String? mode, String? level, String? topic, String? words}) {
+    print('DEBUG: Reconnecting to Realtime chat WebSocket with mode: $mode, level: $level, topic: $topic, words: $words');
     _subscription?.cancel();
     _chatService.disconnect();
     state = RealtimeChatState(messages: [], status: AIStatus.idle);
-    _chatService.connectRealtime(1, mode: mode, level: level, topic: topic);
+    _chatService.connectRealtime(1, mode: mode, level: level, topic: topic, words: words);
     _listenToMessages();
   }
 

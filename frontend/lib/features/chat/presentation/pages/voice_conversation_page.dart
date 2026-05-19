@@ -14,12 +14,14 @@ class VoiceConversationPage extends ConsumerStatefulWidget {
   final String? mode;
   final String? level;
   final String? topic;
+  final String? words;
 
   const VoiceConversationPage({
     super.key,
     this.mode,
     this.level,
     this.topic,
+    this.words,
   });
 
   @override
@@ -54,6 +56,7 @@ class _VoiceConversationPageState extends ConsumerState<VoiceConversationPage> w
         mode: widget.mode,
         level: widget.level,
         topic: widget.topic,
+        words: widget.words,
       );
     });
   }

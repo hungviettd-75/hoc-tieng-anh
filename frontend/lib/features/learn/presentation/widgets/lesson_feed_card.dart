@@ -45,6 +45,17 @@ class LessonFeedCard extends StatelessWidget {
     }
   }
 
+  String _translateContentType(String contentType) {
+    switch (contentType.toLowerCase()) {
+      case 'grammar': return 'NGỮ PHÁP';
+      case 'vocabulary': return 'TỪ VỰNG';
+      case 'roleplay': return 'NHẬP VAI';
+      case 'listening': return 'LUYỆN NGHE';
+      case 'speaking': return 'LUYỆN NÓI';
+      default: return contentType.toUpperCase();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return FadeInUp(
@@ -83,7 +94,7 @@ class LessonFeedCard extends StatelessWidget {
                           Icon(_getIcon(), size: 16, color: _getColor()),
                           const SizedBox(width: 6),
                           Text(
-                            recommendation.contentType.toUpperCase(),
+                            _translateContentType(recommendation.contentType),
                             style: TextStyle(
                               color: _getColor(),
                               fontSize: 10,
@@ -99,7 +110,7 @@ class LessonFeedCard extends StatelessWidget {
                         const Icon(Icons.timer_outlined, size: 14, color: Colors.white54),
                         const SizedBox(width: 4),
                         Text(
-                          '${recommendation.estimatedMinutes} min',
+                          '${recommendation.estimatedMinutes} phút',
                           style: const TextStyle(color: Colors.white54, fontSize: 12),
                         ),
                       ],

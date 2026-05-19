@@ -54,12 +54,12 @@ class ChatNotifier extends StateNotifier<ChatState> {
     _listenToMessages();
   }
 
-  void connectWithContext({String? mode, String? level, String? topic}) {
-    print('DEBUG: Reconnecting to chat WebSocket with mode: $mode, level: $level, topic: $topic');
+  void connectWithContext({String? mode, String? level, String? topic, String? words}) {
+    print('DEBUG: Reconnecting to chat WebSocket with mode: $mode, level: $level, topic: $topic, words: $words');
     _subscription?.cancel();
     _chatService.disconnect();
     state = ChatState(messages: [], isConnected: false);
-    _chatService.connect(1, mode: mode, level: level, topic: topic);
+    _chatService.connect(1, mode: mode, level: level, topic: topic, words: words);
     _listenToMessages();
   }
 

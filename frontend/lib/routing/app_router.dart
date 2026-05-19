@@ -57,7 +57,8 @@ final routerProvider = Provider<GoRouter>((ref) {
           final mode = state.uri.queryParameters['mode'];
           final level = state.uri.queryParameters['level'];
           final topic = state.uri.queryParameters['topic'];
-          return VoiceConversationPage(mode: mode, level: level, topic: topic);
+          final words = state.uri.queryParameters['words'];
+          return VoiceConversationPage(mode: mode, level: level, topic: topic, words: words);
         },
       ),
       // Speaking practice & result - fullscreen (ngoài ShellRoute)
@@ -104,7 +105,8 @@ final routerProvider = Provider<GoRouter>((ref) {
               final mode = state.uri.queryParameters['mode'];
               final level = state.uri.queryParameters['level'];
               final topic = state.uri.queryParameters['topic'];
-              return ChatPage(mode: mode, level: level, topic: topic);
+              final words = state.uri.queryParameters['words'];
+              return ChatPage(mode: mode, level: level, topic: topic, words: words);
             },
           ),
           GoRoute(
@@ -118,6 +120,11 @@ final routerProvider = Provider<GoRouter>((ref) {
               GoRoute(
                 path: 'lesson',
                 builder: (context, state) {
+                  if (state.extra == null) {
+                    // Nếu mất dữ liệu (do nhấn back trình duyệt hoặc refresh), quay về trang Lộ trình cá nhân
+                    Future.microtask(() => context.go('/learn'));
+                    return const Scaffold(body: Center(child: CircularProgressIndicator()));
+                  }
                   final recommendation = state.extra as learn_models.RecommendationItem;
                   return LessonDetailPage(recommendation: recommendation);
                 },

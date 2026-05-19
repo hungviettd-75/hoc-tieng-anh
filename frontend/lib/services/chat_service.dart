@@ -1,18 +1,18 @@
 import 'dart:convert';
 import 'package:web_socket_channel/web_socket_channel.dart';
+import 'package:ai_english_coach/core/api_config.dart';
 
 class ChatService {
   WebSocketChannel? _channel;
   WebSocketChannel? _realtimeChannel;
 
-  void connect(int userId, {String? mode, String? level, String? topic}) {
-    // Sử dụng localhost để tương thích với trình duyệt
-    const String ipAddress = '127.0.0.1'; 
-    String urlStr = 'ws://$ipAddress:8000/api/v1/ws/$userId';
+  void connect(int userId, {String? mode, String? level, String? topic, String? words}) {
+    String urlStr = '${ApiConfig.wsUrl}/ws/$userId';
     final List<String> params = [];
     if (mode != null) params.add('mode=$mode');
     if (level != null) params.add('level=$level');
     if (topic != null) params.add('topic=${Uri.encodeComponent(topic)}');
+    if (words != null) params.add('words=${Uri.encodeComponent(words)}');
 
     if (params.isNotEmpty) {
       urlStr += '?${params.join('&')}';
@@ -23,13 +23,13 @@ class ChatService {
     _channel = WebSocketChannel.connect(url);
   }
 
-  void connectRealtime(int userId, {String? mode, String? level, String? topic}) {
-    const String ipAddress = '127.0.0.1'; 
-    String urlStr = 'ws://$ipAddress:8000/api/v1/ws/realtime/$userId';
+  void connectRealtime(int userId, {String? mode, String? level, String? topic, String? words}) {
+    String urlStr = '${ApiConfig.wsUrl}/ws/realtime/$userId';
     final List<String> params = [];
     if (mode != null) params.add('mode=$mode');
     if (level != null) params.add('level=$level');
     if (topic != null) params.add('topic=${Uri.encodeComponent(topic)}');
+    if (words != null) params.add('words=${Uri.encodeComponent(words)}');
 
     if (params.isNotEmpty) {
       urlStr += '?${params.join('&')}';

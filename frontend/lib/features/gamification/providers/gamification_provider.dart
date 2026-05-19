@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
 import 'package:ai_english_coach/features/gamification/models/gamification_models.dart';
+import 'package:ai_english_coach/core/api_config.dart';
 
 import 'package:ai_english_coach/features/auth/services/auth_service.dart';
 import 'package:ai_english_coach/features/auth/presentation/providers/auth_provider.dart';
@@ -23,7 +24,7 @@ class GamificationNotifier extends StateNotifier<AsyncValue<GamificationStatus>>
       }
 
       final response = await http.get(
-        Uri.parse('http://localhost:8000/api/v1/gamification/status'),
+        Uri.parse('${ApiConfig.baseUrl}/gamification/status'),
         headers: {
           'Authorization': 'Bearer $token',
           'Content-Type': 'application/json',
@@ -46,7 +47,7 @@ class GamificationNotifier extends StateNotifier<AsyncValue<GamificationStatus>>
       if (token == null) return false;
 
       final response = await http.post(
-        Uri.parse('http://localhost:8000/api/v1/gamification/add_xp?amount=$amount'),
+        Uri.parse('${ApiConfig.baseUrl}/gamification/add_xp?amount=$amount'),
         headers: {
           'Authorization': 'Bearer $token',
           'Content-Type': 'application/json',
@@ -77,7 +78,7 @@ final leaderboardProvider = FutureProvider<List<LeaderboardEntry>>((ref) async {
   if (token == null) throw Exception('Not authenticated');
 
   final response = await http.get(
-    Uri.parse('http://localhost:8000/api/v1/gamification/leaderboard'),
+    Uri.parse('${ApiConfig.baseUrl}/gamification/leaderboard'),
     headers: {
       'Authorization': 'Bearer $token',
       'Content-Type': 'application/json',
@@ -99,7 +100,7 @@ final missionsProvider = FutureProvider<List<UserMission>>((ref) async {
   if (token == null) throw Exception('Not authenticated');
 
   final response = await http.get(
-    Uri.parse('http://localhost:8000/api/v1/gamification/missions'),
+    Uri.parse('${ApiConfig.baseUrl}/gamification/missions'),
     headers: {
       'Authorization': 'Bearer $token',
       'Content-Type': 'application/json',

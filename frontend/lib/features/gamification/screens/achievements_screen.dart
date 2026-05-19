@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-// import 'package:ai_english_coach/features/gamification/providers/gamification_provider.dart';
+import 'package:ai_english_coach/theme/app_colors.dart';
 
 class AchievementsScreen extends ConsumerWidget {
   const AchievementsScreen({Key? key}) : super(key: key);
@@ -18,12 +18,16 @@ class AchievementsScreen extends ConsumerWidget {
     ];
 
     return Scaffold(
+      backgroundColor: AppColors.background,
       appBar: AppBar(
-        title: const Text('Achievements'),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back_ios_new_rounded, color: Colors.white, size: 20),
+          onPressed: () => Navigator.of(context).pop(),
+        ),
+        title: const Text('Thành tích', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
         centerTitle: true,
         elevation: 0,
         backgroundColor: Colors.transparent,
-        foregroundColor: Colors.black,
       ),
       body: GridView.builder(
         padding: const EdgeInsets.all(16),
@@ -40,12 +44,12 @@ class AchievementsScreen extends ConsumerWidget {
 
           return Container(
             decoration: BoxDecoration(
-              color: unlocked ? Colors.white : Colors.grey[200],
+              color: unlocked ? AppColors.surface : AppColors.surface.withOpacity(0.4),
               borderRadius: BorderRadius.circular(20),
               boxShadow: unlocked
-                  ? [BoxShadow(color: Colors.blueAccent.withOpacity(0.1), blurRadius: 10, offset: const Offset(0, 5))]
+                  ? [BoxShadow(color: AppColors.primary.withOpacity(0.1), blurRadius: 10, offset: const Offset(0, 5))]
                   : [],
-              border: unlocked ? Border.all(color: Colors.blueAccent.withOpacity(0.3)) : null,
+              border: unlocked ? Border.all(color: AppColors.primary.withOpacity(0.3)) : null,
             ),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -53,7 +57,7 @@ class AchievementsScreen extends ConsumerWidget {
                 Icon(
                   achievement['icon'],
                   size: 50,
-                  color: unlocked ? Colors.blueAccent : Colors.grey[400],
+                  color: unlocked ? AppColors.primary : Colors.white24,
                 ),
                 const SizedBox(height: 12),
                 Text(
@@ -61,7 +65,7 @@ class AchievementsScreen extends ConsumerWidget {
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    color: unlocked ? Colors.black87 : Colors.grey[600],
+                    color: unlocked ? Colors.white : Colors.white38,
                   ),
                 ),
                 const SizedBox(height: 4),
@@ -72,7 +76,7 @@ class AchievementsScreen extends ConsumerWidget {
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 10,
-                      color: unlocked ? Colors.grey[600] : Colors.grey[400],
+                      color: unlocked ? Colors.white54 : Colors.white24,
                     ),
                   ),
                 ),

@@ -10,12 +10,14 @@ class ChatPage extends ConsumerStatefulWidget {
   final String? mode;
   final String? level;
   final String? topic;
+  final String? words;
 
   const ChatPage({
     super.key,
     this.mode,
     this.level,
     this.topic,
+    this.words,
   });
 
   @override
@@ -34,6 +36,7 @@ class _ChatPageState extends ConsumerState<ChatPage> {
         mode: widget.mode,
         level: widget.level,
         topic: widget.topic,
+        words: widget.words,
       );
     });
   }
@@ -71,15 +74,6 @@ class _ChatPageState extends ConsumerState<ChatPage> {
             _buildConnectionStatus(messages.isConnected, messages.error),
           ],
         ),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.mic, color: AppColors.primary),
-            onPressed: () {
-              final topicParam = widget.topic != null ? '&topic=${Uri.encodeComponent(widget.topic!)}' : '';
-              context.push('/voice-chat?mode=${widget.mode}&level=${widget.level}$topicParam');
-            },
-          ),
-        ],
       ),
       body: Column(
         children: [
@@ -150,17 +144,47 @@ class _ChatPageState extends ConsumerState<ChatPage> {
 
   Widget _buildInputArea() {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
-      decoration: const BoxDecoration(color: AppColors.background),
+      padding: const EdgeInsets.fromLTRB(16, 12, 16, 24),
+      decoration: const BoxDecoration(
+        color: AppColors.background,
+        border: Border(top: BorderSide(color: Colors.white10, width: 0.5)),
+      ),
       child: Row(
         children: [
+          // Nút Mic đàm thoại với AI Coach - Vị trí nổi bật, dễ nhìn thấy nhất
+          GestureDetector(
+            onTap: () {
+              final topicParam = widget.topic != null ? '&topic=${Uri.encodeComponent(widget.topic!)}' : '';
+              final wordsParam = widget.words != null ? '&words=${Uri.encodeComponent(widget.words!)}' : '';
+              context.push('/voice-chat?mode=${widget.mode}&level=${widget.level}$topicParam$wordsParam');
+            },
+            child: Container(
+              padding: const EdgeInsets.all(12),
+              decoration: BoxDecoration(
+                gradient: AppColors.primaryGradient,
+                shape: BoxShape.circle,
+                boxShadow: [
+                  BoxShadow(
+                    color: AppColors.primary.withOpacity(0.4),
+                    blurRadius: 10,
+                    spreadRadius: 1,
+                  ),
+                ],
+              ),
+              child: const Icon(Icons.mic_rounded, color: Colors.white, size: 24),
+            ),
+          ),
+          const SizedBox(width: 12),
           Expanded(
             child: TextField(
               controller: _controller,
+              style: const TextStyle(color: AppColors.textPrimary),
               decoration: InputDecoration(
-                hintText: 'Nhập nội dung tin nhắn...',
+                hintText: 'Chạm Mic để nói hoặc nhập tin nhắn...',
+                hintStyle: const TextStyle(color: AppColors.textSecondary, fontSize: 14),
                 filled: true,
                 fillColor: AppColors.surface,
+                contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
                 border: OutlineInputBorder(borderRadius: BorderRadius.circular(30), borderSide: BorderSide.none),
               ),
               onSubmitted: (val) => _handleSend(),
@@ -168,9 +192,10 @@ class _ChatPageState extends ConsumerState<ChatPage> {
           ),
           const SizedBox(width: 12),
           CircleAvatar(
-            backgroundColor: AppColors.primary,
+            radius: 22,
+            backgroundColor: AppColors.surface,
             child: IconButton(
-              icon: const Icon(Icons.send, color: Colors.white),
+              icon: const Icon(Icons.send_rounded, color: AppColors.primary, size: 20),
               onPressed: _handleSend,
             ),
           ),
@@ -198,16 +223,20 @@ class _ChatPageState extends ConsumerState<ChatPage> {
   }
 
   Widget _buildTargetKeywordsBanner(List<ChatMessage> messageList) {
-    final Map<String, List<String>> vocabMap = {
-      'A1': ['Beginner', 'Practice', 'Vocabulary', 'Improve'],
-      'A2': ['Journey', 'Confident', 'Habit', 'Encourage'],
-      'B1': ['Persistent', 'Collaborate', 'Effective', 'Challenge'],
-      'B2': ['Substantial', 'Fluency', 'Analyze', 'Evaluate'],
-      'C1': ['Pragmatic', 'Eloquent', 'Cognitive', 'Sophisticated'],
-    };
-
-    final levelKey = widget.level?.toUpperCase() ?? 'B1';
-    final keywords = vocabMap[levelKey] ?? vocabMap['B1']!;
+    final List<String> keywords;
+    if (widget.words != null && widget.words!.isNotEmpty) {
+      keywords = widget.words!.split(',').map((w) => w.trim()).toList();
+    } else {
+      final Map<String, List<String>> vocabMap = {
+        'A1': ['Beginner', 'Practice', 'Vocabulary', 'Improve'],
+        'A2': ['Journey', 'Confident', 'Habit', 'Encourage'],
+        'B1': ['Persistent', 'Collaborate', 'Effective', 'Challenge'],
+        'B2': ['Substantial', 'Fluency', 'Analyze', 'Evaluate'],
+        'C1': ['Pragmatic', 'Eloquent', 'Cognitive', 'Sophisticated'],
+      };
+      final levelKey = widget.level?.toUpperCase() ?? 'B1';
+      keywords = vocabMap[levelKey] ?? vocabMap['B1']!;
+    }
 
     return Container(
       width: double.infinity,
