@@ -164,11 +164,18 @@ async def analyze_pronunciation(
         f.write(audio_bytes)
 
     # Gọi pronunciation service (Gemini-powered)
-    result = await pronunciation_service.analyze_pronunciation(
-        audio_bytes=audio_bytes,
-        target_text=target_text,
-        audio_filename=audio.filename or "audio.webm",
-    )
+    try:
+        result = await pronunciation_service.analyze_pronunciation(
+            audio_bytes=audio_bytes,
+            target_text=target_text,
+            audio_filename=audio.filename or "audio.webm",
+        )
+    except Exception as e:
+        import traceback
+        print(f"ERROR: Pronunciation service failed: {e}")
+        print(traceback.format_exc())
+        from fastapi import HTTPException
+        raise HTTPException(status_code=400, detail=f"AI Analysis Error: {str(e)}")
 
     # Lưu vào database
     db = SessionLocal()
@@ -208,8 +215,6 @@ async def analyze_pronunciation(
                     skill_level.pronunciation = update_score(skill_level.pronunciation, m["score"])
                 elif m["metric"] == "fluency":
                     skill_level.fluency = update_score(skill_level.fluency, m["score"])
-                elif m["metric"] == "intonation":
-                    skill_level.intonation = update_score(skill_level.intonation, m["score"])
             
             # Cập nhật vocabulary ngẫu nhiên nhẹ dựa trên độ khó của text
             if len(target_text.split()) > 10:
@@ -231,7 +236,11 @@ async def analyze_pronunciation(
         return response_data
     except Exception as e:
         db.rollback()
-        raise e
+        import traceback
+        print(f"ERROR: Database saving failed: {e}")
+        print(traceback.format_exc())
+        from fastapi import HTTPException
+        raise HTTPException(status_code=400, detail=f"Database Save Error: {str(e)}")
     finally:
         db.close()
 
