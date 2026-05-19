@@ -335,16 +335,20 @@ class _VoiceConversationPageState extends ConsumerState<VoiceConversationPage> w
   }
 
   Widget _buildTargetKeywordsBanner() {
-    final Map<String, List<String>> vocabMap = {
-      'A1': ['Beginner', 'Practice', 'Vocabulary', 'Improve'],
-      'A2': ['Journey', 'Confident', 'Habit', 'Encourage'],
-      'B1': ['Persistent', 'Collaborate', 'Effective', 'Challenge'],
-      'B2': ['Substantial', 'Fluency', 'Analyze', 'Evaluate'],
-      'C1': ['Pragmatic', 'Eloquent', 'Cognitive', 'Sophisticated'],
-    };
-
-    final levelKey = widget.level?.toUpperCase() ?? 'B1';
-    final keywords = vocabMap[levelKey] ?? vocabMap['B1']!;
+    final List<String> keywords;
+    if (widget.words != null && widget.words!.isNotEmpty) {
+      keywords = widget.words!.split(',').map((w) => w.trim()).toList();
+    } else {
+      final Map<String, List<String>> vocabMap = {
+        'A1': ['Beginner', 'Practice', 'Vocabulary', 'Improve'],
+        'A2': ['Journey', 'Confident', 'Habit', 'Encourage'],
+        'B1': ['Persistent', 'Collaborate', 'Effective', 'Challenge'],
+        'B2': ['Substantial', 'Fluency', 'Analyze', 'Evaluate'],
+        'C1': ['Pragmatic', 'Eloquent', 'Cognitive', 'Sophisticated'],
+      };
+      final levelKey = widget.level?.toUpperCase() ?? 'B1';
+      keywords = vocabMap[levelKey] ?? vocabMap['B1']!;
+    }
     final state = ref.watch(realtimeChatProvider);
 
     return Container(

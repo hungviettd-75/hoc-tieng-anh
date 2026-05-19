@@ -236,11 +236,34 @@ class _VocabularyListPageState extends State<VocabularyListPage> {
       child: FadeInUp(
         child: ElevatedButton(
           onPressed: () {
-            // Lấy danh sách các từ vựng gốc để đưa vào AI Coach
-            final List<String> currentWords = _vocabList
+            if (_vocabList.isEmpty) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(content: Text('Vui lòng đợi danh sách từ vựng được tải xong!')),
+              );
+              return;
+            }
+
+            // Lọc và chỉ lấy tối đa 5 từ cần luyện tập nhất (ưu tiên 'Learning' -> 'New' -> 'Mastered')
+            final List<Map<String, dynamic>> sortedVocabs = List.from(_vocabList);
+            sortedVocabs.sort((a, b) {
+              final statusA = a['status'] ?? 'New';
+              final statusB = b['status'] ?? 'New';
+              
+              int priority(String status) {
+                if (status == 'Learning') return 1;
+                if (status == 'New') return 2;
+                return 3;
+              }
+              
+              return priority(statusA).compareTo(priority(statusB));
+            });
+
+            final List<String> targetWords = sortedVocabs
+                .take(5)
                 .map((item) => item['word'] as String)
                 .toList();
-            final String wordsParam = currentWords.join(',');
+                
+            final String wordsParam = targetWords.join(',');
             
             // Context-aware deep linking to vocabulary practice chat session with current dynamic words
             context.push('/chat?mode=vocabulary_practice&level=$_selectedLevel&words=${Uri.encodeComponent(wordsParam)}');

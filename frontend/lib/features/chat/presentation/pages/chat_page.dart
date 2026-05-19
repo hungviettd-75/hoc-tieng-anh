@@ -88,6 +88,11 @@ class _ChatPageState extends ConsumerState<ChatPage> {
             final url = '${ApiConfig.speaking}/tts?text=${Uri.encodeComponent(lastMsg.content)}';
             _audioPlayer.play(UrlSource(url)).catchError((e) {
               print("Autoplay TTS blocked or failed: $e");
+              if (mounted) {
+                setState(() {
+                  _currentlyPlayingMessage = null;
+                });
+              }
             });
             _audioPlayer.onPlayerComplete.first.then((_) {
               if (mounted && _currentlyPlayingMessage == lastMsg.content) {
@@ -159,7 +164,7 @@ class _ChatPageState extends ConsumerState<ChatPage> {
                 if (msg.isAI) ...[
                   IconButton(
                     icon: Icon(
-                      isPlaying ? Icons.volume_up_rounded : Icons.volume_mute_rounded,
+                      isPlaying ? Icons.volume_up_rounded : Icons.volume_up_outlined,
                       size: 18,
                       color: isPlaying ? AppColors.primary : AppColors.textSecondary,
                     ),
@@ -176,7 +181,13 @@ class _ChatPageState extends ConsumerState<ChatPage> {
                             _currentlyPlayingMessage = msg.content;
                           });
                           final url = '${ApiConfig.speaking}/tts?text=${Uri.encodeComponent(msg.content)}';
-                          await _audioPlayer.play(UrlSource(url));
+                          await _audioPlayer.play(UrlSource(url)).catchError((e) {
+                            if (mounted) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(content: Text('Không thể phát âm thanh: $e. Hãy tương tác với trang trước!')),
+                              );
+                            }
+                          });
                           _audioPlayer.onPlayerComplete.first.then((_) {
                             if (mounted && _currentlyPlayingMessage == msg.content) {
                               setState(() {
@@ -187,6 +198,9 @@ class _ChatPageState extends ConsumerState<ChatPage> {
                         } catch (e) {
                           print("ERROR playing TTS in ChatPage: $e");
                           if (mounted) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(content: Text('Lỗi: $e')),
+                            );
                             setState(() {
                               _currentlyPlayingMessage = null;
                             });
