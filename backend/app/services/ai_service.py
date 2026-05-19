@@ -86,14 +86,13 @@ class GeminiService:
         last_err = None
         success = False
 
+        system_prompt = custom_instruction or self.system_instruction
         for model_name in models_to_try:
             try:
                 print(f"DEBUG GeminiService: Trying model {model_name} for chat streaming...")
-                current_model = genai.GenerativeModel(model_name)
+                current_model = genai.GenerativeModel(model_name, system_instruction=system_prompt)
                 chat = current_model.start_chat(history=gemini_history)
-                system_prompt = custom_instruction or self.system_instruction
-                prompt = f"{system_prompt}\n\nUser: {user_message}\nCoach:"
-                response = await chat.send_message_async(prompt, stream=True)
+                response = await chat.send_message_async(user_message, stream=True)
                 
                 async for chunk in response:
                     chunk_text = self._get_text_safely(chunk)
@@ -127,7 +126,6 @@ class GeminiService:
         """
         system_instruction = custom_instruction or self.tutor_instruction
         prompt = (
-            f"{system_instruction}\n\n"
             f"{compact_context}\n\n"
             f"User: {user_message}\nCoach:"
         )
@@ -150,7 +148,7 @@ class GeminiService:
         for model_name in models_to_try:
             try:
                 print(f"DEBUG GeminiService: Trying model {model_name} for tutor streaming...")
-                current_model = genai.GenerativeModel(model_name)
+                current_model = genai.GenerativeModel(model_name, system_instruction=system_instruction)
                 chat = current_model.start_chat(history=[])
                 response = await chat.send_message_async(prompt, stream=True)
                 async for chunk in response:

@@ -256,22 +256,8 @@ class _VocabularyListPageState extends State<VocabularyListPage> {
                     return;
                   }
 
-                  // Lọc và chỉ lấy tối đa 5 từ cần luyện tập nhất (ưu tiên 'Learning' -> 'New' -> 'Mastered')
-                  final List<Map<String, dynamic>> sortedVocabs = List.from(_vocabList);
-                  sortedVocabs.sort((a, b) {
-                    final statusA = a['status'] ?? 'New';
-                    final statusB = b['status'] ?? 'New';
-                    
-                    int priority(String status) {
-                      if (status == 'Learning') return 1;
-                      if (status == 'New') return 2;
-                      return 3;
-                    }
-                    
-                    return priority(statusA).compareTo(priority(statusB));
-                  });
-
-                  final List<String> targetWords = sortedVocabs
+                  // Lấy 5 từ đầu tiên theo đúng thứ tự hiển thị trên trang để banner khớp với danh sách user đang nhìn thấy
+                  final List<String> targetWords = _vocabList
                       .take(5)
                       .map((item) => item['word'] as String)
                       .toList();

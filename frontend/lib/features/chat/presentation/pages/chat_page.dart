@@ -322,11 +322,11 @@ class _ChatPageState extends ConsumerState<ChatPage> {
       keywords = widget.words!.split(',').map((w) => w.trim()).toList();
     } else {
       final Map<String, List<String>> vocabMap = {
-        'A1': ['Beginner', 'Practice', 'Vocabulary', 'Improve'],
-        'A2': ['Journey', 'Confident', 'Habit', 'Encourage'],
-        'B1': ['Persistent', 'Collaborate', 'Effective', 'Challenge'],
-        'B2': ['Substantial', 'Fluency', 'Analyze', 'Evaluate'],
-        'C1': ['Pragmatic', 'Eloquent', 'Cognitive', 'Sophisticated'],
+        'A1': ['Beginner', 'Practice', 'Vocabulary', 'Improve', 'Welcome', 'Language', 'Simple', 'Friend', 'Happy', 'Learn', 'Family', 'Morning', 'School', 'Summer', 'Active'],
+        'A2': ['Journey', 'Confident', 'Habit', 'Encourage', 'Positive', 'Healthy', 'Creative', 'Success', 'Goal', 'Experience', 'Patient', 'Support', 'Believe', 'Method', 'Imagine'],
+        'B1': ['Persistent', 'Collaborate', 'Effective', 'Challenge', 'Achieve', 'Determine', 'Essential', 'Progress', 'Valuable', 'Optimize', 'Dynamic', 'Strategy', 'Productive', 'Opportunity', 'Flexibly'],
+        'B2': ['Substantial', 'Fluency', 'Analyze', 'Evaluate', 'Alternative', 'Consequence', 'Significant', 'Distinguish', 'Innovative', 'Perspective', 'Professional', 'Sustainable', 'Coherent', 'Efficient', 'Implement'],
+        'C1': ['Pragmatic', 'Eloquent', 'Cognitive', 'Sophisticated', 'Ambiguous', 'Comprehensive', 'Ephemeral', 'Inevitable', 'Paradigm', 'Resilient', 'Ubiquitous', 'Volatile', 'Aesthetic', 'Paradox', 'Synthesis'],
       };
       final levelKey = widget.level?.toUpperCase() ?? 'B1';
       keywords = vocabMap[levelKey] ?? vocabMap['B1']!;

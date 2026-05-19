@@ -3,14 +3,25 @@ import 'package:flutter/foundation.dart';
 class ApiConfig {
   // 1. Hãy thay thế 'ai-english-coach-backend' bằng tên thực tế ứng dụng của bạn trên Render:
   static String get serverUrl {
+    if (kIsWeb) {
+      final uri = Uri.base;
+      if (uri.host == 'localhost' || uri.host == '127.0.0.1' || uri.host.startsWith('192.168.')) {
+        return 'http://${uri.host}:8000';
+      }
+    }
     if (kDebugMode) {
       return 'http://127.0.0.1:8000';
     }
     return 'https://hoc-tieng-anh.onrender.com';
   }
   
-  // 2. Dưới đây là cấu hình kết nối nói chuyện Voice (WebSocket) - cũng thay tên tương tự:
   static String get wsUrl {
+    if (kIsWeb) {
+      final uri = Uri.base;
+      if (uri.host == 'localhost' || uri.host == '127.0.0.1' || uri.host.startsWith('192.168.')) {
+        return 'ws://${uri.host}:8000/api/v1';
+      }
+    }
     if (kDebugMode) {
       return 'ws://127.0.0.1:8000/api/v1';
     }

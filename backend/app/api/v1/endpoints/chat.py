@@ -37,11 +37,11 @@ class ConnectionManager:
 manager = ConnectionManager()
 
 VOCAB_LISTS = {
-    "A1": ["Beginner", "Practice", "Vocabulary", "Improve"],
-    "A2": ["Journey", "Confident", "Habit", "Encourage"],
-    "B1": ["Persistent", "Collaborate", "Effective", "Challenge"],
-    "B2": ["Substantial", "Fluency", "Analyze", "Evaluate"],
-    "C1": ["Pragmatic", "Eloquent", "Cognitive", "Sophisticated"],
+    "A1": ["Beginner", "Practice", "Vocabulary", "Improve", "Welcome", "Language", "Simple", "Friend", "Happy", "Learn", "Family", "Morning", "School", "Summer", "Active"],
+    "A2": ["Journey", "Confident", "Habit", "Encourage", "Positive", "Healthy", "Creative", "Success", "Goal", "Experience", "Patient", "Support", "Believe", "Method", "Imagine"],
+    "B1": ["Persistent", "Collaborate", "Effective", "Challenge", "Achieve", "Determine", "Essential", "Progress", "Valuable", "Optimize", "Dynamic", "Strategy", "Productive", "Opportunity", "Flexibly"],
+    "B2": ["Substantial", "Fluency", "Analyze", "Evaluate", "Alternative", "Consequence", "Significant", "Distinguish", "Innovative", "Perspective", "Professional", "Sustainable", "Coherent", "Efficient", "Implement"],
+    "C1": ["Pragmatic", "Eloquent", "Cognitive", "Sophisticated", "Ambiguous", "Comprehensive", "Ephemeral", "Inevitable", "Paradigm", "Resilient", "Ubiquitous", "Volatile", "Aesthetic", "Paradox", "Synthesis"],
 }
 
 @router.websocket("/ws/{user_id}")
@@ -53,7 +53,28 @@ async def websocket_endpoint(
     topic: str = None,
     words: str = None
 ):
+    # Ensure query parameters are parsed robustly from websocket.query_params
+    query_params = websocket.query_params
+    if not mode or mode == "null" or mode == "None":
+        mode = query_params.get("mode")
+    if not level or level == "null" or level == "None":
+        level = query_params.get("level")
+    if not topic or topic == "null" or topic == "None":
+        topic = query_params.get("topic")
+    if not words or words == "null" or words == "None":
+        words = query_params.get("words")
+
+    if mode == "null" or mode == "None": mode = None
+    if level == "null" or level == "None": level = None
+    if topic == "null" or topic == "None": topic = None
+    if words == "null" or words == "None": words = None
+
     print(f"DEBUG: New WebSocket connection for user_id: {user_id}, mode: {mode}, level: {level}, topic: {topic}, words: {words}")
+    try:
+        with open("connection_log.txt", "a", encoding="utf-8") as f:
+            f.write(f"New TEXT WebSocket: mode={mode}, level={level}, topic={topic}, words={words}\n")
+    except Exception as log_e:
+        print(f"DEBUG log error: {log_e}")
     await manager.connect(websocket)
     
     # Bắt buộc dọn dẹp bộ nhớ hội thoại cũ của user để đảm bảo mỗi lần mở lại phòng là một session mới tươi nguyên, 100% hiện giới thiệu tiếng Việt dẫn dắt!
@@ -72,21 +93,24 @@ async def websocket_endpoint(
         else:
             vocab_words = VOCAB_LISTS.get(level.upper(), VOCAB_LISTS["B1"])
         words_str = ", ".join([f"'{w}'" for w in vocab_words])
+        numbered_words = "\n".join([f"   Từ {i+1}: {w}" for i, w in enumerate(vocab_words)])
         custom_instruction = (
             "Bạn là AI English Coach chuyên hỗ trợ học viên Luyện tập Từ vựng Thông minh.\n"
-            f"Nhiệm vụ của bạn là hướng dẫn học viên học và phát âm từng từ khóa trình độ {level}: {words_str}.\n"
-            "QUY TẮC DẪN DẮT:\n"
-            "1. HỌC TỪNG TỪ MỘT: Tuyệt đối không yêu cầu học viên hội thoại tự do hoặc trả lời câu hỏi lan man không liên quan.\n"
-            "   Hãy dẫn dắt học viên học và phát âm từng từ trong danh sách một cách tuần tự.\n"
-            "2. ĐỐI VỚI MỖI TỪ:\n"
+            f"DANH SÁCH TỪ VỰNG BẮT BUỘC (trình độ {level}) - CHỈ DẠY CÁC TỪ NÀY, TUYỆT ĐỐI KHÔNG DẠY TỪ NÀO KHÁC:\n"
+            f"{numbered_words}\n"
+            "\nQUY TẮC DẪN DẮT NGHIÊM NGẶT:\n"
+            "1. CHỈ DẠY CÁC TỪ TRONG DANH SÁCH TRÊN. TUYỆT ĐỐI CẤM giới thiệu, dạy, hoặc yêu cầu học viên đọc bất kỳ từ nào KHÔNG có trong danh sách trên. Đây là quy tắc quan trọng nhất.\n"
+            "2. HỌC TỪNG TỪ MỘT THEO ĐÚNG THỨ TỰ: Bắt đầu từ Từ 1, rồi Từ 2, Từ 3... Tuyệt đối không nhảy cóc hay thay đổi thứ tự.\n"
+            "3. ĐỐI VỚI MỖI TỪ:\n"
             "   - Bước 1: Giới thiệu từ vựng, phiên âm IPA, nghĩa tiếng Việt và đặt 1 câu ví dụ siêu ngắn.\n"
             "   - Bước 2: Yêu cầu học viên phát âm từ vựng đó.\n"
-            "   - Bước 3: Nhận xét ngắn gọn về phát âm của học viên, giải thích nhanh cách sử dụng thực tế (nếu cần), rồi giới thiệu từ tiếp theo.\n"
-            "3. LUÔN GIAO TIẾP BẰNG TIẾNG VIỆT thân thiện, ngắn gọn (tối đa 2-3 câu mỗi lượt)."
+            "   - Bước 3: Nhận xét ngắn gọn về phát âm của học viên, giải thích nhanh cách sử dụng thực tế (nếu cần), rồi giới thiệu từ tiếp theo trong danh sách.\n"
+            "4. LUÔN GIAO TIẾP BẰNG TIẾNG VIỆT thân thiện, ngắn gọn (tối đa 2-3 câu mỗi lượt)."
         )
         welcome_prompt = (
-            f"Hãy chào đón học viên bằng Tiếng Việt thân thiện, giới thiệu danh sách từ vựng hôm nay cần học là: {words_str}. "
-            "Sau đó, giới thiệu ngay từ đầu tiên trong danh sách (kèm phiên âm, nghĩa tiếng Việt) và yêu cầu học viên đọc to từ đó để bắt đầu."
+            f"Hãy chào đón học viên bằng Tiếng Việt thân thiện, nói hôm nay sẽ học {len(vocab_words)} từ vựng trình độ {level}. "
+            f"Sau đó, giới thiệu ngay TỪ ĐẦU TIÊN là '{vocab_words[0]}' (kèm phiên âm IPA, nghĩa tiếng Việt, 1 câu ví dụ ngắn) và yêu cầu học viên đọc to từ '{vocab_words[0]}' để bắt đầu. "
+            f"CHÚ Ý: Từ đầu tiên BẮT BUỘC phải là '{vocab_words[0]}', KHÔNG ĐƯỢC dạy từ nào khác."
         )
     elif mode == "roleplay" and topic:
         custom_instruction = (
@@ -243,9 +267,30 @@ async def realtime_voice_endpoint(
     Smart Hybrid AI Pipeline:
     User Text → Local NLP → AI Router → (LLM nếu cần) → Vietnamese Tutor → Response
     """
-    if not mode or mode == "null":
+    # Ensure query parameters are parsed robustly from websocket.query_params
+    query_params = websocket.query_params
+    if not mode or mode == "null" or mode == "None":
+        mode = query_params.get("mode")
+    if not level or level == "null" or level == "None":
+        level = query_params.get("level")
+    if not topic or topic == "null" or topic == "None":
+        topic = query_params.get("topic")
+    if not words or words == "null" or words == "None":
+        words = query_params.get("words")
+
+    if mode == "null" or mode == "None": mode = None
+    if level == "null" or level == "None": level = None
+    if topic == "null" or topic == "None": topic = None
+    if words == "null" or words == "None": words = None
+
+    if not mode:
         mode = "free_talk"
     print(f"DEBUG: New Realtime WebSocket connection for user_id: {user_id}, mode: {mode}, level: {level}, topic: {topic}, words: {words}")
+    try:
+        with open("connection_log.txt", "a", encoding="utf-8") as f:
+            f.write(f"New REALTIME WebSocket: mode={mode}, level={level}, topic={topic}, words={words}\n")
+    except Exception as log_e:
+        print(f"DEBUG log error: {log_e}")
     await manager.connect(websocket)
     
     # Bắt buộc dọn dẹp bộ nhớ hội thoại cũ của user để đảm bảo mỗi lần mở lại phòng là một session mới tươi nguyên, 100% hiện giới thiệu tiếng Việt dẫn dắt!
@@ -261,21 +306,24 @@ async def realtime_voice_endpoint(
         else:
             vocab_words = VOCAB_LISTS.get(level.upper(), VOCAB_LISTS["B1"])
         words_str = ", ".join([f"'{w}'" for w in vocab_words])
+        numbered_words = "\n".join([f"   Từ {i+1}: {w}" for i, w in enumerate(vocab_words)])
         custom_instruction = (
             "Bạn là AI English Coach chuyên hỗ trợ học viên Luyện tập Từ vựng Thông minh.\n"
-            f"Nhiệm vụ của bạn là hướng dẫn học viên học và phát âm từng từ khóa trình độ {level}: {words_str}.\n"
-            "QUY TẮC DẪN DẮT:\n"
-            "1. HỌC TỪNG TỪ MỘT: Tuyệt đối không yêu cầu học viên hội thoại tự do hoặc trả lời câu hỏi lan man không liên quan.\n"
-            "   Hãy dẫn dắt học viên học và phát âm từng từ trong danh sách một cách tuần tự.\n"
-            "2. ĐỐI VỚI MỖI TỪ:\n"
+            f"DANH SÁCH TỪ VỰNG BẮT BUỘC (trình độ {level}) - CHỈ DẠY CÁC TỪ NÀY, TUYỆT ĐỐI KHÔNG DẠY TỪ NÀO KHÁC:\n"
+            f"{numbered_words}\n"
+            "\nQUY TẮC DẪN DẮT NGHIÊM NGẶT:\n"
+            "1. CHỈ DẠY CÁC TỪ TRONG DANH SÁCH TRÊN. TUYỆT ĐỐI CẤM giới thiệu, dạy, hoặc yêu cầu học viên đọc bất kỳ từ nào KHÔNG có trong danh sách trên. Đây là quy tắc quan trọng nhất.\n"
+            "2. HỌC TỪNG TỪ MỘT THEO ĐÚNG THỨ TỰ: Bắt đầu từ Từ 1, rồi Từ 2, Từ 3... Tuyệt đối không nhảy cóc hay thay đổi thứ tự.\n"
+            "3. ĐỐI VỚI MỖI TỪ:\n"
             "   - Bước 1: Giới thiệu từ vựng, phiên âm IPA, nghĩa tiếng Việt và câu ví dụ cực ngắn.\n"
             "   - Bước 2: Yêu cầu học viên đọc to (phát âm) từ đó.\n"
-            "   - Bước 3: Nhận xét ngắn gọn về phát âm của học viên, sau đó giới thiệu từ tiếp theo.\n"
-            "3. LUÔN GIAO TIẾP BẰNG TIẾNG VIỆT ngắn gọn (tối đa 2 câu mỗi lượt để phù hợp với giao tiếp Voice)."
+            "   - Bước 3: Nhận xét ngắn gọn về phát âm của học viên, sau đó giới thiệu từ tiếp theo TRONG DANH SÁCH.\n"
+            "4. LUÔN GIAO TIẾP BẰNG TIẾNG VIỆT ngắn gọn (tối đa 2 câu mỗi lượt để phù hợp với giao tiếp Voice)."
         )
         welcome_prompt = (
-            f"Hãy gửi lời chào bằng Tiếng Việt siêu ngắn gọn (tối đa 1-2 câu), giới thiệu danh sách từ khóa hôm nay là: {words_str}. "
-            "Sau đó giới thiệu từ đầu tiên (phiên âm, nghĩa tiếng Việt) và yêu cầu học viên phát âm từ đó."
+            f"Hãy gửi lời chào bằng Tiếng Việt siêu ngắn gọn (tối đa 1-2 câu), nói hôm nay sẽ học {len(vocab_words)} từ vựng trình độ {level}. "
+            f"Sau đó giới thiệu TỪ ĐẦU TIÊN là '{vocab_words[0]}' (phiên âm IPA, nghĩa tiếng Việt, 1 câu ví dụ ngắn) và yêu cầu học viên phát âm từ '{vocab_words[0]}'. "
+            f"CHÚ Ý: Từ đầu tiên BẮT BUỘC phải là '{vocab_words[0]}', KHÔNG ĐƯỢC dạy từ nào khác."
         )
     elif mode == "roleplay" and topic:
         custom_instruction = (
