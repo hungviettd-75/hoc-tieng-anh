@@ -5,6 +5,8 @@ import 'package:go_router/go_router.dart';
 import 'package:ai_english_coach/theme/app_colors.dart';
 import '../providers/chat_provider.dart';
 import 'package:ai_english_coach/features/learn/presentation/providers/learn_provider.dart';
+import 'package:audioplayers/audioplayers.dart';
+import 'package:ai_english_coach/core/api_config.dart';
 
 class ChatPage extends ConsumerStatefulWidget {
   final String? mode;
@@ -27,6 +29,8 @@ class ChatPage extends ConsumerStatefulWidget {
 class _ChatPageState extends ConsumerState<ChatPage> {
   final TextEditingController _controller = TextEditingController();
   final ScrollController _scrollController = ScrollController();
+  final AudioPlayer _audioPlayer = AudioPlayer();
+  String? _currentlyPlayingMessage;
 
   @override
   void initState() {
@@ -43,6 +47,8 @@ class _ChatPageState extends ConsumerState<ChatPage> {
 
   @override
   void dispose() {
+    _audioPlayer.stop();
+    _audioPlayer.dispose();
     ref.invalidate(learningDashboardProvider);
     _controller.dispose();
     _scrollController.dispose();
@@ -63,6 +69,41 @@ class _ChatPageState extends ConsumerState<ChatPage> {
 
   @override
   Widget build(BuildContext context) {
+    ref.listen<ChatState>(chatProvider, (previous, next) {
+      if (next.messages.isNotEmpty) {
+        final lastMsg = next.messages.last;
+        final prevLength = previous?.messages.length ?? 0;
+        
+        // Auto-play only when a new complete message is added
+        // or when a message is updated with a completion status
+        if (lastMsg.isAI && (next.messages.length > prevLength || (previous?.messages.isNotEmpty == true && previous!.messages.last.content != lastMsg.content))) {
+          // If previous last message was empty/short delta, and it is now finished
+          final isWelcomeFirstInit = prevLength == 0 && next.messages.length == 1;
+          final isJustCompleted = previous != null && previous.messages.isNotEmpty && !previous.messages.last.isAI;
+          
+          if (isWelcomeFirstInit || isJustCompleted) {
+            // Auto play the AI speech
+            _audioPlayer.stop();
+            setState(() {
+              _currentlyPlayingMessage = lastMsg.content;
+            });
+            final url = '${ApiConfig.speaking}/tts?text=${Uri.encodeComponent(lastMsg.content)}';
+            _audioPlayer.play(UrlSource(url)).catchError((e) {
+              print("Autoplay TTS blocked or failed: $e");
+            });
+            _audioPlayer.onPlayerComplete.first.then((_) {
+              if (mounted && _currentlyPlayingMessage == lastMsg.content) {
+                setState(() {
+                  _currentlyPlayingMessage = null;
+                });
+              }
+            });
+          }
+        }
+      }
+      _scrollToBottom();
+    });
+
     final messages = ref.watch(chatProvider);
 
     return Scaffold(
@@ -98,6 +139,7 @@ class _ChatPageState extends ConsumerState<ChatPage> {
   }
 
   Widget _buildMessage(ChatMessage msg) {
+    final isPlaying = _currentlyPlayingMessage == msg.content;
     return Align(
       alignment: msg.isAI ? Alignment.centerLeft : Alignment.centerRight,
       child: Container(
@@ -116,6 +158,46 @@ class _ChatPageState extends ConsumerState<ChatPage> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Expanded(child: SelectableText(msg.content, style: const TextStyle(fontSize: 16))),
+                if (msg.isAI) ...[
+                  IconButton(
+                    icon: Icon(
+                      isPlaying ? Icons.volume_up_rounded : Icons.volume_mute_rounded,
+                      size: 18,
+                      color: isPlaying ? AppColors.primary : AppColors.textSecondary,
+                    ),
+                    onPressed: () async {
+                      if (isPlaying) {
+                        await _audioPlayer.stop();
+                        setState(() {
+                          _currentlyPlayingMessage = null;
+                        });
+                      } else {
+                        try {
+                          await _audioPlayer.stop();
+                          setState(() {
+                            _currentlyPlayingMessage = msg.content;
+                          });
+                          final url = '${ApiConfig.speaking}/tts?text=${Uri.encodeComponent(msg.content)}';
+                          await _audioPlayer.play(UrlSource(url));
+                          _audioPlayer.onPlayerComplete.first.then((_) {
+                            if (mounted && _currentlyPlayingMessage == msg.content) {
+                              setState(() {
+                                _currentlyPlayingMessage = null;
+                              });
+                            }
+                          });
+                        } catch (e) {
+                          print("ERROR playing TTS in ChatPage: $e");
+                          if (mounted) {
+                            setState(() {
+                              _currentlyPlayingMessage = null;
+                            });
+                          }
+                        }
+                      }
+                    },
+                  ),
+                ],
                 IconButton(
                   icon: const Icon(Icons.copy_rounded, size: 16, color: AppColors.textSecondary),
                   onPressed: () {

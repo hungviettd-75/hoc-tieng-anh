@@ -157,6 +157,25 @@ async def websocket_endpoint(
                 print(f"DEBUG: Memory context found: {len(memories)} items")
                 context_prompt = f"Background info you remember about the user:\n{memory_context}\n\nUser: {user_message}"
 
+            # === Step 1: Grammar check (runs in background) ===
+            import asyncio
+            async def get_grammar_corrections():
+                try:
+                    ai_corrections = await gemini_service.get_structured_correction(user_message)
+                    if ai_corrections:
+                        notes = []
+                        for c in ai_corrections:
+                            original = c.get("original", "")
+                            correction = c.get("correction", "")
+                            exp = c.get("explanation_vi", "")
+                            notes.append(f"'{original}' -> '{correction}' ({exp})")
+                        return "; ".join(notes)
+                except Exception as e:
+                    print(f"ERROR getting grammar corrections in ws: {e}")
+                return ""
+            
+            correction_task = asyncio.create_task(get_grammar_corrections())
+
             # Streaming response from Gemini
             print(f"DEBUG: Starting Gemini streaming response...")
             full_response = ""
@@ -180,11 +199,12 @@ async def websocket_endpoint(
             if len(history) > 20:
                 history = history[-20:]
             
+            grammar_notes = await correction_task
             await websocket.send_json({
                 "type": "completion",
                 "role": "assistant",
                 "content": full_response,
-                "grammar_notes": ""
+                "grammar_notes": grammar_notes
             })
 
             print(f"DEBUG: Completion sent to user {user_id}")
