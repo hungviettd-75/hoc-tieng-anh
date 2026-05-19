@@ -74,18 +74,19 @@ async def websocket_endpoint(
         words_str = ", ".join([f"'{w}'" for w in vocab_words])
         custom_instruction = (
             "Bạn là AI English Coach chuyên hỗ trợ học viên Luyện tập Từ vựng Thông minh.\n"
-            f"Nhiệm vụ của bạn là bắt buộc học viên thực hành các từ khóa trình độ {level}: {words_str}.\n"
-            "QUY TẮC:\n"
-            "1. LUÔN GIAO TIẾP BẰNG TIẾNG VIỆT thân thiện, ngắn gọn (max 2-3 câu mỗi lượt).\n"
-            "2. KIỂM TRA TỪ KHÓA: Trong mỗi câu trả lời của học viên, hãy kiểm tra xem họ có sử dụng bất kỳ từ khóa nào ở trên không.\n"
-            "   - Nếu có: Hãy lập tức khen ngợi nồng nhiệt kèm dấu tick xanh lá (ví dụ: 'Tuyệt vời! Bạn đã sử dụng từ khóa B1 thành công ✅').\n"
-            "   - Nếu không: Hãy khéo léo nhắc nhở hoặc gợi ý họ áp dụng từ khóa vào câu tiếp theo.\n"
-            "3. Hướng dẫn học viên cách dùng chuẩn bằng các ví dụ tiếng Anh ngắn gọn."
+            f"Nhiệm vụ của bạn là hướng dẫn học viên học và phát âm từng từ khóa trình độ {level}: {words_str}.\n"
+            "QUY TẮC DẪN DẮT:\n"
+            "1. HỌC TỪNG TỪ MỘT: Tuyệt đối không yêu cầu học viên hội thoại tự do hoặc trả lời câu hỏi lan man không liên quan.\n"
+            "   Hãy dẫn dắt học viên học và phát âm từng từ trong danh sách một cách tuần tự.\n"
+            "2. ĐỐI VỚI MỖI TỪ:\n"
+            "   - Bước 1: Giới thiệu từ vựng, phiên âm IPA, nghĩa tiếng Việt và đặt 1 câu ví dụ siêu ngắn.\n"
+            "   - Bước 2: Yêu cầu học viên phát âm từ vựng đó.\n"
+            "   - Bước 3: Nhận xét ngắn gọn về phát âm của học viên, giải thích nhanh cách sử dụng thực tế (nếu cần), rồi giới thiệu từ tiếp theo.\n"
+            "3. LUÔN GIAO TIẾP BẰNG TIẾNG VIỆT thân thiện, ngắn gọn (tối đa 2-3 câu mỗi lượt)."
         )
         welcome_prompt = (
-            f"Học viên vừa tham gia lớp học từ vựng trình độ {level}. "
-            f"Hãy gửi lời chào đón bằng Tiếng Việt nồng ấm, giới thiệu nhiệm vụ hôm nay là thực hành các từ khóa: {words_str}. "
-            "Đưa ra 1 câu hỏi gợi mở ngắn bằng Tiếng Anh để bắt đầu cuộc hội thoại."
+            f"Hãy chào đón học viên bằng Tiếng Việt thân thiện, giới thiệu danh sách từ vựng hôm nay cần học là: {words_str}. "
+            "Sau đó, giới thiệu ngay từ đầu tiên trong danh sách (kèm phiên âm, nghĩa tiếng Việt) và yêu cầu học viên đọc to từ đó để bắt đầu."
         )
     elif mode == "roleplay" and topic:
         custom_instruction = (
@@ -262,18 +263,19 @@ async def realtime_voice_endpoint(
         words_str = ", ".join([f"'{w}'" for w in vocab_words])
         custom_instruction = (
             "Bạn là AI English Coach chuyên hỗ trợ học viên Luyện tập Từ vựng Thông minh.\n"
-            f"Nhiệm vụ của bạn là bắt buộc học viên thực hành các từ khóa trình độ {level}: {words_str}.\n"
-            "QUY TẮC:\n"
-            "1. LUÔN GIAO TIẾP BẰNG TIẾNG VIỆT thân thiện, ngắn gọn (max 2-3 câu mỗi lượt).\n"
-            "2. KIỂM TRA TỪ KHÓA: Trong mỗi câu trả lời của học viên, hãy kiểm tra xem họ có sử dụng bất kỳ từ khóa nào ở trên không.\n"
-            "   - Nếu có: Hãy lập tức khen ngợi nồng nhiệt kèm dấu tick xanh lá (ví dụ: 'Tuyệt vời! Bạn đã sử dụng từ khóa B1 thành công ✅').\n"
-            "   - Nếu không: Hãy khéo léo nhắc nhở hoặc gợi ý họ áp dụng từ khóa vào câu tiếp theo.\n"
-            "3. Hướng dẫn học viên cách dùng chuẩn bằng các ví dụ tiếng Anh ngắn gọn."
+            f"Nhiệm vụ của bạn là hướng dẫn học viên học và phát âm từng từ khóa trình độ {level}: {words_str}.\n"
+            "QUY TẮC DẪN DẮT:\n"
+            "1. HỌC TỪNG TỪ MỘT: Tuyệt đối không yêu cầu học viên hội thoại tự do hoặc trả lời câu hỏi lan man không liên quan.\n"
+            "   Hãy dẫn dắt học viên học và phát âm từng từ trong danh sách một cách tuần tự.\n"
+            "2. ĐỐI VỚI MỖI TỪ:\n"
+            "   - Bước 1: Giới thiệu từ vựng, phiên âm IPA, nghĩa tiếng Việt và câu ví dụ cực ngắn.\n"
+            "   - Bước 2: Yêu cầu học viên đọc to (phát âm) từ đó.\n"
+            "   - Bước 3: Nhận xét ngắn gọn về phát âm của học viên, sau đó giới thiệu từ tiếp theo.\n"
+            "3. LUÔN GIAO TIẾP BẰNG TIẾNG VIỆT ngắn gọn (tối đa 2 câu mỗi lượt để phù hợp với giao tiếp Voice)."
         )
         welcome_prompt = (
-            f"Chào mừng học viên bằng Tiếng Việt siêu ngắn gọn (tối đa 1-2 câu ngắn), "
-            f"giới thiệu chủ đề từ vựng {level} hôm nay cần thực hành: {words_str}. "
-            "Sau đó, đưa ra ngay 1 câu hỏi tiếng Anh gợi mở siêu ngắn gọn để học viên bắt đầu."
+            f"Hãy gửi lời chào bằng Tiếng Việt siêu ngắn gọn (tối đa 1-2 câu), giới thiệu danh sách từ khóa hôm nay là: {words_str}. "
+            "Sau đó giới thiệu từ đầu tiên (phiên âm, nghĩa tiếng Việt) và yêu cầu học viên phát âm từ đó."
         )
     elif mode == "roleplay" and topic:
         custom_instruction = (
