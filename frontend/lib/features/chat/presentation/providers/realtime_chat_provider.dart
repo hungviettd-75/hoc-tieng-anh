@@ -5,6 +5,7 @@ import 'package:ai_english_coach/services/chat_service.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:ai_english_coach/core/api_config.dart';
 import 'chat_provider.dart';
+import 'package:ai_english_coach/features/auth/presentation/providers/auth_provider.dart';
 
 enum AIStatus { idle, thinking, speaking, correcting }
 
@@ -69,10 +70,11 @@ class RealtimeChatState {
 
 class RealtimeChatNotifier extends StateNotifier<RealtimeChatState> {
   final ChatService _chatService;
+  final Ref _ref;
   final AudioPlayer _audioPlayer = AudioPlayer();
   StreamSubscription? _subscription;
 
-  RealtimeChatNotifier(this._chatService) : super(RealtimeChatState(messages: []));
+  RealtimeChatNotifier(this._chatService, this._ref) : super(RealtimeChatState(messages: []));
 
   String _sanitizeTtsText(String text) {
     String sanitized = text;
@@ -162,7 +164,9 @@ class RealtimeChatNotifier extends StateNotifier<RealtimeChatState> {
     _subscription?.cancel();
     _chatService.disconnect();
     state = RealtimeChatState(messages: [], status: AIStatus.idle);
-    _chatService.connectRealtime(1, mode: mode, level: level, topic: topic, words: words);
+    final user = _ref.read(authProvider).user;
+    final userId = user?.id ?? 1;
+    _chatService.connectRealtime(userId, mode: mode, level: level, topic: topic, words: words);
     _listenToMessages();
   }
 
@@ -263,5 +267,5 @@ class RealtimeChatNotifier extends StateNotifier<RealtimeChatState> {
 }
 
 final realtimeChatProvider = StateNotifierProvider<RealtimeChatNotifier, RealtimeChatState>((ref) {
-  return RealtimeChatNotifier(ref.watch(chatServiceProvider));
+  return RealtimeChatNotifier(ref.watch(chatServiceProvider), ref);
 });

@@ -200,7 +200,7 @@ def get_vocabulary_list(
     import random
     shuffled_pool = list(base_pool)
     random.shuffle(shuffled_pool)
-    vocab_list = shuffled_pool[:5]  # Lấy ngẫu nhiên 5 từ nền để học viên thực hành
+    vocab_list = shuffled_pool  # Lấy toàn bộ từ nền để hiển thị đầy đủ kho từ vựng
 
     # 2. Truy xuất các từ phát âm sai thực tế của User từ database để tích hợp vào "Kho từ vựng thông minh"
     from app.models.models import PronunciationMistakeLog

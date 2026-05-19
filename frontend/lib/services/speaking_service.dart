@@ -7,7 +7,7 @@ import 'package:ai_english_coach/core/api_config.dart';
 
 /// HTTP Service cho Speaking API endpoints.
 class SpeakingService {
-  static const String _baseUrl = ApiConfig.speaking;
+  static final String _baseUrl = ApiConfig.speaking;
 
 
   /// Upload audio + target text → nhận pronunciation scores.

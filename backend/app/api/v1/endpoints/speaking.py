@@ -109,24 +109,51 @@ async def generate_azure_tts(
                         if chunk["type"] == "audio":
                             audio_data += chunk["data"]
 
+                # Nếu cả hai cách trên của Microsoft đều không có âm thanh (ví dụ bị chặn IP trên Cloud/Render)
+                if not audio_data:
+                    print(f"WARN: edge-tts returned empty audio. Activating Google Translate Rescue TTS for: '{p_text}'")
+                    import urllib.parse
+                    import httpx
+                    google_lang = "vi" if p_lang == "vi" else "en"
+                    encoded_text = urllib.parse.quote(p_text)
+                    google_url = f"https://translate.google.com/translate_tts?ie=UTF-8&tl={google_lang}&client=tw-ob&q={encoded_text}"
+                    headers = {
+                        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.0.0 Safari/537.36'
+                    }
+                    async with httpx.AsyncClient() as client:
+                        resp = await client.get(google_url, headers=headers, timeout=10.0)
+                        if resp.status_code == 200:
+                            audio_data = resp.content
+
                 # Lọc bỏ ID3 tag để ghép nối MP3 mượt mà
-                if audio_data.startswith(b"ID3"):
+                if audio_data and audio_data.startswith(b"ID3"):
                     size_bytes = audio_data[6:10]
                     tag_size = (size_bytes[0] << 21) | (size_bytes[1] << 14) | (size_bytes[2] << 7) | size_bytes[3]
                     total_id3_size = 10 + tag_size
                     audio_data = audio_data[total_id3_size:]
                     
-                raw_pcm_data.extend(audio_data)
+                if audio_data:
+                    raw_pcm_data.extend(audio_data)
             except Exception as inner_e:
                 print(f"WARN: edge_tts failed for part '{p_text}': {inner_e}")
-                # Thử cứu hộ bằng giọng Multilingual một lần nữa ở khối try-except ngoài cùng
+                # Thử cứu hộ bằng Google Translate TTS
                 try:
-                    rescue_communicate = edge_tts.Communicate(p_text, "en-US-AvaMultilingualNeural", rate="-4%")
-                    async for chunk in rescue_communicate.stream():
-                        if chunk["type"] == "audio":
-                            raw_pcm_data.extend(chunk["data"])
+                    print(f"Activating Google Translate Rescue TTS due to exception: {inner_e}")
+                    import urllib.parse
+                    import httpx
+                    google_lang = "vi" if p_lang == "vi" else "en"
+                    encoded_text = urllib.parse.quote(p_text)
+                    google_url = f"https://translate.google.com/translate_tts?ie=UTF-8&tl={google_lang}&client=tw-ob&q={encoded_text}"
+                    headers = {
+                        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.0.0 Safari/537.36'
+                    }
+                    async with httpx.AsyncClient() as client:
+                        resp = await client.get(google_url, headers=headers, timeout=10.0)
+                        if resp.status_code == 200:
+                            raw_pcm_data.extend(resp.content)
+                            continue
                 except Exception as rescue_e:
-                    print(f"FAILED Rescue: {rescue_e}")
+                    print(f"FAILED Google Translate Rescue: {rescue_e}")
                 continue
 
         if not raw_pcm_data:

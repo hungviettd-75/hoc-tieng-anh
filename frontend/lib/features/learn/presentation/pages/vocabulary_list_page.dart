@@ -6,6 +6,7 @@ import 'package:ai_english_coach/theme/app_colors.dart';
 import 'package:ai_english_coach/core/api_config.dart';
 import 'package:ai_english_coach/features/auth/services/auth_service.dart';
 import 'package:animate_do/animate_do.dart';
+import 'package:audioplayers/audioplayers.dart';
 
 class VocabularyListPage extends StatefulWidget {
   final String title;
@@ -24,6 +25,8 @@ class _VocabularyListPageState extends State<VocabularyListPage> {
   bool _isLoading = false;
   String _errorMessage = '';
   List<Map<String, dynamic>> _vocabList = [];
+  final AudioPlayer _audioPlayer = AudioPlayer();
+  String? _currentlyPlayingWord;
 
   @override
   void initState() {
@@ -31,10 +34,18 @@ class _VocabularyListPageState extends State<VocabularyListPage> {
     _fetchVocabulary();
   }
 
+  @override
+  void dispose() {
+    _audioPlayer.stop();
+    _audioPlayer.dispose();
+    super.dispose();
+  }
+
   Future<void> _fetchVocabulary() async {
     setState(() {
       _isLoading = true;
       _errorMessage = '';
+      _vocabList = []; // Xóa danh sách cũ để tránh dùng sai dữ liệu khi bấm nhanh
     });
     try {
       final token = await AuthService().getAccessToken();
@@ -235,39 +246,41 @@ class _VocabularyListPageState extends State<VocabularyListPage> {
       right: 20,
       child: FadeInUp(
         child: ElevatedButton(
-          onPressed: () {
-            if (_vocabList.isEmpty) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('Vui lòng đợi danh sách từ vựng được tải xong!')),
-              );
-              return;
-            }
+          onPressed: _isLoading
+              ? null
+              : () {
+                  if (_vocabList.isEmpty) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text('Vui lòng đợi danh sách từ vựng được tải xong!')),
+                    );
+                    return;
+                  }
 
-            // Lọc và chỉ lấy tối đa 5 từ cần luyện tập nhất (ưu tiên 'Learning' -> 'New' -> 'Mastered')
-            final List<Map<String, dynamic>> sortedVocabs = List.from(_vocabList);
-            sortedVocabs.sort((a, b) {
-              final statusA = a['status'] ?? 'New';
-              final statusB = b['status'] ?? 'New';
-              
-              int priority(String status) {
-                if (status == 'Learning') return 1;
-                if (status == 'New') return 2;
-                return 3;
-              }
-              
-              return priority(statusA).compareTo(priority(statusB));
-            });
+                  // Lọc và chỉ lấy tối đa 5 từ cần luyện tập nhất (ưu tiên 'Learning' -> 'New' -> 'Mastered')
+                  final List<Map<String, dynamic>> sortedVocabs = List.from(_vocabList);
+                  sortedVocabs.sort((a, b) {
+                    final statusA = a['status'] ?? 'New';
+                    final statusB = b['status'] ?? 'New';
+                    
+                    int priority(String status) {
+                      if (status == 'Learning') return 1;
+                      if (status == 'New') return 2;
+                      return 3;
+                    }
+                    
+                    return priority(statusA).compareTo(priority(statusB));
+                  });
 
-            final List<String> targetWords = sortedVocabs
-                .take(5)
-                .map((item) => item['word'] as String)
-                .toList();
-                
-            final String wordsParam = targetWords.join(',');
-            
-            // Context-aware deep linking to vocabulary practice chat session with current dynamic words
-            context.push('/chat?mode=vocabulary_practice&level=$_selectedLevel&words=${Uri.encodeComponent(wordsParam)}');
-          },
+                  final List<String> targetWords = sortedVocabs
+                      .take(5)
+                      .map((item) => item['word'] as String)
+                      .toList();
+                      
+                  final String wordsParam = targetWords.join(',');
+                  
+                  // Context-aware deep linking to vocabulary practice chat session with current dynamic words
+                  context.push('/chat?mode=vocabulary_practice&level=$_selectedLevel&words=${Uri.encodeComponent(wordsParam)}');
+                },
           style: ElevatedButton.styleFrom(
             backgroundColor: AppColors.primary,
             foregroundColor: Colors.white,
@@ -305,6 +318,8 @@ class _VocabularyListPageState extends State<VocabularyListPage> {
         statusText = 'Từ mới';
     }
 
+    final isPlaying = _currentlyPlayingWord == item['word'];
+
     return Container(
       margin: const EdgeInsets.only(bottom: 16),
       padding: const EdgeInsets.all(20),
@@ -319,7 +334,64 @@ class _VocabularyListPageState extends State<VocabularyListPage> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(item['word']!, style: const TextStyle(color: AppColors.primary, fontSize: 22, fontWeight: FontWeight.bold)),
+              Expanded(
+                child: Row(
+                  children: [
+                    Flexible(
+                      child: Text(
+                        item['word']!,
+                        style: const TextStyle(color: AppColors.primary, fontSize: 22, fontWeight: FontWeight.bold),
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                    const SizedBox(width: 8),
+                    IconButton(
+                      icon: Icon(
+                        isPlaying ? Icons.volume_up_rounded : Icons.volume_up_outlined,
+                        color: isPlaying ? AppColors.primary : Colors.white54,
+                        size: 20,
+                      ),
+                      onPressed: () async {
+                        if (isPlaying) {
+                          await _audioPlayer.stop();
+                          setState(() {
+                            _currentlyPlayingWord = null;
+                          });
+                        } else {
+                          try {
+                            await _audioPlayer.stop();
+                            setState(() {
+                              _currentlyPlayingWord = item['word'];
+                            });
+                            final url = '${ApiConfig.speaking}/tts?text=${Uri.encodeComponent(item['word'])}';
+                            await _audioPlayer.play(UrlSource(url)).catchError((e) {
+                              if (mounted) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(content: Text('Không thể phát âm thanh: $e')),
+                                );
+                              }
+                            });
+                            _audioPlayer.onPlayerComplete.first.then((_) {
+                              if (mounted && _currentlyPlayingWord == item['word']) {
+                                setState(() {
+                                  _currentlyPlayingWord = null;
+                                });
+                              }
+                            });
+                          } catch (e) {
+                            print("ERROR playing vocab TTS: $e");
+                            if (mounted) {
+                              setState(() {
+                                _currentlyPlayingWord = null;
+                              });
+                            }
+                          }
+                        }
+                      },
+                    ),
+                  ],
+                ),
+              ),
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                 decoration: BoxDecoration(color: statusColor.withOpacity(0.1), borderRadius: BorderRadius.circular(8)),

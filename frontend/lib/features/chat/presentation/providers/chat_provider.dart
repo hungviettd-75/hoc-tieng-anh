@@ -3,6 +3,8 @@ import 'dart:convert';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ai_english_coach/services/chat_service.dart';
 
+import 'package:ai_english_coach/features/auth/presentation/providers/auth_provider.dart';
+
 // Model tin nhắn
 class ChatMessage {
   final String content;
@@ -43,14 +45,17 @@ final chatServiceProvider = Provider((ref) => ChatService());
 // StateNotifier quản lý Chat
 class ChatNotifier extends StateNotifier<ChatState> {
   final ChatService _chatService;
+  final Ref _ref;
   StreamSubscription? _subscription;
 
-  ChatNotifier(this._chatService) : super(ChatState(messages: [])) {
+  ChatNotifier(this._chatService, this._ref) : super(ChatState(messages: [])) {
     _init();
   }
 
   void _init() {
-    _chatService.connect(1); // Mặc định User ID là 1
+    final user = _ref.read(authProvider).user;
+    final userId = user?.id ?? 1;
+    _chatService.connect(userId); // Mặc định User ID là 1 nếu chưa đăng nhập
     _listenToMessages();
   }
 
@@ -59,7 +64,9 @@ class ChatNotifier extends StateNotifier<ChatState> {
     _subscription?.cancel();
     _chatService.disconnect();
     state = ChatState(messages: [], isConnected: false);
-    _chatService.connect(1, mode: mode, level: level, topic: topic, words: words);
+    final user = _ref.read(authProvider).user;
+    final userId = user?.id ?? 1;
+    _chatService.connect(userId, mode: mode, level: level, topic: topic, words: words);
     _listenToMessages();
   }
 
@@ -144,6 +151,6 @@ class ChatNotifier extends StateNotifier<ChatState> {
 }
 
 final chatProvider = StateNotifierProvider<ChatNotifier, ChatState>((ref) {
-  return ChatNotifier(ref.watch(chatServiceProvider));
+  return ChatNotifier(ref.watch(chatServiceProvider), ref);
 });
 
