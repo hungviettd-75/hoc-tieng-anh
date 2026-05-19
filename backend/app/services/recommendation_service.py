@@ -10,10 +10,33 @@ from app.schemas.learn import RecommendationItem
 class RecommendationService:
     def __init__(self):
         genai.configure(api_key=settings.GEMINI_API_KEY)
-        # Using gemini-2.0-flash for fast responses
-        self.model = genai.GenerativeModel('gemini-2.0-flash')
+        # Using gemini-2.5-flash for stable quota and high performance
+        self.model = genai.GenerativeModel('gemini-2.5-flash')
 
     async def generate_daily_recommendations(self, db: Session, user_id: int) -> List[RecommendationItem]:
+        # Caching layer to make tab loading instant (~1ms) and keep daily recommendations stable
+        import datetime as dt
+        today_str = dt.date.today().isoformat()
+        
+        if not hasattr(self, "_cache"):
+            self._cache = {}
+            
+        if user_id in self._cache:
+            cached_date, cached_list = self._cache[user_id]
+            if cached_date == today_str:
+                # Query completed recommendation IDs from database
+                completed_ids = {
+                    r.recommended_content_id 
+                    for r in db.query(RecommendationHistory)
+                    .filter(
+                        RecommendationHistory.user_id == user_id,
+                        RecommendationHistory.status == "completed"
+                    ).all()
+                }
+                # Filter out already completed items
+                remaining = [item for item in cached_list if item.id not in completed_ids]
+                return remaining
+
         # Fetch user profile data
         skill_level = db.query(UserSkillLevel).filter(UserSkillLevel.user_id == user_id).first()
         weak_points = db.query(WeakPoint).filter(WeakPoint.user_id == user_id, WeakPoint.is_resolved == False).all()
@@ -32,13 +55,13 @@ class RecommendationService:
             "You are an AI English Coach. Based on the user's profile below, recommend exactly 3 personalized learning activities for today.\n"
             f"{context}\n\n"
             "Return the response ONLY as a JSON array of objects. Each object must have the following keys:\n"
-            "- 'topic': str (e.g., 'Mastering the Present Perfect')\n"
-            "- 'content_type': str (e.g., 'grammar', 'vocabulary', 'roleplay', 'listening')\n"
+            "- 'topic': str (MUST be in Vietnamese, e.g., 'Làm chủ Thì Hiện tại Hoàn thành' or 'Từ vựng chủ đề Du lịch')\n"
+            "- 'content_type': str (must be exactly 'grammar', 'vocabulary', 'roleplay', 'speaking', or 'listening')\n"
             "- 'difficulty_level': str (e.g., 'Beginner', 'Intermediate', 'Advanced')\n"
             "- 'estimated_minutes': int (e.g., 5)\n"
-            "- 'description': str (A brief description of what the user will do)\n"
-            "- 'reason': str (Why you recommend this based on their weaknesses or goals)\n"
-            "\nDo not include Markdown formatting like ```json or any other text outside the JSON array."
+            "- 'description': str (MUST be a brief description in Vietnamese of what the user will do)\n"
+            "- 'reason': str (MUST be a brief explanation in Vietnamese of why you recommend this based on their weaknesses or goals)\n"
+            "\nCRITICAL REQUIREMENT: The fields 'topic', 'description', and 'reason' MUST be written entirely in Vietnamese. Do not include Markdown formatting like ```json or any other text outside the JSON array."
         )
 
         try:
@@ -75,6 +98,10 @@ class RecommendationService:
                     reason=item.get("reason", "")
                 ))
             db.commit()
+            
+            # Save to daily memory cache
+            self._cache[user_id] = (today_str, recommendations)
+            
             return recommendations
         except Exception as e:
             print(f"Error generating recommendations: {e}")
