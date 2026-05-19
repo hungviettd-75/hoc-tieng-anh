@@ -72,17 +72,15 @@ class _ChatPageState extends ConsumerState<ChatPage> {
     ref.listen<ChatState>(chatProvider, (previous, next) {
       if (next.messages.isNotEmpty) {
         final lastMsg = next.messages.last;
-        final prevLength = previous?.messages.length ?? 0;
+        final prevMsg = previous?.messages.isNotEmpty == true ? previous!.messages.last : null;
         
-        // Auto-play only when a new complete message is added
-        // or when a message is updated with a completion status
-        if (lastMsg.isAI && (next.messages.length > prevLength || (previous?.messages.isNotEmpty == true && previous!.messages.last.content != lastMsg.content))) {
-          // If previous last message was empty/short delta, and it is now finished
-          final isWelcomeFirstInit = prevLength == 0 && next.messages.length == 1;
-          final isJustCompleted = previous != null && previous.messages.isNotEmpty && !previous.messages.last.isAI;
+        // Auto-play when the last message is from AI and has just completed streaming
+        // (meaning: next.messages.last.grammarNotes is not null, but in previous state it was null or did not exist)
+        if (lastMsg.isAI && lastMsg.grammarNotes != null) {
+          final wasNotCompletedYet = prevMsg == null || !prevMsg.isAI || prevMsg.grammarNotes == null;
           
-          if (isWelcomeFirstInit || isJustCompleted) {
-            // Auto play the AI speech
+          if (wasNotCompletedYet) {
+            print("DEBUG: AI message completed. Playing TTS: ${lastMsg.content}");
             _audioPlayer.stop();
             setState(() {
               _currentlyPlayingMessage = lastMsg.content;
