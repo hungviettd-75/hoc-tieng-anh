@@ -39,21 +39,25 @@ class MemoryService:
         if self.index is None:
             return None
             
-        embedding = await gemini_service.get_embedding(text)
-        
-        vector_id = f"user_{user_id}_{int(time.time())}"
-        
-        if metadata is None:
-            metadata = {}
-        
-        metadata.update({
-            "user_id": user_id,
-            "text": text,
-            "timestamp": time.time()
-        })
-        
-        self.index.upsert(vectors=[(vector_id, embedding, metadata)])
-        return vector_id
+        try:
+            embedding = await gemini_service.get_embedding(text)
+            
+            vector_id = f"user_{user_id}_{int(time.time())}"
+            
+            if metadata is None:
+                metadata = {}
+            
+            metadata.update({
+                "user_id": user_id,
+                "text": text,
+                "timestamp": time.time()
+            })
+            
+            self.index.upsert(vectors=[(vector_id, embedding, metadata)])
+            return vector_id
+        except Exception as e:
+            print(f"WARN: Failed to store memory: {e}")
+            return None
 
     async def retrieve_relevant_memories(self, user_id: int, query: str, top_k: int = 3) -> List[Dict[str, Any]]:
         """
@@ -62,25 +66,29 @@ class MemoryService:
         if self.index is None:
             return []
             
-        query_embedding = await gemini_service.get_embedding(query)
-        
-        results = self.index.query(
-            vector=query_embedding,
-            top_k=top_k,
-            filter={"user_id": {"$eq": user_id}},
-            include_metadata=True
-        )
-        
-        memories = []
-        for match in results.matches:
-            if match.score > 0.7: # Ngưỡng tin cậy
-                memories.append({
-                    "text": match.metadata["text"],
-                    "score": match.score,
-                    "metadata": match.metadata
-                })
-        
-        return memories
+        try:
+            query_embedding = await gemini_service.get_embedding(query)
+            
+            results = self.index.query(
+                vector=query_embedding,
+                top_k=top_k,
+                filter={"user_id": {"$eq": user_id}},
+                include_metadata=True
+            )
+            
+            memories = []
+            for match in results.matches:
+                if match.score > 0.7: # Ngưỡng tin cậy
+                    memories.append({
+                        "text": match.metadata["text"],
+                        "score": match.score,
+                        "metadata": match.metadata
+                    })
+            
+            return memories
+        except Exception as e:
+            print(f"WARN: Failed to retrieve relevant memories: {e}")
+            return []
 
     async def summarize_and_store_conversation(self, user_id: int, messages: List[Dict[str, str]]):
         """

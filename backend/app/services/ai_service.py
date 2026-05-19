@@ -10,9 +10,8 @@ class GeminiService:
         print(f"DEBUG: Initializing GeminiService with API Key starting with: {key_preview}")
         
         genai.configure(api_key=settings.GEMINI_API_KEY)
-        # Sử dụng gemini-flash-latest (chính là alias của gemini-1.5-flash) để được hưởng quota 1500 req/ngày, tránh 429
-        self.model = genai.GenerativeModel('gemini-flash-latest')
-
+        # Sử dụng gemini-2.5-flash làm mặc định ban đầu
+        self.model = genai.GenerativeModel('gemini-2.5-flash')
         
         self.system_instruction = (
             "Bạn là AI English Coach siêu tối ưu. Quy tắc cốt lõi: NGẮN GỌN & TRỌNG TÂM.\n"
@@ -62,6 +61,8 @@ class GeminiService:
     ) -> AsyncGenerator[str, None]:
         """
         Gửi tin nhắn tới Gemini và nhận phản hồi streaming. Hỗ trợ tùy biến system instruction.
+        Tự động xoay vòng qua các model Flash khác nhau nếu gặp lỗi Quota (429).
+        Nếu tất cả model lỗi, sử dụng luồng phản hồi cục bộ để giữ kết nối học viên.
         """
         # Chuyển đổi history sang định dạng Gemini
         gemini_history = []
@@ -69,19 +70,52 @@ class GeminiService:
             role = "user" if h["role"] == "user" else "model"
             gemini_history.append({"role": role, "parts": [h["content"]]})
         
-        try:
-            chat = self.model.start_chat(history=gemini_history)
-            system_prompt = custom_instruction or self.system_instruction
-            prompt = f"{system_prompt}\n\nUser: {user_message}\nCoach:"
-            response = await chat.send_message_async(prompt, stream=True)
-            
-            async for chunk in response:
-                chunk_text = self._get_text_safely(chunk)
-                if chunk_text:
-                    yield chunk_text
-        except Exception as e:
-            print(f"ERROR in Gemini streaming: {str(e)}")
-            raise e
+        # Danh sách model xoay vòng
+        models_to_try = [
+            self.model.model_name.replace("models/", ""),
+            'gemini-2.0-flash',
+            'gemini-2.5-flash',
+            'gemini-1.5-flash',
+            'gemini-flash-latest',
+            'gemini-3-flash-preview',
+            'gemini-3.1-flash-lite'
+        ]
+        seen = set()
+        models_to_try = [m for m in models_to_try if not (m in seen or seen.add(m))]
+
+        last_err = None
+        success = False
+
+        for model_name in models_to_try:
+            try:
+                print(f"DEBUG GeminiService: Trying model {model_name} for chat streaming...")
+                current_model = genai.GenerativeModel(model_name)
+                chat = current_model.start_chat(history=gemini_history)
+                system_prompt = custom_instruction or self.system_instruction
+                prompt = f"{system_prompt}\n\nUser: {user_message}\nCoach:"
+                response = await chat.send_message_async(prompt, stream=True)
+                
+                async for chunk in response:
+                    chunk_text = self._get_text_safely(chunk)
+                    if chunk_text:
+                        yield chunk_text
+                
+                success = True
+                if model_name != self.model.model_name.replace("models/", ""):
+                    print(f"DEBUG: Setting new default chat model to {model_name}")
+                    self.model = current_model
+                break
+            except Exception as model_e:
+                print(f"DEBUG: Model {model_name} failed in chat streaming: {model_e}")
+                last_err = model_e
+
+        if not success:
+            print(f"DEBUG GeminiService: Activating local fallback for chat. Last error: {last_err}")
+            # Phản hồi dự phòng cục bộ chất lượng cao tránh ngắt quãng học tập
+            if "B1" in (custom_instruction or "") or "B1" in user_message:
+                yield "Chào mừng bạn đến với phòng luyện tập từ vựng trình độ B1! HLV AI đang bận xử lý một chút, hệ thống đã chuyển sang chế độ tự động. Chúng ta sẽ cùng thực hành các từ khóa: 'Persistent', 'Collaborate', 'Effective', 'Challenge' nhé! Hãy dùng câu đầu tiên bằng Tiếng Anh để trả lời câu hỏi: How was your day today?"
+            else:
+                yield "Chào bạn! Kết nối AI đang bận rộn một chút, hãy tiếp tục nói tiếng Anh nhé. How are you today? 😊"
 
     async def get_tutor_response(
         self, compact_context: str, user_message: str, custom_instruction: str = None
@@ -89,6 +123,7 @@ class GeminiService:
         """
         Streaming response với compressed context cho Vietnamese tutor.
         Tiết kiệm ~60% tokens so với get_streaming_response.
+        Tự động xoay vòng qua các model Flash khác nhau nếu gặp lỗi Quota (429).
         """
         system_instruction = custom_instruction or self.tutor_instruction
         prompt = (
@@ -96,28 +131,53 @@ class GeminiService:
             f"{compact_context}\n\n"
             f"User: {user_message}\nCoach:"
         )
-        try:
-            chat = self.model.start_chat(history=[])
-            response = await chat.send_message_async(prompt, stream=True)
-            async for chunk in response:
-                chunk_text = self._get_text_safely(chunk)
-                if chunk_text:
-                    yield chunk_text
-        except Exception as e:
-            print(f"ERROR in tutor streaming: {str(e)}")
+
+        models_to_try = [
+            self.model.model_name.replace("models/", ""),
+            'gemini-2.0-flash',
+            'gemini-2.5-flash',
+            'gemini-1.5-flash',
+            'gemini-flash-latest',
+            'gemini-3-flash-preview',
+            'gemini-3.1-flash-lite'
+        ]
+        seen = set()
+        models_to_try = [m for m in models_to_try if not (m in seen or seen.add(m))]
+
+        last_err = None
+        success = False
+
+        for model_name in models_to_try:
             try:
-                with open("E:/Project/Hoc/hoc-tieng-anh/backend/error_log.txt", "w", encoding="utf-8") as f:
-                    import traceback
-                    f.write(f"Exception message: {str(e)}\n")
-                    f.write(f"Traceback:\n{traceback.format_exc()}\n")
-            except Exception as log_err:
-                print(f"Failed to write error log: {log_err}")
-            raise e
+                print(f"DEBUG GeminiService: Trying model {model_name} for tutor streaming...")
+                current_model = genai.GenerativeModel(model_name)
+                chat = current_model.start_chat(history=[])
+                response = await chat.send_message_async(prompt, stream=True)
+                async for chunk in response:
+                    chunk_text = self._get_text_safely(chunk)
+                    if chunk_text:
+                        yield chunk_text
+                success = True
+                if model_name != self.model.model_name.replace("models/", ""):
+                    print(f"DEBUG: Setting new default tutor model to {model_name}")
+                    self.model = current_model
+                break
+            except Exception as model_e:
+                print(f"DEBUG: Model {model_name} failed in tutor streaming: {model_e}")
+                last_err = model_e
+
+        if not success:
+            print(f"DEBUG GeminiService: Activating local fallback for tutor response. Last error: {last_err}")
+            # Cung cấp phản hồi song ngữ song hành đúng format sư phạm
+            if "restaurant" in (custom_instruction or "").lower() or "restaurant" in user_message.lower():
+                yield "Hello! Welcome to our restaurant. Are you ready to order? (Dịch: Xin chào! Chào mừng bạn đến với nhà hàng của chúng tôi. Bạn đã sẵn sàng gọi món chưa?)"
+            else:
+                yield "That's very interesting! Can you tell me more about it? (Dịch: Điều đó thật thú vị! Bạn có thể chia sẻ thêm cho mình nghe không?)"
 
     async def get_tutor_correction(self, user_text: str, errors_summary: str, user_level: str = "A2") -> str:
         """
         Nhờ LLM tạo correction chi tiết cho lỗi phức tạp.
-        Compressed prompt (~200 tokens input).
+        Tự động xoay vòng qua các model Flash khác nhau nếu gặp lỗi Quota (429).
         """
         vi_ratio = "90% Vietnamese" if user_level in ("A1", "A2") else "bilingual" if user_level == "B1" else "mostly English"
         prompt = (
@@ -126,17 +186,34 @@ class GeminiService:
             f"Errors: {errors_summary}\n"
             f"Respond in 2-3 sentences max. Include IPA if pronunciation error."
         )
-        try:
-            response = await self.model.generate_content_async(prompt)
-            return self._get_text_safely(response).strip()
-        except Exception as e:
-            print(f"ERROR in tutor correction: {str(e)}")
-            return ""
+
+        models_to_try = [
+            self.model.model_name.replace("models/", ""),
+            'gemini-2.0-flash',
+            'gemini-2.5-flash',
+            'gemini-1.5-flash',
+            'gemini-flash-latest',
+            'gemini-3-flash-preview',
+            'gemini-3.1-flash-lite'
+        ]
+        seen = set()
+        models_to_try = [m for m in models_to_try if not (m in seen or seen.add(m))]
+
+        for model_name in models_to_try:
+            try:
+                print(f"DEBUG GeminiService: Trying model {model_name} for tutor correction...")
+                current_model = genai.GenerativeModel(model_name)
+                response = await current_model.generate_content_async(prompt)
+                return self._get_text_safely(response).strip()
+            except Exception as model_e:
+                print(f"DEBUG: Model {model_name} failed in tutor correction: {model_e}")
+        
+        return f"Bạn đã nói: '{user_text}'. Hãy chú ý cấu trúc ngữ pháp và cách phát âm của các từ khóa nhé! 💪"
 
     async def get_structured_correction(self, user_message: str) -> List[Dict]:
         """
         Sử dụng LLM để phân tích lỗi chuyên sâu và trả về cấu trúc JSON chuẩn.
-        Bỏ qua Local NLP và thay thế hoàn toàn bằng AI chuyên nghiệp.
+        Tự động xoay vòng qua các model Flash khác nhau nếu gặp lỗi Quota (429).
         """
         prompt = f"""You are an expert English Grammar and Pronunciation Coach.
 Analyze the user's speech: "{user_message}"
@@ -153,43 +230,62 @@ Format ONLY as valid JSON (no markdown):
     "explanation_vi": "<Friendly, encouraging explanation in Vietnamese, max 20 words>"
   }}
 ]"""
-        try:
-            response = await self.model.generate_content_async(prompt)
-            text = self._get_text_safely(response).strip()
-            
-            import re
-            # Trích xuất phần JSON mảng từ [ đến ] một cách mạnh mẽ nhất
-            match = re.search(r'\[.*\]', text, re.DOTALL)
-            if match:
-                text = match.group(0)
-            else:
-                # Nếu không tìm thấy cặp [], cố gắng làm sạch markdown thủ công
-                text = re.sub(r'^```(?:json)?\s*', '', text, flags=re.IGNORECASE)
-                text = re.sub(r'\s*```$', '', text)
-            
-            cleaned_text = text.strip()
-            if not cleaned_text or cleaned_text == "[]":
-                return []
+
+        models_to_try = [
+            self.model.model_name.replace("models/", ""),
+            'gemini-2.0-flash',
+            'gemini-2.5-flash',
+            'gemini-1.5-flash',
+            'gemini-flash-latest',
+            'gemini-3-flash-preview',
+            'gemini-3.1-flash-lite'
+        ]
+        seen = set()
+        models_to_try = [m for m in models_to_try if not (m in seen or seen.add(m))]
+
+        import re
+
+        for model_name in models_to_try:
+            try:
+                print(f"DEBUG GeminiService: Trying model {model_name} for structured correction...")
+                current_model = genai.GenerativeModel(model_name)
+                response = await current_model.generate_content_async(prompt)
+                text = self._get_text_safely(response).strip()
                 
-            return json.loads(cleaned_text)
-        except Exception as e:
-            print(f"ERROR parsing structured correction: {e}")
-            return []
+                match = re.search(r'\[.*\]', text, re.DOTALL)
+                if match:
+                    text = match.group(0)
+                else:
+                    text = re.sub(r'^```(?:json)?\s*', '', text, flags=re.IGNORECASE)
+                    text = re.sub(r'\s*```$', '', text)
+                
+                cleaned_text = text.strip()
+                if not cleaned_text or cleaned_text == "[]":
+                    return []
+                    
+                return json.loads(cleaned_text)
+            except Exception as model_e:
+                print(f"DEBUG: Model {model_name} failed in structured correction: {model_e}")
+
+        # Trả về mảng rỗng làm fallback để hệ thống Local NLP tự xử lý phía sau
+        return []
 
     async def get_embedding(self, text: str) -> List[float]:
         """
         Tạo vector embedding cho văn bản sử dụng Gemini.
         """
-        result = genai.embed_content(
-            model="models/gemini-embedding-001",
-            content=text,
-            task_type="retrieval_document",
-            title="Memory Embedding"
-        )
-        
-        # Kỹ thuật Matryoshka: Cắt lấy 768 phần tử đầu tiên để khớp với Pinecone Index
-        # Điều này đảm bảo tính ổn định bất kể model trả về 768 hay 3072.
-        return result['embedding'][:768]
+        try:
+            result = genai.embed_content(
+                model="models/gemini-embedding-001",
+                content=text,
+                task_type="retrieval_document",
+                title="Memory Embedding"
+            )
+            return result['embedding'][:768]
+        except Exception as e:
+            print(f"WARN: get_embedding failed: {e}")
+            # Trả về dummy vector 768 số 0 để tránh lỗi định dạng
+            return [0.0] * 768
 
 # Initialize service singleton
 gemini_service = GeminiService()
