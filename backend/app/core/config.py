@@ -35,3 +35,14 @@ class Settings(BaseSettings):
         env_file_encoding = 'utf-8'
 
 settings = Settings()
+
+# Đảm bảo ưu tiên đọc trực tiếp từ biến môi trường hệ thống (đề phòng file .env đè giá trị rỗng trên Render)
+import os
+system_gemini_key = os.environ.get("GEMINI_API_KEY")
+if system_gemini_key and system_gemini_key.strip():
+    settings.GEMINI_API_KEY = system_gemini_key.strip()
+
+system_openai_key = os.environ.get("OPENAI_API_KEY")
+if system_openai_key and system_openai_key.strip():
+    settings.OPENAI_API_KEY = system_openai_key.strip()
+
