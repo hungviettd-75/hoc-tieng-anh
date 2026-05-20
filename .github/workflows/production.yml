@@ -11,6 +11,7 @@ env:
   GKE_ZONE: us-central1-a
   BACKEND_IMAGE: gcr.io/${{ secrets.GCP_PROJECT_ID }}/ai-coach-backend
   FRONTEND_IMAGE: gcr.io/${{ secrets.GCP_PROJECT_ID }}/ai-coach-frontend
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
 jobs:
   setup-build-publish-deploy:
