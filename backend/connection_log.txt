@@ -1,0 +1,14 @@
+New TEXT WebSocket: mode=vocabulary_practice, level=A1, topic=None, words=Apple,Banana,Cat
+New REALTIME WebSocket: mode=vocabulary_practice, level=A1, topic=None, words=Apple,Banana,Cat
+New REALTIME WebSocket: mode=vocabulary_practice, level=A1, topic=None, words=Apple,Banana,Cat
+New REALTIME WebSocket: mode=vocabulary_practice, level=A1, topic=None, words=Apple,Banana,Cat
+New REALTIME WebSocket: mode=vocabulary_practice, level=A1, topic=None, words=Beginner,Practice,Vocabulary,Improve
+New REALTIME WebSocket: mode=vocabulary_practice, level=A1, topic=None, words=Beginner,Practice,Vocabulary,Improve
+New TEXT WebSocket: mode=None, level=None, topic=None, words=None
+New TEXT WebSocket: mode=vocabulary_practice, level=A1, topic=None, words=School,Learn,Practice,Active,Language
+New REALTIME WebSocket: mode=vocabulary_practice, level=A1, topic=None, words=School,Learn,Practice,Active,Language
+New TEXT WebSocket: mode=None, level=None, topic=None, words=None
+New TEXT WebSocket: mode=vocabulary_practice, level=A1, topic=None, words=Learn,Active,Language,School,Practice
+New TEXT WebSocket: mode=None, level=None, topic=None, words=None
+New TEXT WebSocket: mode=vocabulary_practice, level=A1, topic=None, words=Learn,Improve,Happy,Active,Vocabulary
+New REALTIME WebSocket: mode=vocabulary_practice, level=A1, topic=None, words=Learn,Improve,Happy,Active,Vocabulary

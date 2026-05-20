@@ -1,10 +1,12 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-import os
+from app.core.config import settings
 
-# Sử dụng SQLite để chạy trực tiếp trên máy (không cần Docker/PostgreSQL)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-SQLITE_URL = f"sqlite:///{os.path.join(BASE_DIR, 'ai_coach.db')}"
+# Lấy URL kết nối từ cấu hình (Render cấp PostgreSQL, máy local cấp SQLite hoặc PostgreSQL tuỳ biến)
+engine_url = settings.SQLALCHEMY_DATABASE_URI
 
-engine = create_engine(SQLITE_URL, connect_args={"check_same_thread": False})
+# Nếu là SQLite, cần check_same_thread=False
+connect_args = {"check_same_thread": False} if engine_url.startswith("sqlite") else {}
+
+engine = create_engine(engine_url, connect_args=connect_args)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
