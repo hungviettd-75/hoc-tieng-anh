@@ -12,7 +12,7 @@ class ApiConfig {
     if (kDebugMode) {
       return 'http://127.0.0.1:8000';
     }
-    return 'https://hoc-tieng-anh.onrender.com';
+    return 'https://ai-english-coach-backend.onrender.com';
   }
   
   static String get wsUrl {
@@ -25,7 +25,7 @@ class ApiConfig {
     if (kDebugMode) {
       return 'ws://127.0.0.1:8000/api/v1';
     }
-    return 'wss://hoc-tieng-anh.onrender.com/api/v1';
+    return 'wss://ai-english-coach-backend.onrender.com/api/v1';
   }
 
   // Các phần bên dưới giữ nguyên tự động kết nối:
