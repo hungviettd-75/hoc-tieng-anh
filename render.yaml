@@ -25,6 +25,7 @@ services:
     name: ai-coach-redis
     plan: free
     region: singapore
+    ipAllowList: []
     
 databases:
   - name: ai-coach-db
