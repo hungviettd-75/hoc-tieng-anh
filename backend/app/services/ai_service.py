@@ -73,12 +73,11 @@ class GeminiService:
         # Danh sách model xoay vòng
         models_to_try = [
             self.model.model_name.replace("models/", ""),
-            'gemini-2.0-flash',
             'gemini-2.5-flash',
-            'gemini-1.5-flash',
-            'gemini-flash-latest',
-            'gemini-3-flash-preview',
-            'gemini-3.1-flash-lite'
+            'gemini-2.5-flash-lite',
+            'gemini-3.1-flash-lite',
+            'gemini-3.5-flash',
+            'gemini-2.0-flash-lite'
         ]
         seen = set()
         models_to_try = [m for m in models_to_try if not (m in seen or seen.add(m))]
@@ -132,12 +131,11 @@ class GeminiService:
 
         models_to_try = [
             self.model.model_name.replace("models/", ""),
-            'gemini-2.0-flash',
             'gemini-2.5-flash',
-            'gemini-1.5-flash',
-            'gemini-flash-latest',
-            'gemini-3-flash-preview',
-            'gemini-3.1-flash-lite'
+            'gemini-2.5-flash-lite',
+            'gemini-3.1-flash-lite',
+            'gemini-3.5-flash',
+            'gemini-2.0-flash-lite'
         ]
         seen = set()
         models_to_try = [m for m in models_to_try if not (m in seen or seen.add(m))]
@@ -187,12 +185,11 @@ class GeminiService:
 
         models_to_try = [
             self.model.model_name.replace("models/", ""),
-            'gemini-2.0-flash',
             'gemini-2.5-flash',
-            'gemini-1.5-flash',
-            'gemini-flash-latest',
-            'gemini-3-flash-preview',
-            'gemini-3.1-flash-lite'
+            'gemini-2.5-flash-lite',
+            'gemini-3.1-flash-lite',
+            'gemini-3.5-flash',
+            'gemini-2.0-flash-lite'
         ]
         seen = set()
         models_to_try = [m for m in models_to_try if not (m in seen or seen.add(m))]
@@ -231,12 +228,11 @@ Format ONLY as valid JSON (no markdown):
 
         models_to_try = [
             self.model.model_name.replace("models/", ""),
-            'gemini-2.0-flash',
             'gemini-2.5-flash',
-            'gemini-1.5-flash',
-            'gemini-flash-latest',
-            'gemini-3-flash-preview',
-            'gemini-3.1-flash-lite'
+            'gemini-2.5-flash-lite',
+            'gemini-3.1-flash-lite',
+            'gemini-3.5-flash',
+            'gemini-2.0-flash-lite'
         ]
         seen = set()
         models_to_try = [m for m in models_to_try if not (m in seen or seen.add(m))]

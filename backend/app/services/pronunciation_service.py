@@ -86,12 +86,11 @@ Return your response as a JSON object ONLY:
         # Danh sách các model Flash khả dụng để xoay vòng fallback
         models_to_try = [
             self.model.model_name,
-            'models/gemini-2.0-flash',
             'models/gemini-2.5-flash',
-            'models/gemini-1.5-flash',
-            'models/gemini-flash-latest',
-            'models/gemini-3-flash-preview',
-            'models/gemini-3.1-flash-lite'
+            'models/gemini-2.5-flash-lite',
+            'models/gemini-3.1-flash-lite',
+            'models/gemini-3.5-flash',
+            'models/gemini-2.0-flash-lite'
         ]
         
         # Loại bỏ trùng lặp và giữ nguyên thứ tự
