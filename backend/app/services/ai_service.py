@@ -107,6 +107,9 @@ class GeminiService:
             except Exception as model_e:
                 print(f"DEBUG: Model {model_name} failed in chat streaming: {model_e}")
                 last_err = model_e
+                err_str = str(model_e).lower()
+                if any(x in err_str for x in ["api_key", "api key", "invalid", "credential", "auth", "key not found", "not found", "forbidden", "403", "401"]):
+                    break
 
         if not success:
             print(f"DEBUG GeminiService: Activating local fallback for chat. Last error: {last_err}")
@@ -162,6 +165,9 @@ class GeminiService:
             except Exception as model_e:
                 print(f"DEBUG: Model {model_name} failed in tutor streaming: {model_e}")
                 last_err = model_e
+                err_str = str(model_e).lower()
+                if any(x in err_str for x in ["api_key", "api key", "invalid", "credential", "auth", "key not found", "not found", "forbidden", "403", "401"]):
+                    break
 
         if not success:
             print(f"DEBUG GeminiService: Activating local fallback for tutor response. Last error: {last_err}")
@@ -203,6 +209,9 @@ class GeminiService:
                 return self._get_text_safely(response).strip()
             except Exception as model_e:
                 print(f"DEBUG: Model {model_name} failed in tutor correction: {model_e}")
+                err_str = str(model_e).lower()
+                if any(x in err_str for x in ["api_key", "api key", "invalid", "credential", "auth", "key not found", "not found", "forbidden", "403", "401"]):
+                    break
         
         return f"Bạn đã nói: '{user_text}'. Hãy chú ý cấu trúc ngữ pháp và cách phát âm của các từ khóa nhé! 💪"
 
@@ -261,6 +270,9 @@ Format ONLY as valid JSON (no markdown):
                 return json.loads(cleaned_text)
             except Exception as model_e:
                 print(f"DEBUG: Model {model_name} failed in structured correction: {model_e}")
+                err_str = str(model_e).lower()
+                if any(x in err_str for x in ["api_key", "api key", "invalid", "credential", "auth", "key not found", "not found", "forbidden", "403", "401"]):
+                    break
 
         # Trả về mảng rỗng làm fallback để hệ thống Local NLP tự xử lý phía sau
         return []
