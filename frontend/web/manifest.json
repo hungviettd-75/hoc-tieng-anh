@@ -1,11 +1,11 @@
 {
-    "name": "frontend",
-    "short_name": "frontend",
+    "name": "AI English Coach",
+    "short_name": "AI English Coach",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
     "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "description": "AI English Coach - Học tiếng Anh với trợ lý AI",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [
