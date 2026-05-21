@@ -1,8 +1,14 @@
 import 'package:flutter/foundation.dart';
 
 class ApiConfig {
-  // 1. Hãy thay thế 'ai-english-coach-backend' bằng tên thực tế ứng dụng của bạn trên Render:
+  // Đổi thành true nếu bạn muốn kết nối với backend chạy ở localhost cục bộ.
+  // Mặc định để false để kết nối thẳng tới máy chủ Render production.
+  static const bool useLocalBackend = false;
+
   static String get serverUrl {
+    if (!useLocalBackend) {
+      return 'https://ai-english-coach-backend.onrender.com';
+    }
     if (kIsWeb) {
       final uri = Uri.base;
       if (uri.host == 'localhost' || uri.host == '127.0.0.1' || uri.host.startsWith('192.168.')) {
@@ -16,6 +22,9 @@ class ApiConfig {
   }
   
   static String get wsUrl {
+    if (!useLocalBackend) {
+      return 'wss://ai-english-coach-backend.onrender.com/api/v1';
+    }
     if (kIsWeb) {
       final uri = Uri.base;
       if (uri.host == 'localhost' || uri.host == '127.0.0.1' || uri.host.startsWith('192.168.')) {
