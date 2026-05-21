@@ -1,4 +1,5 @@
 import google.generativeai as genai
+import asyncio
 from app.core.config import settings
 from typing import List, Dict, AsyncGenerator
 import json
@@ -269,7 +270,8 @@ Format ONLY as valid JSON (no markdown):
         Tạo vector embedding cho văn bản sử dụng Gemini.
         """
         try:
-            result = genai.embed_content(
+            result = await asyncio.to_thread(
+                genai.embed_content,
                 model="models/gemini-embedding-001",
                 content=text,
                 task_type="retrieval_document",

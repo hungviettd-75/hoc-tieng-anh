@@ -1,4 +1,5 @@
 from pinecone import Pinecone
+import asyncio
 from app.core.config import settings
 from app.services.ai_service import gemini_service
 from typing import List, Dict, Any
@@ -53,7 +54,7 @@ class MemoryService:
                 "timestamp": time.time()
             })
             
-            self.index.upsert(vectors=[(vector_id, embedding, metadata)])
+            await asyncio.to_thread(self.index.upsert, vectors=[(vector_id, embedding, metadata)])
             return vector_id
         except Exception as e:
             print(f"WARN: Failed to store memory: {e}")
@@ -69,7 +70,8 @@ class MemoryService:
         try:
             query_embedding = await gemini_service.get_embedding(query)
             
-            results = self.index.query(
+            results = await asyncio.to_thread(
+                self.index.query,
                 vector=query_embedding,
                 top_k=top_k,
                 filter={"user_id": {"$eq": user_id}},
