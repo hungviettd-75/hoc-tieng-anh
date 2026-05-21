@@ -14,6 +14,7 @@ class Settings(BaseSettings):
     PINECONE_INDEX_NAME: str = "ai-english-coach"
 
     # DATABASE
+    DATABASE_URL: str | None = None
     POSTGRES_SERVER: str = "db"
     POSTGRES_USER: str = "admin"
     POSTGRES_PASSWORD: str = "password123"
@@ -21,9 +22,8 @@ class Settings(BaseSettings):
     
     @property
     def SQLALCHEMY_DATABASE_URI(self) -> str:
-        import os
-        database_url = os.environ.get("DATABASE_URL")
-        if database_url:
+        if self.DATABASE_URL:
+            database_url = self.DATABASE_URL
             # SQLAlchemy 2.0 requires postgresql:// instead of postgres://
             if database_url.startswith("postgres://"):
                 database_url = database_url.replace("postgres://", "postgresql://", 1)
@@ -49,6 +49,7 @@ class Settings(BaseSettings):
 
     class Config:
         case_sensitive = True
+        extra = "ignore"
         env_file = [".env", "../.env"]
         env_file_encoding = 'utf-8'
 
