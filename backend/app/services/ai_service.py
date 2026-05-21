@@ -1,5 +1,6 @@
 import google.generativeai as genai
 import asyncio
+import os
 from app.core.config import settings
 from typing import List, Dict, AsyncGenerator
 import json
@@ -10,6 +11,10 @@ class GeminiService:
         key_preview = settings.GEMINI_API_KEY[:5] + "..." if settings.GEMINI_API_KEY else "None"
         print(f"DEBUG: Initializing GeminiService with API Key starting with: {key_preview}")
         
+        # Bắt buộc gán biến môi trường GOOGLE_API_KEY cho transport="rest"
+        if settings.GEMINI_API_KEY:
+            os.environ["GOOGLE_API_KEY"] = settings.GEMINI_API_KEY
+            
         genai.configure(api_key=settings.GEMINI_API_KEY, transport="rest")
         # Sử dụng gemini-2.5-flash làm mặc định ban đầu
         self.model = genai.GenerativeModel('gemini-2.5-flash')
