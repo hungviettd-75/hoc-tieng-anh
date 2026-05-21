@@ -114,7 +114,7 @@ class GeminiService:
             if "B1" in (custom_instruction or "") or "B1" in user_message:
                 yield "Chào mừng bạn đến với phòng luyện tập từ vựng trình độ B1! HLV AI đang bận xử lý một chút, hệ thống đã chuyển sang chế độ tự động. Chúng ta sẽ cùng thực hành các từ khóa: 'Persistent', 'Collaborate', 'Effective', 'Challenge' nhé! Hãy dùng câu đầu tiên bằng Tiếng Anh để trả lời câu hỏi: How was your day today?"
             else:
-                yield "Chào bạn! Kết nối AI đang bận rộn một chút, hãy tiếp tục nói tiếng Anh nhé. How are you today? 😊"
+                yield f"Chào bạn! Kết nối AI đang bận rộn một chút (Chi tiết lỗi: {last_err}). Hãy tiếp tục nói tiếng Anh nhé. How are you today? 😊"
 
     async def get_tutor_response(
         self, compact_context: str, user_message: str, custom_instruction: str = None
@@ -169,7 +169,7 @@ class GeminiService:
             if "restaurant" in (custom_instruction or "").lower() or "restaurant" in user_message.lower():
                 yield "Hello! Welcome to our restaurant. Are you ready to order? (Dịch: Xin chào! Chào mừng bạn đến với nhà hàng của chúng tôi. Bạn đã sẵn sàng gọi món chưa?)"
             else:
-                yield "That's very interesting! Can you tell me more about it? (Dịch: Điều đó thật thú vị! Bạn có thể chia sẻ thêm cho mình nghe không?)"
+                yield f"That's very interesting! Can you tell me more about it? (Chi tiết lỗi: {last_err})"
 
     async def get_tutor_correction(self, user_text: str, errors_summary: str, user_level: str = "A2") -> str:
         """
