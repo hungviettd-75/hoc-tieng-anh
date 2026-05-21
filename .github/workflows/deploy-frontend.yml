@@ -28,7 +28,7 @@ jobs:
 
       - name: Build Flutter Web
         working-directory: frontend
-        run: flutter build web --release --web-renderer canvaskit --no-pwa
+        run: flutter build web --release --web-renderer canvaskit --pwa-strategy none
 
       - name: Deploy to Vercel
         uses: amondnet/vercel-action@v25
