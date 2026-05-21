@@ -10,7 +10,7 @@ class GeminiService:
         key_preview = settings.GEMINI_API_KEY[:5] + "..." if settings.GEMINI_API_KEY else "None"
         print(f"DEBUG: Initializing GeminiService with API Key starting with: {key_preview}")
         
-        genai.configure(api_key=settings.GEMINI_API_KEY)
+        genai.configure(api_key=settings.GEMINI_API_KEY, transport="rest")
         # Sử dụng gemini-2.5-flash làm mặc định ban đầu
         self.model = genai.GenerativeModel('gemini-2.5-flash')
         
@@ -92,12 +92,20 @@ class GeminiService:
                 print(f"DEBUG GeminiService: Trying model {model_name} for chat streaming...")
                 current_model = genai.GenerativeModel(model_name, system_instruction=system_prompt)
                 chat = current_model.start_chat(history=gemini_history)
-                response = await chat.send_message_async(user_message, stream=True)
                 
-                async for chunk in response:
-                    chunk_text = self._get_text_safely(chunk)
-                    if chunk_text:
-                        yield chunk_text
+                # Dùng sync API trong thread riêng để tương thích với transport='rest'
+                def _collect_chunks():
+                    chunks = []
+                    resp = chat.send_message(user_message, stream=True)
+                    for chunk in resp:
+                        text = self._get_text_safely(chunk)
+                        if text:
+                            chunks.append(text)
+                    return chunks
+                
+                collected = await asyncio.to_thread(_collect_chunks)
+                for chunk_text in collected:
+                    yield chunk_text
                 
                 success = True
                 if model_name != self.model.model_name.replace("models/", ""):
@@ -152,11 +160,20 @@ class GeminiService:
                 print(f"DEBUG GeminiService: Trying model {model_name} for tutor streaming...")
                 current_model = genai.GenerativeModel(model_name, system_instruction=system_instruction)
                 chat = current_model.start_chat(history=[])
-                response = await chat.send_message_async(prompt, stream=True)
-                async for chunk in response:
-                    chunk_text = self._get_text_safely(chunk)
-                    if chunk_text:
-                        yield chunk_text
+                
+                # Dùng sync API trong thread riêng để tương thích với transport='rest'
+                def _collect_tutor_chunks():
+                    chunks = []
+                    resp = chat.send_message(prompt, stream=True)
+                    for chunk in resp:
+                        text = self._get_text_safely(chunk)
+                        if text:
+                            chunks.append(text)
+                    return chunks
+                
+                collected = await asyncio.to_thread(_collect_tutor_chunks)
+                for chunk_text in collected:
+                    yield chunk_text
                 success = True
                 if model_name != self.model.model_name.replace("models/", ""):
                     print(f"DEBUG: Setting new default tutor model to {model_name}")
