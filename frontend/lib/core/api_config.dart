@@ -3,7 +3,7 @@ import 'package:flutter/foundation.dart';
 class ApiConfig {
   // Đổi thành true nếu bạn muốn kết nối với backend chạy ở localhost cục bộ.
   // Mặc định để false để kết nối thẳng tới máy chủ Render production.
-  static const bool useLocalBackend = true;
+  static const bool useLocalBackend = !kReleaseMode;
 
   static String get serverUrl {
     if (!useLocalBackend) {
