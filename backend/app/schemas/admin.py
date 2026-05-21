@@ -141,3 +141,75 @@ class SubscriptionPlanSchema(BaseModel):
 class SeedResponse(BaseModel):
     message: str
     admin_email: str
+
+
+# --- Vocabulary Management ---
+class VocabularyBase(BaseModel):
+    word: str
+    ipa: Optional[str] = None
+    meaning: str
+    level: str
+    example: Optional[str] = None
+    topic: Optional[str] = None
+    is_active: bool = True
+
+class VocabularyCreate(VocabularyBase):
+    pass
+
+class VocabularyUpdate(BaseModel):
+    word: Optional[str] = None
+    ipa: Optional[str] = None
+    meaning: Optional[str] = None
+    level: Optional[str] = None
+    example: Optional[str] = None
+    topic: Optional[str] = None
+    is_active: Optional[bool] = None
+
+class VocabularyResponse(VocabularyBase):
+    id: int
+    created_at: datetime
+
+    class Config:
+        from_attributes = True
+
+class AdminVocabularyListResponse(BaseModel):
+    items: List[VocabularyResponse]
+    total: int
+    page: int
+    page_size: int
+
+
+# --- Lesson Management ---
+class LessonBase(BaseModel):
+    title: str
+    description: Optional[str] = None
+    level: str
+    content_type: str
+    content_data: Optional[Dict[str, Any]] = None
+    is_active: bool = True
+    order_index: int = 0
+
+class LessonCreate(LessonBase):
+    pass
+
+class LessonUpdate(BaseModel):
+    title: Optional[str] = None
+    description: Optional[str] = None
+    level: Optional[str] = None
+    content_type: Optional[str] = None
+    content_data: Optional[Dict[str, Any]] = None
+    is_active: Optional[bool] = None
+    order_index: Optional[int] = None
+
+class LessonResponse(LessonBase):
+    id: int
+    created_at: datetime
+
+    class Config:
+        from_attributes = True
+
+class AdminLessonListResponse(BaseModel):
+    items: List[LessonResponse]
+    total: int
+    page: int
+    page_size: int

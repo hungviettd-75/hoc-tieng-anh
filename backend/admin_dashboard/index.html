@@ -68,8 +68,16 @@
                     <span class="nav-icon">👥</span>
                     <span class="nav-label">Quản lý Users</span>
                 </a>
-                <a href="#" class="nav-item" data-section="lessons" onclick="switchSection('lessons', this)">
+                <a href="#" class="nav-item" data-section="vocabulary-mgmt" onclick="switchSection('vocabulary-mgmt', this)">
+                    <span class="nav-icon">📖</span>
+                    <span class="nav-label">Quản lý Từ vựng</span>
+                </a>
+                <a href="#" class="nav-item" data-section="lessons-mgmt" onclick="switchSection('lessons-mgmt', this)">
                     <span class="nav-icon">📚</span>
+                    <span class="nav-label">Quản lý Bài học</span>
+                </a>
+                <a href="#" class="nav-item" data-section="lessons" onclick="switchSection('lessons', this)">
+                    <span class="nav-icon">📈</span>
                     <span class="nav-label">Lesson Analytics</span>
                 </a>
                 <a href="#" class="nav-item" data-section="ai-usage" onclick="switchSection('ai-usage', this)">
@@ -451,6 +459,99 @@
                         </div>
                     </div>
                 </section>
+
+                <!-- VOCABULARY MANAGEMENT SECTION -->
+                <section id="section-vocabulary-mgmt" class="section">
+                    <div class="section-toolbar">
+                        <button class="btn-primary" onclick="openVocabModal(null)">➕ Thêm từ vựng</button>
+                        <button class="btn-secondary" onclick="handleSeedVocabulary()">🌱 Seed dữ liệu mẫu</button>
+                        <div class="search-box">
+                            <span class="search-icon">🔍</span>
+                            <input type="text" id="vocabSearch" placeholder="Tìm từ hoặc nghĩa..." oninput="debounceSearchVocab()">
+                        </div>
+                        <div class="filter-group">
+                            <select id="vocabLevelFilter" onchange="loadVocabulary()">
+                                <option value="">Tất cả Level</option>
+                                <option value="A1">A1</option>
+                                <option value="A2">A2</option>
+                                <option value="B1">B1</option>
+                                <option value="B2">B2</option>
+                                <option value="C1">C1</option>
+                                <option value="C2">C2</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="table-container">
+                        <table class="data-table" id="vocabTable">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Từ</th>
+                                    <th>IPA</th>
+                                    <th>Nghĩa</th>
+                                    <th>Level</th>
+                                    <th>Chủ đề</th>
+                                    <th>Ví dụ</th>
+                                    <th>Trạng thái</th>
+                                    <th>Hành động</th>
+                                </tr>
+                            </thead>
+                            <tbody id="vocabTableBody">
+                                <tr><td colspan="9" class="loading-cell">Đang tải...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="pagination" id="vocabPagination"></div>
+                </section>
+
+                <!-- LESSONS MANAGEMENT SECTION -->
+                <section id="section-lessons-mgmt" class="section">
+                    <div class="section-toolbar">
+                        <button class="btn-primary" onclick="openLessonModal(null)">➕ Thêm bài học</button>
+                        <div class="search-box">
+                            <span class="search-icon">🔍</span>
+                            <input type="text" id="lessonSearch" placeholder="Tìm tên bài học..." oninput="debounceSearchLessons()">
+                        </div>
+                        <div class="filter-group">
+                            <select id="lessonLevelFilter" onchange="loadLessons()">
+                                <option value="">Tất cả Level</option>
+                                <option value="A1">A1</option>
+                                <option value="A2">A2</option>
+                                <option value="B1">B1</option>
+                                <option value="B2">B2</option>
+                                <option value="C1">C1</option>
+                                <option value="C2">C2</option>
+                            </select>
+                            <select id="lessonTypeFilter" onchange="loadLessons()">
+                                <option value="">Tất cả Loại</option>
+                                <option value="vocabulary">Từ vựng</option>
+                                <option value="grammar">Ngữ pháp</option>
+                                <option value="listening">Nghe</option>
+                                <option value="roleplay">Hội thoại</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="table-container">
+                        <table class="data-table" id="lessonsTable">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Tiêu đề</th>
+                                    <th>Mô tả</th>
+                                    <th>Level</th>
+                                    <th>Loại</th>
+                                    <th>Thứ tự</th>
+                                    <th>Trạng thái</th>
+                                    <th>Hành động</th>
+                                </tr>
+                            </thead>
+                            <tbody id="lessonsTableBody">
+                                <tr><td colspan="8" class="loading-cell">Đang tải...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="pagination" id="lessonsPagination"></div>
+                </section>
             </div>
         </main>
     </div>
@@ -465,6 +566,128 @@
             </div>
             <div class="modal-body" id="userDetailBody">
                 <div class="loading-cell">Đang tải...</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- VOCABULARY MODAL -->
+    <div id="vocabModal" class="modal" style="display:none;">
+        <div class="modal-overlay" onclick="closeVocabModal()"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="vocabModalTitle">Thêm Từ Vựng</h2>
+                <button class="modal-close" onclick="closeVocabModal()">✕</button>
+            </div>
+            <div class="modal-body">
+                <form id="vocabForm" onsubmit="saveVocabulary(event)">
+                    <input type="hidden" id="vocabId">
+                    <div class="form-group">
+                        <label for="vocabWord">Từ tiếng Anh</label>
+                        <input type="text" id="vocabWord" required class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="vocabIpa">Phiên âm IPA</label>
+                        <input type="text" id="vocabIpa" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="vocabMeaning">Nghĩa tiếng Việt</label>
+                        <input type="text" id="vocabMeaning" required class="form-control">
+                    </div>
+                    <div class="form-group-row" style="display: flex; gap: 1rem;">
+                        <div class="form-group" style="flex: 1;">
+                            <label for="vocabLevel">CEFR Level</label>
+                            <select id="vocabLevel" required class="form-control">
+                                <option value="A1">A1</option>
+                                <option value="A2">A2</option>
+                                <option value="B1">B1</option>
+                                <option value="B2">B2</option>
+                                <option value="C1">C1</option>
+                                <option value="C2">C2</option>
+                            </select>
+                        </div>
+                        <div class="form-group" style="flex: 1;">
+                            <label for="vocabTopic">Chủ đề</label>
+                            <input type="text" id="vocabTopic" placeholder="General" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="vocabExample">Câu ví dụ</label>
+                        <textarea id="vocabExample" rows="2" class="form-control"></textarea>
+                    </div>
+                    <div class="form-group" style="display: flex; align-items: center; gap: 0.5rem;">
+                        <input type="checkbox" id="vocabIsActive" checked>
+                        <label for="vocabIsActive" style="margin-bottom: 0;">Hiển thị cho học viên</label>
+                    </div>
+                    <div class="modal-footer" style="margin-top: 1.5rem; text-align: right;">
+                        <button type="button" class="btn-secondary" onclick="closeVocabModal()">Hủy</button>
+                        <button type="submit" class="btn-primary">Lưu</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- LESSON MODAL -->
+    <div id="lessonModal" class="modal" style="display:none;">
+        <div class="modal-overlay" onclick="closeLessonModal()"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="lessonModalTitle">Thêm Bài Học</h2>
+                <button class="modal-close" onclick="closeLessonModal()">✕</button>
+            </div>
+            <div class="modal-body">
+                <form id="lessonForm" onsubmit="saveLesson(event)">
+                    <input type="hidden" id="lessonId">
+                    <div class="form-group">
+                        <label for="lessonTitle">Tên bài học</label>
+                        <input type="text" id="lessonTitle" required class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="lessonDescription">Mô tả bài học</label>
+                        <input type="text" id="lessonDescription" class="form-control">
+                    </div>
+                    <div class="form-group-row" style="display: flex; gap: 1rem;">
+                        <div class="form-group" style="flex: 1;">
+                            <label for="lessonLevel">CEFR Level</label>
+                            <select id="lessonLevel" required class="form-control">
+                                <option value="A1">A1</option>
+                                <option value="A2">A2</option>
+                                <option value="B1">B1</option>
+                                <option value="B2">B2</option>
+                                <option value="C1">C1</option>
+                                <option value="C2">C2</option>
+                            </select>
+                        </div>
+                        <div class="form-group" style="flex: 1;">
+                            <label for="lessonType">Loại bài học</label>
+                            <select id="lessonType" required class="form-control">
+                                <option value="vocabulary">Từ vựng</option>
+                                <option value="grammar">Ngữ pháp</option>
+                                <option value="listening">Nghe</option>
+                                <option value="roleplay">Hội thoại</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group-row" style="display: flex; gap: 1rem; align-items: center;">
+                        <div class="form-group" style="flex: 1;">
+                            <label for="lessonOrderIndex">Thứ tự hiển thị (Order Index)</label>
+                            <input type="number" id="lessonOrderIndex" value="0" class="form-control">
+                        </div>
+                        <div class="form-group" style="flex: 1; padding-top: 1.2rem; display: flex; align-items: center; gap: 0.5rem;">
+                            <input type="checkbox" id="lessonIsActive" checked>
+                            <label for="lessonIsActive" style="margin-bottom: 0;">Kích hoạt</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="lessonContentData">Dữ liệu nội dung (JSON)</label>
+                        <textarea id="lessonContentData" rows="4" placeholder='{ "questions": [], "text": "..." }' class="form-control"></textarea>
+                        <small style="color: #666; font-size: 0.8rem;">Nhập dạng JSON object hợp lệ.</small>
+                    </div>
+                    <div class="modal-footer" style="margin-top: 1.5rem; text-align: right;">
+                        <button type="button" class="btn-secondary" onclick="closeLessonModal()">Hủy</button>
+                        <button type="submit" class="btn-primary">Lưu</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

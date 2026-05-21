@@ -193,8 +193,25 @@ def get_vocabulary_list(
     API Kho từ vựng thông minh: Trả về danh sách từ vựng theo trình độ,
     kết hợp cá nhân hóa bằng các từ phát âm sai thực tế của người dùng từ PronunciationMistakeLog.
     """
-    # Lấy danh sách từ nền cho level hiện tại (mặc định B1 nếu không thấy)
-    base_pool = base_vocab.get(level, base_vocab["B1"])
+    # 1. Thử lấy từ database trước
+    from app.models.models import Vocabulary
+    db_vocab = db.query(Vocabulary).filter(Vocabulary.level == level, Vocabulary.is_active == True).all()
+    
+    if db_vocab:
+        base_pool = [
+            {
+                "word": v.word,
+                "ipa": v.ipa,
+                "meaning": v.meaning,
+                "level": v.level,
+                "status": "New",
+                "example": v.example
+            }
+            for v in db_vocab
+        ]
+    else:
+        # Fallback về base_vocab hardcoded
+        base_pool = base_vocab.get(level, base_vocab["B1"])
     
     # Thực hiện xáo trộn ngẫu nhiên từ vựng để tạo tính tươi mới và thông minh
     import random

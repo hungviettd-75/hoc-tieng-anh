@@ -323,3 +323,27 @@ class PronunciationMistakeLog(Base):
     frequency = Column(Integer, default=1)
     last_occurred = Column(DateTime(timezone=True), server_default=func.now())
     is_mastered = Column(Boolean, default=False)
+
+class Vocabulary(Base):
+    __tablename__ = "vocabularies"
+    id = Column(Integer, primary_key=True, index=True)
+    word = Column(String, nullable=False, index=True)
+    ipa = Column(String)
+    meaning = Column(String, nullable=False)
+    level = Column(String, nullable=False, index=True)  # A1, A2, B1, B2, C1, C2
+    example = Column(String)
+    topic = Column(String, index=True)
+    is_active = Column(Boolean, default=True)
+    created_at = Column(DateTime(timezone=True), server_default=func.now())
+
+class Lesson(Base):
+    __tablename__ = "lessons"
+    id = Column(Integer, primary_key=True, index=True)
+    title = Column(String, nullable=False)
+    description = Column(String)
+    level = Column(String, nullable=False, index=True)  # A1, A2, B1, B2, C1, C2
+    content_type = Column(String, nullable=False)  # vocabulary, grammar, listening, roleplay
+    content_data = Column(JSON)
+    is_active = Column(Boolean, default=True)
+    order_index = Column(Integer, default=0)
+    created_at = Column(DateTime(timezone=True), server_default=func.now())

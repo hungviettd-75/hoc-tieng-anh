@@ -151,3 +151,207 @@ def get_subscription_analytics(
     """Subscription analytics."""
     service = AnalyticsService(db)
     return service.get_subscription_analytics(days=days)
+
+
+# ============================================================
+# VOCABULARY MANAGEMENT
+# ============================================================
+@router.get("/vocabulary", response_model=schemas.admin.AdminVocabularyListResponse)
+def get_vocabulary(
+    db: Session = Depends(deps.get_db),
+    admin: models.models.User = Depends(deps.get_current_admin),
+    page: int = Query(1, ge=1),
+    page_size: int = Query(20, ge=1, le=100),
+    search: Optional[str] = Query(None),
+    level: Optional[str] = Query(None),
+) -> Any:
+    """Danh sách từ vựng với pagination, search, filter theo level."""
+    query = db.query(models.models.Vocabulary)
+    if search:
+        query = query.filter(
+            (models.models.Vocabulary.word.ilike(f"%{search}%")) |
+            (models.models.Vocabulary.meaning.ilike(f"%{search}%"))
+        )
+    if level:
+        query = query.filter(models.models.Vocabulary.level == level)
+    
+    total = query.count()
+    items = query.order_by(models.models.Vocabulary.id.desc()).offset((page - 1) * page_size).limit(page_size).all()
+    
+    return {
+        "items": items,
+        "total": total,
+        "page": page,
+        "page_size": page_size
+    }
+
+
+@router.post("/vocabulary", response_model=schemas.admin.VocabularyResponse)
+def create_vocabulary(
+    vocab_in: schemas.admin.VocabularyCreate,
+    db: Session = Depends(deps.get_db),
+    admin: models.models.User = Depends(deps.get_current_admin),
+) -> Any:
+    """Thêm từ vựng mới."""
+    vocab = models.models.Vocabulary(**vocab_in.dict())
+    db.add(vocab)
+    db.commit()
+    db.refresh(vocab)
+    return vocab
+
+
+@router.put("/vocabulary/{vocab_id}", response_model=schemas.admin.VocabularyResponse)
+def update_vocabulary(
+    vocab_id: int,
+    vocab_in: schemas.admin.VocabularyUpdate,
+    db: Session = Depends(deps.get_db),
+    admin: models.models.User = Depends(deps.get_current_admin),
+) -> Any:
+    """Sửa từ vựng."""
+    vocab = db.query(models.models.Vocabulary).filter(models.models.Vocabulary.id == vocab_id).first()
+    if not vocab:
+        raise HTTPException(status_code=404, detail="Vocabulary not found")
+    
+    update_data = vocab_in.dict(exclude_unset=True)
+    for field, value in update_data.items():
+        setattr(vocab, field, value)
+        
+    db.commit()
+    db.refresh(vocab)
+    return vocab
+
+
+@router.delete("/vocabulary/{vocab_id}")
+def delete_vocabulary(
+    vocab_id: int,
+    db: Session = Depends(deps.get_db),
+    admin: models.models.User = Depends(deps.get_current_admin),
+) -> Any:
+    """Xóa từ vựng."""
+    vocab = db.query(models.models.Vocabulary).filter(models.models.Vocabulary.id == vocab_id).first()
+    if not vocab:
+        raise HTTPException(status_code=404, detail="Vocabulary not found")
+    
+    db.delete(vocab)
+    db.commit()
+    return {"message": "Vocabulary deleted successfully", "id": vocab_id}
+
+
+@router.post("/vocabulary/seed")
+def seed_vocabulary_data(
+    db: Session = Depends(deps.get_db),
+    admin: models.models.User = Depends(deps.get_current_admin),
+) -> Any:
+    """Seed data từ hardcode trong learn.py vào DB nếu DB trống."""
+    # Import base_vocab từ learn.py
+    from app.api.v1.endpoints.learn import base_vocab
+    
+    # Kiểm tra xem đã có từ vựng nào chưa
+    existing_count = db.query(models.models.Vocabulary).count()
+    if existing_count > 0:
+        return {"message": f"Database already has {existing_count} vocabularies. Skipping seed."}
+        
+    count = 0
+    for level, words in base_vocab.items():
+        for item in words:
+            vocab = models.models.Vocabulary(
+                word=item["word"],
+                ipa=item["ipa"],
+                meaning=item["meaning"],
+                level=level,
+                example=item.get("example"),
+                topic="General",
+                is_active=True
+            )
+            db.add(vocab)
+            count += 1
+            
+    db.commit()
+    return {"message": f"Successfully seeded {count} vocabularies into database."}
+
+
+# ============================================================
+# LESSON MANAGEMENT
+# ============================================================
+@router.get("/lessons", response_model=schemas.admin.AdminLessonListResponse)
+def get_lessons(
+    db: Session = Depends(deps.get_db),
+    admin: models.models.User = Depends(deps.get_current_admin),
+    page: int = Query(1, ge=1),
+    page_size: int = Query(20, ge=1, le=100),
+    search: Optional[str] = Query(None),
+    level: Optional[str] = Query(None),
+    content_type: Optional[str] = Query(None),
+) -> Any:
+    """Danh sách bài học với pagination, search, filter."""
+    query = db.query(models.models.Lesson)
+    if search:
+        query = query.filter(
+            (models.models.Lesson.title.ilike(f"%{search}%")) |
+            (models.models.Lesson.description.ilike(f"%{search}%"))
+        )
+    if level:
+        query = query.filter(models.models.Lesson.level == level)
+    if content_type:
+        query = query.filter(models.models.Lesson.content_type == content_type)
+        
+    total = query.count()
+    items = query.order_by(models.models.Lesson.order_index.asc(), models.models.Lesson.id.desc()).offset((page - 1) * page_size).limit(page_size).all()
+    
+    return {
+        "items": items,
+        "total": total,
+        "page": page,
+        "page_size": page_size
+    }
+
+
+@router.post("/lessons", response_model=schemas.admin.LessonResponse)
+def create_lesson(
+    lesson_in: schemas.admin.LessonCreate,
+    db: Session = Depends(deps.get_db),
+    admin: models.models.User = Depends(deps.get_current_admin),
+) -> Any:
+    """Thêm bài học mới."""
+    lesson = models.models.Lesson(**lesson_in.dict())
+    db.add(lesson)
+    db.commit()
+    db.refresh(lesson)
+    return lesson
+
+
+@router.put("/lessons/{lesson_id}", response_model=schemas.admin.LessonResponse)
+def update_lesson(
+    lesson_id: int,
+    lesson_in: schemas.admin.LessonUpdate,
+    db: Session = Depends(deps.get_db),
+    admin: models.models.User = Depends(deps.get_current_admin),
+) -> Any:
+    """Sửa bài học."""
+    lesson = db.query(models.models.Lesson).filter(models.models.Lesson.id == lesson_id).first()
+    if not lesson:
+        raise HTTPException(status_code=404, detail="Lesson not found")
+        
+    update_data = lesson_in.dict(exclude_unset=True)
+    for field, value in update_data.items():
+        setattr(lesson, field, value)
+        
+    db.commit()
+    db.refresh(lesson)
+    return lesson
+
+
+@router.delete("/lessons/{lesson_id}")
+def delete_lesson(
+    lesson_id: int,
+    db: Session = Depends(deps.get_db),
+    admin: models.models.User = Depends(deps.get_current_admin),
+) -> Any:
+    """Xóa bài học."""
+    lesson = db.query(models.models.Lesson).filter(models.models.Lesson.id == lesson_id).first()
+    if not lesson:
+        raise HTTPException(status_code=404, detail="Lesson not found")
+        
+    db.delete(lesson)
+    db.commit()
+    return {"message": "Lesson deleted successfully", "id": lesson_id}

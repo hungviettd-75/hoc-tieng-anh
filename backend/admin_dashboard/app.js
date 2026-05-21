@@ -96,7 +96,8 @@ function loadCurrentSection() {
 const sectionTitles = {
     'overview': 'Tổng quan', 'users': 'Quản lý Users', 'lessons': 'Lesson Analytics',
     'ai-usage': 'AI Usage Analytics', 'subscriptions': 'Subscription Analytics',
-    'retention': 'Retention Analytics', 'speaking': 'Speaking Statistics'
+    'retention': 'Retention Analytics', 'speaking': 'Speaking Statistics',
+    'vocabulary-mgmt': 'Quản lý Từ vựng', 'lessons-mgmt': 'Quản lý Bài học'
 };
 
 function switchSection(name, el, silent) {
@@ -113,7 +114,8 @@ function switchSection(name, el, silent) {
     const loaders = {
         'overview': loadOverview, 'users': loadUsers, 'lessons': loadLessons,
         'ai-usage': loadAIUsage, 'subscriptions': loadSubscriptions,
-        'retention': loadRetention, 'speaking': loadSpeaking
+        'retention': loadRetention, 'speaking': loadSpeaking,
+        'vocabulary-mgmt': loadVocabularyMgmt, 'lessons-mgmt': loadLessonsMgmt
     };
     if (loaders[name]) loaders[name]();
 }
@@ -480,3 +482,287 @@ async function loadSpeaking() {
     }
     document.getElementById('loginScreen').style.display = 'flex';
 })();
+
+
+// ============================================================
+// VOCABULARY MANAGEMENT
+// ============================================================
+let vocabPage = 1;
+let vocabSearchTimeout = null;
+let currentVocabs = [];
+
+function debounceSearchVocab() {
+    if (vocabSearchTimeout) clearTimeout(vocabSearchTimeout);
+    vocabSearchTimeout = setTimeout(() => { vocabPage = 1; loadVocabularyMgmt(); }, 400);
+}
+
+async function loadVocabularyMgmt() {
+    try {
+        const search = document.getElementById('vocabSearch').value;
+        const level = document.getElementById('vocabLevelFilter').value;
+        let url = `/admin/vocabulary?page=${vocabPage}&page_size=15`;
+        if (search) url += `&search=${encodeURIComponent(search)}`;
+        if (level) url += `&level=${level}`;
+
+        const data = await apiFetch(url);
+        currentVocabs = data.items;
+        const tbody = document.getElementById('vocabTableBody');
+
+        if (data.items.length === 0) {
+            tbody.innerHTML = '<tr><td colspan="9" class="loading-cell">Không tìm thấy từ vựng nào</td></tr>';
+        } else {
+            tbody.innerHTML = data.items.map(v => `
+                <tr>
+                    <td>${v.id}</td>
+                    <td><strong>${v.word}</strong></td>
+                    <td><code style="color:var(--accent)">${v.ipa || ''}</code></td>
+                    <td>${v.meaning}</td>
+                    <td><span class="level-badge ${v.level}">${v.level}</span></td>
+                    <td>${v.topic || 'General'}</td>
+                    <td style="font-size: 0.9rem; max-width: 200px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" title="${v.example || ''}">${v.example || '—'}</td>
+                    <td><span class="status-badge ${v.is_active ? 'active' : 'banned'}">${v.is_active ? '✅ Active' : '🚫 Hidden'}</span></td>
+                    <td>
+                        <button class="btn-action" onclick="openVocabModal(${v.id})">✏️</button>
+                        <button class="btn-action danger" onclick="deleteVocabulary(${v.id})">🗑️</button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        // Pagination
+        const totalPages = Math.ceil(data.total / data.page_size);
+        const pag = document.getElementById('vocabPagination');
+        let pagHtml = `<button onclick="goVocabPage(${vocabPage-1})" ${vocabPage<=1?'disabled':''}>← Prev</button>`;
+        for (let i = 1; i <= Math.min(totalPages, 5); i++) {
+            pagHtml += `<button class="${i===vocabPage?'active':''}" onclick="goVocabPage(${i})">${i}</button>`;
+        }
+        pagHtml += `<button onclick="goVocabPage(${vocabPage+1})" ${vocabPage>=totalPages?'disabled':''}>Next →</button>`;
+        pag.innerHTML = pagHtml;
+    } catch (e) { console.error('Vocabulary list error:', e); }
+}
+
+function goVocabPage(p) { vocabPage = p; loadVocabularyMgmt(); }
+
+function openVocabModal(id) {
+    document.getElementById('vocabModal').style.display = 'flex';
+    const form = document.getElementById('vocabForm');
+    form.reset();
+    document.getElementById('vocabId').value = '';
+    
+    if (id) {
+        document.getElementById('vocabModalTitle').textContent = 'Sửa Từ Vựng';
+        const v = currentVocabs.find(item => item.id === id);
+        if (v) {
+            document.getElementById('vocabId').value = v.id;
+            document.getElementById('vocabWord').value = v.word;
+            document.getElementById('vocabIpa').value = v.ipa || '';
+            document.getElementById('vocabMeaning').value = v.meaning;
+            document.getElementById('vocabLevel').value = v.level;
+            document.getElementById('vocabTopic').value = v.topic || '';
+            document.getElementById('vocabExample').value = v.example || '';
+            document.getElementById('vocabIsActive').checked = v.is_active;
+        }
+    } else {
+        document.getElementById('vocabModalTitle').textContent = 'Thêm Từ Vựng';
+    }
+}
+
+function closeVocabModal() {
+    document.getElementById('vocabModal').style.display = 'none';
+}
+
+async function saveVocabulary(e) {
+    e.preventDefault();
+    const id = document.getElementById('vocabId').value;
+    const word = document.getElementById('vocabWord').value;
+    const ipa = document.getElementById('vocabIpa').value;
+    const meaning = document.getElementById('vocabMeaning').value;
+    const level = document.getElementById('vocabLevel').value;
+    const topic = document.getElementById('vocabTopic').value || 'General';
+    const example = document.getElementById('vocabExample').value;
+    const is_active = document.getElementById('vocabIsActive').checked;
+
+    const payload = { word, ipa, meaning, level, topic, example, is_active };
+
+    try {
+        if (id) {
+            await apiFetch(`/admin/vocabulary/${id}`, {
+                method: 'PUT',
+                body: JSON.stringify(payload)
+            });
+        } else {
+            await apiFetch('/admin/vocabulary', {
+                method: 'POST',
+                body: JSON.stringify(payload)
+            });
+        }
+        closeVocabModal();
+        loadVocabularyMgmt();
+    } catch (error) {
+        alert('Lỗi khi lưu từ vựng: ' + error.message);
+    }
+}
+
+async function deleteVocabulary(id) {
+    if (!confirm(`Bạn chắc chắn muốn xóa từ vựng #${id}?`)) return;
+    try {
+        await apiFetch(`/admin/vocabulary/${id}`, { method: 'DELETE' });
+        loadVocabularyMgmt();
+    } catch (e) {
+        alert('Lỗi khi xóa từ vựng: ' + e.message);
+    }
+}
+
+async function handleSeedVocabulary() {
+    if (!confirm('Bạn có muốn seed 75 từ vựng mẫu từ learn.py vào cơ sở dữ liệu không? Chức năng này chỉ chạy nếu cơ sở dữ liệu từ vựng đang trống.')) return;
+    try {
+        const res = await apiFetch('/admin/vocabulary/seed', { method: 'POST' });
+        alert(res.message);
+        loadVocabularyMgmt();
+    } catch (e) {
+        alert('Lỗi: ' + e.message);
+    }
+}
+
+
+// ============================================================
+// LESSONS MANAGEMENT
+// ============================================================
+let lessonPage = 1;
+let lessonSearchTimeout = null;
+let currentLessons = [];
+
+function debounceSearchLessons() {
+    if (lessonSearchTimeout) clearTimeout(lessonSearchTimeout);
+    lessonSearchTimeout = setTimeout(() => { lessonPage = 1; loadLessonsMgmt(); }, 400);
+}
+
+async function loadLessonsMgmt() {
+    try {
+        const search = document.getElementById('lessonSearch').value;
+        const level = document.getElementById('lessonLevelFilter').value;
+        const type = document.getElementById('lessonTypeFilter').value;
+        let url = `/admin/lessons?page=${lessonPage}&page_size=15`;
+        if (search) url += `&search=${encodeURIComponent(search)}`;
+        if (level) url += `&level=${level}`;
+        if (type) url += `&content_type=${type}`;
+
+        const data = await apiFetch(url);
+        currentLessons = data.items;
+        const tbody = document.getElementById('lessonsTableBody');
+
+        if (data.items.length === 0) {
+            tbody.innerHTML = '<tr><td colspan="8" class="loading-cell">Không tìm thấy bài học nào</td></tr>';
+        } else {
+            tbody.innerHTML = data.items.map(l => `
+                <tr>
+                    <td>${l.id}</td>
+                    <td><strong>${l.title}</strong></td>
+                    <td style="font-size: 0.9rem; max-width: 200px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" title="${l.description || ''}">${l.description || '—'}</td>
+                    <td><span class="level-badge ${l.level}">${l.level}</span></td>
+                    <td><span class="type-badge ${l.content_type}">${l.content_type}</span></td>
+                    <td>${l.order_index}</td>
+                    <td><span class="status-badge ${l.is_active ? 'active' : 'banned'}">${l.is_active ? '✅ Active' : '🚫 Inactive'}</span></td>
+                    <td>
+                        <button class="btn-action" onclick="openLessonModal(${l.id})">✏️</button>
+                        <button class="btn-action danger" onclick="deleteLesson(${l.id})">🗑️</button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        // Pagination
+        const totalPages = Math.ceil(data.total / data.page_size);
+        const pag = document.getElementById('lessonsPagination');
+        let pagHtml = `<button onclick="goLessonPage(${lessonPage-1})" ${lessonPage<=1?'disabled':''}>← Prev</button>`;
+        for (let i = 1; i <= Math.min(totalPages, 5); i++) {
+            pagHtml += `<button class="${i===lessonPage?'active':''}" onclick="goLessonPage(${i})">${i}</button>`;
+        }
+        pagHtml += `<button onclick="goLessonPage(${lessonPage+1})" ${lessonPage>=totalPages?'disabled':''}>Next →</button>`;
+        pag.innerHTML = pagHtml;
+    } catch (e) { console.error('Lessons list error:', e); }
+}
+
+function goLessonPage(p) { lessonPage = p; loadLessonsMgmt(); }
+
+function openLessonModal(id) {
+    document.getElementById('lessonModal').style.display = 'flex';
+    const form = document.getElementById('lessonForm');
+    form.reset();
+    document.getElementById('lessonId').value = '';
+    document.getElementById('lessonContentData').value = '';
+    
+    if (id) {
+        document.getElementById('lessonModalTitle').textContent = 'Sửa Bài Học';
+        const l = currentLessons.find(item => item.id === id);
+        if (l) {
+            document.getElementById('lessonId').value = l.id;
+            document.getElementById('lessonTitle').value = l.title;
+            document.getElementById('lessonDescription').value = l.description || '';
+            document.getElementById('lessonLevel').value = l.level;
+            document.getElementById('lessonType').value = l.content_type;
+            document.getElementById('lessonOrderIndex').value = l.order_index;
+            document.getElementById('lessonIsActive').checked = l.is_active;
+            document.getElementById('lessonContentData').value = l.content_data ? JSON.stringify(l.content_data, null, 2) : '';
+        }
+    } else {
+        document.getElementById('lessonModalTitle').textContent = 'Thêm Bài Học';
+    }
+}
+
+function closeLessonModal() {
+    document.getElementById('lessonModal').style.display = 'none';
+}
+
+async function saveLesson(e) {
+    e.preventDefault();
+    const id = document.getElementById('lessonId').value;
+    const title = document.getElementById('lessonTitle').value;
+    const description = document.getElementById('lessonDescription').value;
+    const level = document.getElementById('lessonLevel').value;
+    const content_type = document.getElementById('lessonType').value;
+    const order_index = parseInt(document.getElementById('lessonOrderIndex').value) || 0;
+    const is_active = document.getElementById('lessonIsActive').checked;
+    
+    const contentDataStr = document.getElementById('lessonContentData').value;
+    let content_data = null;
+    
+    if (contentDataStr.trim()) {
+        try {
+            content_data = JSON.parse(contentDataStr);
+        } catch (err) {
+            alert('Lỗi cú pháp JSON ở Dữ liệu nội dung! Vui lòng kiểm tra lại.');
+            return;
+        }
+    }
+
+    const payload = { title, description, level, content_type, content_data, is_active, order_index };
+
+    try {
+        if (id) {
+            await apiFetch(`/admin/lessons/${id}`, {
+                method: 'PUT',
+                body: JSON.stringify(payload)
+            });
+        } else {
+            await apiFetch('/admin/lessons', {
+                method: 'POST',
+                body: JSON.stringify(payload)
+            });
+        }
+        closeLessonModal();
+        loadLessonsMgmt();
+    } catch (error) {
+        alert('Lỗi khi lưu bài học: ' + error.message);
+    }
+}
+
+async function deleteLesson(id) {
+    if (!confirm(`Bạn chắc chắn muốn xóa bài học #${id}?`)) return;
+    try {
+        await apiFetch(`/admin/lessons/${id}`, { method: 'DELETE' });
+        loadLessonsMgmt();
+    } catch (e) {
+        alert('Lỗi khi xóa bài học: ' + e.message);
+    }
+}
