@@ -449,7 +449,10 @@ class _HomePageState extends ConsumerState<HomePage> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             const Text('Tiếp tục học', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-            TextButton(onPressed: () {}, child: const Text('Xem tất cả')),
+            TextButton(
+              onPressed: () => context.go('/learn'), 
+              child: const Text('Xem tất cả'),
+            ),
           ],
         ),
         ...activities.map((act) => Material(
