@@ -27,4 +27,27 @@ class LearnService {
       throw Exception('Failed to load learning dashboard');
     }
   }
+
+  Future<void> updatePreferences({int? dailyTimeGoalMinutes, String? targetLevel}) async {
+    final token = await _authService.getAccessToken();
+    final headers = {
+      'Content-Type': 'application/json',
+      if (token != null) 'Authorization': 'Bearer $token',
+    };
+
+    final body = jsonEncode({
+      if (dailyTimeGoalMinutes != null) 'daily_time_goal_minutes': dailyTimeGoalMinutes,
+      if (targetLevel != null) 'target_level': targetLevel,
+    });
+
+    final response = await http.put(
+      Uri.parse('${ApiConfig.baseUrl}/learn/preferences'),
+      headers: headers,
+      body: body,
+    );
+
+    if (response.statusCode != 200) {
+      throw Exception('Failed to update learning preferences');
+    }
+  }
 }

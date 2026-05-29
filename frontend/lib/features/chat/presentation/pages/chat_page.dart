@@ -250,7 +250,7 @@ class _ChatPageState extends ConsumerState<ChatPage> {
             onTap: () {
               final topicParam = widget.topic != null ? '&topic=${Uri.encodeComponent(widget.topic!)}' : '';
               final wordsParam = widget.words != null ? '&words=${Uri.encodeComponent(widget.words!)}' : '';
-              context.push('/voice-chat?mode=${widget.mode}&level=${widget.level}$topicParam$wordsParam');
+              context.push('/voice-chat?mode=${widget.mode}&level=${widget.level}$topicParam$wordsParam&skipWelcome=true');
             },
             child: Container(
               padding: const EdgeInsets.all(12),

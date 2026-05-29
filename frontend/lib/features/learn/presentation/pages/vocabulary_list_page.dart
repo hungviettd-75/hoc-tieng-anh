@@ -10,10 +10,14 @@ import 'package:audioplayers/audioplayers.dart';
 
 class VocabularyListPage extends StatefulWidget {
   final String title;
+  final String? topicCode;
+  final String? topicName;
   
   const VocabularyListPage({
     super.key, 
     this.title = 'Kho từ vựng thông minh',
+    this.topicCode,
+    this.topicName,
   });
 
   @override
@@ -54,24 +58,42 @@ class _VocabularyListPageState extends State<VocabularyListPage> {
         if (token != null) 'Authorization': 'Bearer $token',
       };
 
+      final url = widget.topicCode != null
+          ? '${ApiConfig.baseUrl}/learn/vocabulary/topic/${widget.topicCode}?level=$_selectedLevel'
+          : '${ApiConfig.baseUrl}/learn/vocabulary?level=$_selectedLevel';
+
       final response = await http.get(
-        Uri.parse('${ApiConfig.baseUrl}/learn/vocabulary?level=$_selectedLevel'),
+        Uri.parse(url),
         headers: headers,
-      ).timeout(const Duration(seconds: 10));
+      ).timeout(const Duration(seconds: 15));
 
       if (response.statusCode == 200) {
-        final List<dynamic> data = jsonDecode(utf8.decode(response.bodyBytes));
+        final dynamic decodedBody = jsonDecode(utf8.decode(response.bodyBytes));
+        List<dynamic> data = [];
+        if (widget.topicCode != null) {
+          data = decodedBody['words'] ?? [];
+        } else {
+          data = decodedBody;
+        }
         setState(() {
           _vocabList = data.map((item) => Map<String, dynamic>.from(item)).toList();
           _isLoading = false;
         });
       } else {
+        print('ERROR fetching vocabulary: status=${response.statusCode}, body=${response.body}');
         setState(() {
-          _errorMessage = 'Không thể tải dữ liệu từ server';
+          _errorMessage = 'Lỗi server (${response.statusCode}). Vui lòng thử lại sau.';
           _isLoading = false;
         });
       }
+    } on FormatException catch (e) {
+      print('ERROR parsing vocabulary JSON: $e');
+      setState(() {
+        _errorMessage = 'Dữ liệu server không hợp lệ. Vui lòng thử lại.';
+        _isLoading = false;
+      });
     } catch (e) {
+      print('ERROR fetching vocabulary: $e');
       setState(() {
         _errorMessage = 'Lỗi kết nối. Vui lòng kiểm tra lại mạng';
         _isLoading = false;
@@ -90,7 +112,15 @@ class _VocabularyListPageState extends State<VocabularyListPage> {
           icon: const Icon(Icons.arrow_back_ios_new_rounded, color: Colors.white, size: 20),
           onPressed: () => context.pop(),
         ),
-        title: Text(widget.title, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+        title: Text(widget.topicName ?? widget.title, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.analytics_outlined, color: Colors.white, size: 24),
+            tooltip: 'Phân tích từ vựng AI',
+            onPressed: () => context.push('/vocabulary-analytics'),
+          ),
+          const SizedBox(width: 8),
+        ],
       ),
       body: Column(
         children: [
@@ -256,16 +286,16 @@ class _VocabularyListPageState extends State<VocabularyListPage> {
                     return;
                   }
 
-                  // Lấy 5 từ đầu tiên theo đúng thứ tự hiển thị trên trang để banner khớp với danh sách user đang nhìn thấy
+                  // Lấy 15 từ đầu tiên theo đúng thứ tự hiển thị trên trang để banner khớp với danh sách user đang nhìn thấy
                   final List<String> targetWords = _vocabList
-                      .take(5)
+                      .take(15)
                       .map((item) => item['word'] as String)
                       .toList();
                       
                   final String wordsParam = targetWords.join(',');
                   
-                  // Context-aware deep linking to vocabulary practice chat session with current dynamic words
-                  context.push('/chat?mode=vocabulary_practice&level=$_selectedLevel&words=${Uri.encodeComponent(wordsParam)}');
+                  // Chuyển tiếp sang màn hình chọn chế độ học (Luyện đọc hoặc Luyện ghép từ)
+                  context.push('/vocabulary-mode-selection?level=$_selectedLevel&words=${Uri.encodeComponent(wordsParam)}');
                 },
           style: ElevatedButton.styleFrom(
             backgroundColor: AppColors.primary,
@@ -325,7 +355,7 @@ class _VocabularyListPageState extends State<VocabularyListPage> {
                   children: [
                     Flexible(
                       child: Text(
-                        item['word']!,
+                        item['word'] ?? '',
                         style: const TextStyle(color: AppColors.primary, fontSize: 22, fontWeight: FontWeight.bold),
                         overflow: TextOverflow.ellipsis,
                       ),
@@ -386,11 +416,11 @@ class _VocabularyListPageState extends State<VocabularyListPage> {
             ],
           ),
           const SizedBox(height: 4),
-          Text(item['ipa']!, style: const TextStyle(color: Colors.white54, fontSize: 14, fontStyle: FontStyle.italic)),
+          Text(item['ipa'] ?? '', style: const TextStyle(color: Colors.white54, fontSize: 14, fontStyle: FontStyle.italic)),
           const SizedBox(height: 12),
-          Text(item['meaning']!, style: const TextStyle(color: AppColors.textPrimary, fontSize: 16, fontWeight: FontWeight.w500)),
+          Text(item['meaning'] ?? '', style: const TextStyle(color: AppColors.textPrimary, fontSize: 16, fontWeight: FontWeight.w500)),
           const SizedBox(height: 12),
-          _buildExampleBox(item['example']!),
+          _buildExampleBox(item['example'] ?? ''),
         ],
       ),
     );

@@ -11,12 +11,18 @@ import '../features/profile/presentation/pages/notification_settings_page.dart';
 import '../features/profile/presentation/pages/support_center_page.dart';
 import '../features/learn/presentation/pages/learn_page.dart';
 import '../features/learn/presentation/pages/vocabulary_list_page.dart';
+import '../features/learn/presentation/pages/vocabulary_mode_selection_page.dart';
+import '../features/learn/presentation/pages/vocabulary_matching_game_page.dart';
+import '../features/learn/presentation/pages/vocabulary_analytics_page.dart';
+import '../features/learn/presentation/pages/vocabulary_topics_page.dart';
+import '../features/learn/presentation/pages/vocabulary_leaderboard_page.dart';
 import '../features/learn/presentation/pages/lesson_detail_page.dart';
 import '../features/learn/models/learning_models.dart' as learn_models;
 import '../features/auth/presentation/pages/login_page.dart';
 import '../features/auth/presentation/pages/register_page.dart';
 import '../features/auth/presentation/providers/auth_provider.dart';
 import '../features/chat/presentation/pages/voice_conversation_page.dart';
+import '../features/chat/presentation/pages/roleplay_setup_page.dart';
 import '../features/speaking/presentation/pages/speaking_page.dart';
 import '../features/speaking/presentation/pages/pronunciation_practice_page.dart';
 import '../features/speaking/presentation/pages/pronunciation_result_page.dart';
@@ -52,13 +58,24 @@ final routerProvider = Provider<GoRouter>((ref) {
         builder: (context, state) => const RegisterPage(),
       ),
       GoRoute(
+        path: '/roleplay-setup',
+        builder: (context, state) => const RoleplaySetupPage(),
+      ),
+      GoRoute(
         path: '/voice-chat',
         builder: (context, state) {
           final mode = state.uri.queryParameters['mode'];
           final level = state.uri.queryParameters['level'];
           final topic = state.uri.queryParameters['topic'];
           final words = state.uri.queryParameters['words'];
-          return VoiceConversationPage(mode: mode, level: level, topic: topic, words: words);
+          final skipWelcome = state.uri.queryParameters['skipWelcome'] == 'true';
+          return VoiceConversationPage(
+            mode: mode,
+            level: level,
+            topic: topic,
+            words: words,
+            skipWelcome: skipWelcome,
+          );
         },
       ),
       // Speaking practice & result - fullscreen (ngoài ShellRoute)
@@ -153,7 +170,41 @@ final routerProvider = Provider<GoRouter>((ref) {
           ),
           GoRoute(
             path: '/vocabulary-list',
-            builder: (context, state) => const VocabularyListPage(),
+            builder: (context, state) => const VocabularyTopicsPage(),
+          ),
+          GoRoute(
+            path: '/vocabulary-topic-detail',
+            builder: (context, state) {
+              final code = state.uri.queryParameters['code'];
+              final name = state.uri.queryParameters['name'];
+              return VocabularyListPage(
+                topicCode: code,
+                topicName: name,
+              );
+            },
+          ),
+          GoRoute(
+            path: '/vocabulary-mode-selection',
+            builder: (context, state) {
+              final level = state.uri.queryParameters['level'] ?? 'B1';
+              final words = state.uri.queryParameters['words'] ?? '';
+              return VocabularyModeSelectionPage(level: level, words: words);
+            },
+          ),
+          GoRoute(
+            path: '/vocabulary-matching-game',
+            builder: (context, state) {
+              final level = state.uri.queryParameters['level'] ?? 'B1';
+              return VocabularyMatchingGamePage(level: level);
+            },
+          ),
+          GoRoute(
+            path: '/vocabulary-analytics',
+            builder: (context, state) => const VocabularyAnalyticsPage(),
+          ),
+          GoRoute(
+            path: '/vocabulary-leaderboard',
+            builder: (context, state) => const VocabularyLeaderboardPage(),
           ),
         ],
       ),

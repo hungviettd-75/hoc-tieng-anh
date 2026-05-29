@@ -11,3 +11,10 @@ final learningDashboardProvider = FutureProvider<LearningDashboardData>((ref) as
   final service = ref.read(learnServiceProvider);
   return await service.getDashboardData();
 });
+
+// Quản lý trình độ từ vựng được chọn
+final selectedLevelProvider = StateProvider<String>((ref) => 'B1');
+
+// Quản lý chế độ học từ vựng được chọn (ví dụ: 'reading' hoặc 'matching')
+final learningModeProvider = StateProvider<String?>((ref) => null);
+

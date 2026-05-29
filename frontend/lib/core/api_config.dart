@@ -10,9 +10,14 @@ class ApiConfig {
       return 'https://ai-english-coach-backend.onrender.com';
     }
     if (kIsWeb) {
-      final uri = Uri.base;
-      if (uri.host == 'localhost' || uri.host == '127.0.0.1' || uri.host.startsWith('192.168.')) {
-        return 'http://${uri.host}:8000';
+      try {
+        final uri = Uri.base;
+        if (uri.host == 'localhost' || uri.host == '127.0.0.1' || uri.host.startsWith('192.168.')) {
+          return 'http://${uri.host}:8000';
+        }
+      } catch (e) {
+        print('Error getting Uri.base on web: $e');
+        return 'http://localhost:8000';
       }
     }
     if (kDebugMode) {
@@ -26,9 +31,14 @@ class ApiConfig {
       return 'wss://ai-english-coach-backend.onrender.com/api/v1';
     }
     if (kIsWeb) {
-      final uri = Uri.base;
-      if (uri.host == 'localhost' || uri.host == '127.0.0.1' || uri.host.startsWith('192.168.')) {
-        return 'ws://${uri.host}:8000/api/v1';
+      try {
+        final uri = Uri.base;
+        if (uri.host == 'localhost' || uri.host == '127.0.0.1' || uri.host.startsWith('192.168.')) {
+          return 'ws://${uri.host}:8000/api/v1';
+        }
+      } catch (e) {
+        print('Error getting Uri.base for ws on web: $e');
+        return 'ws://localhost:8000/api/v1';
       }
     }
     if (kDebugMode) {

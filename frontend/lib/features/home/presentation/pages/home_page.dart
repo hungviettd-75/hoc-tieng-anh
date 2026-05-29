@@ -379,33 +379,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                 Icons.groups_rounded, 
                 'Nhập vai', 
                 Colors.green, 
-                onTap: () {
-                  final random = Random();
-                  final randomTopic = _roleplayTopics[random.nextInt(_roleplayTopics.length)];
-                  
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Row(
-                        children: [
-                          const Icon(Icons.casino_rounded, color: Colors.white),
-                          const SizedBox(width: 8),
-                          Expanded(
-                            child: Text(
-                              'Chủ đề: $randomTopic',
-                              style: const TextStyle(fontWeight: FontWeight.bold),
-                            ),
-                          ),
-                        ],
-                      ),
-                      backgroundColor: Colors.green,
-                      duration: const Duration(seconds: 2),
-                      behavior: SnackBarBehavior.floating,
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                    ),
-                  );
-                  
-                  context.push('/voice-chat?mode=roleplay&topic=${Uri.encodeComponent(randomTopic)}');
-                },
+                onTap: () => context.push('/roleplay-setup'),
               ),
             ],
           ),
