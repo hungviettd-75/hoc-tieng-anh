@@ -13,7 +13,7 @@ class ConversationMemory:
     - Track mistakes trong session
     """
 
-    def __init__(self, max_recent: int = 4, summary_interval: int = 6):
+    def __init__(self, max_recent: int = 20, summary_interval: int = 24):
         self._sessions: Dict[int, Dict] = {}
         self._max_recent = max_recent
         self._summary_interval = summary_interval

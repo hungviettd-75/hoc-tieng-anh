@@ -85,8 +85,9 @@ async def generate_azure_tts(
                 continue
  
             if p_lang == "vi":
-                v_name = "vi-VN-HoaiMyNeural"
-                p_rate = "+0%"
+                # Sử dụng giọng đa ngôn ngữ AvaMultilingualNeural cực kỳ ổn định và phát âm tiếng Việt rất tự nhiên, tránh lỗi "No audio was received" của các giọng vi-VN gốc.
+                v_name = "en-US-AvaMultilingualNeural"
+                p_rate = "-3%"
             else:
                 # Sử dụng giọng đọc chuẩn Anh-Anh (British English) quý phái, rõ ràng, dễ nghe
                 v_name = "en-GB-SoniaNeural"
@@ -101,10 +102,10 @@ async def generate_azure_tts(
                     if chunk["type"] == "audio":
                         audio_data += chunk["data"]
                 
-                # Nếu giọng đọc tiếng Việt của Microsoft bị lỗi, tự động chuyển sang dùng giọng đa ngôn ngữ cứu hộ
+                # Nếu giọng đọc tiếng Việt Ava bị lỗi, tự động chuyển sang dùng giọng nam đa ngôn ngữ Andrew cứu hộ
                 if not audio_data and p_lang == "vi":
                     print(f"WARN: Native {v_name} failed. Activating Multilingual Rescue Voice for: {p_text}")
-                    rescue_communicate = edge_tts.Communicate(p_text, "en-US-AvaMultilingualNeural", rate="-4%")
+                    rescue_communicate = edge_tts.Communicate(p_text, "en-US-AndrewMultilingualNeural", rate="-4%")
                     async for chunk in rescue_communicate.stream():
                         if chunk["type"] == "audio":
                             audio_data += chunk["data"]

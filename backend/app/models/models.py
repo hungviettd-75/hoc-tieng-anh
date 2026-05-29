@@ -32,7 +32,8 @@ class User(Base):
     missions = relationship("UserMission", back_populates="user", cascade="all, delete-orphan")
     rewards = relationship("Reward", back_populates="user", cascade="all, delete-orphan")
     subscription = relationship("UserSubscription", back_populates="user", uselist=False)
-
+    vocabulary_games = relationship("VocabularyGame", back_populates="user", cascade="all, delete-orphan")
+    
 class Conversation(Base):
     __tablename__ = "conversations"
     id = Column(Integer, primary_key=True, index=True)
@@ -347,3 +348,140 @@ class Lesson(Base):
     is_active = Column(Boolean, default=True)
     order_index = Column(Integer, default=0)
     created_at = Column(DateTime(timezone=True), server_default=func.now())
+
+class VocabularyGame(Base):
+    __tablename__ = "vocabulary_games"
+    id = Column(Integer, primary_key=True, index=True)
+    user_id = Column(Integer, ForeignKey("users.id"))
+    level = Column(String, nullable=False)
+    score = Column(Integer, default=0)
+    xp_earned = Column(Integer, default=0)
+    duration_seconds = Column(Integer, default=0)
+    created_at = Column(DateTime(timezone=True), server_default=func.now())
+    
+    user = relationship("User", back_populates="vocabulary_games")
+    attempts = relationship("VocabularyAttempt", back_populates="game", cascade="all, delete-orphan")
+
+class VocabularyAttempt(Base):
+    __tablename__ = "vocabulary_attempts"
+    id = Column(Integer, primary_key=True, index=True)
+    game_id = Column(Integer, ForeignKey("vocabulary_games.id"))
+    word = Column(String, nullable=False)
+    user_answer = Column(String)
+    is_correct = Column(Boolean, default=False)
+    created_at = Column(DateTime(timezone=True), server_default=func.now())
+    
+    game = relationship("VocabularyGame", back_populates="attempts")
+
+class VocabularyWrongAnswer(Base):
+    __tablename__ = "vocabulary_wrong_answers"
+    id = Column(Integer, primary_key=True, index=True)
+    user_id = Column(Integer, ForeignKey("users.id"))
+    word = Column(String, nullable=False, index=True)
+    error_count = Column(Integer, default=1)
+    last_attempt_at = Column(DateTime(timezone=True), server_default=func.now(), onupdate=func.now())
+
+class VocabularyMasteredWord(Base):
+    __tablename__ = "vocabulary_mastered_words"
+    id = Column(Integer, primary_key=True, index=True)
+    user_id = Column(Integer, ForeignKey("users.id"))
+    word = Column(String, nullable=False, index=True)
+    correct_streak = Column(Integer, default=1)
+    mastered_at = Column(DateTime(timezone=True), server_default=func.now())
+
+class VocabularyMemory(Base):
+    __tablename__ = "vocabulary_memory"
+    id = Column(Integer, primary_key=True, index=True)
+    user_id = Column(Integer, ForeignKey("users.id"))
+    word = Column(String, nullable=False, index=True)
+    ease_factor = Column(Float, default=2.5)  # SM-2 ease factor
+    interval_days = Column(Integer, default=0)
+    repetitions = Column(Integer, default=0)
+    last_reviewed_at = Column(DateTime(timezone=True), server_default=func.now())
+    next_review_at = Column(DateTime(timezone=True), server_default=func.now())
+
+class VocabularyReviewSchedule(Base):
+    __tablename__ = "vocabulary_review_schedules"
+    id = Column(Integer, primary_key=True, index=True)
+    user_id = Column(Integer, ForeignKey("users.id"))
+    word = Column(String, nullable=False, index=True)
+    scheduled_for = Column(DateTime(timezone=True), nullable=False)
+    status = Column(String, default="pending")  # pending, completed
+    created_at = Column(DateTime(timezone=True), server_default=func.now())
+
+class VocabularyTopic(Base):
+    __tablename__ = "vocabulary_topics"
+    id = Column(Integer, primary_key=True, index=True)
+    name = Column(String, nullable=False)
+    code = Column(String, nullable=False, unique=True, index=True)
+    icon = Column(String)
+    description = Column(String)
+
+class VocabularyTopicProgress(Base):
+    __tablename__ = "vocabulary_topic_progress"
+    id = Column(Integer, primary_key=True, index=True)
+    user_id = Column(Integer, ForeignKey("users.id"))
+    topic_code = Column(String, nullable=False, index=True)
+    level = Column(String, nullable=False)
+    mastered_count = Column(Integer, default=0)
+    total_count = Column(Integer, default=0)
+    last_studied_at = Column(DateTime(timezone=True), server_default=func.now(), onupdate=func.now())
+
+class VocabularyXP(Base):
+    __tablename__ = "vocabulary_xp"
+    id = Column(Integer, primary_key=True, index=True)
+    user_id = Column(Integer, ForeignKey("users.id"))
+    xp = Column(Integer, default=0)
+    level = Column(Integer, default=1)
+    weekly_xp = Column(Integer, default=0)
+    last_earned_at = Column(DateTime(timezone=True), server_default=func.now(), onupdate=func.now())
+
+class VocabularyAchievement(Base):
+    __tablename__ = "vocabulary_achievements"
+    id = Column(Integer, primary_key=True, index=True)
+    user_id = Column(Integer, ForeignKey("users.id"))
+    achievement_code = Column(String, nullable=False, index=True) # e.g. "first_perfect", "streak_10", "vocab_master"
+    title = Column(String, nullable=False)
+    description = Column(String)
+    unlocked_at = Column(DateTime(timezone=True), server_default=func.now())
+
+class DailyChallenge(Base):
+    __tablename__ = "daily_challenges"
+    id = Column(Integer, primary_key=True, index=True)
+    title = Column(String, nullable=False)
+    description = Column(String)
+    target_value = Column(Integer, default=1) # e.g. 3 games, 100 points
+    xp_reward = Column(Integer, default=50)
+    challenge_type = Column(String, nullable=False) # e.g. "play_games", "score_points", "perfect_game"
+    created_at = Column(DateTime(timezone=True), server_default=func.now())
+
+class VocabularyReport(Base):
+    __tablename__ = "vocabulary_reports"
+    id = Column(Integer, primary_key=True, index=True)
+    user_id = Column(Integer, ForeignKey("users.id"))
+    game_id = Column(Integer, ForeignKey("vocabulary_games.id"))
+    words_learned_count = Column(Integer, default=0)
+    correct_answers_count = Column(Integer, default=0)
+    accuracy = Column(Float, default=0.0)
+    max_combo = Column(Integer, default=0)
+    xp_earned = Column(Integer, default=0)
+    ai_insights_json = Column(JSON) # e.g. {"words_to_review": [], "weak_points": [], "suggested_topics": []}
+    created_at = Column(DateTime(timezone=True), server_default=func.now())
+
+class DailyVocabularyProgress(Base):
+    __tablename__ = "daily_vocabulary_progress"
+    id = Column(Integer, primary_key=True, index=True)
+    user_id = Column(Integer, ForeignKey("users.id"))
+    date = Column(DateTime(timezone=True), server_default=func.now())
+    words_studied = Column(Integer, default=0)
+    minutes_spent = Column(Integer, default=0)
+    xp_earned = Column(Integer, default=0)
+
+class VocabularyLearningStatistics(Base):
+    __tablename__ = "vocabulary_learning_statistics"
+    id = Column(Integer, primary_key=True, index=True)
+    user_id = Column(Integer, ForeignKey("users.id"))
+    total_words_studied = Column(Integer, default=0)
+    total_games_played = Column(Integer, default=0)
+    overall_accuracy = Column(Float, default=100.0)
+    updated_at = Column(DateTime(timezone=True), server_default=func.now(), onupdate=func.now())

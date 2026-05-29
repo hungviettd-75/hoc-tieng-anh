@@ -5,12 +5,85 @@ from app.services.ai_router import ai_router
 from app.services.conversation_memory import conversation_memory
 from app.services.vietnamese_tutor_engine import vietnamese_tutor
 from app.db.session import SessionLocal
-from app.models.models import Conversation, Message as DBMessage
+from app.models.models import Conversation, Message as DBMessage, PronunciationSession, PronunciationScore, ActivityLog, User
+from app.api import deps
+from sqlalchemy.orm import Session
+from pydantic import BaseModel
 import json
 import asyncio
 import time
 
+class RoleplaySessionCreate(BaseModel):
+    duration_minutes: int
+    sentence_count: int
+    pronunciation_errors_count: int
+    grammar_errors_count: int
+    pronunciation_score: float
+    fluency_score: float
+    confidence_score: float
+    topic: str
+    level: str
+
 router = APIRouter()
+
+@router.post("/roleplay/session")
+def save_roleplay_session(
+    session_data: RoleplaySessionCreate,
+    db: Session = Depends(deps.get_db),
+    current_user: User = Depends(deps.get_current_user)
+):
+    # 1. Tạo PronunciationSession
+    overall = (session_data.pronunciation_score + session_data.fluency_score + session_data.confidence_score) / 3.0
+    db_session = PronunciationSession(
+        user_id=current_user.id,
+        target_text=f"Roleplay topic: {session_data.topic}",
+        transcribed_text=f"Completed {session_data.level} roleplay on topic '{session_data.topic}'",
+        overall_score=overall
+    )
+    db.add(db_session)
+    db.flush() # Để lấy db_session.id
+    
+    # 2. Tạo PronunciationScores
+    metrics = [
+        ("pronunciation", session_data.pronunciation_score, "Phát âm trong buổi nhập vai."),
+        ("fluency", session_data.fluency_score, "Độ lưu loát khi nhập vai."),
+        ("confidence", session_data.confidence_score, "Độ tự tin khi luyện nói.")
+    ]
+    for metric, score, feedback in metrics:
+        db_score = PronunciationScore(
+            session_id=db_session.id,
+            metric=metric,
+            score=score,
+            feedback=feedback
+        )
+        db.add(db_score)
+        
+    # 3. Tạo ActivityLog
+    # Tính toán XP: 50 base XP + (sentence_count * 2) (tối đa 100 XP)
+    xp_earned = min(100, 50 + session_data.sentence_count * 2)
+    db_activity = ActivityLog(
+        user_id=current_user.id,
+        activity_type="roleplay",
+        duration_minutes=session_data.duration_minutes,
+        xp_earned=xp_earned
+    )
+    db.add(db_activity)
+    
+    # 4. Cộng XP cho User
+    from app.services.gamification_service import gamification_service
+    user_xp, leveled_up = gamification_service.add_xp(db, current_user.id, xp_earned)
+    
+    db.commit()
+    
+    return {
+        "message": "Saved roleplay session successfully",
+        "session_id": db_session.id,
+        "xp_earned": xp_earned,
+        "total_xp": user_xp.total_xp,
+        "level": user_xp.level,
+        "leveled_up": leveled_up
+    }
+
 
 
 class ConnectionManager:
@@ -98,6 +171,7 @@ async def websocket_endpoint(
             "Bạn là AI English Coach chuyên hỗ trợ học viên Luyện tập Từ vựng Thông minh.\n"
             f"DANH SÁCH TỪ VỰNG BẮT BUỘC (trình độ {level}) - CHỈ DẠY CÁC TỪ NÀY, TUYỆT ĐỐI KHÔNG DẠY TỪ NÀO KHÁC:\n"
             f"{numbered_words}\n"
+            f"\nTổng cộng: {len(vocab_words)} từ vựng.\n"
             "\nQUY TẮC DẪN DẮT NGHIÊM NGẶT:\n"
             "1. CHỈ DẠY CÁC TỪ TRONG DANH SÁCH TRÊN. TUYỆT ĐỐI CẤM giới thiệu, dạy, hoặc yêu cầu học viên đọc bất kỳ từ nào KHÔNG có trong danh sách trên. Đây là quy tắc quan trọng nhất.\n"
             "2. HỌC TỪNG TỪ MỘT THEO ĐÚNG THỨ TỰ: Bắt đầu từ Từ 1, rồi Từ 2, Từ 3... Tuyệt đối không nhảy cóc hay thay đổi thứ tự.\n"
@@ -105,7 +179,11 @@ async def websocket_endpoint(
             "   - Bước 1: Giới thiệu từ vựng, phiên âm IPA, nghĩa tiếng Việt và đặt 1 câu ví dụ siêu ngắn.\n"
             "   - Bước 2: Yêu cầu học viên phát âm từ vựng đó.\n"
             "   - Bước 3: Nhận xét ngắn gọn về phát âm của học viên, giải thích nhanh cách sử dụng thực tế (nếu cần), rồi giới thiệu từ tiếp theo trong danh sách.\n"
-            "4. LUÔN GIAO TIẾP BẰNG TIẾNG VIỆT thân thiện, ngắn gọn (tối đa 2-3 câu mỗi lượt)."
+            "4. LUÔN GIAO TIẾP BẰNG TIẾNG VIỆT thân thiện, ngắn gọn (tối đa 2-3 câu mỗi lượt).\n"
+            f"5. KẾT THÚC BUỔI HỌC: Khi đã dạy HẾT tất cả {len(vocab_words)} từ trong danh sách (sau khi học viên phát âm xong từ cuối cùng), "
+            "bạn PHẢI tổng kết buổi học bằng cách: khen ngợi học viên, tóm tắt ngắn gọn các từ đã học, và nói 'Buổi học hôm nay hoàn thành! 🎉'. "
+            "TUYỆT ĐỐI KHÔNG quay lại dạy từ đã dạy rồi.\n"
+            "6. KHÔNG BAO GIỜ yêu cầu học viên phát âm lại một từ đã dạy xong ở bước trước. Mỗi từ chỉ được dạy MỘT LẦN DUY NHẤT."
         )
         welcome_prompt = (
             f"Hãy chào đón học viên bằng Tiếng Việt thân thiện, nói hôm nay sẽ học {len(vocab_words)} từ vựng trình độ {level}. "
@@ -113,21 +191,46 @@ async def websocket_endpoint(
             f"CHÚ Ý: Từ đầu tiên BẮT BUỘC phải là '{vocab_words[0]}', KHÔNG ĐƯỢC dạy từ nào khác."
         )
     elif mode == "roleplay" and topic:
+        # Dynamic Scenario Generator: AI tự sáng tạo bối cảnh đa dạng mỗi lần học
+        level_tag = f" (trình độ {level})" if level else ""
         custom_instruction = (
-            f"Bạn là AI chuyên gia nhập vai tiếng Anh trong tình huống giao tiếp thực tế: '{topic}'.\n"
-            "QUY TẮC:\n"
-            "1. Bạn PHẢI đóng đúng vai trò hội thoại phù hợp với tình huống này.\n"
-            "   - Nếu tình huống là nhà hàng, bạn là nhân viên phục vụ (Waiter/Waitress), học viên là khách hàng.\n"
-            "   - Nếu tình huống là sân bay, bạn là nhân viên check-in, học viên là hành khách.\n"
-            "   - Đối với bất kỳ tình huống nào khác, hãy đóng vai trò đối thoại tự nhiên tương ứng.\n"
-            "2. GIAO TIẾP CHỦ YẾU BẰNG TIẾNG ANH (ngắn gọn, 1-2 câu mỗi lượt) để kéo học viên vào vai diễn.\n"
-            "3. Hỗ trợ sư phạm: Nếu học viên nói sai ngữ pháp hoặc phát âm, bạn có thể kèm giải thích/gợi ý ngắn gọn bằng Tiếng Việt ở cuối câu thoại.\n"
-            "4. Hãy dẫn dắt tình huống tự nhiên, đặt câu hỏi hoặc đưa ra gợi mở để thúc đẩy cuộc hội thoại."
+            f"Bạn là AI chuyên gia nhập vai tiếng Anh{level_tag} trong chủ đề: '{topic}'.\n"
+            "QUY TẮC SÁNG TẠO BỐI CẢNH ĐỘNG:\n"
+            "1. MỖI LẦN HỌC, bạn PHẢI TỰ SÁNG TẠO một bối cảnh nhập vai HOÀN TOÀN MỚI và KHÁC BIỆT liên quan đến chủ đề.\n"
+            "   - TUYỆT ĐỐI KHÔNG lặp lại kịch bản cũ hay dùng template cố định.\n"
+            "   - Hãy sáng tạo các tình huống thực tế, bất ngờ, thú vị (ví dụ: cùng chủ đề Du lịch nhưng lần này có thể là check-in khách sạn, lần khác là mua vé tàu, lần khác là hỏi đường tại Tokyo...).\n"
+            "2. Bạn tự chọn vai trò phù hợp cho mình VÀ cho học viên dựa trên bối cảnh đã sáng tạo.\n"
+            "3. GIAO TIẾP CHỦ YẾU BẰNG TIẾNG ANH (ngắn gọn, 1-2 câu mỗi lượt) để kéo học viên vào vai diễn.\n"
+            "4. Hỗ trợ sư phạm: Nếu học viên nói sai ngữ pháp hoặc phát âm, bạn có thể kèm giải thích/gợi ý ngắn gọn bằng Tiếng Việt ở cuối câu thoại.\n"
+            "5. Hãy dẫn dắt tình huống tự nhiên, đặt câu hỏi hoặc đưa ra gợi mở để thúc đẩy cuộc hội thoại.\n"
+            f"6. QUY TẮC BÁM SÁT CHỦ ĐỀ (TUYỆT ĐỐI TUÂN THỦ):\n"
+            f"   - TOÀN BỘ buổi học phải xoay quanh CHỦ ĐỀ DUY NHẤT: '{topic}'.\n"
+            f"   - TUYỆT ĐỐI KHÔNG được tự ý chuyển sang chủ đề khác dù học viên nói gì.\n"
+            f"   - Nếu học viên đi lạc đề, hãy nhẹ nhàng kéo họ quay lại chủ đề '{topic}' bằng một câu hỏi mới liên quan.\n"
+            f"   - Hãy khai thác sâu nhiều khía cạnh khác nhau TRONG chủ đề '{topic}' (ví dụ: đặt phòng, hỏi giá, yêu cầu dịch vụ, than phiền, thanh toán...) thay vì nhảy sang chủ đề ngoài.\n"
+            "7. QUY TẮC CHỦ ĐỘNG TƯƠNG TÁC (BẮT BUỘC):\n"
+            "   - SAU MỖI CÂU TRẢ LỜI CỦA HỌC VIÊN, bạn BẮT BUỘC phải phản hồi VÀ đặt thêm 1 câu hỏi tiếp theo hoặc đưa ra tình huống mới trong cùng chủ đề để cuộc hội thoại KHÔNG BAO GIỜ bị ngắt quãng.\n"
+            "   - TUYỆT ĐỐI KHÔNG chỉ trả lời rồi im lặng. Luôn kết thúc lượt thoại bằng 1 câu hỏi hoặc 1 gợi mở mới.\n"
+            "   - HỖ TRỢ KHI BẾ TẮC: Nếu học viên nói 'I don't know', im lặng hoặc bế tắc, bạn BẮT BUỘC phải nói 1 câu Tiếng Việt động viên nồng ấm, gợi ý 1-2 câu trả lời mẫu Tiếng Anh đơn giản kèm dịch Tiếng Việt, hoặc chuyển sang 1 tình huống mới dễ hơn TRONG CÙNG CHỦ ĐỀ."
         )
         welcome_prompt = (
-            f"Học viên vừa tham gia tình huống nhập vai thực tế: '{topic}'. "
-            "Hãy gửi lời chào chào mừng bằng Tiếng Việt nồng ấm, giới thiệu rõ vai diễn của bạn và vai diễn của học viên trong tình huống này. "
-            "Sau đó đưa ra câu thoại tiếng Anh đầu tiên để dẫn dắt học viên bắt đầu nhập vai."
+            f"Học viên vừa chọn chủ đề nhập vai: '{topic}'{level_tag}.\n"
+            "BẮT BUỘC THỰC HIỆN THEO ĐÚNG THỨ TỰ SAU (KHÔNG ĐƯỢC BỎ QUA BƯỚC NÀO):\n"
+            "BƯỚC 1 - CHÀO HỌC VIÊN: Nói 1 câu tiếng Việt chào mừng nồng ấm, xác nhận chủ đề hôm nay.\n"
+            "   Ví dụ: 'Chào bạn! Hôm nay chúng ta sẽ cùng luyện chủ đề Du lịch nhé! 🌍✈️'\n"
+            "BƯỚC 2 - GIỚI THIỆU MỤC TIÊU: Nói bằng tiếng Việt 1-2 câu ngắn về mục tiêu buổi học.\n"
+            "   Ví dụ: 'Mục tiêu hôm nay: Luyện giao tiếp tự nhiên khi check-in khách sạn, hỏi giá phòng và yêu cầu dịch vụ.'\n"
+            "BƯỚC 3 - TẠO BỐI CẢNH MỚI: Sáng tạo 1 bối cảnh nhập vai CỤ THỂ, SINH ĐỘNG, KHÔNG LẶP LẠI.\n"
+            "   - Mô tả ngắn gọn bối cảnh bằng tiếng Việt (địa điểm, thời gian, hoàn cảnh cụ thể).\n"
+            "   - Nêu rõ VAI TRÒ của AI (ví dụ: lễ tân khách sạn 5 sao, đầu bếp Ý, hướng dẫn viên du lịch...).\n"
+            "   - Nêu rõ VAI TRÒ của học viên (ví dụ: khách du lịch, khách hàng VIP, ứng viên xin việc...).\n"
+            "BƯỚC 4 - CÂU MỞ ĐẦU SONG NGỮ (BẮT BUỘC VỪA TIẾNG VIỆT VỪA TIẾNG ANH):\n"
+            "   a) Nói 1 câu Tiếng Việt động viên thân thiện để học viên tự tin, ví dụ: 'Bạn cứ thoải mái nhé, mình sẽ bắt đầu trước! 😊'\n"
+            "   b) Đưa ra câu thoại Tiếng Anh đầu tiên (1 câu ngắn gọn) của vai diễn AI.\n"
+            "   c) Kèm ngay bản dịch Tiếng Việt trong ngoặc đơn dạng '(Dịch: ...)' để học viên hiểu ý nghĩa.\n"
+            "   d) Gợi ý 1-2 câu trả lời mẫu siêu đơn giản bằng Tiếng Anh kèm dịch Tiếng Việt để học viên có thể bắt chước nói theo ngay.\n"
+            "   Ví dụ chuẩn: 'Bạn cứ thoải mái nhé, mình bắt đầu trước! 😊 Good evening! Welcome to our hotel. Do you have a reservation? (Dịch: Chào buổi tối! Chào mừng đến khách sạn. Bạn đã đặt phòng chưa?) 💡 Bạn có thể trả lời: \"Yes, I have a reservation.\" (Dịch: \"Vâng, tôi đã đặt phòng.\")'\n"
+            "TUYỆT ĐỐI KHÔNG viết thêm gợi ý dài dòng hay giải thích luật chơi. Chỉ thực hiện đúng 4 bước trên."
         )
     elif mode == "free_talk":
         custom_instruction = (
@@ -311,6 +414,7 @@ async def realtime_voice_endpoint(
             "Bạn là AI English Coach chuyên hỗ trợ học viên Luyện tập Từ vựng Thông minh.\n"
             f"DANH SÁCH TỪ VỰNG BẮT BUỘC (trình độ {level}) - CHỈ DẠY CÁC TỪ NÀY, TUYỆT ĐỐI KHÔNG DẠY TỪ NÀO KHÁC:\n"
             f"{numbered_words}\n"
+            f"\nTổng cộng: {len(vocab_words)} từ vựng.\n"
             "\nQUY TẮC DẪN DẮT NGHIÊM NGẶT:\n"
             "1. CHỈ DẠY CÁC TỪ TRONG DANH SÁCH TRÊN. TUYỆT ĐỐI CẤM giới thiệu, dạy, hoặc yêu cầu học viên đọc bất kỳ từ nào KHÔNG có trong danh sách trên. Đây là quy tắc quan trọng nhất.\n"
             "2. HỌC TỪNG TỪ MỘT THEO ĐÚNG THỨ TỰ: Bắt đầu từ Từ 1, rồi Từ 2, Từ 3... Tuyệt đối không nhảy cóc hay thay đổi thứ tự.\n"
@@ -318,7 +422,11 @@ async def realtime_voice_endpoint(
             "   - Bước 1: Giới thiệu từ vựng, phiên âm IPA, nghĩa tiếng Việt và câu ví dụ cực ngắn.\n"
             "   - Bước 2: Yêu cầu học viên đọc to (phát âm) từ đó.\n"
             "   - Bước 3: Nhận xét ngắn gọn về phát âm của học viên, sau đó giới thiệu từ tiếp theo TRONG DANH SÁCH.\n"
-            "4. LUÔN GIAO TIẾP BẰNG TIẾNG VIỆT ngắn gọn (tối đa 2 câu mỗi lượt để phù hợp với giao tiếp Voice)."
+            "4. LUÔN GIAO TIẾP BẰNG TIẾNG VIỆT ngắn gọn (tối đa 2 câu mỗi lượt để phù hợp với giao tiếp Voice).\n"
+            f"5. KẾT THÚC BUỔI HỌC: Khi đã dạy HẾT tất cả {len(vocab_words)} từ trong danh sách (sau khi học viên phát âm xong từ cuối cùng), "
+            "bạn PHẢI tổng kết buổi học bằng cách: khen ngợi học viên, tóm tắt ngắn gọn các từ đã học, và nói 'Buổi học hôm nay hoàn thành! 🎉'. "
+            "TUYỆT ĐỐI KHÔNG quay lại dạy từ đã dạy rồi.\n"
+            "6. KHÔNG BAO GIỜ yêu cầu học viên phát âm lại một từ đã dạy xong ở bước trước. Mỗi từ chỉ được dạy MỘT LẦN DUY NHẤT."
         )
         welcome_prompt = (
             f"Hãy gửi lời chào bằng Tiếng Việt siêu ngắn gọn (tối đa 1-2 câu), nói hôm nay sẽ học {len(vocab_words)} từ vựng trình độ {level}. "
@@ -326,22 +434,34 @@ async def realtime_voice_endpoint(
             f"CHÚ Ý: Từ đầu tiên BẮT BUỘC phải là '{vocab_words[0]}', KHÔNG ĐƯỢC dạy từ nào khác."
         )
     elif mode == "roleplay" and topic:
+        # Dynamic Scenario Generator: AI tự sáng tạo bối cảnh đa dạng mỗi lần học
+        level_tag = f" (trình độ {level})" if level else ""
         custom_instruction = (
-            f"Bạn là AI chuyên gia nhập vai tiếng Anh trong tình huống giao tiếp thực tế: '{topic}'.\n"
-            "QUY TẮC:\n"
-            "1. Bạn PHẢI đóng đúng vai trò hội thoại phù hợp với tình huống này.\n"
-            "   - Nếu tình huống là nhà hàng, bạn là nhân viên phục vụ (Waiter/Waitress), học viên là khách hàng.\n"
-            "   - Nếu tình huống là sân bay, bạn là nhân viên check-in, học viên là hành khách.\n"
-            "   - Đối với bất kỳ tình huống nào khác, hãy đóng vai trò đối thoại tự nhiên tương ứng.\n"
-            "2. GIAO TIẾP CHỦ YẾU BẰNG TIẾNG ANH (ngắn gọn, 1-2 câu mỗi lượt) để kéo học viên vào vai diễn.\n"
-            "3. TUYỆT ĐỐI KHÔNG chèn bất kỳ phần giải thích ngữ pháp, sửa lỗi hay nhắc nhở lỗi sai nào trong câu thoại này. Việc phân tích lỗi đã có một hệ thống chuyên biệt khác tự động xử lý và hiển thị ở Thẻ Vàng AI Correction. Bạn chỉ tập trung 100% vào việc đưa ra câu thoại nhập vai tự nhiên nhất.\n"
-            "4. Hãy dẫn dắt tình huống tự nhiên, đặt câu hỏi hoặc đưa ra gợi mở để thúc đẩy cuộc hội thoại.\n"
-            "5. HỖ TRỢ KHI BẾ TẮC: Nếu học viên nói 'I don't know', 'I don't understand' hoặc im lặng/bế tắc, bạn BẮT BUỘC phải nói 1 câu Tiếng Việt động viên ngắn gọn, sau đó gợi ý cho họ 2 câu thoại Tiếng Anh mẫu siêu đơn giản phù hợp tình huống (ví dụ: 'Yes, please' hoặc 'Here you go') để họ tự tin bắt chước nói theo."
+            f"Bạn là AI chuyên gia nhập vai tiếng Anh{level_tag} trong chủ đề: '{topic}'.\n"
+            "QUY TẮC SÁNG TẠO BỐI CẢNH ĐỘNG:\n"
+            "1. MỖI LẦN HỌC, bạn PHẢI TỰ SÁNG TẠO một bối cảnh nhập vai HOÀN TOÀN MỚI và KHÁC BIỆT liên quan đến chủ đề.\n"
+            "   - TUYỆT ĐỐI KHÔNG lặp lại kịch bản cũ hay dùng template cố định.\n"
+            "   - Hãy sáng tạo các tình huống thực tế, bất ngờ, thú vị.\n"
+            "2. Bạn tự chọn vai trò phù hợp cho mình VÀ cho học viên dựa trên bối cảnh đã sáng tạo.\n"
+            "3. GIAO TIẾP CHỦ YẾU BẰNG TIẾNG ANH (ngắn gọn, 1-2 câu mỗi lượt) để kéo học viên vào vai diễn.\n"
+            "4. TUYỆT ĐỐI KHÔNG chèn bất kỳ phần giải thích ngữ pháp, sửa lỗi hay nhắc nhở lỗi sai nào trong câu thoại. Việc phân tích lỗi đã có hệ thống chuyên biệt khác xử lý ở Thẻ Vàng AI Correction.\n"
+            "5. Hãy dẫn dắt tình huống tự nhiên, đặt câu hỏi hoặc đưa ra gợi mở để thúc đẩy cuộc hội thoại.\n"
+            "6. HỖ TRỢ KHI BẾ TẮC: Nếu học viên nói 'I don't know', 'I don't understand' hoặc im lặng/bế tắc, bạn BẮT BUỘC phải nói 1 câu Tiếng Việt động viên ngắn gọn, sau đó gợi ý cho họ 2 câu thoại Tiếng Anh mẫu siêu đơn giản phù hợp tình huống để họ tự tin bắt chước nói theo."
         )
         welcome_prompt = (
-            f"Hãy gửi lời chào bằng Tiếng Việt siêu ngắn gọn (tối đa 1-2 câu ngắn) giới thiệu vai diễn của bạn và của học viên "
-            f"trong tình huống '{topic}'. Sau đó, đưa ra ngay câu thoại tiếng Anh đầu tiên "
-            "của bạn (tối đa 1 câu ngắn) để dẫn dắt học viên nhập vai ngay lập tức. TUYỆT ĐỐI không viết gợi ý hay hướng dẫn dài dòng."
+            f"Học viên vừa chọn chủ đề nhập vai: '{topic}'{level_tag}.\n"
+            "BẮT BUỘC THỰC HIỆN THEO ĐÚNG THỨ TỰ SAU (KHÔNG ĐƯỢC BỎ QUA BƯỚC NÀO):\n"
+            "BƯỚC 1 - CHÀO HỌC VIÊN: Nói 1 câu tiếng Việt ngắn gọn chào mừng, xác nhận chủ đề hôm nay.\n"
+            "BƯỚC 2 - MỤC TIÊU: Nói bằng tiếng Việt 1 câu ngắn về mục tiêu buổi học hôm nay.\n"
+            "BƯỚC 3 - TẠO BỐI CẢNH: Sáng tạo 1 bối cảnh nhập vai CỤ THỂ, SINH ĐỘNG, KHÔNG LẶP LẠI.\n"
+            "   - Mô tả ngắn gọn bối cảnh bằng tiếng Việt (1 câu).\n"
+            "   - Nêu rõ vai trò AI và vai trò học viên (1 câu).\n"
+            "BƯỚC 4 - CÂU MỞ ĐẦU SONG NGỮ (BẮT BUỘC VỪA TIẾNG VIỆT VỪA TIẾNG ANH):\n"
+            "   a) Nói 1 câu Tiếng Việt động viên thân thiện, ví dụ: 'Bạn cứ thoải mái nhé! 😊'\n"
+            "   b) Đưa ra câu thoại Tiếng Anh đầu tiên (1 câu ngắn) của vai diễn AI.\n"
+            "   c) Kèm bản dịch Tiếng Việt trong ngoặc đơn '(Dịch: ...)'.\n"
+            "   d) Gợi ý 1 câu trả lời mẫu Tiếng Anh kèm dịch để học viên bắt chước nói theo ngay.\n"
+            "GIỮ TOÀN BỘ NỘI DUNG NGẮN GỌN (tối đa 6-7 câu tổng cộng). TUYỆT ĐỐI KHÔNG viết dài dòng."
         )
     elif mode == "free_talk":
         # Điều chỉnh chỉ thị hệ thống dựa trên trình độ học viên lựa chọn
@@ -397,6 +517,11 @@ async def realtime_voice_endpoint(
             message_data = json.loads(data)
             
             if message_data.get("type") == "client_ready":
+                if message_data.get("skip_welcome") is True:
+                    print("DEBUG: Client is ready but requested to skip welcome greeting.")
+                    await manager.send_json({"type": "status", "status": "idle"}, websocket)
+                    continue
+                
                 print(f"DEBUG: Client is ready. Initiating welcome greeting...")
                 if welcome_prompt:
                     await manager.send_json({"type": "status", "status": "thinking"}, websocket)
@@ -406,12 +531,16 @@ async def realtime_voice_endpoint(
                     current_instruction = custom_instruction
                     if mode == "roleplay":
                         current_instruction = (
-                            f"Bạn là AI chuyên gia nhập vai trong tình huống giao tiếp thực tế sinh động: '{topic}'.\n"
-                            "QUY TẮC BẮT BUỘC CHO LƯỢT CHÀO ĐẦU TIÊN:\n"
-                            "1. Bạn BẮT BUỘC phải nói bằng Tiếng Việt trước (tối đa 1-2 câu ngắn gọn) giới thiệu thật sinh động bối cảnh tình huống, xác định rõ AI đóng vai gì và học viên đóng vai gì.\n"
-                            "   Ví dụ: 'Chào mừng bạn đến với nhà hàng! Hôm nay chúng mình sẽ cùng nhập vai: mình là người phục vụ bàn còn bạn là vị khách đáng yêu đến ăn tối nhé! 🍽️✨'\n"
-                            "2. Ngay sau đó, cất câu thoại Tiếng Anh đầu tiên của vai diễn của bạn (tối đa 1 câu ngắn, từ vựng siêu dễ hiểu) để học viên bắt đầu nhập vai ngay lập tức.\n"
-                            "3. Tuyệt đối không viết thêm bất kỳ lời gợi ý, hướng dẫn hay dặn dò dài dòng nào khác."
+                            f"Bạn là AI chuyên gia nhập vai{level_tag} trong chủ đề: '{topic}'.\n"
+                            "QUY TẮC CỰC KỲ NGHIÊM NGẶT CHO LƯỢT CHÀO ĐẦU TIÊN (Giới thiệu Siêu ngắn gọn & Đi thẳng vào trọng tâm):\n"
+                            "1. TỰ SÁNG TẠO một bối cảnh nhập vai cụ thể liên quan đến chủ đề.\n"
+                            "2. BẮT BUỘC chỉ được nói tối đa 4 câu ngắn gọn theo cấu trúc sau:\n"
+                            "   - Câu 1 (Tiếng Việt): Chào học viên ngắn gọn, giới thiệu bối cảnh và vai diễn (AI vai gì, học viên vai gì).\n"
+                            "   - Câu 2 (Tiếng Việt): Một câu động viên siêu ngắn (Ví dụ: 'Bạn cứ tự nhiên nhé! 😊').\n"
+                            "   - Câu 3 (Tiếng Anh): Đi thẳng vào câu thoại Tiếng Anh đầu tiên của vai diễn AI kèm bản dịch Tiếng Việt trong ngoặc '(Dịch: ...)'.\n"
+                            "   - Câu 4 (Tiếng Anh/Tiếng Việt): Đưa ra 1 gợi ý câu trả lời mẫu Tiếng Anh kèm dịch (Ví dụ: '💡 Bạn có thể nói: \"Yes, I am ready.\"').\n"
+                            "3. TUYỆT ĐỐI KHÔNG giải thích dông dài, không nêu mục tiêu rườm rà. Phải đi thẳng vào tình huống đàm thoại.\n"
+                            f"4. LƯU Ý QUAN TRỌNG: Toàn bộ buổi học sau đó phải BÁM SÁT chủ đề '{topic}'. TUYỆT ĐỐI KHÔNG tự ý chuyển sang chủ đề khác."
                         )
                     
                     full_welcome = ""
@@ -426,17 +555,26 @@ async def realtime_voice_endpoint(
                     except Exception as e:
                         print(f"WARN: Realtime welcome response failed: {e}")
                         if mode == "roleplay":
-                            topic_lower = topic.lower()
-                            if "restaurant" in topic_lower or "dining" in topic_lower or "food" in topic_lower:
-                                full_welcome = f"Chào mừng bạn đến với nhà hàng! Hôm nay chúng mình sẽ cùng nhập vai: mình là người phục vụ bàn còn bạn là vị khách đáng yêu đến ăn tối nhé! 🍽️✨ Hello! Welcome to our restaurant. Are you ready to order?"
-                            elif "airport" in topic_lower or "flight" in topic_lower or "travel" in topic_lower:
-                                full_welcome = f"Chào bạn! Hôm nay chúng mình sẽ cùng nhập vai tại Sân bay nhé: mình sẽ là nhân viên tại quầy check-in, còn bạn là hành khách chuẩn bị bay! ✈️💼 Good morning! May I see your ticket and passport, please?"
-                            elif "direction" in topic_lower or "lost" in topic_lower or "street" in topic_lower:
-                                full_welcome = f"Chào bạn! Hôm nay chúng mình sẽ nhập vai tình huống Hỏi đường nhé: bạn là một khách du lịch bị lạc, còn mình là người dân địa phương tốt bụng! 🗺️🚶‍♂️ Excuse me, can I help you find something?"
-                            elif "shopping" in topic_lower or "store" in topic_lower or "market" in topic_lower:
-                                full_welcome = f"Chào bạn! Hôm nay chúng mình sẽ nhập vai đi Mua sắm nhé: mình là nhân viên bán hàng thân thiện, còn bạn là khách hàng mua sắm! 🛍️✨ Hello! How can I help you today?"
-                            else:
-                                full_welcome = f"Chào mừng bạn đến với tình huống nhập vai '{topic}'! Trong tình huống này, mình sẽ đóng vai trò dẫn dắt đối thoại còn bạn nhập vai nhân vật tương ứng nhé! 🌟 Hello! I'm so excited to roleplay with you. Shall we start?"
+                            import random
+                            # Dynamic fallback: Rút gọn siêu ngắn gọn, đi thẳng vào trọng tâm
+                            fallback_scenarios = [
+                                (
+                                    f"Chào bạn! Chúng ta sẽ nhập vai chủ đề '{topic}' nhé. Mình đóng vai người bán hàng, còn bạn là khách hàng. Bạn cứ tự nhiên nhé! 😊\n"
+                                    "Hello! Let's get started. How can I help you today? (Dịch: Xin chào! Chúng ta bắt đầu nhé. Mình có thể giúp gì cho bạn hôm nay?)\n"
+                                    "💡 Bạn có thể nói: 'I want to practice speaking English.'"
+                                ),
+                                (
+                                    f"Xin chào! Hôm nay chúng ta sẽ nhập vai chủ đề '{topic}' nhé. Mình sẽ đồng hành trò chuyện cùng bạn. Hãy tự tin lên nhé! 😊\n"
+                                    "Hi there! Are you ready to begin our conversation? (Dịch: Chào bạn! Bạn đã sẵn sàng bắt đầu cuộc trò chuyện chưa?)\n"
+                                    "💡 Bạn có thể nói: 'Yes, I am ready!'"
+                                ),
+                                (
+                                    f"Chào mừng bạn! Chúng ta sẽ nhập vai chủ đề '{topic}' nhé. Mình đóng vai bồi bàn, còn bạn là thực khách. Bạn cứ tự nhiên nhé! 😊\n"
+                                    "Good day! Welcome! What would you like to talk about first? (Dịch: Ngày tốt lành! Chào mừng bạn! Bạn muốn nói về điều gì đầu tiên?)\n"
+                                    "💡 Bạn có thể nói: 'Let's start the roleplay!'"
+                                ),
+                            ]
+                            full_welcome = random.choice(fallback_scenarios)
                         else:
                             if level in ["A1", "A2"]:
                                 full_welcome = "Xin chào! Mình là AI English Coach của bạn. Hôm nay chúng ta sẽ cùng đàm thoại tự do để tăng phản xạ nhé! How are you? (Dịch: Bạn khỏe không?) 😊"
@@ -465,49 +603,52 @@ async def realtime_voice_endpoint(
                 target_text = message_data.get("target_text", user_message)
                 current_time = time.time()
                 
+                # === XỬ LÝ TÍN HIỆU NUDGE: Học viên im lặng quá lâu ===
+                if user_message == "[SILENCE_NUDGE]":
+                    print("DEBUG: Received SILENCE_NUDGE - Student has been silent. AI will proactively re-engage.")
+                    await manager.send_json({"type": "status", "status": "thinking"}, websocket)
+                    await manager.send_json({"type": "status", "status": "speaking"}, websocket)
+                    
+                    nudge_instruction = custom_instruction + (
+                        "\n\nTÌNH HUỐNG ĐẶC BIỆT: Học viên đang im lặng/chưa phản hồi. "
+                        "Bạn BẮT BUỘC phải CHỦ ĐỘNG lên tiếng bằng 1 trong các cách sau:\n"
+                        "a) Nhắc nhở thân thiện bằng Tiếng Việt (1 câu ngắn), sau đó lặp lại hoặc đặt lại câu hỏi Tiếng Anh đơn giản hơn kèm dịch Tiếng Việt.\n"
+                        "b) Gợi ý 1-2 câu trả lời mẫu Tiếng Anh siêu đơn giản kèm dịch để học viên bắt chước nói theo.\n"
+                        "Ví dụ: 'Bạn ơi, đến lượt bạn rồi! 😊 Let me ask again: Do you have a reservation? (Dịch: Bạn đã đặt phòng chưa?) "
+                        "💡 Bạn có thể nói: \"Yes, I do.\" hoặc \"No, I don't.\"'\n"
+                        "GIỮ NGẮN GỌN (tối đa 3-4 câu). TUYỆT ĐỐI KHÔNG nói dài dòng."
+                    )
+                    
+                    nudge_full = ""
+                    compact_ctx = conversation_memory.get_compact_context(user_id)
+                    try:
+                        async for chunk in gemini_service.get_tutor_response(
+                            compact_context=compact_ctx,
+                            user_message="Học viên đang im lặng, chưa phản hồi. Hãy chủ động nhắc nhở và hỏi lại.",
+                            custom_instruction=nudge_instruction
+                        ):
+                            nudge_full += chunk
+                            await manager.send_json({"type": "delta", "content": chunk}, websocket)
+                    except Exception as e:
+                        print(f"WARN: Nudge response failed: {e}")
+                        nudge_full = "Bạn ơi, đến lượt bạn rồi! 😊 Don't worry, take your time! (Dịch: Đừng lo, cứ từ từ nhé!)"
+                        await manager.send_json({"type": "delta", "content": nudge_full}, websocket)
+                    
+                    conversation_memory.add_turn(user_id, "[Học viên im lặng]", nudge_full)
+                    await manager.send_json({
+                        "type": "done",
+                        "full_content": nudge_full,
+                        "grammar_notes": "",
+                        "route_used": "nudge_proactive"
+                    }, websocket)
+                    await manager.send_json({"type": "status", "status": "idle"}, websocket)
+                    continue
+                
                 # === STEP 1: Professional LLM Correction Analysis with Fallback ===
                 async def get_and_send_corrections():
-                    from app.services.lightweight_nlp_engine import CorrectionItem, lightweight_nlp
-                    corrections_obj = []
-                    used_route = "llm_professional"
-                    try:
-                        ai_corrections = await gemini_service.get_structured_correction(user_message)
-                        for c in ai_corrections:
-                            corrections_obj.append(CorrectionItem(
-                                error_type=c.get("error_type", "grammar"),
-                                severity=c.get("severity", "medium"),
-                                original=c.get("original", ""),
-                                correction=c.get("correction", ""),
-                                explanation_vi=c.get("explanation_vi", ""),
-                                category="llm_professional"
-                            ))
-                        
-                        # FALLBACK: Nếu Gemini trả về mảng rỗng (do lỗi 429, timeout hoặc không tìm thấy lỗi)
-                        if not corrections_obj:
-                            local_errors = lightweight_nlp.detect_all_errors(target_text, user_message)
-                            if local_errors:
-                                print("DEBUG: Gemini returned empty. Activated Local NLP Fallback.")
-                                corrections_obj = local_errors
-                                used_route = "local_fallback"
-                        
-                        if corrections_obj:
-                            correction_text = vietnamese_tutor.format_correction_response(corrections_obj)
-                            correction_data = [{
-                                "error_type": c.error_type, "severity": c.severity,
-                                "original": c.original, "correction": c.correction,
-                                "ipa": getattr(c, 'ipa', ''), "explanation_vi": c.explanation_vi,
-                            } for c in corrections_obj]
-                            
-                            await manager.send_json({
-                                "type": "realtime_correction",
-                                "corrections": correction_data,
-                                "formatted_text": correction_text,
-                                "route": used_route,
-                            }, websocket)
-                        return corrections_obj, used_route
-                    except Exception as e:
-                        print(f"ERROR in get_and_send_corrections: {e}")
-                        return corrections_obj, used_route
+                    # ĐÃ LOẠI BỎ TÍNH NĂNG AI CORRECTION THEO YÊU CẦU NGƯỜI DÙNG
+                    # Điều này giúp tăng gấp đôi tốc độ phản hồi và tiết kiệm 100% tài nguyên API
+                    return [], "disabled"
 
                 correction_task = asyncio.create_task(get_and_send_corrections())
 

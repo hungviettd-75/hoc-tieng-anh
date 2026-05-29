@@ -12,3 +12,44 @@ New TEXT WebSocket: mode=vocabulary_practice, level=A1, topic=None, words=Learn,
 New TEXT WebSocket: mode=None, level=None, topic=None, words=None
 New TEXT WebSocket: mode=vocabulary_practice, level=A1, topic=None, words=Learn,Improve,Happy,Active,Vocabulary
 New REALTIME WebSocket: mode=vocabulary_practice, level=A1, topic=None, words=Learn,Improve,Happy,Active,Vocabulary
+New REALTIME WebSocket: mode=roleplay, level=A1, topic=Nấu ăn (Cooking), words=None
+New REALTIME WebSocket: mode=roleplay, level=A1, topic=Văn hóa (Culture), words=None
+New REALTIME WebSocket: mode=roleplay, level=A1, topic=Ẩm thực (Cuisine), words=None
+New REALTIME WebSocket: mode=roleplay, level=A1, topic=Du lịch (Travel), words=None
+New REALTIME WebSocket: mode=roleplay, level=A1, topic=Văn hóa (Culture), words=None
+New REALTIME WebSocket: mode=roleplay, level=A1, topic=Văn hóa (Culture), words=None
+New REALTIME WebSocket: mode=roleplay, level=A1, topic=Nấu ăn (Cooking), words=None
+New REALTIME WebSocket: mode=roleplay, level=A1, topic=Văn hóa (Culture), words=None
+New REALTIME WebSocket: mode=roleplay, level=A1, topic=Văn hóa (Culture), words=None
+New REALTIME WebSocket: mode=roleplay, level=A1, topic=Văn hóa (Culture), words=None
+New REALTIME WebSocket: mode=roleplay, level=A1, topic=Mua sắm (Shopping), words=None
+New REALTIME WebSocket: mode=roleplay, level=A1, topic=Phim ảnh (Movies & Cinema), words=None
+New REALTIME WebSocket: mode=roleplay, level=A1, topic=Công nghệ (Technology), words=None
+New REALTIME WebSocket: mode=roleplay, level=B2, topic=Âm nhạc (Music), words=None
+New REALTIME WebSocket: mode=roleplay, level=A1, topic=Văn hóa (Culture), words=None
+New REALTIME WebSocket: mode=free_talk, level=A1, topic=None, words=None
+New REALTIME WebSocket: mode=free_talk, level=A1, topic=None, words=None
+New TEXT WebSocket: mode=None, level=None, topic=None, words=None
+New TEXT WebSocket: mode=vocabulary_practice, level=A1, topic=None, words=Vocabulary,Language,Beginner,Welcome,Summer,Active,Learn,Practice,Family,Morning,Improve,Happy,Friend,School,Simple
+New REALTIME WebSocket: mode=roleplay, level=A1, topic=Nấu ăn (Cooking), words=None
+New REALTIME WebSocket: mode=roleplay, level=A1, topic=Văn hóa (Culture), words=None
+New REALTIME WebSocket: mode=free_talk, level=A1, topic=None, words=None
+New REALTIME WebSocket: mode=roleplay, level=A1, topic=Văn hóa (Culture), words=None
+New REALTIME WebSocket: mode=roleplay, level=A1, topic=Văn hóa (Culture), words=None
+New REALTIME WebSocket: mode=roleplay, level=A1, topic=Văn hóa (Culture), words=None
+New REALTIME WebSocket: mode=roleplay, level=A1, topic=Văn hóa (Culture), words=None
+New TEXT WebSocket: mode=None, level=None, topic=None, words=None
+New TEXT WebSocket: mode=None, level=None, topic=None, words=None
+New REALTIME WebSocket: mode=free_talk, level=A1, topic=None, words=None
+New TEXT WebSocket: mode=None, level=None, topic=None, words=None
+New TEXT WebSocket: mode=vocabulary_practice, level=A2, topic=None, words=Airport,Luggage
+New TEXT WebSocket: mode=None, level=None, topic=None, words=None
+New TEXT WebSocket: mode=vocabulary_practice, level=A1, topic=None, words=Ticket,Hotel
+New REALTIME WebSocket: mode=vocabulary_practice, level=A1, topic=None, words=Ticket,Hotel
+New TEXT WebSocket: mode=vocabulary_practice, level=A1, topic=None, words=Ticket,Hotel
+New TEXT WebSocket: mode=None, level=None, topic=None, words=None
+New TEXT WebSocket: mode=vocabulary_practice, level=A1, topic=None, words=Ticket,Hotel,Bus,Map,Passport,Fly,Beach,Bag
+New TEXT WebSocket: mode=vocabulary_practice, level=A1, topic=None, words=Ticket,Hotel,Bus,Map,Passport,Fly,Beach,Bag
+New REALTIME WebSocket: mode=free_talk, level=A1, topic=None, words=None
+New TEXT WebSocket: mode=None, level=None, topic=None, words=None
+New TEXT WebSocket: mode=vocabulary_practice, level=A1, topic=None, words=Ticket,Hotel,Bus,Map,Passport,Fly,Beach,Bag
