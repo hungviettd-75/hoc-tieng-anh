@@ -116,7 +116,7 @@ class VocabularyModeSelectionPage extends ConsumerWidget {
                             
                             // Điều hướng đến game ghép từ
                             context.push(
-                              '/vocabulary-matching-game?level=$level',
+                              '/vocabulary-matching-game?level=$level&words=${Uri.encodeComponent(words)}',
                             );
                           },
                         ),

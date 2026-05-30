@@ -195,7 +195,8 @@ final routerProvider = Provider<GoRouter>((ref) {
             path: '/vocabulary-matching-game',
             builder: (context, state) {
               final level = state.uri.queryParameters['level'] ?? 'B1';
-              return VocabularyMatchingGamePage(level: level);
+              final words = state.uri.queryParameters['words'] ?? '';
+              return VocabularyMatchingGamePage(level: level, words: words);
             },
           ),
           GoRoute(

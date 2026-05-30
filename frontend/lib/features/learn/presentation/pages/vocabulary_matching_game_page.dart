@@ -21,10 +21,12 @@ enum GameMode {
 
 class VocabularyMatchingGamePage extends StatefulWidget {
   final String level;
+  final String words;
 
   const VocabularyMatchingGamePage({
     super.key,
     required this.level,
+    this.words = '',
   });
 
   @override
@@ -158,9 +160,9 @@ class _VocabularyMatchingGamePageState extends State<VocabularyMatchingGamePage>
         if (token != null) 'Authorization': 'Bearer $token',
       };
 
-      // Tải bộ câu hỏi từ backend
+      // Tải bộ câu hỏi từ backend - Truyền thêm list words từ widget để lọc đúng chủ đề học viên đang học
       final response = await http.get(
-        Uri.parse('${ApiConfig.baseUrl}/learn/vocabulary-game/questions?level=${widget.level}'),
+        Uri.parse('${ApiConfig.baseUrl}/learn/vocabulary-game/questions?level=${widget.level}&words=${Uri.encodeComponent(widget.words)}'),
         headers: headers,
       ).timeout(const Duration(seconds: 10));
 

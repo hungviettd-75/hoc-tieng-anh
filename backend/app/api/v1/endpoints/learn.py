@@ -277,45 +277,97 @@ class GameResultIn(BaseModel):
 @router.get("/vocabulary-game/questions")
 def get_game_questions(
     level: str = "B1",
+    topic: str | None = None,
+    words: str | None = None,
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user)
 ):
     """
-    Lấy danh sách câu hỏi game trắc nghiệm từ vựng, ưu tiên từ cần ôn tập (Spaced Repetition) 
-    và các từ hay sai (Weak Words) để tăng tần suất lặp lại.
+    Lấy danh sách câu hỏi game trắc nghiệm từ vựng theo chủ đề (topic) hoặc danh sách từ chỉ định (words),
+    ưu tiên từ cần ôn tập (Spaced Repetition) và từ hay sai (Weak Words).
     """
     from app.models.models import Vocabulary, VocabularyMemory, VocabularyWrongAnswer
     from datetime import datetime
     
-    db_vocab = db.query(Vocabulary).filter(Vocabulary.level == level, Vocabulary.is_active == True).all()
+    # 1. Xác định pool từ vựng cơ sở dựa trên topic/words hoặc level
     vocab_pool_dict = {}
     
-    # Prioritize vocabulary items from database
-    for v in db_vocab:
-        vocab_pool_dict[v.word.lower()] = {
-            "word": v.word,
-            "ipa": v.ipa,
-            "meaning": v.meaning,
-            "example": v.example,
-            "level": v.level
-        }
-        
-    # Merge with base_vocab to ensure rich distractor options and prevent insufficient word crashes
-    fallback_list = base_vocab.get(level, base_vocab["B1"])
-    for item in fallback_list:
-        w_low = item["word"].lower()
-        if w_low not in vocab_pool_dict:
-            vocab_pool_dict[w_low] = {
-                "word": item["word"],
-                "ipa": item["ipa"],
-                "meaning": item["meaning"],
-                "example": item["example"],
-                "level": item["level"]
+    if words:
+        # Lọc theo danh sách từ cụ thể được truyền từ frontend
+        word_list = [w.strip().lower() for w in words.split(",") if w.strip()]
+        db_vocab = db.query(Vocabulary).filter(
+            Vocabulary.word.in_(word_list),
+            Vocabulary.is_active == True
+        ).all()
+        for v in db_vocab:
+            vocab_pool_dict[v.word.lower()] = {
+                "word": v.word,
+                "ipa": v.ipa,
+                "meaning": v.meaning,
+                "example": v.example,
+                "level": v.level
             }
             
-    vocab_pool = list(vocab_pool_dict.values())
+        # Tìm thêm từ fallback nếu DB thiếu
+        for lvl_name, lvl_words in base_vocab.items():
+            for w in lvl_words:
+                w_low = w["word"].lower()
+                if w_low in word_list and w_low not in vocab_pool_dict:
+                    vocab_pool_dict[w_low] = {
+                        "word": w["word"],
+                        "ipa": w["ipa"],
+                        "meaning": w["meaning"],
+                        "example": w["example"],
+                        "level": w["level"]
+                    }
+    elif topic:
+        # Lọc theo chủ đề cụ thể
+        db_vocab = db.query(Vocabulary).filter(
+            Vocabulary.topic == topic,
+            Vocabulary.level == level,
+            Vocabulary.is_active == True
+        ).all()
+        for v in db_vocab:
+            vocab_pool_dict[v.word.lower()] = {
+                "word": v.word,
+                "ipa": v.ipa,
+                "meaning": v.meaning,
+                "example": v.example,
+                "level": v.level
+            }
+    else:
+        # Mặc định lọc theo level
+        db_vocab = db.query(Vocabulary).filter(
+            Vocabulary.level == level, 
+            Vocabulary.is_active == True
+        ).all()
+        for v in db_vocab:
+            vocab_pool_dict[v.word.lower()] = {
+                "word": v.word,
+                "ipa": v.ipa,
+                "meaning": v.meaning,
+                "example": v.example,
+                "level": v.level
+            }
+            
+        fallback_list = base_vocab.get(level, base_vocab["B1"])
+        for item in fallback_list:
+            w_low = item["word"].lower()
+            if w_low not in vocab_pool_dict:
+                vocab_pool_dict[w_low] = {
+                    "word": item["word"],
+                    "ipa": item["ipa"],
+                    "meaning": item["meaning"],
+                    "example": item["example"],
+                    "level": item["level"]
+                }
 
-    # Phân loại độ ưu tiên dựa trên AI Personalization
+    vocab_pool = list(vocab_pool_dict.values())
+    if not vocab_pool:
+        # Nếu hoàn toàn trống, trả về list rỗng
+        return []
+
+    # 2. Phân loại độ ưu tiên dựa trên AI Personalization
     now = datetime.utcnow()
     spaced_words = [
         m.word.lower() for m in db.query(VocabularyMemory).filter(
@@ -342,8 +394,17 @@ def get_game_questions(
     random.shuffle(priority_items)
     random.shuffle(normal_items)
 
-    # Chọn 10 từ (ưu tiên từ priority_items trước)
-    selected_items = (priority_items + normal_items)[:10]
+    # Chọn tối đa 10 từ (hoặc ít hơn nếu tổng số từ của topic nhỏ hơn 10)
+    total_to_take = min(10, len(vocab_pool))
+    selected_items = (priority_items + normal_items)[:total_to_take]
+
+    # Để các đáp án sai phong phú, ta lấy pool làm các distractor.
+    # Nếu pool quá bé, ta lấy thêm từ base_vocab của level làm distractor.
+    distractor_pool = list(vocab_pool)
+    if len(distractor_pool) < 5:
+        level_fallback = selected_items[0]["level"] if selected_items else level
+        for item in base_vocab.get(level_fallback, base_vocab["B1"]):
+            distractor_pool.append(item)
 
     questions = []
     for item in selected_items:
