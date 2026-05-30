@@ -335,6 +335,20 @@ def get_game_questions(
                 "example": v.example,
                 "level": v.level
             }
+            
+        # Fallback từ topic_vocab_db nếu DB trống hoặc thiếu
+        fallback_topic = topic_vocab_db.get(topic, topic_vocab_db.get("travel", {}))
+        fallback_list = fallback_topic.get(level, fallback_topic.get("B1", []))
+        for item in fallback_list:
+            w_low = item["word"].lower()
+            if w_low not in vocab_pool_dict:
+                vocab_pool_dict[w_low] = {
+                    "word": item["word"],
+                    "ipa": item["ipa"],
+                    "meaning": item["meaning"],
+                    "example": item["example"],
+                    "level": level
+                }
     else:
         # Mặc định lọc theo level
         db_vocab = db.query(Vocabulary).filter(
