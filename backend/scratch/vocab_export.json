@@ -1,0 +1,3437 @@
+[
+  {
+    "word": "A-line",
+    "ipa": "/ˈeɪ laɪn/",
+    "meaning": "dáng chữ A"
+  },
+  {
+    "word": "A/B testing (social media)",
+    "ipa": "/ˌeɪˈbiː ˈtes.tɪŋ/",
+    "meaning": "thử nghiệm A/B nội dung"
+  },
+  {
+    "word": "API",
+    "ipa": "/ˌeɪ.piːˈaɪ/",
+    "meaning": "giao diện lập trình ứng dụng"
+  },
+  {
+    "word": "Accommodation",
+    "ipa": "/əˌkɒməˈdeɪʃn/",
+    "meaning": "Chỗ ở, nơi lưu trú"
+  },
+  {
+    "word": "Adventure",
+    "ipa": "/ədˈventʃə(r)/",
+    "meaning": "Cuộc phiêu lưu"
+  },
+  {
+    "word": "Analyze",
+    "ipa": "/ˈænəlaɪz/",
+    "meaning": "Phân tích"
+  },
+  {
+    "word": "App",
+    "ipa": "/æp/",
+    "meaning": "Ứng dụng"
+  },
+  {
+    "word": "Application",
+    "ipa": "/ˌæp.lɪˈkeɪ.ʃən/",
+    "meaning": "Ứng dụng, chương trình phần mềm"
+  },
+  {
+    "word": "Artificial brain",
+    "ipa": "/ˌɑː.tɪˈfɪʃ.əl breɪn/",
+    "meaning": "Não bộ nhân tạo"
+  },
+  {
+    "word": "Assistant",
+    "ipa": "/əˈsɪstənt/",
+    "meaning": "Trợ lý"
+  },
+  {
+    "word": "Atlas",
+    "ipa": "/ˈæt.ləs/",
+    "meaning": "Bản đồ, tập bản đồ"
+  },
+  {
+    "word": "Attention mechanisms",
+    "ipa": "/əˈten.ʃən ˈmek.ə.nɪz.əmz/",
+    "meaning": "Cơ chế chú ý trong mạng nơ-ron"
+  },
+  {
+    "word": "Attraction",
+    "ipa": "/əˈtræk.ʃən/",
+    "meaning": "Điểm thu hút khách du lịch"
+  },
+  {
+    "word": "Automation",
+    "ipa": "/ˌɔːtəˈmeɪʃn/",
+    "meaning": "Tự động hóa"
+  },
+  {
+    "word": "Autonomous",
+    "ipa": "/ɔːˈtɒnəməs/",
+    "meaning": "Tự trị, tự lái"
+  },
+  {
+    "word": "Backpropagation",
+    "ipa": "/ˌbækprɒpəˈɡeɪʃn/",
+    "meaning": "Lan truyền ngược"
+  },
+  {
+    "word": "Bag",
+    "ipa": "/bæɡ/",
+    "meaning": "Túi xách, ba lô"
+  },
+  {
+    "word": "Beach",
+    "ipa": "/biːtʃ/",
+    "meaning": "Bãi biển"
+  },
+  {
+    "word": "Booking",
+    "ipa": "/ˈbʊk.ɪŋ/",
+    "meaning": "Việc đặt chỗ trước"
+  },
+  {
+    "word": "Bus",
+    "ipa": "/bʌs/",
+    "meaning": "Xe buýt"
+  },
+  {
+    "word": "CDN (Content Delivery Network)",
+    "ipa": "/ˌsiː.diːˈen/",
+    "meaning": "mạng phân phối nội dung"
+  },
+  {
+    "word": "CI/CD pipeline",
+    "ipa": "/ˌsiː.aɪ ˌsiːˈdiː ˈpaɪp.laɪn/",
+    "meaning": "quy trình tích hợp/triển khai liên tục"
+  },
+  {
+    "word": "Categorization",
+    "ipa": "/ˌkæt.ə.ɡər.aɪˈzeɪ.ʃən/",
+    "meaning": "Sự chia nhóm, phân loại danh mục"
+  },
+  {
+    "word": "Classification",
+    "ipa": "/ˌklæsɪfɪˈkeɪʃn/",
+    "meaning": "Sự phân loại"
+  },
+  {
+    "word": "Clever",
+    "ipa": "/ˈklev.ər/",
+    "meaning": "Thông minh, khôn khéo, nhanh trí"
+  },
+  {
+    "word": "Client",
+    "ipa": "/ˈklaɪ.ənt/",
+    "meaning": "Khách hàng của công ty, máy khách"
+  },
+  {
+    "word": "Coach",
+    "ipa": "/kəʊtʃ/",
+    "meaning": "Huấn luyện viên"
+  },
+  {
+    "word": "Coast",
+    "ipa": "/kəʊst/",
+    "meaning": "bờ biển"
+  },
+  {
+    "word": "Code",
+    "ipa": "/kəʊd/",
+    "meaning": "Mã lập trình"
+  },
+  {
+    "word": "Cognitive computing",
+    "ipa": "/ˈkɒɡnətɪv kəmˈpjuːtɪŋ/",
+    "meaning": "Điện toán nhận thức"
+  },
+  {
+    "word": "Computer",
+    "ipa": "/kəmˈpjuːtə(r)/",
+    "meaning": "Máy tính"
+  },
+  {
+    "word": "Connection",
+    "ipa": "/kəˈnek.ʃən/",
+    "meaning": "Sự kết nối, mối liên kết"
+  },
+  {
+    "word": "Corpus",
+    "ipa": "/ˈkɔː.pəs/",
+    "meaning": "Tập hợp văn bản ngôn ngữ, kho ngữ liệu"
+  },
+  {
+    "word": "Creative",
+    "ipa": "/kriˈeɪ.tɪv/",
+    "meaning": "Sáng tạo, mang tính sáng tạo"
+  },
+  {
+    "word": "Dashboard",
+    "ipa": "/ˈdæʃ.bɔːd/",
+    "meaning": "Bảng điều khiển giao diện"
+  },
+  {
+    "word": "Data",
+    "ipa": "/ˈdeɪtə/",
+    "meaning": "Dữ liệu"
+  },
+  {
+    "word": "Database",
+    "ipa": "/ˈdeɪtəbeɪs/",
+    "meaning": "Cơ sở dữ liệu"
+  },
+  {
+    "word": "Dataset",
+    "ipa": "/ˈdeɪtəset/",
+    "meaning": "Tập dữ liệu"
+  },
+  {
+    "word": "Deep learning",
+    "ipa": "/diːp ˈlɜːnɪŋ/",
+    "meaning": "Học sâu"
+  },
+  {
+    "word": "Deep network",
+    "ipa": "/diːp ˈnet.wɜːk/",
+    "meaning": "Mạng học sâu, mạng nơ-ron nhiều lớp"
+  },
+  {
+    "word": "Destination",
+    "ipa": "/ˌdestɪˈneɪʃn/",
+    "meaning": "Điểm đến"
+  },
+  {
+    "word": "DevOps",
+    "ipa": "/ˈdev.ɒps/",
+    "meaning": "DevOps (kết hợp phát triển và vận hành)"
+  },
+  {
+    "word": "Device",
+    "ipa": "/dɪˈvaɪs/",
+    "meaning": "Thiết bị"
+  },
+  {
+    "word": "Digital",
+    "ipa": "/ˈdɪdʒɪtl/",
+    "meaning": "Kỹ thuật số"
+  },
+  {
+    "word": "Discover",
+    "ipa": "/dɪˈskʌv.ər/",
+    "meaning": "Phát hiện ra, khám phá ra"
+  },
+  {
+    "word": "EQ (equalization)",
+    "ipa": "/ˌiː.kwəlaɪˈzeɪ.ʃən/",
+    "meaning": "điều chỉnh tần số âm thanh"
+  },
+  {
+    "word": "ETF (Exchange-Traded Fund)",
+    "ipa": "/ˌiː.tiːˈef/",
+    "meaning": "quỹ giao dịch trên sàn"
+  },
+  {
+    "word": "Electronic",
+    "ipa": "/ˌel.ekˈtrɒn.ɪk/",
+    "meaning": "Thuộc về điện tử"
+  },
+  {
+    "word": "Equipment",
+    "ipa": "/ɪˈkwɪp.mənt/",
+    "meaning": "Trang thiết bị máy móc"
+  },
+  {
+    "word": "Error propagation",
+    "ipa": "/ˈer.ər ˌprɒp.əˈɡeɪ.ʃən/",
+    "meaning": "Sự lan truyền sai số"
+  },
+  {
+    "word": "Examine",
+    "ipa": "/ɪɡˈzæm.ɪn/",
+    "meaning": "Xem xét kỹ lưỡng, khảo sát"
+  },
+  {
+    "word": "Excursion",
+    "ipa": "/ɪkˈskɜːʃn/",
+    "meaning": "Chuyến tham quan ngắn"
+  },
+  {
+    "word": "Explore",
+    "ipa": "/ɪkˈsplɔː(r)/",
+    "meaning": "Khám phá, thám hiểm"
+  },
+  {
+    "word": "FOMO (fear of missing out)",
+    "ipa": "/ˈfəʊ.məʊ/",
+    "meaning": "tâm lý sợ bị bỏ lỡ"
+  },
+  {
+    "word": "Facts",
+    "ipa": "/fækts/",
+    "meaning": "Sự thật, số liệu thực tế"
+  },
+  {
+    "word": "Fast",
+    "ipa": "/fɑːst/",
+    "meaning": "Nhanh"
+  },
+  {
+    "word": "Feedback loops",
+    "ipa": "/ˈfiːd.bæk luːps/",
+    "meaning": "Vòng phản hồi điều khiển"
+  },
+  {
+    "word": "Fly",
+    "ipa": "/flaɪ/",
+    "meaning": "Bay, đi máy bay"
+  },
+  {
+    "word": "Forecast",
+    "ipa": "/ˈfɔː.kɑːst/",
+    "meaning": "Sự dự báo thời tiết hoặc kinh tế"
+  },
+  {
+    "word": "Generative",
+    "ipa": "/ˈdʒenərətɪv/",
+    "meaning": "Tạo sinh"
+  },
+  {
+    "word": "Handle",
+    "ipa": "/ˈhæn.dəl/",
+    "meaning": "Xử lý, đối phó, giải quyết"
+  },
+  {
+    "word": "Helper",
+    "ipa": "/ˈhel.pər/",
+    "meaning": "Người trợ giúp, người giúp đỡ"
+  },
+  {
+    "word": "Hotel",
+    "ipa": "/həʊˈtel/",
+    "meaning": "Khách sạn"
+  },
+  {
+    "word": "Human speech",
+    "ipa": "/ˈhjuː.mən spiːtʃ/",
+    "meaning": "Tiếng nói của con người"
+  },
+  {
+    "word": "Hyperparameters",
+    "ipa": "/ˌhaɪpəpəˈræmɪtəz/",
+    "meaning": "Siêu tham số"
+  },
+  {
+    "word": "IT security",
+    "ipa": "/ˌsaɪ.bə.sɪˈkjʊə.rə.ti/",
+    "meaning": "an ninh mạng"
+  },
+  {
+    "word": "Inn",
+    "ipa": "/ɪn/",
+    "meaning": "Nhà trọ, quán trọ cổ"
+  },
+  {
+    "word": "Interface",
+    "ipa": "/ˈɪntəfeɪs/",
+    "meaning": "Giao diện"
+  },
+  {
+    "word": "Itinerary",
+    "ipa": "/aɪˈtɪnərəri/",
+    "meaning": "Lịch trình chuyến đi"
+  },
+  {
+    "word": "JSON",
+    "ipa": "/ˈdʒeɪ.sɒn/",
+    "meaning": "định dạng dữ liệu JSON"
+  },
+  {
+    "word": "Journey",
+    "ipa": "/ˈʤərni/",
+    "meaning": "Hành trình, chuyến đi"
+  },
+  {
+    "word": "Labeled learning",
+    "ipa": "/ˈleɪ.bəld ˈlɜː.nɪŋ/",
+    "meaning": "Học máy có gắn nhãn dữ liệu"
+  },
+  {
+    "word": "Library_1",
+    "ipa": "/ˈlaɪ.brər.i/",
+    "meaning": "Thư viện mã nguồn phần mềm"
+  },
+  {
+    "word": "Lodging",
+    "ipa": "/ˈlɒdʒ.ɪŋ/",
+    "meaning": "Phòng trọ, nơi tạm trú"
+  },
+  {
+    "word": "Luggage",
+    "ipa": "/ˈləgɪʤ/",
+    "meaning": "Hành lý"
+  },
+  {
+    "word": "Machine",
+    "ipa": "/məˈʃiːn/",
+    "meaning": "Máy móc, thiết bị cơ khí"
+  },
+  {
+    "word": "Machine learning",
+    "ipa": "/məˈʃiːn ˈlɜːnɪŋ/",
+    "meaning": "Học máy"
+  },
+  {
+    "word": "Map",
+    "ipa": "/mæp/",
+    "meaning": "Bản đồ"
+  },
+  {
+    "word": "Mechanization",
+    "ipa": "/ˌmek.ə.naɪˈzeɪ.ʃən/",
+    "meaning": "Cơ giới hóa bằng máy móc"
+  },
+  {
+    "word": "Memory",
+    "ipa": "/ˈmem.ər.i/",
+    "meaning": "Bộ nhớ lưu trữ thông tin"
+  },
+  {
+    "word": "Model settings",
+    "ipa": "/ˈmɒd.əl ˈset.ɪŋz/",
+    "meaning": "Thiết lập cấu hình mô hình"
+  },
+  {
+    "word": "Natural Language",
+    "ipa": "/ˈnætʃrəl ˈlæŋɡwɪdʒ/",
+    "meaning": "Ngôn ngữ tự nhiên"
+  },
+  {
+    "word": "Net",
+    "ipa": "/net/",
+    "meaning": "Mạng lưới internet"
+  },
+  {
+    "word": "Network",
+    "ipa": "/ˈnetwɜːk/",
+    "meaning": "Mạng lưới, mạng kết nối"
+  },
+  {
+    "word": "Neural network",
+    "ipa": "/ˈnjʊərəl ˈnetwɜːk/",
+    "meaning": "Mạng nơ-ron"
+  },
+  {
+    "word": "NoSQL",
+    "ipa": "/ˌnəʊ.ˈes.kjuːˈel/",
+    "meaning": "cơ sở dữ liệu phi quan hệ"
+  },
+  {
+    "word": "Optimization",
+    "ipa": "/ˌɒptɪmaɪˈzeɪʃn/",
+    "meaning": "Sự tối ưu hóa"
+  },
+  {
+    "word": "Outing",
+    "ipa": "/ˈaʊ.tɪŋ/",
+    "meaning": "Chuyến dã ngoại, đi chơi ngoài trời"
+  },
+  {
+    "word": "P/E ratio",
+    "ipa": "/piː tuː ˈɜː.nɪŋz ˈreɪ.ʃi.əʊ/",
+    "meaning": "tỷ lệ giá/lợi nhuận"
+  },
+  {
+    "word": "Pass",
+    "ipa": "/pɑːs/",
+    "meaning": "Thẻ thông hành, thẻ ra vào"
+  },
+  {
+    "word": "Passenger",
+    "ipa": "/ˈpæsɪndʒə(r)/",
+    "meaning": "Hành khách"
+  },
+  {
+    "word": "Passport",
+    "ipa": "/ˈpɑːspɔːt/",
+    "meaning": "Hộ chiếu"
+  },
+  {
+    "word": "Pattern recognition",
+    "ipa": "/ˈpæt.ən ˌrek.əɡˈnɪʃ.ən/",
+    "meaning": "Sự nhận dạng khuôn mẫu"
+  },
+  {
+    "word": "Prediction",
+    "ipa": "/prɪˈdɪkʃn/",
+    "meaning": "Sự dự đoán"
+  },
+  {
+    "word": "Procedure",
+    "ipa": "/prəˈsiː.dʒər/",
+    "meaning": "Thủ tục, quy trình thực hiện"
+  },
+  {
+    "word": "Process",
+    "ipa": "/ˈprəʊses/",
+    "meaning": "Xử lý, quy trình"
+  },
+  {
+    "word": "Processor",
+    "ipa": "/ˈprəʊ.ses.ər/",
+    "meaning": "Bộ vi xử lý thông tin"
+  },
+  {
+    "word": "Program",
+    "ipa": "/ˈprəʊɡræm/",
+    "meaning": "Chương trình máy tính"
+  },
+  {
+    "word": "Quick",
+    "ipa": "/kwɪk/",
+    "meaning": "Nhanh chóng, mau lẹ"
+  },
+  {
+    "word": "REST API",
+    "ipa": "/rest ˌeɪ.piːˈaɪ/",
+    "meaning": "API kiểu REST"
+  },
+  {
+    "word": "ROI (return on investment)",
+    "ipa": "/rɔɪ (rɪˈtərn ɔn ˌɪnˈvɛstmənt)/",
+    "meaning": "lợi nhuận trên đầu tư"
+  },
+  {
+    "word": "Reinforcement",
+    "ipa": "/ˌriːɪnˈfɔːsmənt/",
+    "meaning": "Sự tăng cường"
+  },
+  {
+    "word": "Repository_1",
+    "ipa": "/rɪˈpɒz.ɪ.tər.i/",
+    "meaning": "Kho lưu trữ dữ liệu, kho chứa"
+  },
+  {
+    "word": "Representation learning",
+    "ipa": "/ˌrep.rɪ.zenˈteɪ.ʃən ˈlɜː.nɪŋ/",
+    "meaning": "Học biểu diễn tính năng"
+  },
+  {
+    "word": "Reservation",
+    "ipa": "/ˌrezəˈveɪʃn/",
+    "meaning": "Sự đặt trước"
+  },
+  {
+    "word": "Robot",
+    "ipa": "/ˈrəʊbɒt/",
+    "meaning": "Người máy"
+  },
+  {
+    "word": "SEO (social)",
+    "ipa": "/ˈsioʊ (ˈsoʊʃəl)/",
+    "meaning": "tối ưu hóa tìm kiếm trên mạng xã hội"
+  },
+  {
+    "word": "SQL",
+    "ipa": "/ˌes.kjuːˈel/",
+    "meaning": "ngôn ngữ truy vấn SQL"
+  },
+  {
+    "word": "STAR method",
+    "ipa": "/stɑːr ˈmeθ.əd/",
+    "meaning": "phương pháp STAR trả lời phỏng vấn"
+  },
+  {
+    "word": "SaaS (Software as a Service)",
+    "ipa": "/sæs/",
+    "meaning": "phần mềm dưới dạng dịch vụ"
+  },
+  {
+    "word": "Schedule",
+    "ipa": "/ˈskɛʤʊl/",
+    "meaning": "Lịch trình, thời khóa biểu"
+  },
+  {
+    "word": "Script",
+    "ipa": "/skrɪpt/",
+    "meaning": "Kịch bản mã lệnh, đoạn mã script"
+  },
+  {
+    "word": "Self-driving",
+    "ipa": "/ˌselfˈdraɪ.vɪŋ/",
+    "meaning": "Tự lái, tự điều khiển hành trình"
+  },
+  {
+    "word": "Smart",
+    "ipa": "/smɑːt/",
+    "meaning": "Thông minh"
+  },
+  {
+    "word": "Software",
+    "ipa": "/ˈsɒftweə(r)/",
+    "meaning": "Phần mềm"
+  },
+  {
+    "word": "Storage",
+    "ipa": "/ˈstɔːrɪdʒ/",
+    "meaning": "Bộ nhớ lưu trữ"
+  },
+  {
+    "word": "Structure",
+    "ipa": "/ˈstrʌk.tʃər/",
+    "meaning": "Cấu trúc, kết cấu hệ thống"
+  },
+  {
+    "word": "Supervised",
+    "ipa": "/ˈsuːpəvaɪzd/",
+    "meaning": "Có giám sát"
+  },
+  {
+    "word": "System",
+    "ipa": "/ˈsɪstəm/",
+    "meaning": "Hệ thống"
+  },
+  {
+    "word": "Ticket",
+    "ipa": "/ˈtɪkɪt/",
+    "meaning": "Vé xe/tàu/máy bay"
+  },
+  {
+    "word": "Tool",
+    "ipa": "/tuːl/",
+    "meaning": "Công cụ, dụng cụ làm việc"
+  },
+  {
+    "word": "Transformers",
+    "ipa": "/trænsˈfɔːməs/",
+    "meaning": "Mô hình Transformer"
+  },
+  {
+    "word": "Travel",
+    "ipa": "/ˈtræv.əl/",
+    "meaning": "Đi du lịch, di chuyển"
+  },
+  {
+    "word": "Traveler",
+    "ipa": "/ˈtræv.əl.ər/",
+    "meaning": "Khách du lịch, người du hành"
+  },
+  {
+    "word": "Tuning",
+    "ipa": "/ˈtʃuː.nɪŋ/",
+    "meaning": "Sự căn chỉnh, tinh chỉnh hiệu năng"
+  },
+  {
+    "word": "UI design",
+    "ipa": "/ˌjuːˈaɪ dɪˈzaɪn/",
+    "meaning": "thiết kế giao diện người dùng"
+  },
+  {
+    "word": "UX design",
+    "ipa": "/ˌjuːˈeks dɪˈzaɪn/",
+    "meaning": "thiết kế trải nghiệm người dùng"
+  },
+  {
+    "word": "User",
+    "ipa": "/ˈjuːzə(r)/",
+    "meaning": "Người dùng"
+  },
+  {
+    "word": "VR",
+    "ipa": "/ˌvɜː.tʃu.əl riˈæl.ə.ti/",
+    "meaning": "thực tế ảo"
+  },
+  {
+    "word": "Visa",
+    "ipa": "/ˈviː.zə/",
+    "meaning": "Thị thực nhập cảnh"
+  },
+  {
+    "word": "Web",
+    "ipa": "/web/",
+    "meaning": "Trang mạng, mạng lưới"
+  },
+  {
+    "word": "a cappella",
+    "ipa": "/ˌæ kəˈpel.ə/",
+    "meaning": "hát không nhạc đệm"
+  },
+  {
+    "word": "accounts payable",
+    "ipa": "/əˈkaʊnts ˈpeɪ.ə.bəl/",
+    "meaning": "khoản phải trả"
+  },
+  {
+    "word": "accounts receivable",
+    "ipa": "/əˈkaʊnts rɪˈsiː.və.bəl/",
+    "meaning": "khoản phải thu"
+  },
+  {
+    "word": "accrual accounting",
+    "ipa": "/əˈkruː.əl əˈkaʊn.tɪŋ/",
+    "meaning": "kế toán dồn tích"
+  },
+  {
+    "word": "acoustic treatment",
+    "ipa": "/əˈkuː.stɪk ˈtriːt.mənt/",
+    "meaning": "xử lý âm học phòng thu"
+  },
+  {
+    "word": "acquisition",
+    "ipa": "/ˌæk.wɪˈzɪʃ.ən/",
+    "meaning": "sự thu hút, thu nhận khách hàng"
+  },
+  {
+    "word": "active listening",
+    "ipa": "/ˈæk.tɪv ˈlɪs.ən.ɪŋ/",
+    "meaning": "lắng nghe chủ động"
+  },
+  {
+    "word": "advancement",
+    "ipa": "/ədˈvɑːns.mənt/",
+    "meaning": "sự tiến bộ, thăng tiến sự nghiệp"
+  },
+  {
+    "word": "affiliate marketing",
+    "ipa": "/əˈfɪl.i.ɪt ˈmɑː.kɪ.tɪŋ/",
+    "meaning": "tiếp thị liên kết"
+  },
+  {
+    "word": "aggregate score",
+    "ipa": "/ˈæɡ.rɪ.ɡɪt skɔːr/",
+    "meaning": "tổng tỉ số hai lượt"
+  },
+  {
+    "word": "agile methodology",
+    "ipa": "/ˈædʒ.aɪl meˌθɒd.ɒl.ə.dʒi/",
+    "meaning": "phương pháp Agile"
+  },
+  {
+    "word": "agility",
+    "ipa": "/əˈdʒɪl.ɪ.ti/",
+    "meaning": "sự linh hoạt, nhanh nhẹn"
+  },
+  {
+    "word": "algorithm",
+    "ipa": "/ˈæl.ɡə.rɪð.əm/",
+    "meaning": "thuật toán"
+  },
+  {
+    "word": "algorithm update",
+    "ipa": "/ˈæl.ɡə.rɪð.əm ˈʌp.deɪt/",
+    "meaning": "cập nhật thuật toán"
+  },
+  {
+    "word": "analytics",
+    "ipa": "/ˌæn.əˈlɪt.ɪks/",
+    "meaning": "phân tích dữ liệu"
+  },
+  {
+    "word": "androgynous style",
+    "ipa": "/ænˈdrɒdʒ.ɪ.nəs staɪl/",
+    "meaning": "phong cách lưỡng tính"
+  },
+  {
+    "word": "annual report",
+    "ipa": "/ˈæn.ju.əl rɪˈpɔːt/",
+    "meaning": "báo cáo thường niên"
+  },
+  {
+    "word": "application_1",
+    "ipa": "/ˈsɒft.weər/",
+    "meaning": "phần mềm máy tính"
+  },
+  {
+    "word": "aptitude test",
+    "ipa": "/ˈæp.tɪ.tjuːd test/",
+    "meaning": "bài kiểm tra năng khiếu"
+  },
+  {
+    "word": "arrangement",
+    "ipa": "/əˈreɪndʒ.mənt/",
+    "meaning": "phần phối khí"
+  },
+  {
+    "word": "assessment center",
+    "ipa": "/əˈses.mənt ˈsen.tər/",
+    "meaning": "trung tâm đánh giá ứng viên"
+  },
+  {
+    "word": "asset allocation",
+    "ipa": "/ˈæs.et ˌæl.əˈkeɪ.ʃən/",
+    "meaning": "phân bổ tài sản đầu tư"
+  },
+  {
+    "word": "athleisure",
+    "ipa": "/ˈæθ.liːʒ.ər/",
+    "meaning": "phong cách thể thao-thời trang"
+  },
+  {
+    "word": "athleisure trend",
+    "ipa": "/ˈæθ.liːʒ.ər trend/",
+    "meaning": "xu hướng trang phục thể thao-thường nhật"
+  },
+  {
+    "word": "attacking midfielder",
+    "ipa": "/əˈtæk.ɪŋ ˈmɪd.fiːl.dər/",
+    "meaning": "tiền vệ tấn công"
+  },
+  {
+    "word": "attention economy",
+    "ipa": "/əˈten.ʃən ɪˈkɒn.ə.mi/",
+    "meaning": "nền kinh tế thu hút sự chú ý"
+  },
+  {
+    "word": "audit",
+    "ipa": "/ˈɔː.dɪt/",
+    "meaning": "kiểm toán"
+  },
+  {
+    "word": "authentication",
+    "ipa": "/ɔːˌθen.tɪˈkeɪ.ʃən/",
+    "meaning": "xác thực người dùng"
+  },
+  {
+    "word": "authorization",
+    "ipa": "/ˌɔː.θər.aɪˈzeɪ.ʃən/",
+    "meaning": "phân quyền truy cập"
+  },
+  {
+    "word": "autoimmune disease",
+    "ipa": "/ˌɔː.tə.ɪˈmjuːn dɪˈziːz/",
+    "meaning": "bệnh tự miễn"
+  },
+  {
+    "word": "backend",
+    "ipa": "/ˈbæk.end/",
+    "meaning": "phía máy chủ (backend)"
+  },
+  {
+    "word": "backing track",
+    "ipa": "/ˈbæk.ɪŋ træk/",
+    "meaning": "bản nhạc nền"
+  },
+  {
+    "word": "backlog",
+    "ipa": "/ˈbæk.lɒɡ/",
+    "meaning": "danh sách công việc tồn đọng"
+  },
+  {
+    "word": "baking powder",
+    "ipa": "/ˈbeɪ.kɪŋ ˌpaʊ.dər/",
+    "meaning": "bột nở"
+  },
+  {
+    "word": "balance sheet",
+    "ipa": "/ˈbæl.əns ʃiːt/",
+    "meaning": "bảng cân đối kế toán"
+  },
+  {
+    "word": "bandwidth",
+    "ipa": "/ˈbænd.wɪdθ/",
+    "meaning": "băng thông"
+  },
+  {
+    "word": "bankruptcy",
+    "ipa": "/ˈbæŋk.rʌp.si/",
+    "meaning": "phá sản"
+  },
+  {
+    "word": "baste",
+    "ipa": "/beɪst/",
+    "meaning": "tưới nước thịt lên khi nướng"
+  },
+  {
+    "word": "battery",
+    "ipa": "/ˈbæt.ər.i/",
+    "meaning": "pin"
+  },
+  {
+    "word": "bear market",
+    "ipa": "/beər ˈmɑː.kɪt/",
+    "meaning": "thị trường giảm giá"
+  },
+  {
+    "word": "beat drop",
+    "ipa": "/biːt drɒp/",
+    "meaning": "đoạn nhạc bùng nổ (trong EDM)"
+  },
+  {
+    "word": "behavioral interview",
+    "ipa": "/bɪˈheɪ.vjər.əl ˈɪn.tə.vjuː/",
+    "meaning": "phỏng vấn hành vi"
+  },
+  {
+    "word": "behavioral targeting",
+    "ipa": "/bɪˈheɪ.vjər.əl ˈtɑː.ɡɪ.tɪŋ/",
+    "meaning": "nhắm mục tiêu theo hành vi"
+  },
+  {
+    "word": "benchmark",
+    "ipa": "/ˈbentʃ.mɑːk/",
+    "meaning": "tiêu chuẩn so sánh"
+  },
+  {
+    "word": "bespoke",
+    "ipa": "/bɪˈspəʊk/",
+    "meaning": "đặt may riêng theo yêu cầu"
+  },
+  {
+    "word": "biomarker",
+    "ipa": "/ˈbaɪ.əʊˌmɑː.kər/",
+    "meaning": "dấu ấn sinh học"
+  },
+  {
+    "word": "biopsy",
+    "ipa": "/ˈbaɪ.ɒp.si/",
+    "meaning": "sinh thiết"
+  },
+  {
+    "word": "blanch",
+    "ipa": "/blɑːntʃ/",
+    "meaning": "chần nhanh qua nước sôi"
+  },
+  {
+    "word": "blockchain",
+    "ipa": "/ˈblɒk.tʃeɪn/",
+    "meaning": "chuỗi khối (công nghệ)"
+  },
+  {
+    "word": "blood test",
+    "ipa": "/blʌd test/",
+    "meaning": "xét nghiệm máu"
+  },
+  {
+    "word": "board of directors",
+    "ipa": "/bɔːd əv daɪˈrek.tərz/",
+    "meaning": "hội đồng quản trị"
+  },
+  {
+    "word": "body language",
+    "ipa": "/ˈbɒd.i ˌlæŋ.ɡwɪdʒ/",
+    "meaning": "ngôn ngữ cơ thể"
+  },
+  {
+    "word": "boho",
+    "ipa": "/ˈbəʊ.həʊ/",
+    "meaning": "phong cách bohemian"
+  },
+  {
+    "word": "boosted post",
+    "ipa": "/ˈbuːst.ɪd pəʊst/",
+    "meaning": "bài viết được quảng bá"
+  },
+  {
+    "word": "braise",
+    "ipa": "/breɪz/",
+    "meaning": "hầm (bít tết...)"
+  },
+  {
+    "word": "branch",
+    "ipa": "/brɑːntʃ/",
+    "meaning": "nhánh mã nguồn"
+  },
+  {
+    "word": "brand awareness",
+    "ipa": "/brænd əˈweər.nəs/",
+    "meaning": "nhận thức thương hiệu"
+  },
+  {
+    "word": "brand deal",
+    "ipa": "/brænd diːl/",
+    "meaning": "thỏa thuận hợp tác thương hiệu"
+  },
+  {
+    "word": "brand voice",
+    "ipa": "/brænd vɔɪs/",
+    "meaning": "giọng điệu thương hiệu"
+  },
+  {
+    "word": "branding",
+    "ipa": "/ˈbræn.dɪŋ/",
+    "meaning": "xây dựng thương hiệu"
+  },
+  {
+    "word": "break-even point",
+    "ipa": "/breɪk ˈiː.vən pɔɪnt/",
+    "meaning": "điểm hòa vốn"
+  },
+  {
+    "word": "broadcasting",
+    "ipa": "/ˈbrɔdˌkæstɪŋ/",
+    "meaning": "phát trực tuyến"
+  },
+  {
+    "word": "brokerage account",
+    "ipa": "/ˈbrəʊ.kər.ɪdʒ əˈkaʊnt/",
+    "meaning": "tài khoản môi giới chứng khoán"
+  },
+  {
+    "word": "brunoise",
+    "ipa": "/ˈbruː.nwɑːz/",
+    "meaning": "thái hạt lựu cực nhỏ"
+  },
+  {
+    "word": "bull market",
+    "ipa": "/bʊl ˈmɑː.kɪt/",
+    "meaning": "thị trường tăng giá"
+  },
+  {
+    "word": "business development",
+    "ipa": "/ˈbɪz.nɪs dɪˈvel.əp.mənt/",
+    "meaning": "phát triển kinh doanh"
+  },
+  {
+    "word": "business ethics",
+    "ipa": "/ˈbɪz.nɪs ˈeθ.ɪks/",
+    "meaning": "đạo đức kinh doanh"
+  },
+  {
+    "word": "business model",
+    "ipa": "/ˈbɪz.nɪs ˌmɒd.əl/",
+    "meaning": "mô hình kinh doanh"
+  },
+  {
+    "word": "call and response",
+    "ipa": "/kɔːl ənd rɪˈspɒns/",
+    "meaning": "kỹ thuật hỏi-đáp trong âm nhạc"
+  },
+  {
+    "word": "camera",
+    "ipa": "/ˈkæm.ər.ə/",
+    "meaning": "máy ảnh, máy quay"
+  },
+  {
+    "word": "campaign",
+    "ipa": "/kæmˈpeɪn/",
+    "meaning": "chiến dịch"
+  },
+  {
+    "word": "capacity",
+    "ipa": "/kəˈpæsɪti/",
+    "meaning": "băng thông"
+  },
+  {
+    "word": "capital gains tax",
+    "ipa": "/ˈkæp.ɪ.təl ɡeɪnz tæks/",
+    "meaning": "thuế lãi vốn"
+  },
+  {
+    "word": "capsule collection",
+    "ipa": "/ˈkæp.sjuːl kəˈlek.ʃən/",
+    "meaning": "bộ sưu tập giới hạn"
+  },
+  {
+    "word": "capsule wardrobe planning",
+    "ipa": "/ˈkæp.sjuːl ˈwɔː.drəʊb ˈplæn.ɪŋ/",
+    "meaning": "lên kế hoạch tủ đồ tối giản"
+  },
+  {
+    "word": "caramelize",
+    "ipa": "/ˈkær.ə.mə.laɪz/",
+    "meaning": "làm vàng/caramel"
+  },
+  {
+    "word": "cardiovascular",
+    "ipa": "/ˌkɑː.di.əʊˈvæs.kjʊ.lər/",
+    "meaning": "tim mạch"
+  },
+  {
+    "word": "career",
+    "ipa": "/kəˈrɪər/",
+    "meaning": "sự nghiệp"
+  },
+  {
+    "word": "career trajectory",
+    "ipa": "/kəˈrɪər trəˈdʒek.tər.i/",
+    "meaning": "lộ trình sự nghiệp"
+  },
+  {
+    "word": "case interview",
+    "ipa": "/keɪs ˈɪn.tə.vjuː/",
+    "meaning": "phỏng vấn tình huống"
+  },
+  {
+    "word": "cash flow",
+    "ipa": "/kæʃ fləʊ/",
+    "meaning": "dòng tiền"
+  },
+  {
+    "word": "cash flow statement",
+    "ipa": "/kæʃ fləʊ ˈsteɪt.mənt/",
+    "meaning": "báo cáo lưu chuyển tiền tệ"
+  },
+  {
+    "word": "cash reserve",
+    "ipa": "/kæʃ rɪˈzɜːv/",
+    "meaning": "dự trữ tiền mặt"
+  },
+  {
+    "word": "catwalk",
+    "ipa": "/ˈkæt.wɔːk/",
+    "meaning": "sàn trình diễn thời trang"
+  },
+  {
+    "word": "celebrity",
+    "ipa": "/səˈleb.rə.ti/",
+    "meaning": "người nổi tiếng"
+  },
+  {
+    "word": "cellphone",
+    "ipa": "/ˈsel.fəʊn/",
+    "meaning": "điện thoại di động"
+  },
+  {
+    "word": "charger",
+    "ipa": "/ˈʧɑrʤər/",
+    "meaning": "thiết bị sạc pin"
+  },
+  {
+    "word": "chemotherapy",
+    "ipa": "/ˌkiː.məʊˈθer.ə.pi/",
+    "meaning": "hóa trị"
+  },
+  {
+    "word": "chiffonade",
+    "ipa": "/ˌʃɪf.əˈnɑːd/",
+    "meaning": "thái chỉ lá rau thơm"
+  },
+  {
+    "word": "cholesterol",
+    "ipa": "/kəˈles.tər.ɒl/",
+    "meaning": "cholesterol"
+  },
+  {
+    "word": "chord progression",
+    "ipa": "/kɔːd prəˈɡreʃ.ən/",
+    "meaning": "tiến trình hợp âm"
+  },
+  {
+    "word": "chronic disease",
+    "ipa": "/ˈkrɒn.ɪk dɪˈziːz/",
+    "meaning": "bệnh mãn tính"
+  },
+  {
+    "word": "chronic pain",
+    "ipa": "/ˈkrɒn.ɪk peɪn/",
+    "meaning": "đau mãn tính"
+  },
+  {
+    "word": "clean sheet",
+    "ipa": "/kliːn ʃiːt/",
+    "meaning": "không để thủng lưới"
+  },
+  {
+    "word": "clinical trial",
+    "ipa": "/ˈklɪn.ɪ.kəl ˈtraɪ.əl/",
+    "meaning": "thử nghiệm lâm sàng"
+  },
+  {
+    "word": "clip",
+    "ipa": "/klɪp/",
+    "meaning": "video, phim"
+  },
+  {
+    "word": "cloud computing",
+    "ipa": "/klaʊd kəmˈpjuː.tɪŋ/",
+    "meaning": "điện toán đám mây"
+  },
+  {
+    "word": "cloud tech",
+    "ipa": "/klaʊd kəmˈpjuː.tɪŋ/",
+    "meaning": "điện toán đám mây"
+  },
+  {
+    "word": "coda",
+    "ipa": "/ˈkəʊ.də/",
+    "meaning": "đoạn kết bài nhạc"
+  },
+  {
+    "word": "code review",
+    "ipa": "/kəʊd rɪˈvjuː/",
+    "meaning": "xem xét mã nguồn"
+  },
+  {
+    "word": "collaboration post",
+    "ipa": "/kəˌlæb.əˈreɪ.ʃən pəʊst/",
+    "meaning": "bài đăng hợp tác"
+  },
+  {
+    "word": "color theory (fashion)",
+    "ipa": "/ˈkʌl.ər ˈθɪər.i/",
+    "meaning": "lý thuyết màu sắc ứng dụng thời trang"
+  },
+  {
+    "word": "commit",
+    "ipa": "/kəˈmɪt/",
+    "meaning": "lưu thay đổi vào kho mã"
+  },
+  {
+    "word": "commodity",
+    "ipa": "/kəˈmɒd.ɪ.ti/",
+    "meaning": "hàng hóa (đầu tư)"
+  },
+  {
+    "word": "community management",
+    "ipa": "/kəˈmjuː.nɪ.ti ˈmæn.ɪdʒ.mənt/",
+    "meaning": "quản lý cộng đồng trực tuyến"
+  },
+  {
+    "word": "company values",
+    "ipa": "/ˈkʌm.pə.ni ˈvæl.juːz/",
+    "meaning": "giá trị cốt lõi công ty"
+  },
+  {
+    "word": "competency",
+    "ipa": "/ˈkɒm.pɪ.tən.si/",
+    "meaning": "năng lực cốt lõi"
+  },
+  {
+    "word": "competitive advantage",
+    "ipa": "/kəmˌpet.ɪ.tɪv ədˈvɑːn.tɪdʒ/",
+    "meaning": "lợi thế cạnh tranh"
+  },
+  {
+    "word": "competitive analysis",
+    "ipa": "/kəmˈpet.ɪ.tɪv əˈnæl.ə.sɪs/",
+    "meaning": "phân tích cạnh tranh"
+  },
+  {
+    "word": "complementary colors",
+    "ipa": "/ˌkɒm.plɪˈmen.tər.i ˈkʌl.ərz/",
+    "meaning": "màu bổ trợ (tương phản)"
+  },
+  {
+    "word": "compliance",
+    "ipa": "/kəmˈplaɪ.əns/",
+    "meaning": "sự tuân thủ"
+  },
+  {
+    "word": "complication",
+    "ipa": "/ˌkɒm.plɪˈkeɪ.ʃən/",
+    "meaning": "biến chứng"
+  },
+  {
+    "word": "composition",
+    "ipa": "/ˌkɒm.pəˈzɪʃ.ən/",
+    "meaning": "tác phẩm âm nhạc"
+  },
+  {
+    "word": "concede",
+    "ipa": "/kənˈsiːd/",
+    "meaning": "thủng lưới; để thua"
+  },
+  {
+    "word": "conflict resolution",
+    "ipa": "/ˈkɒn.flɪkt ˌrez.əˈluː.ʃən/",
+    "meaning": "giải quyết xung đột"
+  },
+  {
+    "word": "connect",
+    "ipa": "/kəˈnekt/",
+    "meaning": "kết nối"
+  },
+  {
+    "word": "containerization",
+    "ipa": "/kənˌteɪ.nər.aɪˈzeɪ.ʃən/",
+    "meaning": "đóng gói ứng dụng vào container"
+  },
+  {
+    "word": "content marketing",
+    "ipa": "/ˌkɒn.tent ˈmɑː.kɪ.tɪŋ/",
+    "meaning": "tiếp thị nội dung"
+  },
+  {
+    "word": "content moderation",
+    "ipa": "/ˈkɒn.tent ˌmɒd.əˈreɪ.ʃən/",
+    "meaning": "kiểm duyệt nội dung"
+  },
+  {
+    "word": "content pillars",
+    "ipa": "/ˈkɒn.tent ˈpɪl.ərz/",
+    "meaning": "chủ đề cốt lõi của nội dung"
+  },
+  {
+    "word": "content strategy",
+    "ipa": "/ˈkɒn.tent ˈstræt.ɪ.dʒi/",
+    "meaning": "chiến lược nội dung"
+  },
+  {
+    "word": "contract extension",
+    "ipa": "/ˈkɒn.trækt ɪkˈsten.ʃən/",
+    "meaning": "gia hạn hợp đồng"
+  },
+  {
+    "word": "contractor",
+    "ipa": "/kənˈtræk.tər/",
+    "meaning": "người làm việc theo hợp đồng, thầu phụ"
+  },
+  {
+    "word": "conversion",
+    "ipa": "/kənˈvɜː.ʃən/",
+    "meaning": "chuyển đổi (khách thành người mua)"
+  },
+  {
+    "word": "copyright",
+    "ipa": "/ˈkɒp.i.raɪt/",
+    "meaning": "bản quyền"
+  },
+  {
+    "word": "corner kick",
+    "ipa": "/ˈkɔː.nər kɪk/",
+    "meaning": "phạt góc"
+  },
+  {
+    "word": "corporate governance",
+    "ipa": "/ˈkɔː.pər.ɪt ˈɡʌv.ən.əns/",
+    "meaning": "quản trị doanh nghiệp"
+  },
+  {
+    "word": "cost reduction",
+    "ipa": "/kɒst rɪˈdʌk.ʃən/",
+    "meaning": "cắt giảm chi phí"
+  },
+  {
+    "word": "coulis",
+    "ipa": "/ˈkuː.li/",
+    "meaning": "sốt trái cây xay"
+  },
+  {
+    "word": "counterattack",
+    "ipa": "/ˌkaʊn.tərəˈtæk/",
+    "meaning": "phản công"
+  },
+  {
+    "word": "countermelody",
+    "ipa": "/ˌkaʊn.tərˈmel.ə.di/",
+    "meaning": "giai điệu phụ đối"
+  },
+  {
+    "word": "cover letter",
+    "ipa": "/ˈkʌv.ər ˌlet.ər/",
+    "meaning": "thư xin việc"
+  },
+  {
+    "word": "creator economy",
+    "ipa": "/kriˈeɪ.tər ɪˈkɒn.ə.mi/",
+    "meaning": "nền kinh tế người sáng tạo"
+  },
+  {
+    "word": "crisis communication",
+    "ipa": "/ˈkraɪ.sɪs kəˌmjuː.nɪˈkeɪ.ʃən/",
+    "meaning": "truyền thông khủng hoảng"
+  },
+  {
+    "word": "critical thinking",
+    "ipa": "/ˈkrɪt.ɪ.kəl ˈθɪŋk.ɪŋ/",
+    "meaning": "tư duy phản biện"
+  },
+  {
+    "word": "cropped",
+    "ipa": "/krɒpt/",
+    "meaning": "áo ngắn cắt gọn"
+  },
+  {
+    "word": "cross-contamination",
+    "ipa": "/ˈkrɒs kənˌtæm.ɪˈneɪ.ʃən/",
+    "meaning": "nhiễm chéo vi khuẩn"
+  },
+  {
+    "word": "cryptocurrency",
+    "ipa": "/ˈkrɪp.təʊˌkʌr.ən.si/",
+    "meaning": "tiền điện tử"
+  },
+  {
+    "word": "crème brûlée",
+    "ipa": "/ˌkrem bruːˈleɪ/",
+    "meaning": "bánh kem brûlée"
+  },
+  {
+    "word": "cultural fit",
+    "ipa": "/ˈkʌl.tʃər.əl fɪt/",
+    "meaning": "phù hợp văn hóa công ty"
+  },
+  {
+    "word": "cure",
+    "ipa": "/kjʊər/",
+    "meaning": "ướp muối bảo quản"
+  },
+  {
+    "word": "customer retention",
+    "ipa": "/ˈkʌs.tə.mər rɪˈten.ʃən/",
+    "meaning": "giữ chân khách hàng"
+  },
+  {
+    "word": "cybersecurity",
+    "ipa": "/ˌsaɪ.bə.sɪˈkjʊə.rə.ti/",
+    "meaning": "an ninh mạng"
+  },
+  {
+    "word": "debugging tools",
+    "ipa": "/diːˈbʌɡ.ɪŋ tuːlz/",
+    "meaning": "công cụ gỡ lỗi"
+  },
+  {
+    "word": "debut",
+    "ipa": "/ˈdeɪ.bjuː/",
+    "meaning": "lần ra sân/thi đấu đầu tiên"
+  },
+  {
+    "word": "defensive line",
+    "ipa": "/dɪˈfen.sɪv laɪn/",
+    "meaning": "hàng phòng thủ"
+  },
+  {
+    "word": "deglaze",
+    "ipa": "/diːˈɡleɪz/",
+    "meaning": "hòa tan cặn nồi bằng chất lỏng"
+  },
+  {
+    "word": "demographic targeting",
+    "ipa": "/ˌdem.əˈɡræf.ɪk ˈtɑː.ɡɪ.tɪŋ/",
+    "meaning": "nhắm mục tiêu theo nhân khẩu học"
+  },
+  {
+    "word": "deployment",
+    "ipa": "/dɪˈplɔɪ.mənt/",
+    "meaning": "triển khai phần mềm"
+  },
+  {
+    "word": "depreciation",
+    "ipa": "/dɪˌpriː.ʃiˈeɪ.ʃən/",
+    "meaning": "khấu hao tài sản"
+  },
+  {
+    "word": "device",
+    "ipa": "/dɪˈvaɪs/",
+    "meaning": "thiết bị điện tử nhỏ"
+  },
+  {
+    "word": "diagnosis",
+    "ipa": "/ˌdaɪ.əɡˈnəʊ.sɪs/",
+    "meaning": "chẩn đoán"
+  },
+  {
+    "word": "dialysis",
+    "ipa": "/daɪˈæl.ɪ.sɪs/",
+    "meaning": "lọc máu nhân tạo"
+  },
+  {
+    "word": "diatonic scale",
+    "ipa": "/ˌdaɪ.əˈtɒn.ɪk skeɪl/",
+    "meaning": "gam diatonic (7 âm)"
+  },
+  {
+    "word": "dietary restriction",
+    "ipa": "/ˈdaɪ.ɪ.tər.i rɪˈstrɪk.ʃən/",
+    "meaning": "hạn chế ăn uống"
+  },
+  {
+    "word": "digital wellness",
+    "ipa": "/ˈdɪdʒ.ɪ.təl ˈwel.nəs/",
+    "meaning": "sức khỏe số"
+  },
+  {
+    "word": "direct marketing",
+    "ipa": "/daɪˈrekt ˈmɑː.kɪ.tɪŋ/",
+    "meaning": "tiếp thị trực tiếp"
+  },
+  {
+    "word": "display",
+    "ipa": "/dɪˈspleɪ/",
+    "meaning": "màn hình"
+  },
+  {
+    "word": "distribution channel",
+    "ipa": "/ˌdɪs.trɪˈbjuː.ʃən ˈtʃæn.əl/",
+    "meaning": "kênh phân phối"
+  },
+  {
+    "word": "diversification",
+    "ipa": "/daɪˌvɜː.sɪ.fɪˈkeɪ.ʃən/",
+    "meaning": "đa dạng hóa danh mục đầu tư"
+  },
+  {
+    "word": "dividend",
+    "ipa": "/ˈdɪv.ɪ.dend/",
+    "meaning": "cổ tức"
+  },
+  {
+    "word": "documentation",
+    "ipa": "/ˌdɒk.jʊ.menˈteɪ.ʃən/",
+    "meaning": "tài liệu kỹ thuật"
+  },
+  {
+    "word": "dollar-cost averaging",
+    "ipa": "/ˈdɒl.ər kɒst ˈæv.ər.ɪ.dʒɪŋ/",
+    "meaning": "mua định kỳ trung bình giá"
+  },
+  {
+    "word": "doomscrolling",
+    "ipa": "/ˈduːm.skrəʊ.lɪŋ/",
+    "meaning": "cuộn mạng liên tục xem tin xấu"
+  },
+  {
+    "word": "download",
+    "ipa": "/ˌdaʊnˈləʊd/",
+    "meaning": "tải xuống"
+  },
+  {
+    "word": "drape",
+    "ipa": "/dreɪp/",
+    "meaning": "cách vải buông, rủ"
+  },
+  {
+    "word": "drive",
+    "ipa": "/draɪv/",
+    "meaning": "chiến dịch lớn, cuộc vận động"
+  },
+  {
+    "word": "dynamics",
+    "ipa": "/daɪˈnæm.ɪks/",
+    "meaning": "sắc thái to nhỏ trong âm nhạc"
+  },
+  {
+    "word": "earnings per share",
+    "ipa": "/ˈɜː.nɪŋz pər ʃeər/",
+    "meaning": "lợi nhuận trên mỗi cổ phần"
+  },
+  {
+    "word": "echo chamber",
+    "ipa": "/ˈek.əʊ ˌtʃeɪm.bər/",
+    "meaning": "buồng vọng (bong bóng thông tin)"
+  },
+  {
+    "word": "editorial (fashion)",
+    "ipa": "/ˌɛdəˈtɔriəl (ˈfæʃən)/",
+    "meaning": "ảnh thời trang tạp chí"
+  },
+  {
+    "word": "electronic mail",
+    "ipa": "/ˌɪˌlɛkˈtrɑnɪk meɪl/",
+    "meaning": "thư điện tử"
+  },
+  {
+    "word": "elevator pitch",
+    "ipa": "/ˈel.ɪ.veɪ.tər pɪtʃ/",
+    "meaning": "bài giới thiệu bản thân ngắn gọn"
+  },
+  {
+    "word": "email",
+    "ipa": "/ˈiː.meɪl/",
+    "meaning": "thư điện tử"
+  },
+  {
+    "word": "emotional intelligence",
+    "ipa": "/ɪˌməʊ.ʃən.əl ɪnˈtel.ɪ.dʒəns/",
+    "meaning": "trí tuệ cảm xúc"
+  },
+  {
+    "word": "emulsify",
+    "ipa": "/ɪˈmʌl.sɪ.faɪ/",
+    "meaning": "nhũ hóa"
+  },
+  {
+    "word": "endemic",
+    "ipa": "/enˈdem.ɪk/",
+    "meaning": "bệnh đặc hữu (địa phương)"
+  },
+  {
+    "word": "endurance",
+    "ipa": "/ɪnˈdjʊər.əns/",
+    "meaning": "sức bền"
+  },
+  {
+    "word": "engagement",
+    "ipa": "/ɪnˈɡeɪdʒ.mənt/",
+    "meaning": "mức độ tương tác"
+  },
+  {
+    "word": "entrepreneur",
+    "ipa": "/ˌɒn.trə.prəˈnɜːr/",
+    "meaning": "doanh nhân khởi nghiệp"
+  },
+  {
+    "word": "epidemiology",
+    "ipa": "/ˌep.ɪ.diː.miˈɒl.ə.dʒi/",
+    "meaning": "dịch tễ học"
+  },
+  {
+    "word": "estate planning",
+    "ipa": "/ɪˈsteɪt ˈplæn.ɪŋ/",
+    "meaning": "lập kế hoạch di sản"
+  },
+  {
+    "word": "evergreen content",
+    "ipa": "/ˈev.ə.ɡriːn ˈkɒn.tent/",
+    "meaning": "nội dung không lỗi thời"
+  },
+  {
+    "word": "expense ratio",
+    "ipa": "/ɪkˈspens ˈreɪ.ʃi.əʊ/",
+    "meaning": "tỷ lệ chi phí quản lý quỹ"
+  },
+  {
+    "word": "expertise",
+    "ipa": "/ˌek.spɜːˈtiːz/",
+    "meaning": "chuyên môn kỹ thuật, sự tinh thông"
+  },
+  {
+    "word": "extra time",
+    "ipa": "/ˈek.strə taɪm/",
+    "meaning": "hiệp phụ"
+  },
+  {
+    "word": "eye contact",
+    "ipa": "/aɪ ˈkɒn.tækt/",
+    "meaning": "giao tiếp bằng mắt"
+  },
+  {
+    "word": "fashion archive",
+    "ipa": "/ˈfæʃ.ən ˈɑː.kaɪv/",
+    "meaning": "kho lưu trữ thời trang"
+  },
+  {
+    "word": "fashion blogger",
+    "ipa": "/ˈfæʃ.ən ˈblɒɡ.ər/",
+    "meaning": "blogger thời trang"
+  },
+  {
+    "word": "fashion influencer",
+    "ipa": "/ˈfæʃ.ən ˈɪn.fluː.ən.sər/",
+    "meaning": "người ảnh hưởng về thời trang"
+  },
+  {
+    "word": "fashion photographer",
+    "ipa": "/ˈfæʃ.ən fəˈtɒɡ.rə.fər/",
+    "meaning": "nhiếp ảnh gia thời trang"
+  },
+  {
+    "word": "fashion stylist",
+    "ipa": "/ˈfæʃ.ən ˈstaɪ.lɪst/",
+    "meaning": "chuyên gia phong cách thời trang"
+  },
+  {
+    "word": "fashion tech",
+    "ipa": "/ˈfæʃ.ən tek/",
+    "meaning": "công nghệ ứng dụng trong thời trang"
+  },
+  {
+    "word": "fashion week",
+    "ipa": "/ˈfæʃ.ən wiːk/",
+    "meaning": "tuần lễ thời trang"
+  },
+  {
+    "word": "fast fashion",
+    "ipa": "/fɑːst ˈfæʃ.ən/",
+    "meaning": "thời trang nhanh, giá rẻ"
+  },
+  {
+    "word": "fermata",
+    "ipa": "/fɜːˈmɑː.tə/",
+    "meaning": "dấu giữ nốt"
+  },
+  {
+    "word": "ferment",
+    "ipa": "/fɜːˈment/",
+    "meaning": "lên men"
+  },
+  {
+    "word": "filter bubble",
+    "ipa": "/ˈfɪl.tər ˌbʌb.əl/",
+    "meaning": "bong bóng lọc thông tin"
+  },
+  {
+    "word": "financial forecast",
+    "ipa": "/faɪˈnæn.ʃəl ˈfɔː.kɑːst/",
+    "meaning": "dự báo tài chính"
+  },
+  {
+    "word": "financial planning",
+    "ipa": "/faɪˈnæn.ʃəl ˈplæn.ɪŋ/",
+    "meaning": "lập kế hoạch tài chính"
+  },
+  {
+    "word": "fintech",
+    "ipa": "/ˈfɪn.tek/",
+    "meaning": "công nghệ tài chính"
+  },
+  {
+    "word": "fiscal year",
+    "ipa": "/ˈfɪs.kəl jɪər/",
+    "meaning": "năm tài chính"
+  },
+  {
+    "word": "fit and flare",
+    "ipa": "/fɪt ənd fleər/",
+    "meaning": "dáng ôm trên, xòe dưới"
+  },
+  {
+    "word": "fixture",
+    "ipa": "/ˈfɪks.tʃər/",
+    "meaning": "lịch thi đấu"
+  },
+  {
+    "word": "fold",
+    "ipa": "/fəʊld/",
+    "meaning": "trộn nhẹ nhàng (không phá vỡ bọt khí)"
+  },
+  {
+    "word": "follow-up email",
+    "ipa": "/ˈfɒl.əʊ.ʌp ˈiː.meɪl/",
+    "meaning": "email theo dõi sau phỏng vấn"
+  },
+  {
+    "word": "food allergy",
+    "ipa": "/fuːd ˈæl.ə.dʒi/",
+    "meaning": "dị ứng thực phẩm"
+  },
+  {
+    "word": "food safety",
+    "ipa": "/fuːd ˈseɪf.ti/",
+    "meaning": "an toàn thực phẩm"
+  },
+  {
+    "word": "formation",
+    "ipa": "/fɔːˈmeɪ.ʃən/",
+    "meaning": "đội hình chiến thuật"
+  },
+  {
+    "word": "framework",
+    "ipa": "/ˈfreɪm.wɜːk/",
+    "meaning": "khung phần mềm"
+  },
+  {
+    "word": "franchise",
+    "ipa": "/ˈfræn.tʃaɪz/",
+    "meaning": "nhượng quyền thương mại"
+  },
+  {
+    "word": "free kick",
+    "ipa": "/ˈfriː kɪk/",
+    "meaning": "đá phạt trực tiếp"
+  },
+  {
+    "word": "freelancer",
+    "ipa": "/ˈfriː.lɑːn.sər/",
+    "meaning": "người làm tự do"
+  },
+  {
+    "word": "frontend",
+    "ipa": "/ˈfrʌnt.end/",
+    "meaning": "phía giao diện người dùng (frontend)"
+  },
+  {
+    "word": "fundamental analysis",
+    "ipa": "/ˌfʌn.dəˈmen.təl əˈnæl.ɪ.sɪs/",
+    "meaning": "phân tích cơ bản"
+  },
+  {
+    "word": "futures contract",
+    "ipa": "/ˈfjuː.tʃərz ˈkɒn.trækt/",
+    "meaning": "hợp đồng tương lai"
+  },
+  {
+    "word": "gadget",
+    "ipa": "/ˈgæʤət/",
+    "meaning": "thiết bị điện tử nhỏ"
+  },
+  {
+    "word": "game",
+    "ipa": "/ɡeɪm/",
+    "meaning": "trò chơi"
+  },
+  {
+    "word": "gap year",
+    "ipa": "/ɡæp jɪər/",
+    "meaning": "năm nghỉ giữa công việc/học tập"
+  },
+  {
+    "word": "gastrique",
+    "ipa": "/ɡæˈstriːk/",
+    "meaning": "sốt caramel chua ngọt"
+  },
+  {
+    "word": "gelatin",
+    "ipa": "/ˈdʒel.ə.tɪn/",
+    "meaning": "gelatin"
+  },
+  {
+    "word": "gender-neutral fashion",
+    "ipa": "/ˈdʒen.dər ˌnjuː.trəl ˈfæʃ.ən/",
+    "meaning": "thời trang phi giới tính"
+  },
+  {
+    "word": "genetic testing",
+    "ipa": "/dʒɪˈnet.ɪk ˈtes.tɪŋ/",
+    "meaning": "xét nghiệm di truyền"
+  },
+  {
+    "word": "genre blending",
+    "ipa": "/ˈʒɒn.rə ˈblen.dɪŋ/",
+    "meaning": "pha trộn thể loại nhạc"
+  },
+  {
+    "word": "gluten",
+    "ipa": "/ˈɡluː.tən/",
+    "meaning": "gluten (protein trong bột mì)"
+  },
+  {
+    "word": "gross profit",
+    "ipa": "/ɡrəʊs ˈprɒf.ɪt/",
+    "meaning": "lợi nhuận gộp"
+  },
+  {
+    "word": "group discussion",
+    "ipa": "/ɡruːp dɪˈskʌʃ.ən/",
+    "meaning": "thảo luận nhóm"
+  },
+  {
+    "word": "growth mindset",
+    "ipa": "/ɡrəʊθ ˈmaɪnd.set/",
+    "meaning": "tư duy phát triển"
+  },
+  {
+    "word": "guerrilla marketing",
+    "ipa": "/ɡəˈrɪl.ə ˈmɑː.kɪ.tɪŋ/",
+    "meaning": "tiếp thị du kích"
+  },
+  {
+    "word": "hard skills",
+    "ipa": "/hɑːd skɪlz/",
+    "meaning": "kỹ năng cứng"
+  },
+  {
+    "word": "harmonize",
+    "ipa": "/ˈhɑː.mə.naɪz/",
+    "meaning": "hòa âm"
+  },
+  {
+    "word": "hat-trick",
+    "ipa": "/ˈhæt.trɪk/",
+    "meaning": "ghi ba bàn thắng trong một trận"
+  },
+  {
+    "word": "haute couture",
+    "ipa": "/ˌəʊt kuːˈtjʊər/",
+    "meaning": "thời trang cao cấp đặt riêng"
+  },
+  {
+    "word": "header",
+    "ipa": "/ˈhed.ər/",
+    "meaning": "cú đánh đầu"
+  },
+  {
+    "word": "headhunter",
+    "ipa": "/ˈhed.hʌn.tər/",
+    "meaning": "chuyên viên tuyển dụng đầu ngành"
+  },
+  {
+    "word": "health insurance",
+    "ipa": "/helθ ɪnˈʃʊər.əns/",
+    "meaning": "bảo hiểm y tế"
+  },
+  {
+    "word": "healthcare system",
+    "ipa": "/ˈhelθ.keər ˈsɪs.təm/",
+    "meaning": "hệ thống y tế"
+  },
+  {
+    "word": "herd immunity",
+    "ipa": "/hɜːd ɪˈmjuː.nɪ.ti/",
+    "meaning": "miễn dịch cộng đồng"
+  },
+  {
+    "word": "heritage brand",
+    "ipa": "/ˈher.ɪ.tɪdʒ brænd/",
+    "meaning": "thương hiệu lâu đời"
+  },
+  {
+    "word": "hormone",
+    "ipa": "/ˈhɔː.məʊn/",
+    "meaning": "hooc-môn"
+  },
+  {
+    "word": "hospice",
+    "ipa": "/ˈhɒs.pɪs/",
+    "meaning": "cơ sở chăm sóc người hấp hối"
+  },
+  {
+    "word": "identity",
+    "ipa": "/aɪˈden.tə.ti/",
+    "meaning": "nhận diện, danh tính thương hiệu"
+  },
+  {
+    "word": "immunotherapy",
+    "ipa": "/ˌɪm.jʊ.nəʊˈθer.ə.pi/",
+    "meaning": "liệu pháp miễn dịch"
+  },
+  {
+    "word": "improvise",
+    "ipa": "/ˈɪm.prə.vaɪz/",
+    "meaning": "ứng tấu, ngẫu hứng"
+  },
+  {
+    "word": "income statement",
+    "ipa": "/ˈɪŋ.kʌm ˈsteɪt.mənt/",
+    "meaning": "báo cáo kết quả kinh doanh"
+  },
+  {
+    "word": "index fund",
+    "ipa": "/ˈɪn.deks fʌnd/",
+    "meaning": "quỹ chỉ số"
+  },
+  {
+    "word": "inflammatory response",
+    "ipa": "/ɪnˈflæm.ə.tɔːr.i rɪˈspɒns/",
+    "meaning": "phản ứng viêm"
+  },
+  {
+    "word": "influencer",
+    "ipa": "/ˈɪn.flu.ən.sər/",
+    "meaning": "người có ảnh hưởng"
+  },
+  {
+    "word": "influencer marketing",
+    "ipa": "/ˈɪn.fluː.ən.sər ˈmɑː.kɪ.tɪŋ/",
+    "meaning": "tiếp thị người ảnh hưởng"
+  },
+  {
+    "word": "infuse",
+    "ipa": "/ɪnˈfjuːz/",
+    "meaning": "hãm/ngâm để lấy hương vị"
+  },
+  {
+    "word": "injury time",
+    "ipa": "/ˈɪn.dʒər.i taɪm/",
+    "meaning": "giờ bù giờ"
+  },
+  {
+    "word": "innovation",
+    "ipa": "/ˌɪn.əˈveɪ.ʃən/",
+    "meaning": "sự đổi mới, sáng tạo"
+  },
+  {
+    "word": "inpatient",
+    "ipa": "/ˈɪn.peɪ.ʃənt/",
+    "meaning": "bệnh nhân nội trú"
+  },
+  {
+    "word": "insolvency",
+    "ipa": "/ɪnˈsɒl.vən.si/",
+    "meaning": "mất khả năng thanh toán"
+  },
+  {
+    "word": "insomnia",
+    "ipa": "/ɪnˈsɒm.ni.ə/",
+    "meaning": "chứng mất ngủ"
+  },
+  {
+    "word": "integration testing",
+    "ipa": "/ˌɪn.tɪˈɡreɪ.ʃən ˈtes.tɪŋ/",
+    "meaning": "kiểm thử tích hợp"
+  },
+  {
+    "word": "interaction",
+    "ipa": "/ˌɪn.təˈræk.ʃən/",
+    "meaning": "sự tương tác qua lại"
+  },
+  {
+    "word": "internet",
+    "ipa": "/ˈɪn.tə.net/",
+    "meaning": "mạng Internet"
+  },
+  {
+    "word": "interval",
+    "ipa": "/ˈɪn.tə.vəl/",
+    "meaning": "quãng (âm nhạc)"
+  },
+  {
+    "word": "invention",
+    "ipa": "/ˌɪn.əˈveɪ.ʃən/",
+    "meaning": "sự đổi mới, sáng tạo"
+  },
+  {
+    "word": "job description",
+    "ipa": "/dʒɒb dɪˈskrɪp.ʃən/",
+    "meaning": "mô tả công việc"
+  },
+  {
+    "word": "joint venture",
+    "ipa": "/dʒɔɪnt ˈven.tʃər/",
+    "meaning": "liên doanh"
+  },
+  {
+    "word": "julienne",
+    "ipa": "/ˌdʒuː.liˈen/",
+    "meaning": "thái chỉ mỏng"
+  },
+  {
+    "word": "key performance indicators",
+    "ipa": "/kiː pəˈfɔː.məns ˈɪn.dɪ.keɪ.tərz/",
+    "meaning": "chỉ số hiệu suất chính"
+  },
+  {
+    "word": "key signature",
+    "ipa": "/kiː ˈsɪɡ.nɪ.tʃər/",
+    "meaning": "giọng điệu (ký hiệu)"
+  },
+  {
+    "word": "keyword optimization",
+    "ipa": "/ˈkiː.wɜːd ˌɒp.tɪ.maɪˈzeɪ.ʃən/",
+    "meaning": "tối ưu hóa từ khóa"
+  },
+  {
+    "word": "knockout",
+    "ipa": "/ˈnɒk.aʊt/",
+    "meaning": "đấm knock-out; hạ gục đối thủ"
+  },
+  {
+    "word": "layering",
+    "ipa": "/ˈleɪ.ər.ɪŋ/",
+    "meaning": "chồng lớp âm thanh"
+  },
+  {
+    "word": "legato",
+    "ipa": "/lɪˈɡɑː.təʊ/",
+    "meaning": "liền mạch, trơn tru (âm nhạc)"
+  },
+  {
+    "word": "lens",
+    "ipa": "/lɛnz/",
+    "meaning": "máy ảnh, máy quay"
+  },
+  {
+    "word": "library",
+    "ipa": "/ˈlaɪ.brər.i/",
+    "meaning": "thư viện lập trình"
+  },
+  {
+    "word": "link",
+    "ipa": "/lɪŋk/",
+    "meaning": "liên kết, nối liền"
+  },
+  {
+    "word": "liquidity",
+    "ipa": "/lɪˈkwɪd.ɪ.ti/",
+    "meaning": "tính thanh khoản"
+  },
+  {
+    "word": "load balancer",
+    "ipa": "/ləʊd ˈbæl.əns.ər/",
+    "meaning": "bộ cân bằng tải"
+  },
+  {
+    "word": "logomania",
+    "ipa": "/ˌləʊ.ɡəʊˈmeɪ.ni.ə/",
+    "meaning": "trào lưu khoe logo thương hiệu"
+  },
+  {
+    "word": "long-term vision",
+    "ipa": "/lɒŋ tɜːm ˈvɪʒ.ən/",
+    "meaning": "tầm nhìn dài hạn"
+  },
+  {
+    "word": "lookalike audience",
+    "ipa": "/ˈlʊk.ə.laɪk ˈɔː.di.əns/",
+    "meaning": "đối tượng tương tự"
+  },
+  {
+    "word": "lookbook",
+    "ipa": "/ˈlʊk.bʊk/",
+    "meaning": "sách ảnh trang phục mẫu"
+  },
+  {
+    "word": "looping",
+    "ipa": "/ˈluː.pɪŋ/",
+    "meaning": "lặp vòng âm thanh"
+  },
+  {
+    "word": "macerate",
+    "ipa": "/ˈmæs.ə.reɪt/",
+    "meaning": "ngâm mềm (trái cây) trong đường/rượu"
+  },
+  {
+    "word": "maillard reaction",
+    "ipa": "/maɪˈjɑːr riˈæk.ʃən/",
+    "meaning": "phản ứng Maillard (tạo vỏ vàng)"
+  },
+  {
+    "word": "major key",
+    "ipa": "/ˈmeɪ.dʒər kiː/",
+    "meaning": "giọng trưởng"
+  },
+  {
+    "word": "man-to-man marking",
+    "ipa": "/mæn tə mæn ˈmɑː.kɪŋ/",
+    "meaning": "kèm người"
+  },
+  {
+    "word": "margin trading",
+    "ipa": "/ˈmɑː.dʒɪn ˈtreɪ.dɪŋ/",
+    "meaning": "giao dịch ký quỹ"
+  },
+  {
+    "word": "market capitalization",
+    "ipa": "/ˈmɑː.kɪt ˌkæp.ɪ.t.əl.aɪˈzeɪ.ʃən/",
+    "meaning": "vốn hóa thị trường"
+  },
+  {
+    "word": "market correction",
+    "ipa": "/ˈmɑː.kɪt kəˈrek.ʃən/",
+    "meaning": "điều chỉnh thị trường"
+  },
+  {
+    "word": "market penetration",
+    "ipa": "/ˈmɑː.kɪt ˌpen.ɪˈtreɪ.ʃən/",
+    "meaning": "thâm nhập thị trường"
+  },
+  {
+    "word": "market research",
+    "ipa": "/ˈmɑː.kɪt rɪˈsɜːtʃ/",
+    "meaning": "nghiên cứu thị trường"
+  },
+  {
+    "word": "market share",
+    "ipa": "/ˈmɑː.kɪt ʃeər/",
+    "meaning": "thị phần"
+  },
+  {
+    "word": "mastering",
+    "ipa": "/ˈmɑː.stər.ɪŋ/",
+    "meaning": "xử lý cuối bản nhạc"
+  },
+  {
+    "word": "match",
+    "ipa": "/mæʧ/",
+    "meaning": "trò chơi"
+  },
+  {
+    "word": "maxi",
+    "ipa": "/ˈmæk.si/",
+    "meaning": "váy/áo dài đến mắt cá"
+  },
+  {
+    "word": "maximalist fashion",
+    "ipa": "/ˈmæk.sɪ.mə.lɪst ˈfæʃ.ən/",
+    "meaning": "thời trang tối đa (nhiều màu, hoạ tiết)"
+  },
+  {
+    "word": "mental wellness",
+    "ipa": "/ˈmen.təl ˈwel.nəs/",
+    "meaning": "sức khỏe tinh thần tổng thể"
+  },
+  {
+    "word": "mentoring",
+    "ipa": "/ˈmen.tər.ɪŋ/",
+    "meaning": "cố vấn, hướng dẫn"
+  },
+  {
+    "word": "merge",
+    "ipa": "/mərʤ/",
+    "meaning": "gộp mã nguồn"
+  },
+  {
+    "word": "merger",
+    "ipa": "/ˈmɜː.dʒər/",
+    "meaning": "sự sáp nhập"
+  },
+  {
+    "word": "message",
+    "ipa": "/ˈmes.ɪdʒ/",
+    "meaning": "tin nhắn"
+  },
+  {
+    "word": "metabolism",
+    "ipa": "/məˈtæb.ə.lɪ.zəm/",
+    "meaning": "trao đổi chất"
+  },
+  {
+    "word": "microservices",
+    "ipa": "/ˈmaɪ.krəʊˌsɜː.vɪsɪz/",
+    "meaning": "kiến trúc vi dịch vụ"
+  },
+  {
+    "word": "midi",
+    "ipa": "/ˈmɪd.i/",
+    "meaning": "độ dài midi (đến bắp chân)"
+  },
+  {
+    "word": "mindfulness",
+    "ipa": "/ˈmaɪnd.fəl.nəs/",
+    "meaning": "chánh niệm"
+  },
+  {
+    "word": "mini",
+    "ipa": "/ˈmɪn.i/",
+    "meaning": "váy/áo ngắn"
+  },
+  {
+    "word": "minimalist fashion",
+    "ipa": "/ˈmɪn.ɪ.mə.lɪst ˈfæʃ.ən/",
+    "meaning": "thời trang tối giản"
+  },
+  {
+    "word": "minor key",
+    "ipa": "/ˈmaɪ.nər kiː/",
+    "meaning": "giọng thứ"
+  },
+  {
+    "word": "mise en place",
+    "ipa": "/ˌmiːz ɒn ˈplɑːs/",
+    "meaning": "chuẩn bị nguyên liệu trước khi nấu"
+  },
+  {
+    "word": "mise en scène (plating)",
+    "ipa": "/ˌmiːz ɒn ˈsen/",
+    "meaning": "nghệ thuật trình bày đĩa"
+  },
+  {
+    "word": "mixing board",
+    "ipa": "/ˈmɪk.sɪŋ bɔːd/",
+    "meaning": "bàn trộn âm thanh"
+  },
+  {
+    "word": "modulation",
+    "ipa": "/ˌmɒd.jʊˈleɪ.ʃən/",
+    "meaning": "chuyển giọng"
+  },
+  {
+    "word": "monetization",
+    "ipa": "/ˌmɒn.ɪ.taɪˈzeɪ.ʃən/",
+    "meaning": "kiếm tiền từ nội dung"
+  },
+  {
+    "word": "monolith",
+    "ipa": "/ˈmɒn.ə.lɪθ/",
+    "meaning": "ứng dụng nguyên khối"
+  },
+  {
+    "word": "mousse",
+    "ipa": "/muːs/",
+    "meaning": "kem bọt (bánh mousse)"
+  },
+  {
+    "word": "multi-platform strategy",
+    "ipa": "/ˈmʌl.ti ˈplæt.fɔːm ˈstræt.ɪ.dʒi/",
+    "meaning": "chiến lược đa nền tảng"
+  },
+  {
+    "word": "muscle cramp",
+    "ipa": "/ˈmʌs.əl kræmp/",
+    "meaning": "chuột rút"
+  },
+  {
+    "word": "music charts",
+    "ipa": "/ˈmjuː.zɪk tʃɑːts/",
+    "meaning": "bảng xếp hạng âm nhạc"
+  },
+  {
+    "word": "music educator",
+    "ipa": "/ˈmjuː.zɪk ˈed.jʊ.keɪ.tər/",
+    "meaning": "giáo viên âm nhạc"
+  },
+  {
+    "word": "music licensing",
+    "ipa": "/ˈmjuː.zɪk ˈlaɪ.sən.sɪŋ/",
+    "meaning": "cấp phép nhạc"
+  },
+  {
+    "word": "music notation",
+    "ipa": "/ˈmjuː.zɪk nəʊˈteɪ.ʃən/",
+    "meaning": "ký hiệu âm nhạc"
+  },
+  {
+    "word": "music production",
+    "ipa": "/ˈmjuː.zɪk prəˈdʌk.ʃən/",
+    "meaning": "sản xuất âm nhạc"
+  },
+  {
+    "word": "music streaming",
+    "ipa": "/ˈmjuː.zɪk ˈstriː.mɪŋ/",
+    "meaning": "phát nhạc trực tuyến"
+  },
+  {
+    "word": "music theory",
+    "ipa": "/ˈmjuː.zɪk ˈθɪər.i/",
+    "meaning": "lý thuyết âm nhạc"
+  },
+  {
+    "word": "mutual fund",
+    "ipa": "/ˈmjuː.tʃu.əl fʌnd/",
+    "meaning": "quỹ tương hỗ"
+  },
+  {
+    "word": "negotiation",
+    "ipa": "/nɪˌɡəʊ.ʃiˈeɪ.ʃən/",
+    "meaning": "đàm phán"
+  },
+  {
+    "word": "net",
+    "ipa": "/nɛt/",
+    "meaning": "mạng Internet"
+  },
+  {
+    "word": "net asset value",
+    "ipa": "/net ˈæs.et ˈvæl.juː/",
+    "meaning": "giá trị tài sản ròng"
+  },
+  {
+    "word": "networking",
+    "ipa": "/ˈnet.wɜː.kɪŋ/",
+    "meaning": "xây dựng quan hệ nghề nghiệp"
+  },
+  {
+    "word": "notice",
+    "ipa": "/ˈnəʊ.tɪs/",
+    "meaning": "thông báo, yết thị"
+  },
+  {
+    "word": "notice period",
+    "ipa": "/ˈnəʊ.tɪs ˌpɪər.i.əd/",
+    "meaning": "thời gian báo trước khi nghỉ việc"
+  },
+  {
+    "word": "obesity management",
+    "ipa": "/əʊˈbiː.sɪ.ti ˈmæn.ɪdʒ.mənt/",
+    "meaning": "quản lý béo phì"
+  },
+  {
+    "word": "occupation",
+    "ipa": "/ˌɒk.jəˈpeɪ.ʃən/",
+    "meaning": "nghề nghiệp, công việc chính"
+  },
+  {
+    "word": "off-the-rack",
+    "ipa": "/ˌɒf.ðəˈræk/",
+    "meaning": "quần áo may sẵn"
+  },
+  {
+    "word": "offer letter",
+    "ipa": "/ˈɒf.ər ˌlet.ər/",
+    "meaning": "thư mời nhận việc"
+  },
+  {
+    "word": "office",
+    "ipa": "/ˈɒf.ɪs/",
+    "meaning": "văn phòng làm việc"
+  },
+  {
+    "word": "offside",
+    "ipa": "/ˌɒfˈsaɪd/",
+    "meaning": "việt vị"
+  },
+  {
+    "word": "offsides trap",
+    "ipa": "/ˈɒf.saɪdz træp/",
+    "meaning": "bẫy việt vị"
+  },
+  {
+    "word": "onboarding",
+    "ipa": "/ˈɒn.bɔː.dɪŋ/",
+    "meaning": "quy trình tiếp nhận nhân viên mới"
+  },
+  {
+    "word": "oncology",
+    "ipa": "/ɒŋˈkɒl.ə.dʒi/",
+    "meaning": "ung thư học"
+  },
+  {
+    "word": "online advertising",
+    "ipa": "/ˈɒn.laɪn ˈæd.və.taɪ.zɪŋ/",
+    "meaning": "quảng cáo trực tuyến"
+  },
+  {
+    "word": "open source",
+    "ipa": "/ˌəʊ.pən ˈsɔːs/",
+    "meaning": "mã nguồn mở"
+  },
+  {
+    "word": "operational efficiency",
+    "ipa": "/ˌɒp.ər.ˈeɪ.ʃən.əl ɪˈfɪʃ.ən.si/",
+    "meaning": "hiệu quả vận hành"
+  },
+  {
+    "word": "options trading",
+    "ipa": "/ˈɒp.ʃənz ˈtreɪ.dɪŋ/",
+    "meaning": "giao dịch quyền chọn"
+  },
+  {
+    "word": "organ donation",
+    "ipa": "/ˈɔː.ɡən dəʊˈneɪ.ʃən/",
+    "meaning": "hiến tạng"
+  },
+  {
+    "word": "organic reach",
+    "ipa": "/ɔːˈɡæn.ɪk riːtʃ/",
+    "meaning": "tiếp cận tự nhiên (không trả phí)"
+  },
+  {
+    "word": "ostinato",
+    "ipa": "/ˌɒs.tɪˈnɑː.təʊ/",
+    "meaning": "mô-típ âm nhạc lặp đi lặp lại"
+  },
+  {
+    "word": "outfit of the day (OOTD)",
+    "ipa": "/ˈaʊt.fɪt əv ðə deɪ/",
+    "meaning": "trang phục hôm nay"
+  },
+  {
+    "word": "outpatient",
+    "ipa": "/ˈaʊt.peɪ.ʃənt/",
+    "meaning": "bệnh nhân ngoại trú"
+  },
+  {
+    "word": "outsourcing",
+    "ipa": "/ˈaʊt.sɔː.sɪŋ/",
+    "meaning": "thuê ngoài"
+  },
+  {
+    "word": "overdubbing",
+    "ipa": "/ˌəʊ.vəˈdʌb.ɪŋ/",
+    "meaning": "thu chèn thêm âm"
+  },
+  {
+    "word": "overhead",
+    "ipa": "/ˈəʊ.vər.hed/",
+    "meaning": "chi phí cố định"
+  },
+  {
+    "word": "oversized",
+    "ipa": "/ˌəʊ.vəˈsaɪzd/",
+    "meaning": "quá khổ, rộng thùng thình"
+  },
+  {
+    "word": "overtime",
+    "ipa": "/ˈəʊ.və.taɪm/",
+    "meaning": "Làm thêm giờ, thời gian làm thêm"
+  },
+  {
+    "word": "pace",
+    "ipa": "/peɪs/",
+    "meaning": "tốc độ"
+  },
+  {
+    "word": "pad",
+    "ipa": "/pæd/",
+    "meaning": "Miếng lót, tập giấy ghi chú"
+  },
+  {
+    "word": "paid media",
+    "ipa": "/peɪd ˈmiː.di.ə/",
+    "meaning": "quảng cáo trả phí"
+  },
+  {
+    "word": "paid reach",
+    "ipa": "/peɪd riːtʃ/",
+    "meaning": "tiếp cận trả phí"
+  },
+  {
+    "word": "pairing",
+    "ipa": "/ˈpeər.ɪŋ/",
+    "meaning": "ghép đôi (rượu + món ăn)"
+  },
+  {
+    "word": "palliative care",
+    "ipa": "/ˈpæl.i.ə.tɪv keər/",
+    "meaning": "chăm sóc giảm nhẹ"
+  },
+  {
+    "word": "pandemic",
+    "ipa": "/pænˈdem.ɪk/",
+    "meaning": "đại dịch"
+  },
+  {
+    "word": "panel interview",
+    "ipa": "/ˈpæn.əl ˈɪn.tə.vjuː/",
+    "meaning": "phỏng vấn hội đồng"
+  },
+  {
+    "word": "partnership",
+    "ipa": "/ˈpɑːt.nər.ʃɪp/",
+    "meaning": "quan hệ đối tác"
+  },
+  {
+    "word": "passcode",
+    "ipa": "/ˈpɑːs.kəʊd/",
+    "meaning": "mật mã số"
+  },
+  {
+    "word": "password",
+    "ipa": "/ˈpɑːs.wɜːd/",
+    "meaning": "mật khẩu"
+  },
+  {
+    "word": "pastry",
+    "ipa": "/ˈpeɪ.stri/",
+    "meaning": "bánh ngọt làm từ bột"
+  },
+  {
+    "word": "patent",
+    "ipa": "/ˈpeɪ.tənt/",
+    "meaning": "bằng sáng chế"
+  },
+  {
+    "word": "payroll",
+    "ipa": "/ˈpeɪ.rəʊl/",
+    "meaning": "bảng lương nhân viên"
+  },
+  {
+    "word": "penalty shootout",
+    "ipa": "/ˈpen.əl.ti ˈʃuː.taʊt/",
+    "meaning": "loạt sút phạt đền"
+  },
+  {
+    "word": "pentatonic scale",
+    "ipa": "/ˌpen.təˈtɒn.ɪk skeɪl/",
+    "meaning": "gam ngũ âm"
+  },
+  {
+    "word": "peplum",
+    "ipa": "/ˈpep.ləm/",
+    "meaning": "kiểu áo xòe ở eo"
+  },
+  {
+    "word": "performance indicator",
+    "ipa": "/pəˈfɔː.məns ˈɪn.dɪ.keɪ.tər/",
+    "meaning": "chỉ số hiệu suất"
+  },
+  {
+    "word": "performance optimization",
+    "ipa": "/pəˈfɔː.məns ˌɒp.tɪ.maɪˈzeɪ.ʃən/",
+    "meaning": "tối ưu hiệu suất"
+  },
+  {
+    "word": "personal best",
+    "ipa": "/ˈpɜː.sən.əl best/",
+    "meaning": "thành tích cá nhân tốt nhất"
+  },
+  {
+    "word": "personal shopper",
+    "ipa": "/ˈpɜː.sən.əl ˈʃɒp.ər/",
+    "meaning": "người mua sắm cá nhân"
+  },
+  {
+    "word": "phone",
+    "ipa": "/fəʊn/",
+    "meaning": "điện thoại"
+  },
+  {
+    "word": "physiotherapy",
+    "ipa": "/ˌfɪz.i.əʊˈθer.ə.pi/",
+    "meaning": "vật lý trị liệu"
+  },
+  {
+    "word": "pickle",
+    "ipa": "/ˈpɪk.əl/",
+    "meaning": "muối chua"
+  },
+  {
+    "word": "pinned post",
+    "ipa": "/pɪnd pəʊst/",
+    "meaning": "bài viết được ghim"
+  },
+  {
+    "word": "placebo",
+    "ipa": "/pləˈsiː.bəʊ/",
+    "meaning": "thuốc giả (đối chứng)"
+  },
+  {
+    "word": "platform dependency",
+    "ipa": "/ˈplæt.fɔːm dɪˈpen.dən.si/",
+    "meaning": "sự phụ thuộc vào nền tảng"
+  },
+  {
+    "word": "poach",
+    "ipa": "/pəʊtʃ/",
+    "meaning": "luộc nhẹ trong nước/sữa"
+  },
+  {
+    "word": "possession",
+    "ipa": "/pəˈzeʃ.ən/",
+    "meaning": "sự kiểm soát bóng"
+  },
+  {
+    "word": "potential customer",
+    "ipa": "/pəˈten.ʃəl ˈkʌs.tə.mər/",
+    "meaning": "khách hàng tiềm năng"
+  },
+  {
+    "word": "preloved",
+    "ipa": "/ˌpriːˈlʌvd/",
+    "meaning": "đồ đã qua sử dụng (mua lại)"
+  },
+  {
+    "word": "presentation skills",
+    "ipa": "/ˌprez.ənˈteɪ.ʃən skɪlz/",
+    "meaning": "kỹ năng thuyết trình"
+  },
+  {
+    "word": "pressing",
+    "ipa": "/ˈpres.ɪŋ/",
+    "meaning": "chiến thuật pressing"
+  },
+  {
+    "word": "preventive care",
+    "ipa": "/prɪˈven.tɪv keər/",
+    "meaning": "chăm sóc phòng ngừa"
+  },
+  {
+    "word": "primary care",
+    "ipa": "/ˈpraɪ.mər.i keər/",
+    "meaning": "chăm sóc y tế ban đầu"
+  },
+  {
+    "word": "probation period",
+    "ipa": "/prəˈbeɪ.ʃən ˌpɪər.i.əd/",
+    "meaning": "thời gian thử việc"
+  },
+  {
+    "word": "product development",
+    "ipa": "/ˈprɒd.ʌkt dɪˈvel.əp.mənt/",
+    "meaning": "phát triển sản phẩm"
+  },
+  {
+    "word": "product launch",
+    "ipa": "/ˈprɒd.ʌkt lɔːntʃ/",
+    "meaning": "ra mắt sản phẩm"
+  },
+  {
+    "word": "profit margin",
+    "ipa": "/ˈprɒf.ɪt ˌmɑː.dʒɪn/",
+    "meaning": "biên lợi nhuận"
+  },
+  {
+    "word": "prognosis",
+    "ipa": "/prɒɡˈnəʊ.sɪs/",
+    "meaning": "tiên lượng bệnh"
+  },
+  {
+    "word": "promotion",
+    "ipa": "/prəˈməʊ.ʃən/",
+    "meaning": "thăng chức"
+  },
+  {
+    "word": "proof",
+    "ipa": "/pruːf/",
+    "meaning": "ủ bột lên men"
+  },
+  {
+    "word": "prototype",
+    "ipa": "/ˈprəʊ.tə.taɪp/",
+    "meaning": "nguyên mẫu phần mềm"
+  },
+  {
+    "word": "prêt-à-porter",
+    "ipa": "/ˌpret ɑː pɔːˈteɪ/",
+    "meaning": "thời trang may sẵn cao cấp"
+  },
+  {
+    "word": "psychometric test",
+    "ipa": "/ˌsaɪ.kəˈmet.rɪk test/",
+    "meaning": "bài kiểm tra tâm lý"
+  },
+  {
+    "word": "public health",
+    "ipa": "/ˈpʌb.lɪk helθ/",
+    "meaning": "y tế công cộng"
+  },
+  {
+    "word": "pull request",
+    "ipa": "/pʊl rɪˈkwest/",
+    "meaning": "yêu cầu gộp mã (Git)"
+  },
+  {
+    "word": "pâté",
+    "ipa": "/ˈpæt.eɪ/",
+    "meaning": "pâté (gan thịt xay nhuyễn)"
+  },
+  {
+    "word": "qualifying round",
+    "ipa": "/ˈkwɒl.ɪ.faɪ.ɪŋ raʊnd/",
+    "meaning": "vòng loại"
+  },
+  {
+    "word": "quarterly earnings",
+    "ipa": "/ˈkwɔː.tər.li ˈɜː.nɪŋz/",
+    "meaning": "lợi nhuận hàng quý"
+  },
+  {
+    "word": "radiation therapy",
+    "ipa": "/ˌreɪ.diˈeɪ.ʃən ˈθer.ə.pi/",
+    "meaning": "xạ trị"
+  },
+  {
+    "word": "real estate investment",
+    "ipa": "/rɪəl ɪˈsteɪt ɪnˈvest.mənt/",
+    "meaning": "đầu tư bất động sản"
+  },
+  {
+    "word": "rebalancing",
+    "ipa": "/ˌriːˈbæl.əns.ɪŋ/",
+    "meaning": "tái cân bằng danh mục"
+  },
+  {
+    "word": "recommendation",
+    "ipa": "/ˌrek.ə.menˈdeɪ.ʃən/",
+    "meaning": "thư giới thiệu, sự tiến cử"
+  },
+  {
+    "word": "recording session",
+    "ipa": "/rɪˈkɔː.dɪŋ ˈseʃ.ən/",
+    "meaning": "phiên thu âm"
+  },
+  {
+    "word": "recruiter",
+    "ipa": "/rɪˈkruː.tər/",
+    "meaning": "người tuyển dụng"
+  },
+  {
+    "word": "red card",
+    "ipa": "/red kɑːd/",
+    "meaning": "thẻ đỏ"
+  },
+  {
+    "word": "reduction",
+    "ipa": "/rɪˈdʌk.ʃən/",
+    "meaning": "nước sốt cô đặc"
+  },
+  {
+    "word": "refactoring",
+    "ipa": "/ˌriːˈfæk.tər.ɪŋ/",
+    "meaning": "tái cấu trúc mã nguồn"
+  },
+  {
+    "word": "reference",
+    "ipa": "/ˈref.ər.əns/",
+    "meaning": "người giới thiệu, tham chiếu"
+  },
+  {
+    "word": "regression testing",
+    "ipa": "/rɪˈɡreʃ.ən ˈtes.tɪŋ/",
+    "meaning": "kiểm thử hồi quy"
+  },
+  {
+    "word": "rehabilitation",
+    "ipa": "/ˌriː.ə.bɪl.ɪˈteɪ.ʃən/",
+    "meaning": "phục hồi chức năng"
+  },
+  {
+    "word": "rejection",
+    "ipa": "/rɪˈdʒek.ʃən/",
+    "meaning": "bị từ chối (tuyển dụng)"
+  },
+  {
+    "word": "relapse",
+    "ipa": "/rɪˈlæps/",
+    "meaning": "tái phát bệnh"
+  },
+  {
+    "word": "relay race",
+    "ipa": "/ˈriː.leɪ reɪs/",
+    "meaning": "đua tiếp sức"
+  },
+  {
+    "word": "release candidate",
+    "ipa": "/rɪˈliːs ˈkæn.dɪ.dɪt/",
+    "meaning": "phiên bản ứng viên phát hành"
+  },
+  {
+    "word": "relegation",
+    "ipa": "/ˌrel.ɪˈɡeɪ.ʃən/",
+    "meaning": "xuống hạng"
+  },
+  {
+    "word": "remission",
+    "ipa": "/rɪˈmɪʃ.ən/",
+    "meaning": "giai đoạn lui bệnh"
+  },
+  {
+    "word": "remote work",
+    "ipa": "/rɪˌməʊt ˈwɜːk/",
+    "meaning": "làm việc từ xa"
+  },
+  {
+    "word": "render",
+    "ipa": "/ˈren.dər/",
+    "meaning": "rán chảy mỡ"
+  },
+  {
+    "word": "rental fashion",
+    "ipa": "/ˈren.təl ˈfæʃ.ən/",
+    "meaning": "thuê trang phục"
+  },
+  {
+    "word": "repository",
+    "ipa": "/rɪˈpɒz.ɪ.tər.i/",
+    "meaning": "kho lưu trữ mã nguồn"
+  },
+  {
+    "word": "reputation management",
+    "ipa": "/ˌrep.jʊˈteɪ.ʃən ˈmæn.ɪdʒ.mənt/",
+    "meaning": "quản lý danh tiếng trực tuyến"
+  },
+  {
+    "word": "resilience",
+    "ipa": "/rɪˈzɪl.i.əns/",
+    "meaning": "sức bền tinh thần"
+  },
+  {
+    "word": "responsive design",
+    "ipa": "/rɪˈspɒn.sɪv dɪˈzaɪn/",
+    "meaning": "thiết kế giao diện thích ứng"
+  },
+  {
+    "word": "resting meat",
+    "ipa": "/ˈres.tɪŋ miːt/",
+    "meaning": "để thịt nghỉ sau khi nấu"
+  },
+  {
+    "word": "retargeting",
+    "ipa": "/ˌriːˈtɑː.ɡɪ.tɪŋ/",
+    "meaning": "tiếp thị lại"
+  },
+  {
+    "word": "return on investment",
+    "ipa": "/rɪˈtɜːn ɒn ɪnˈvest.mənt/",
+    "meaning": "tỷ suất hoàn vốn"
+  },
+  {
+    "word": "revenue",
+    "ipa": "/ˈrev.ən.juː/",
+    "meaning": "doanh thu"
+  },
+  {
+    "word": "revenue recognition",
+    "ipa": "/ˈrev.ən.juː ˌrek.əɡˈnɪʃ.ən/",
+    "meaning": "ghi nhận doanh thu"
+  },
+  {
+    "word": "reverb",
+    "ipa": "/ˈriː.vɜːb/",
+    "meaning": "hiệu ứng vang tiếng"
+  },
+  {
+    "word": "risk assessment",
+    "ipa": "/rɪsk əˈses.mənt/",
+    "meaning": "đánh giá rủi ro"
+  },
+  {
+    "word": "risk factor",
+    "ipa": "/rɪsk ˈfæk.tər/",
+    "meaning": "yếu tố nguy cơ"
+  },
+  {
+    "word": "robo-advisor",
+    "ipa": "/ˌrəʊ.bəʊ ədˈvaɪ.zər/",
+    "meaning": "cố vấn đầu tư tự động"
+  },
+  {
+    "word": "role play",
+    "ipa": "/rəʊl pleɪ/",
+    "meaning": "đóng vai tình huống"
+  },
+  {
+    "word": "royalties",
+    "ipa": "/ˈrɔɪ.əl.tiz/",
+    "meaning": "tiền bản quyền âm nhạc"
+  },
+  {
+    "word": "rubato",
+    "ipa": "/ruːˈbɑː.təʊ/",
+    "meaning": "kỹ thuật linh hoạt tempo"
+  },
+  {
+    "word": "salary negotiation",
+    "ipa": "/ˈsæl.ər.i nɪˌɡəʊ.ʃiˈeɪ.ʃən/",
+    "meaning": "đàm phán lương"
+  },
+  {
+    "word": "sample sale",
+    "ipa": "/ˈsɑːm.pəl seɪl/",
+    "meaning": "bán hàng mẫu giảm giá"
+  },
+  {
+    "word": "sauté",
+    "ipa": "/ˈsɒt.eɪ/",
+    "meaning": "xào nhẹ trong bơ/dầu"
+  },
+  {
+    "word": "scalability",
+    "ipa": "/ˌskeɪ.ləˈbɪl.ɪ.ti/",
+    "meaning": "khả năng mở rộng"
+  },
+  {
+    "word": "scalable",
+    "ipa": "/ˈskeɪ.lə.bəl/",
+    "meaning": "có khả năng mở rộng"
+  },
+  {
+    "word": "scale",
+    "ipa": "/skeɪl/",
+    "meaning": "gam nhạc"
+  },
+  {
+    "word": "score",
+    "ipa": "/skɔːr/",
+    "meaning": "khía rạch (thịt/cá)"
+  },
+  {
+    "word": "scouting",
+    "ipa": "/ˈskaʊ.tɪŋ/",
+    "meaning": "tìm kiếm tài năng"
+  },
+  {
+    "word": "screen",
+    "ipa": "/skriːn/",
+    "meaning": "màn hình"
+  },
+  {
+    "word": "screen time",
+    "ipa": "/skriːn taɪm/",
+    "meaning": "thời gian sử dụng màn hình"
+  },
+  {
+    "word": "screening program",
+    "ipa": "/ˈskriː.nɪŋ ˈprəʊ.ɡræm/",
+    "meaning": "chương trình sàng lọc bệnh"
+  },
+  {
+    "word": "scrum",
+    "ipa": "/skrʌm/",
+    "meaning": "khung Scrum (quản lý dự án)"
+  },
+  {
+    "word": "self-awareness",
+    "ipa": "/ˌself əˈweər.nəs/",
+    "meaning": "tự nhận thức bản thân"
+  },
+  {
+    "word": "sentiment analysis",
+    "ipa": "/ˈsen.tɪ.mənt əˈnæl.ɪ.sɪs/",
+    "meaning": "phân tích cảm xúc người dùng"
+  },
+  {
+    "word": "set piece",
+    "ipa": "/set piːs/",
+    "meaning": "tình huống cố định (phạt góc, phạt trực tiếp)"
+  },
+  {
+    "word": "shareholder",
+    "ipa": "/ˈʃeər.həʊl.dər/",
+    "meaning": "cổ đông"
+  },
+  {
+    "word": "shoppable content",
+    "ipa": "/ˈʃɒp.ə.bəl ˈkɒn.tent/",
+    "meaning": "nội dung có thể mua hàng trực tiếp"
+  },
+  {
+    "word": "short selling",
+    "ipa": "/ʃɔːt ˈsel.ɪŋ/",
+    "meaning": "bán khống"
+  },
+  {
+    "word": "side effect",
+    "ipa": "/saɪd ɪˈfekt/",
+    "meaning": "tác dụng phụ"
+  },
+  {
+    "word": "sight-reading",
+    "ipa": "/saɪt ˈriː.dɪŋ/",
+    "meaning": "đọc nhạc không qua luyện tập trước"
+  },
+  {
+    "word": "silhouette",
+    "ipa": "/ˌsɪl.uˈet/",
+    "meaning": "dáng (thiết kế quần áo)"
+  },
+  {
+    "word": "skill set",
+    "ipa": "/ˈskɪl set/",
+    "meaning": "bộ kỹ năng"
+  },
+  {
+    "word": "slow fashion",
+    "ipa": "/sləʊ ˈfæʃ.ən/",
+    "meaning": "thời trang chậm, bền vững"
+  },
+  {
+    "word": "smart tech",
+    "ipa": "/smɑrt tɛk/",
+    "meaning": "thiết bị đeo được"
+  },
+  {
+    "word": "smartphone",
+    "ipa": "/ˈsmɑːt.fəʊn/",
+    "meaning": "điện thoại thông minh"
+  },
+  {
+    "word": "smoke",
+    "ipa": "/sməʊk/",
+    "meaning": "hun khói"
+  },
+  {
+    "word": "social commerce",
+    "ipa": "/ˈsəʊ.ʃəl ˈkɒm.ɜːs/",
+    "meaning": "mua sắm qua mạng xã hội"
+  },
+  {
+    "word": "social listening",
+    "ipa": "/ˈsəʊ.ʃəl ˈlɪs.ən.ɪŋ/",
+    "meaning": "lắng nghe mạng xã hội"
+  },
+  {
+    "word": "social media detox",
+    "ipa": "/ˈsəʊ.ʃəl ˈmiː.di.ə ˈdiː.tɒks/",
+    "meaning": "cai nghiện mạng xã hội tạm thời"
+  },
+  {
+    "word": "social media marketing",
+    "ipa": "/ˈsəʊ.ʃəl ˈmiː.di.ə ˈmɑː.kɪ.tɪŋ/",
+    "meaning": "tiếp thị qua mạng xã hội"
+  },
+  {
+    "word": "social proof",
+    "ipa": "/ˈsəʊ.ʃəl pruːf/",
+    "meaning": "bằng chứng xã hội"
+  },
+  {
+    "word": "socializing",
+    "ipa": "/ˈsəʊ.ʃəl.aɪ.zɪŋ/",
+    "meaning": "giao lưu xã hội, kết bạn"
+  },
+  {
+    "word": "soft skills",
+    "ipa": "/sɒft skɪlz/",
+    "meaning": "kỹ năng mềm"
+  },
+  {
+    "word": "soufflé",
+    "ipa": "/ˈsuː.fleɪ/",
+    "meaning": "bánh soufflé (phồng)"
+  },
+  {
+    "word": "sous vide",
+    "ipa": "/suː ˈviːd/",
+    "meaning": "kỹ thuật nấu chân không nhiệt độ thấp"
+  },
+  {
+    "word": "specialist",
+    "ipa": "/ˈspeʃ.ə.lɪst/",
+    "meaning": "bác sĩ chuyên khoa"
+  },
+  {
+    "word": "sports nutrition",
+    "ipa": "/spɔːts njuːˈtrɪʃ.ən/",
+    "meaning": "dinh dưỡng thể thao"
+  },
+  {
+    "word": "sportsmanship",
+    "ipa": "/ˈspɔːts.mən.ʃɪp/",
+    "meaning": "tinh thần thể thao"
+  },
+  {
+    "word": "sprint",
+    "ipa": "/sprɪnt/",
+    "meaning": "chu kỳ làm việc ngắn (Agile)"
+  },
+  {
+    "word": "squad",
+    "ipa": "/skwɒd/",
+    "meaning": "đội hình cầu thủ"
+  },
+  {
+    "word": "staccato",
+    "ipa": "/stəˈkɑː.təʊ/",
+    "meaning": "kỹ thuật ngắt âm trong âm nhạc"
+  },
+  {
+    "word": "stakeholder",
+    "ipa": "/ˈsteɪk.həʊl.dər/",
+    "meaning": "bên liên quan"
+  },
+  {
+    "word": "stamina",
+    "ipa": "/ˈstæm.ɪ.nə/",
+    "meaning": "thể lực bền bỉ"
+  },
+  {
+    "word": "startup",
+    "ipa": "/ˈstɑːt.ʌp/",
+    "meaning": "công ty khởi nghiệp"
+  },
+  {
+    "word": "statistics",
+    "ipa": "/stəˈtɪs.tɪks/",
+    "meaning": "số liệu thống kê"
+  },
+  {
+    "word": "stock exchange",
+    "ipa": "/stɒk ɪksˈtʃeɪndʒ/",
+    "meaning": "sàn giao dịch chứng khoán"
+  },
+  {
+    "word": "strategy",
+    "ipa": "/ˈstræt.ə.dʒi/",
+    "meaning": "chiến lược"
+  },
+  {
+    "word": "streaming",
+    "ipa": "/ˈstriː.mɪŋ/",
+    "meaning": "phát trực tuyến"
+  },
+  {
+    "word": "streetwear",
+    "ipa": "/ˈstriːt.weər/",
+    "meaning": "thời trang đường phố"
+  },
+  {
+    "word": "striker",
+    "ipa": "/ˈstraɪ.kər/",
+    "meaning": "tiền đạo trung tâm"
+  },
+  {
+    "word": "structured interview",
+    "ipa": "/ˈstrʌk.tʃərd ˈɪn.tə.vjuː/",
+    "meaning": "phỏng vấn có cấu trúc"
+  },
+  {
+    "word": "subscription box (fashion)",
+    "ipa": "/səbˈskrɪp.ʃən bɒks/",
+    "meaning": "hộp quần áo đăng ký"
+  },
+  {
+    "word": "subsidiary",
+    "ipa": "/səbˈsɪd.i.ər.i/",
+    "meaning": "công ty con"
+  },
+  {
+    "word": "supply chain",
+    "ipa": "/səˈplaɪ tʃeɪn/",
+    "meaning": "chuỗi cung ứng"
+  },
+  {
+    "word": "sustainable fashion",
+    "ipa": "/səˈsteɪ.nə.bəl ˈfæʃ.ən/",
+    "meaning": "thời trang bền vững"
+  },
+  {
+    "word": "sweeper",
+    "ipa": "/ˈswiː.pər/",
+    "meaning": "hậu vệ quét (libero)"
+  },
+  {
+    "word": "symphony",
+    "ipa": "/ˈsɪm.fə.ni/",
+    "meaning": "bản giao hưởng"
+  },
+  {
+    "word": "syncopation",
+    "ipa": "/ˌsɪŋ.kəˈpeɪ.ʃən/",
+    "meaning": "đảo phách"
+  },
+  {
+    "word": "tablet",
+    "ipa": "/ˈtæb.lɪt/",
+    "meaning": "máy tính bảng"
+  },
+  {
+    "word": "tailored",
+    "ipa": "/ˈteɪ.ləd/",
+    "meaning": "may đo vừa vặn, trang nhã"
+  },
+  {
+    "word": "tapenade",
+    "ipa": "/ˈtæp.ɪ.neɪd/",
+    "meaning": "sốt ô-liu đen"
+  },
+  {
+    "word": "target audience",
+    "ipa": "/ˌtɑː.ɡɪt ˈɔː.di.əns/",
+    "meaning": "đối tượng mục tiêu"
+  },
+  {
+    "word": "tasting menu",
+    "ipa": "/ˈteɪ.stɪŋ ˈmen.juː/",
+    "meaning": "thực đơn thử nhiều món nhỏ"
+  },
+  {
+    "word": "tax-advantaged account",
+    "ipa": "/tæks ədˈvɑːn.tɪdʒd əˈkaʊnt/",
+    "meaning": "tài khoản ưu đãi thuế"
+  },
+  {
+    "word": "tech debt",
+    "ipa": "/tek det/",
+    "meaning": "nợ kỹ thuật (code tệ tích tụ)"
+  },
+  {
+    "word": "technical analysis",
+    "ipa": "/ˈtek.nɪ.kəl əˈnæl.ɪ.sɪs/",
+    "meaning": "phân tích kỹ thuật"
+  },
+  {
+    "word": "technical interview",
+    "ipa": "/ˈtek.nɪ.kəl ˈɪn.tə.vjuː/",
+    "meaning": "phỏng vấn kỹ thuật"
+  },
+  {
+    "word": "telecommuting",
+    "ipa": "/ˌtel.ɪ.kəˈmjuː.tɪŋ/",
+    "meaning": "làm việc từ xa qua mạng máy tính"
+  },
+  {
+    "word": "telemedicine",
+    "ipa": "/ˈtel.ɪˌmed.ɪ.sɪn/",
+    "meaning": "y tế từ xa"
+  },
+  {
+    "word": "telephone",
+    "ipa": "/ˈtɛləˌfoʊn/",
+    "meaning": "điện thoại"
+  },
+  {
+    "word": "tempering",
+    "ipa": "/ˈtem.pər.ɪŋ/",
+    "meaning": "điều hòa nhiệt độ (chocolate)"
+  },
+  {
+    "word": "terrine",
+    "ipa": "/təˈriːn/",
+    "meaning": "pâté khuôn terrine"
+  },
+  {
+    "word": "thrift shop",
+    "ipa": "/θrɪft ʃɒp/",
+    "meaning": "cửa hàng đồ cũ từ thiện"
+  },
+  {
+    "word": "throw-in",
+    "ipa": "/ˈθrəʊ.ɪn/",
+    "meaning": "ném biên"
+  },
+  {
+    "word": "tiki-taka",
+    "ipa": "/ˌtɪk.iˈtɑː.kə/",
+    "meaning": "phong cách chơi trao đổi bóng ngắn liên tục"
+  },
+  {
+    "word": "time management",
+    "ipa": "/taɪm ˈmæn.ɪdʒ.mənt/",
+    "meaning": "quản lý thời gian"
+  },
+  {
+    "word": "time signature",
+    "ipa": "/taɪm ˈsɪɡ.nɪ.tʃər/",
+    "meaning": "nhịp (ký hiệu thời gian)"
+  },
+  {
+    "word": "trademark",
+    "ipa": "/ˈtreɪd.mɑːk/",
+    "meaning": "nhãn hiệu thương mại"
+  },
+  {
+    "word": "training camp",
+    "ipa": "/ˈtreɪ.nɪŋ kæmp/",
+    "meaning": "trại tập huấn"
+  },
+  {
+    "word": "transfer fee",
+    "ipa": "/ˈtræns.fər fiː/",
+    "meaning": "phí chuyển nhượng"
+  },
+  {
+    "word": "transferable skills",
+    "ipa": "/trænsˈfɜː.rə.bəl skɪlz/",
+    "meaning": "kỹ năng chuyển đổi được"
+  },
+  {
+    "word": "transplant",
+    "ipa": "/ˈtræns.plɑːnt/",
+    "meaning": "cấy ghép nội tạng"
+  },
+  {
+    "word": "transposition",
+    "ipa": "/ˌtræn.spəˈzɪʃ.ən/",
+    "meaning": "chuyển giọng/điều chỉnh khóa"
+  },
+  {
+    "word": "trending topic",
+    "ipa": "/ˈtren.dɪŋ ˈtɒp.ɪk/",
+    "meaning": "chủ đề đang hot"
+  },
+  {
+    "word": "truss",
+    "ipa": "/trʌs/",
+    "meaning": "buộc (thịt gà) trước khi quay"
+  },
+  {
+    "word": "trust fund",
+    "ipa": "/trʌst fʌnd/",
+    "meaning": "quỹ tín thác"
+  },
+  {
+    "word": "umami",
+    "ipa": "/uːˈmɑː.mi/",
+    "meaning": "vị umami (vị ngon đặc biệt)"
+  },
+  {
+    "word": "underdog",
+    "ipa": "/ˈʌn.də.dɒɡ/",
+    "meaning": "đội/người yếu thế"
+  },
+  {
+    "word": "unit testing",
+    "ipa": "/ˈjuː.nɪt ˈtes.tɪŋ/",
+    "meaning": "kiểm thử đơn vị"
+  },
+  {
+    "word": "unstructured interview",
+    "ipa": "/ˈʌnˌstrʌk.tʃərd ˈɪn.tə.vjuː/",
+    "meaning": "phỏng vấn không có cấu trúc"
+  },
+  {
+    "word": "upcycling (fashion)",
+    "ipa": "/ˈʌp.saɪ.klɪŋ/",
+    "meaning": "tái chế sáng tạo quần áo"
+  },
+  {
+    "word": "update",
+    "ipa": "/ʌpˈdeɪt/",
+    "meaning": "cập nhật"
+  },
+  {
+    "word": "upgrade",
+    "ipa": "/ʌpˈɡreɪd/",
+    "meaning": "sự nâng cấp, cải tiến"
+  },
+  {
+    "word": "upload",
+    "ipa": "/ʌpˈləʊd/",
+    "meaning": "tải lên dữ liệu"
+  },
+  {
+    "word": "upskilling",
+    "ipa": "/ˌʌpˈskɪl.ɪŋ/",
+    "meaning": "nâng cao kỹ năng"
+  },
+  {
+    "word": "user acceptance testing",
+    "ipa": "/ˈjuː.zər əkˈsep.təns ˈtes.tɪŋ/",
+    "meaning": "kiểm thử chấp nhận người dùng"
+  },
+  {
+    "word": "user story",
+    "ipa": "/ˈjuː.zər ˈstɔː.ri/",
+    "meaning": "câu chuyện người dùng (Agile)"
+  },
+  {
+    "word": "vaccination program",
+    "ipa": "/ˌvæk.sɪˈneɪ.ʃən ˈprəʊ.ɡræm/",
+    "meaning": "chương trình tiêm chủng"
+  },
+  {
+    "word": "value proposition",
+    "ipa": "/ˈvæl.juː ˌprɒp.əˈzɪʃ.ən/",
+    "meaning": "đề xuất giá trị"
+  },
+  {
+    "word": "venture capital",
+    "ipa": "/ˈven.tʃər ˈkæp.ɪ.təl/",
+    "meaning": "vốn đầu tư mạo hiểm"
+  },
+  {
+    "word": "version control",
+    "ipa": "/ˈvɜː.ʃən kənˈtrəʊl/",
+    "meaning": "quản lý phiên bản mã nguồn"
+  },
+  {
+    "word": "veteran",
+    "ipa": "/ˈvet.ər.ən/",
+    "meaning": "cầu thủ kỳ cựu"
+  },
+  {
+    "word": "vibrato",
+    "ipa": "/vɪˈbrɑː.təʊ/",
+    "meaning": "kỹ thuật rung âm"
+  },
+  {
+    "word": "video",
+    "ipa": "/ˈvɪd.i.əʊ/",
+    "meaning": "video, phim"
+  },
+  {
+    "word": "vinaigrette",
+    "ipa": "/ˌvɪn.ɪˈɡret/",
+    "meaning": "sốt dấm dầu"
+  },
+  {
+    "word": "viral marketing",
+    "ipa": "/ˈvaɪ.rəl ˈmɑː.kɪ.tɪŋ/",
+    "meaning": "tiếp thị lan truyền"
+  },
+  {
+    "word": "virtual reality",
+    "ipa": "/ˌvɜː.tʃu.əl riˈæl.ə.ti/",
+    "meaning": "thực tế ảo"
+  },
+  {
+    "word": "wearable",
+    "ipa": "/ˈweə.rə.bəl/",
+    "meaning": "thiết bị đeo được"
+  },
+  {
+    "word": "webpage",
+    "ipa": "/ˈweb.peɪdʒ/",
+    "meaning": "trang web (một trang đơn lẻ)"
+  },
+  {
+    "word": "website",
+    "ipa": "/ˈweb.saɪt/",
+    "meaning": "trang web"
+  },
+  {
+    "word": "will (legal)",
+    "ipa": "/wɪl (ˈligəl)/",
+    "meaning": "di chúc"
+  },
+  {
+    "word": "winger",
+    "ipa": "/ˈwɪŋ.ər/",
+    "meaning": "cầu thủ chạy cánh"
+  },
+  {
+    "word": "wireframe",
+    "ipa": "/ˈwaɪər.freɪm/",
+    "meaning": "khung giao diện sơ bộ"
+  },
+  {
+    "word": "work ethic",
+    "ipa": "/wɜːk ˈeθ.ɪk/",
+    "meaning": "đạo đức làm việc"
+  },
+  {
+    "word": "working capital management",
+    "ipa": "/ˈwɜː.kɪŋ ˈkæp.ɪ.təl ˈmæn.ɪdʒ.mənt/",
+    "meaning": "quản lý vốn lưu động"
+  },
+  {
+    "word": "workplace",
+    "ipa": "/ˈwɜːk.pleɪs/",
+    "meaning": "nơi làm việc"
+  },
+  {
+    "word": "yeast",
+    "ipa": "/jiːst/",
+    "meaning": "men nở (làm bánh mì)"
+  },
+  {
+    "word": "yellow card",
+    "ipa": "/ˈjel.əʊ kɑːd/",
+    "meaning": "thẻ vàng"
+  }
+]

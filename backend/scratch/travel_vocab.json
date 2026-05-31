@@ -1,0 +1,2002 @@
+[
+  {
+    "word": "airport",
+    "ipa": "/ˈeə.pɔːt/",
+    "meaning": "sân bay",
+    "level": "A1",
+    "example": "We arrived at the airport three hours before our flight.",
+    "topic": "travel"
+  },
+  {
+    "word": "train",
+    "ipa": "/treɪn/",
+    "meaning": "tàu hỏa",
+    "level": "A1",
+    "example": "The train leaves the station at exactly ten o'clock.",
+    "topic": "travel"
+  },
+  {
+    "word": "taxi",
+    "ipa": "/ˈtæk.si/",
+    "meaning": "xe taxi",
+    "level": "A1",
+    "example": "Let's take a taxi to the hotel to save time.",
+    "topic": "travel"
+  },
+  {
+    "word": "car",
+    "ipa": "/kɑːr/",
+    "meaning": "ô tô",
+    "level": "A1",
+    "example": "We rented a small car to drive around the countryside.",
+    "topic": "travel"
+  },
+  {
+    "word": "plane",
+    "ipa": "/pleɪn/",
+    "meaning": "máy bay",
+    "level": "A1",
+    "example": "The plane is flying high above the clouds.",
+    "topic": "travel"
+  },
+  {
+    "word": "ship",
+    "ipa": "/ʃɪp/",
+    "meaning": "tàu thủy, tàu lớn",
+    "level": "A1",
+    "example": "A large ship is sailing across the blue ocean.",
+    "topic": "travel"
+  },
+  {
+    "word": "boat",
+    "ipa": "/bəʊt/",
+    "meaning": "thuyền, đò",
+    "level": "A1",
+    "example": "We went for a relaxing boat ride on the quiet lake.",
+    "topic": "travel"
+  },
+  {
+    "word": "bike",
+    "ipa": "/baɪk/",
+    "meaning": "xe đạp",
+    "level": "A1",
+    "example": "It is easy to explore the small island by bike.",
+    "topic": "travel"
+  },
+  {
+    "word": "road",
+    "ipa": "/rəʊd/",
+    "meaning": "con đường",
+    "level": "A1",
+    "example": "This long road leads directly to the mountain.",
+    "topic": "travel"
+  },
+  {
+    "word": "street",
+    "ipa": "/striːt/",
+    "meaning": "đường phố",
+    "level": "A1",
+    "example": "The street is filled with shops and lovely cafes.",
+    "topic": "travel"
+  },
+  {
+    "word": "room",
+    "ipa": "/ruːm/",
+    "meaning": "căn phòng",
+    "level": "A1",
+    "example": "Our hotel room has a beautiful view of the sea.",
+    "topic": "travel"
+  },
+  {
+    "word": "key",
+    "ipa": "/kiː/",
+    "meaning": "chìa khóa",
+    "level": "A1",
+    "example": "Please remember to return your room key to reception.",
+    "topic": "travel"
+  },
+  {
+    "word": "stop",
+    "ipa": "/stɒp/",
+    "meaning": "điểm dừng, trạm dừng",
+    "level": "A1",
+    "example": "The bus stop is just a short walk from here.",
+    "topic": "travel"
+  },
+  {
+    "word": "trip",
+    "ipa": "/trɪp/",
+    "meaning": "chuyến đi",
+    "level": "A1",
+    "example": "We are planning a weekend trip to the countryside.",
+    "topic": "travel"
+  },
+  {
+    "word": "visit",
+    "ipa": "/ˈvɪz.ɪt/",
+    "meaning": "ghé thăm, tham quan",
+    "level": "A1",
+    "example": "I want to visit the famous museum tomorrow.",
+    "topic": "travel"
+  },
+  {
+    "word": "swim",
+    "ipa": "/swɪm/",
+    "meaning": "bơi lội",
+    "level": "A1",
+    "example": "The children love to swim in the warm sea water.",
+    "topic": "travel"
+  },
+  {
+    "word": "walk",
+    "ipa": "/wɔːk/",
+    "meaning": "đi bộ",
+    "level": "A1",
+    "example": "Let's walk along the beautiful beach in the evening.",
+    "topic": "travel"
+  },
+  {
+    "word": "run",
+    "ipa": "/rʌn/",
+    "meaning": "chạy bộ, chạy",
+    "level": "A1",
+    "example": "I like to run in the park near the hotel.",
+    "topic": "travel"
+  },
+  {
+    "word": "backpack",
+    "ipa": "/ˈbæk.pæk/",
+    "meaning": "ba lô",
+    "level": "A1",
+    "example": "He put his camera and water bottle in his backpack.",
+    "topic": "travel"
+  },
+  {
+    "word": "photo",
+    "ipa": "/ˈfəʊ.təʊ/",
+    "meaning": "bức ảnh",
+    "level": "A1",
+    "example": "Can you take a photo of me in front of the castle?",
+    "topic": "travel"
+  },
+  {
+    "word": "sea",
+    "ipa": "/siː/",
+    "meaning": "biển",
+    "level": "A1",
+    "example": "The blue sea looks wonderful in the bright morning sun.",
+    "topic": "travel"
+  },
+  {
+    "word": "water",
+    "ipa": "/ˈwɔː.tər/",
+    "meaning": "nước",
+    "level": "A1",
+    "example": "Always carry a bottle of fresh water during your hike.",
+    "topic": "travel"
+  },
+  {
+    "word": "sun",
+    "ipa": "/sʌn/",
+    "meaning": "mặt trời",
+    "level": "A1",
+    "example": "The sun is hot, so remember to wear a sun hat.",
+    "topic": "travel"
+  },
+  {
+    "word": "lake",
+    "ipa": "/leɪk/",
+    "meaning": "hồ nước",
+    "level": "A1",
+    "example": "There are many small boats floating on the lake.",
+    "topic": "travel"
+  },
+  {
+    "word": "town",
+    "ipa": "/taʊn/",
+    "meaning": "thị trấn",
+    "level": "A1",
+    "example": "This old town is quiet and very friendly to travelers.",
+    "topic": "travel"
+  },
+  {
+    "word": "city",
+    "ipa": "/ˈsɪt.i/",
+    "meaning": "thành phố",
+    "level": "A1",
+    "example": "Tokyo is a very large and modern city.",
+    "topic": "travel"
+  },
+  {
+    "word": "shop",
+    "ipa": "/ʃɒp/",
+    "meaning": "cửa hàng",
+    "level": "A1",
+    "example": "Let's visit the gift shop to buy some souvenirs.",
+    "topic": "travel"
+  },
+  {
+    "word": "buy",
+    "ipa": "/baɪ/",
+    "meaning": "mua",
+    "level": "A1",
+    "example": "I need to buy a physical map of the area.",
+    "topic": "travel"
+  },
+  {
+    "word": "pay",
+    "ipa": "/peɪ/",
+    "meaning": "thanh toán",
+    "level": "A1",
+    "example": "You can pay for the train tickets online.",
+    "topic": "travel"
+  },
+  {
+    "word": "coin",
+    "ipa": "/kɔɪn/",
+    "meaning": "tiền xu",
+    "level": "A1",
+    "example": "I need a gold coin to buy coffee from the machine.",
+    "topic": "travel"
+  },
+  {
+    "word": "food",
+    "ipa": "/fuːd/",
+    "meaning": "thức ăn, đồ ăn",
+    "level": "A1",
+    "example": "Trying local food is my favorite part of any trip.",
+    "topic": "travel"
+  },
+  {
+    "word": "drink",
+    "ipa": "/drɪnk/",
+    "meaning": "đồ uống, thức uống",
+    "level": "A1",
+    "example": "We sat down to enjoy a cold drink after a long walk.",
+    "topic": "travel"
+  },
+  {
+    "word": "cafe",
+    "ipa": "/ˈkæf.eɪ/",
+    "meaning": "quán cà phê",
+    "level": "A1",
+    "example": "We met in a small cafe near the river bank.",
+    "topic": "travel"
+  },
+  {
+    "word": "station",
+    "ipa": "/ˈsteɪ.ʃən/",
+    "meaning": "nhà ga, trạm xe",
+    "level": "A1",
+    "example": "Please meet me outside the central train station.",
+    "topic": "travel"
+  },
+  {
+    "word": "gate",
+    "ipa": "/ɡeɪt/",
+    "meaning": "cổng",
+    "level": "A1",
+    "example": "Our flight departs from gate number twelve.",
+    "topic": "travel"
+  },
+  {
+    "word": "seat",
+    "ipa": "/siːt/",
+    "meaning": "chỗ ngồi",
+    "level": "A1",
+    "example": "Is this window seat free, or is someone sitting here?",
+    "topic": "travel"
+  },
+  {
+    "word": "driver",
+    "ipa": "/ˈdraɪ.vər/",
+    "meaning": "tài xế, người lái xe",
+    "level": "A1",
+    "example": "The taxi driver was polite and drove very safely.",
+    "topic": "travel"
+  },
+  {
+    "word": "guide",
+    "ipa": "/ɡaɪd/",
+    "meaning": "hướng dẫn viên, cẩm nang",
+    "level": "A1",
+    "example": "Our tour guide explained the history of the ancient temple.",
+    "topic": "travel"
+  },
+  {
+    "word": "group",
+    "ipa": "/ɡruːp/",
+    "meaning": "nhóm",
+    "level": "A1",
+    "example": "A group of young tourists is waiting near the entrance.",
+    "topic": "travel"
+  },
+  {
+    "word": "country",
+    "ipa": "/ˈkʌn.tri/",
+    "meaning": "đất nước, quốc gia",
+    "level": "A1",
+    "example": "I want to visit a new country every single year.",
+    "topic": "travel"
+  },
+  {
+    "word": "place",
+    "ipa": "/pleɪs/",
+    "meaning": "nơi chốn, địa điểm",
+    "level": "A1",
+    "example": "This quiet beach is a wonderful place to relax.",
+    "topic": "travel"
+  },
+  {
+    "word": "world",
+    "ipa": "/wɜːld/",
+    "meaning": "thế giới",
+    "level": "A1",
+    "example": "My dream is to travel all around the world.",
+    "topic": "travel"
+  },
+  {
+    "word": "holiday",
+    "ipa": "/ˈhɒl.ə.deɪ/",
+    "meaning": "ngày nghỉ, kỳ nghỉ",
+    "level": "A1",
+    "example": "We are going to Italy for our summer holiday.",
+    "topic": "travel"
+  },
+  {
+    "word": "time",
+    "ipa": "/taɪm/",
+    "meaning": "thời gian, giờ giấc",
+    "level": "A1",
+    "example": "What time does our bus arrive in the city?",
+    "topic": "travel"
+  },
+  {
+    "word": "day",
+    "ipa": "/deɪ/",
+    "meaning": "ngày",
+    "level": "A1",
+    "example": "It was a wonderful day full of sightseeing and fun.",
+    "topic": "travel"
+  },
+  {
+    "word": "night",
+    "ipa": "/naɪt/",
+    "meaning": "đêm, buổi tối",
+    "level": "A1",
+    "example": "The town looks very beautiful at night.",
+    "topic": "travel"
+  },
+  {
+    "word": "afternoon",
+    "ipa": "/ˌɑːf.təˈnuːn/",
+    "meaning": "buổi chiều",
+    "level": "A1",
+    "example": "We visited the local castle in the afternoon.",
+    "topic": "travel"
+  },
+  {
+    "word": "evening",
+    "ipa": "/ˈiːv.nɪŋ/",
+    "meaning": "buổi tối",
+    "level": "A1",
+    "example": "Let's have a nice dinner together this evening.",
+    "topic": "travel"
+  },
+  {
+    "word": "weather",
+    "ipa": "/ˈweð.ər/",
+    "meaning": "thời tiết",
+    "level": "A1",
+    "example": "I hope the weather remains warm and sunny tomorrow.",
+    "topic": "travel"
+  },
+  {
+    "word": "nature",
+    "ipa": "/ˈneɪ.tʃər/",
+    "meaning": "tự nhiên, thiên nhiên",
+    "level": "A1",
+    "example": "We enjoyed spending time in nature during our trip.",
+    "topic": "travel"
+  },
+  {
+    "word": "flight",
+    "ipa": "/flaɪt/",
+    "meaning": "chuyến bay",
+    "level": "A2",
+    "example": "Our flight to Paris was delayed by two hours.",
+    "topic": "travel"
+  },
+  {
+    "word": "museum",
+    "ipa": "/mjuːˈziː.əm/",
+    "meaning": "bảo tàng",
+    "level": "A2",
+    "example": "We spent the entire morning visiting the art museum.",
+    "topic": "travel"
+  },
+  {
+    "word": "suitcase",
+    "ipa": "/ˈsuːt.keɪs/",
+    "meaning": "va li",
+    "level": "A2",
+    "example": "She packed her clothes carefully in a large suitcase.",
+    "topic": "travel"
+  },
+  {
+    "word": "island",
+    "ipa": "/ˈaɪ.lənd/",
+    "meaning": "hòn đảo",
+    "level": "A2",
+    "example": "We took a small ferry to reach the tropical island.",
+    "topic": "travel"
+  },
+  {
+    "word": "mountain",
+    "ipa": "/ˈmaʊn.tɪn/",
+    "meaning": "ngọn núi",
+    "level": "A2",
+    "example": "The mountain tops were completely covered in snow.",
+    "topic": "travel"
+  },
+  {
+    "word": "forest",
+    "ipa": "/ˈfɒr.ɪst/",
+    "meaning": "khu rừng",
+    "level": "A2",
+    "example": "We walked along a narrow trail through the forest.",
+    "topic": "travel"
+  },
+  {
+    "word": "river",
+    "ipa": "/ˈrɪv.ər/",
+    "meaning": "sông, dòng sông",
+    "level": "A2",
+    "example": "The beautiful river flows through the heart of the city.",
+    "topic": "travel"
+  },
+  {
+    "word": "bridge",
+    "ipa": "/brɪdʒ/",
+    "meaning": "cây cầu",
+    "level": "A2",
+    "example": "We crossed the ancient stone bridge over the river.",
+    "topic": "travel"
+  },
+  {
+    "word": "garden",
+    "ipa": "/ˈɡɑː.dən/",
+    "meaning": "khu vườn",
+    "level": "A2",
+    "example": "The palace is famous for its botanical garden.",
+    "topic": "travel"
+  },
+  {
+    "word": "building",
+    "ipa": "/ˈbɪl.dɪŋ/",
+    "meaning": "tòa nhà",
+    "level": "A2",
+    "example": "That tall building offers an incredible view of the skyline.",
+    "topic": "travel"
+  },
+  {
+    "word": "castle",
+    "ipa": "/ˈkɑː.səl/",
+    "meaning": "lâu đài",
+    "level": "A2",
+    "example": "The medieval castle stands proudly on top of the hill.",
+    "topic": "travel"
+  },
+  {
+    "word": "temple",
+    "ipa": "/ˈtem.pəl/",
+    "meaning": "đền chùa",
+    "level": "A2",
+    "example": "Visitors must dress quietly and politely in the temple.",
+    "topic": "travel"
+  },
+  {
+    "word": "market",
+    "ipa": "/ˈmɑː.kɪt/",
+    "meaning": "chợ, thị trường",
+    "level": "A2",
+    "example": "I bought some fresh local fruits at the outdoor market.",
+    "topic": "travel"
+  },
+  {
+    "word": "double room",
+    "ipa": "/ˈdʌb.əl ruːm/",
+    "meaning": "phòng đôi (khách sạn)",
+    "level": "A2",
+    "example": "We booked a comfortable double room with a queen bed.",
+    "topic": "travel"
+  },
+  {
+    "word": "single room",
+    "ipa": "/ˈsɪŋ.ɡəl ruːm/",
+    "meaning": "phòng đơn (khách sạn)",
+    "level": "A2",
+    "example": "I requested a single room since I was traveling alone.",
+    "topic": "travel"
+  },
+  {
+    "word": "reception",
+    "ipa": "/rɪˈsep.ʃən/",
+    "meaning": "quầy lễ tân",
+    "level": "A2",
+    "example": "Please leave your room keys at the reception desk.",
+    "topic": "travel"
+  },
+  {
+    "word": "guest",
+    "ipa": "/ɡest/",
+    "meaning": "khách du lịch, khách trọ",
+    "level": "A2",
+    "example": "The hotel manager welcomed every guest warmly.",
+    "topic": "travel"
+  },
+  {
+    "word": "bill",
+    "ipa": "/bɪl/",
+    "meaning": "hóa đơn",
+    "level": "A2",
+    "example": "We asked the waiter for the restaurant bill.",
+    "topic": "travel"
+  },
+  {
+    "word": "tourist",
+    "ipa": "/ˈtʊə.rɪst/",
+    "meaning": "khách du lịch",
+    "level": "A2",
+    "example": "The historic town is popular with many international tourists.",
+    "topic": "travel"
+  },
+  {
+    "word": "baggage",
+    "ipa": "/ˈbæɡ.ɪdʒ/",
+    "meaning": "hành lý",
+    "level": "A2",
+    "example": "The airline lost my baggage on my way back.",
+    "topic": "travel"
+  },
+  {
+    "word": "delay",
+    "ipa": "/dɪˈleɪ/",
+    "meaning": "sự trì hoãn, chậm trễ",
+    "level": "A2",
+    "example": "The heavy rain caused a major delay at the station.",
+    "topic": "travel"
+  },
+  {
+    "word": "pack",
+    "ipa": "/pæk/",
+    "meaning": "đóng gói hành lý",
+    "level": "A2",
+    "example": "I need to pack my swimsuit for the beach trip.",
+    "topic": "travel"
+  },
+  {
+    "word": "unpack",
+    "ipa": "/ʌnˈpæk/",
+    "meaning": "mở hành lý",
+    "level": "A2",
+    "example": "We will unpack our bags once we reach the room.",
+    "topic": "travel"
+  },
+  {
+    "word": "rental",
+    "ipa": "/ˈren.təl/",
+    "meaning": "thuê xe, sự thuê mướn",
+    "level": "A2",
+    "example": "Our rental car broke down on our way to the mountains.",
+    "topic": "travel"
+  },
+  {
+    "word": "directions",
+    "ipa": "/daɪˈrek.ʃənz/",
+    "meaning": "chỉ đường, phương hướng",
+    "level": "A2",
+    "example": "Can you give me directions to the nearest subway?",
+    "topic": "travel"
+  },
+  {
+    "word": "location",
+    "ipa": "/ləʊˈkeɪ.ʃən/",
+    "meaning": "vị trí, địa điểm",
+    "level": "A2",
+    "example": "The guesthouse has an excellent location close to town.",
+    "topic": "travel"
+  },
+  {
+    "word": "area",
+    "ipa": "/ˈeə.ri.ə/",
+    "meaning": "khu vực, vùng",
+    "level": "A2",
+    "example": "This area is known for its beautiful lakes.",
+    "topic": "travel"
+  },
+  {
+    "word": "path",
+    "ipa": "/pɑːθ/",
+    "meaning": "lối đi, đường mòn",
+    "level": "A2",
+    "example": "Follow the stone path down to the lake.",
+    "topic": "travel"
+  },
+  {
+    "word": "currency",
+    "ipa": "/ˈkʌr.ən.si/",
+    "meaning": "tiền tệ",
+    "level": "A2",
+    "example": "You should exchange some cash into the local currency.",
+    "topic": "travel"
+  },
+  {
+    "word": "check-in",
+    "ipa": "/ˈtʃek.ɪn/",
+    "meaning": "thủ tục nhận phòng/lên máy bay",
+    "level": "A2",
+    "example": "The hotel check-in begins at two in the afternoon.",
+    "topic": "travel"
+  },
+  {
+    "word": "check-out",
+    "ipa": "/ˈtʃek.aʊt/",
+    "meaning": "thủ tục trả phòng",
+    "level": "A2",
+    "example": "We did our check-out and left for the airport.",
+    "topic": "travel"
+  },
+  {
+    "word": "information",
+    "ipa": "/ˌɪn.fəˈmeɪ.ʃən/",
+    "meaning": "thông tin",
+    "level": "A2",
+    "example": "Ask the information desk for a free bus map.",
+    "topic": "travel"
+  },
+  {
+    "word": "brochure",
+    "ipa": "/ˈbrəʊ.ʃər/",
+    "meaning": "tờ rơi quảng cáo du lịch",
+    "level": "A2",
+    "example": "I took a travel brochure about city museum tours.",
+    "topic": "travel"
+  },
+  {
+    "word": "guidebook",
+    "ipa": "/ˈɡaɪd.bʊk/",
+    "meaning": "sách hướng dẫn du lịch",
+    "level": "A2",
+    "example": "This guidebook lists the best local restaurants in town.",
+    "topic": "travel"
+  },
+  {
+    "word": "postcard",
+    "ipa": "/ˈpəʊst.kɑːd/",
+    "meaning": "bưu thiếp",
+    "level": "A2",
+    "example": "I bought a postcard to send to my best friend.",
+    "topic": "travel"
+  },
+  {
+    "word": "souvenir",
+    "ipa": "/ˌsuː.vəˈnɪər/",
+    "meaning": "quà lưu niệm",
+    "level": "A2",
+    "example": "She bought a small magnet as a souvenir from Rome.",
+    "topic": "travel"
+  },
+  {
+    "word": "custom",
+    "ipa": "/ˈkʌs.təm/",
+    "meaning": "phong tục địa phương",
+    "level": "A2",
+    "example": "It is a local custom to bow when greeting elders.",
+    "topic": "travel"
+  },
+  {
+    "word": "flight attendant",
+    "ipa": "/flaɪt əˈten.dənt/",
+    "meaning": "tiếp viên hàng không",
+    "level": "A2",
+    "example": "The flight attendant helped us place our bags.",
+    "topic": "travel"
+  },
+  {
+    "word": "pilot",
+    "ipa": "/ˈpaɪ.lət/",
+    "meaning": "phi công",
+    "level": "A2",
+    "example": "The pilot announced that the flight would land shortly.",
+    "topic": "travel"
+  },
+  {
+    "word": "platform",
+    "ipa": "/ˈplæt.fɔːm/",
+    "meaning": "sân ga, thềm ga",
+    "level": "A2",
+    "example": "The train for Edinburgh is waiting at platform four.",
+    "topic": "travel"
+  },
+  {
+    "word": "railway",
+    "ipa": "/ˈreɪl.weɪ/",
+    "meaning": "đường sắt",
+    "level": "A2",
+    "example": "The railway line runs along the beautiful sea coast.",
+    "topic": "travel"
+  },
+  {
+    "word": "ticket office",
+    "ipa": "/ˈtɪk.ɪt ˌɒf.ɪs/",
+    "meaning": "phòng bán vé",
+    "level": "A2",
+    "example": "You can buy your underground tickets at the ticket office.",
+    "topic": "travel"
+  },
+  {
+    "word": "timetable",
+    "ipa": "/ˈtaɪm.teɪ.bəl/",
+    "meaning": "lịch trình chạy xe, thời khóa biểu",
+    "level": "A2",
+    "example": "Let's check the timetable to see when the next bus leaves.",
+    "topic": "travel"
+  },
+  {
+    "word": "traffic",
+    "ipa": "/ˈtræf.ɪk/",
+    "meaning": "giao thông, xe cộ",
+    "level": "A2",
+    "example": "The heavy morning traffic delayed our journey slightly.",
+    "topic": "travel"
+  },
+  {
+    "word": "underground",
+    "ipa": "/ˌʌn.dəˈɡraʊnd/",
+    "meaning": "tàu điện ngầm",
+    "level": "A2",
+    "example": "The London underground is very fast and easy to use.",
+    "topic": "travel"
+  },
+  {
+    "word": "vehicle",
+    "ipa": "/ˈviː.ə.kəl/",
+    "meaning": "phương tiện giao thông",
+    "level": "A2",
+    "example": "No private vehicles are allowed inside the park area.",
+    "topic": "travel"
+  },
+  {
+    "word": "voyage",
+    "ipa": "/ˈvɔɪ.ɪdʒ/",
+    "meaning": "hành trình bằng đường biển",
+    "level": "A2",
+    "example": "The sailors prepared for their long voyage across the sea.",
+    "topic": "travel"
+  },
+  {
+    "word": "wind",
+    "ipa": "/wɪnd/",
+    "meaning": "gió",
+    "level": "A2",
+    "example": "A cold wind blew across the beach in the evening.",
+    "topic": "travel"
+  },
+  {
+    "word": "hiking",
+    "ipa": "/ˈhaɪ.kɪŋ/",
+    "meaning": "đi bộ đường dài, dã ngoại",
+    "level": "A2",
+    "example": "We packed sturdy boots for our hiking holiday.",
+    "topic": "travel"
+  },
+  {
+    "word": "camping",
+    "ipa": "/ˈkæm.pɪŋ/",
+    "meaning": "cắm trại",
+    "level": "A2",
+    "example": "They bought a new tent for their weekend camping trip.",
+    "topic": "travel"
+  },
+  {
+    "word": "sightseeing",
+    "ipa": "/ˈsaɪtˌʃiː.ɪŋ/",
+    "meaning": "ngắm cảnh, tham quan",
+    "level": "B1",
+    "example": "We plan to do some sightseeing in Rome tomorrow morning.",
+    "topic": "travel"
+  },
+  {
+    "word": "cruise",
+    "ipa": "/kruːz/",
+    "meaning": "du thuyền, chuyến đi bằng du thuyền",
+    "level": "B1",
+    "example": "They took a luxury cruise around the Caribbean islands.",
+    "topic": "travel"
+  },
+  {
+    "word": "hostel",
+    "ipa": "/ˈhɒs.təl/",
+    "meaning": "nhà nghỉ giá rẻ",
+    "level": "B1",
+    "example": "Staying in a youth hostel is a great way to meet travelers.",
+    "topic": "travel"
+  },
+  {
+    "word": "backpacker",
+    "ipa": "/ˈbæk.pæk.ər/",
+    "meaning": "khách du lịch bụi",
+    "level": "B1",
+    "example": "The cheap guesthouse is very popular with young backpackers.",
+    "topic": "travel"
+  },
+  {
+    "word": "tour",
+    "ipa": "/tʊər/",
+    "meaning": "chuyến đi tham quan, tour du lịch",
+    "level": "B1",
+    "example": "We booked a guided walking tour of the historic city.",
+    "topic": "travel"
+  },
+  {
+    "word": "boarding pass",
+    "ipa": "/ˈbɔː.dɪŋ ˌpɑːs/",
+    "meaning": "thẻ lên máy bay",
+    "level": "B1",
+    "example": "Please show your boarding pass and passport at the gate.",
+    "topic": "travel"
+  },
+  {
+    "word": "departure",
+    "ipa": "/dɪˈpɑː.tʃər/",
+    "meaning": "sự khởi hành",
+    "level": "B1",
+    "example": "The departure board showed that our flight was on time.",
+    "topic": "travel"
+  },
+  {
+    "word": "arrival",
+    "ipa": "/əˈraɪ.vəl/",
+    "meaning": "sự đến nơi",
+    "level": "B1",
+    "example": "We waited for their arrival at the hotel lobby.",
+    "topic": "travel"
+  },
+  {
+    "word": "customs",
+    "ipa": "/ˈkʌs.təmz/",
+    "meaning": "hải quan, thuế quan",
+    "level": "B1",
+    "example": "We had to go through customs after landing at the airport.",
+    "topic": "travel"
+  },
+  {
+    "word": "terminal",
+    "ipa": "/ˈtɜː.mɪ.nəl/",
+    "meaning": "nhà ga (sân bay, bến xe)",
+    "level": "B1",
+    "example": "The flight to New York departs from terminal three.",
+    "topic": "travel"
+  },
+  {
+    "word": "transport",
+    "ipa": "/trænsˈpɔːt/",
+    "meaning": "vận tải, giao thông công cộng",
+    "level": "B1",
+    "example": "Public transport in this city is very cheap and reliable.",
+    "topic": "travel"
+  },
+  {
+    "word": "transfer",
+    "ipa": "/trænsˈfɜːr/",
+    "meaning": "sự trung chuyển, chuyển khách",
+    "level": "B1",
+    "example": "The hotel provides a free airport transfer service.",
+    "topic": "travel"
+  },
+  {
+    "word": "confirmation",
+    "ipa": "/ˌkɒn.fəˈmeɪ.ʃən/",
+    "meaning": "thư xác nhận, sự xác nhận",
+    "level": "B1",
+    "example": "I received an email confirmation for my flight reservation.",
+    "topic": "travel"
+  },
+  {
+    "word": "cancel",
+    "ipa": "/ˈkæn.səl/",
+    "meaning": "hủy bỏ",
+    "level": "B1",
+    "example": "We had to cancel our trip due to sudden health issues.",
+    "topic": "travel"
+  },
+  {
+    "word": "refund",
+    "ipa": "/ˈriː.fʌnd/",
+    "meaning": "tiền hoàn lại, sự hoàn tiền",
+    "level": "B1",
+    "example": "The airline gave us a full refund for the cancelled flight.",
+    "topic": "travel"
+  },
+  {
+    "word": "rent",
+    "ipa": "/rent/",
+    "meaning": "thuê (xe, nhà)",
+    "level": "B1",
+    "example": "We decided to rent a bicycle to explore the quiet countryside.",
+    "topic": "travel"
+  },
+  {
+    "word": "wander",
+    "ipa": "/ˈwɒn.dər/",
+    "meaning": "đi lang thang, dạo chơi",
+    "level": "B1",
+    "example": "We loved to wander through the narrow streets of the old quarter.",
+    "topic": "travel"
+  },
+  {
+    "word": "route",
+    "ipa": "/ruːt/",
+    "meaning": "tuyến đường, lộ trình",
+    "level": "B1",
+    "example": "The scenic route offers spectacular views of the valleys.",
+    "topic": "travel"
+  },
+  {
+    "word": "package tour",
+    "ipa": "/ˈpæk.ɪdʒ tʊər/",
+    "meaning": "du lịch trọn gói",
+    "level": "B1",
+    "example": "They booked a package tour that included flights and meals.",
+    "topic": "travel"
+  },
+  {
+    "word": "scenery",
+    "ipa": "/ˈsiː.nər.i/",
+    "meaning": "phong cảnh, cảnh vật",
+    "level": "B1",
+    "example": "The train passed through beautiful mountain scenery.",
+    "topic": "travel"
+  },
+  {
+    "word": "spot",
+    "ipa": "/spɒt/",
+    "meaning": "nơi, điểm, địa điểm",
+    "level": "B1",
+    "example": "This is a popular picnic spot for local families.",
+    "topic": "travel"
+  },
+  {
+    "word": "historical",
+    "ipa": "/hɪˈstɒr.ɪ.kəl/",
+    "meaning": "thuộc lịch sử, mang tính lịch sử",
+    "level": "B1",
+    "example": "We visited several historical buildings during our tour.",
+    "topic": "travel"
+  },
+  {
+    "word": "culture",
+    "ipa": "/ˈkʌl.tʃər/",
+    "meaning": "văn hóa",
+    "level": "B1",
+    "example": "Traveling is the best way to experience a different culture.",
+    "topic": "travel"
+  },
+  {
+    "word": "native",
+    "ipa": "/ˈneɪ.tɪv/",
+    "meaning": "bản địa, bản xứ",
+    "level": "B1",
+    "example": "He had a long chat with the native inhabitants of the village.",
+    "topic": "travel"
+  },
+  {
+    "word": "abroad",
+    "ipa": "/əˈbrɔːd/",
+    "meaning": "ở nước ngoài",
+    "level": "B1",
+    "example": "This was the first time she had traveled abroad alone.",
+    "topic": "travel"
+  },
+  {
+    "word": "overseas",
+    "ipa": "/ˌəʊ.vəˈsiːz/",
+    "meaning": "hải ngoại, nước ngoài",
+    "level": "B1",
+    "example": "The hotel attracts thousands of overseas visitors every summer.",
+    "topic": "travel"
+  },
+  {
+    "word": "border",
+    "ipa": "/ˈbɔː.dər/",
+    "meaning": "biên giới",
+    "level": "B1",
+    "example": "We had to show our visas at the border crossing.",
+    "topic": "travel"
+  },
+  {
+    "word": "landmark",
+    "ipa": "/ˈlænd.mɑːk/",
+    "meaning": "cột mốc, điểm mốc nổi tiếng",
+    "level": "B1",
+    "example": "The Eiffel Tower is a world-famous landmark.",
+    "topic": "travel"
+  },
+  {
+    "word": "monument",
+    "ipa": "/ˈmɒn.jə.mənt/",
+    "meaning": "đài tưởng niệm, di tích",
+    "level": "B1",
+    "example": "There is a beautiful historical monument in the square.",
+    "topic": "travel"
+  },
+  {
+    "word": "palace",
+    "ipa": "/ˈpæl.ɪs/",
+    "meaning": "cung điện",
+    "level": "B1",
+    "example": "The royal family lives in the grand palace in the city.",
+    "topic": "travel"
+  },
+  {
+    "word": "cathedral",
+    "ipa": "/kəˈθiː.drəl/",
+    "meaning": "nhà thờ lớn, thánh đường",
+    "level": "B1",
+    "example": "The gothic cathedral dominates the town's skyline.",
+    "topic": "travel"
+  },
+  {
+    "word": "resort",
+    "ipa": "/rɪˈzɔːt/",
+    "meaning": "khu nghỉ dưỡng",
+    "level": "B1",
+    "example": "We stayed at a luxury beach resort in Thailand.",
+    "topic": "travel"
+  },
+  {
+    "word": "guesthouse",
+    "ipa": "/ˈɡest.haʊs/",
+    "meaning": "nhà khách, nhà trọ",
+    "level": "B1",
+    "example": "The family-run guesthouse was extremely cozy and clean.",
+    "topic": "travel"
+  },
+  {
+    "word": "motel",
+    "ipa": "/məʊˈtel/",
+    "meaning": "nhà nghỉ bên đường",
+    "level": "B1",
+    "example": "We parked our car outside the motel and went inside to sleep.",
+    "topic": "travel"
+  },
+  {
+    "word": "reconfirm",
+    "ipa": "/ˌriː.kənˈfɜːm/",
+    "meaning": "xác nhận lại",
+    "level": "B1",
+    "example": "Please reconfirm your flight ticket 24 hours in advance.",
+    "topic": "travel"
+  },
+  {
+    "word": "baggage reclaim",
+    "ipa": "/ˈbæɡ.ɪdʒ rɪˈkleɪm/",
+    "meaning": "khu vực trả hành lý",
+    "level": "B1",
+    "example": "We headed to baggage reclaim to collect our heavy suitcases.",
+    "topic": "travel"
+  },
+  {
+    "word": "duty-free",
+    "ipa": "/ˌdʒuː.tiˈfriː/",
+    "meaning": "miễn thuế",
+    "level": "B1",
+    "example": "I bought some perfume at the airport duty-free shop.",
+    "topic": "travel"
+  },
+  {
+    "word": "stopover",
+    "ipa": "/ˈstɒp.əʊ.vər/",
+    "meaning": "điểm dừng chân (trong hành trình dài)",
+    "level": "B1",
+    "example": "We had a brief stopover in Singapore before flying to London.",
+    "topic": "travel"
+  },
+  {
+    "word": "cabin",
+    "ipa": "/ˈkæb.ɪn/",
+    "meaning": "cabin, khoang khách",
+    "level": "B1",
+    "example": "The ship offers spacious cabins with private balconies.",
+    "topic": "travel"
+  },
+  {
+    "word": "deck",
+    "ipa": "/dek/",
+    "meaning": "boong tàu",
+    "level": "B1",
+    "example": "We sat on the upper deck to watch the harbor fade away.",
+    "topic": "travel"
+  },
+  {
+    "word": "jet lag",
+    "ipa": "/ˈdʒet ˌlæɡ/",
+    "meaning": "cảm giác mệt mỏi sau bay dài, lệch múi giờ",
+    "level": "B1",
+    "example": "I always suffer from bad jet lag when traveling east.",
+    "topic": "travel"
+  },
+  {
+    "word": "insurance",
+    "ipa": "/ɪnˈʃɔː.rəns/",
+    "meaning": "bảo hiểm",
+    "level": "B1",
+    "example": "It is essential to buy medical insurance before traveling.",
+    "topic": "travel"
+  },
+  {
+    "word": "permit",
+    "ipa": "/ˈpɜː.mɪt/",
+    "meaning": "giấy phép",
+    "level": "B1",
+    "example": "You need a special permit to camp in the national park.",
+    "topic": "travel"
+  },
+  {
+    "word": "document",
+    "ipa": "/ˈdɒk.jə.mənt/",
+    "meaning": "tài liệu, giấy tờ",
+    "level": "B1",
+    "example": "Keep all your travel documents safe in your hand bag.",
+    "topic": "travel"
+  },
+  {
+    "word": "local",
+    "ipa": "/ˈləʊ.kəl/",
+    "meaning": "người địa phương, dân bản xứ",
+    "level": "B1",
+    "example": "A friendly local showed us the way to the market.",
+    "topic": "travel"
+  },
+  {
+    "word": "postpone",
+    "ipa": "/pəʊstˈpəʊn/",
+    "meaning": "hoãn lại, trì hoãn",
+    "level": "B1",
+    "example": "They decided to postpone their trip due to bad weather.",
+    "topic": "travel"
+  },
+  {
+    "word": "direct flight",
+    "ipa": "/daɪˈrekt flaɪt/",
+    "meaning": "chuyến bay thẳng",
+    "level": "B1",
+    "example": "Booking a direct flight is much more convenient.",
+    "topic": "travel"
+  },
+  {
+    "word": "transit",
+    "ipa": "/ˈtræn.zɪt/",
+    "meaning": "quá cảnh",
+    "level": "B1",
+    "example": "We spent six hours in transit at the airport.",
+    "topic": "travel"
+  },
+  {
+    "word": "luggage allowance",
+    "ipa": "/ˈlʌɡ.ɪdʒ əˈlaʊ.əns/",
+    "meaning": "tiêu chuẩn hành lý cho phép",
+    "level": "B1",
+    "example": "The airline has a strict 20kg luggage allowance policy.",
+    "topic": "travel"
+  },
+  {
+    "word": "check-in desk",
+    "ipa": "/ˈtʃek.ɪn desk/",
+    "meaning": "quầy làm thủ tục",
+    "level": "B1",
+    "example": "There was a long queue at the airline check-in desk.",
+    "topic": "travel"
+  },
+  {
+    "word": "wanderlust",
+    "ipa": "/ˈwɒn.də.lʌst/",
+    "meaning": "sự đam mê dịch chuyển, cuồng đi",
+    "level": "B2",
+    "example": "His intense wanderlust led him to explore remote islands.",
+    "topic": "travel"
+  },
+  {
+    "word": "ecotourism",
+    "ipa": "/ˈiː.kəʊˌtʊə.rɪ.zəm/",
+    "meaning": "du lịch sinh thái",
+    "level": "B2",
+    "example": "The local community benefits greatly from sustainable ecotourism.",
+    "topic": "travel"
+  },
+  {
+    "word": "backpacking",
+    "ipa": "/ˈbæk.pæk.ɪŋ/",
+    "meaning": "du lịch ba lô, phượt",
+    "level": "B2",
+    "example": "She spent six months backpacking through Southeast Asia.",
+    "topic": "travel"
+  },
+  {
+    "word": "expedition",
+    "ipa": "/ˌek.spəˈdɪʃ.ən/",
+    "meaning": "cuộc thám hiểm, hành trình",
+    "level": "B2",
+    "example": "He organized a scientific expedition to the Antarctic region.",
+    "topic": "travel"
+  },
+  {
+    "word": "pilgrimage",
+    "ipa": "/ˈpɪl.ɡrɪ.mɪdʒ/",
+    "meaning": "cuộc hành hương",
+    "level": "B2",
+    "example": "Every year, thousands of believers make a sacred pilgrimage.",
+    "topic": "travel"
+  },
+  {
+    "word": "commute",
+    "ipa": "/kəˈmjuːt/",
+    "meaning": "quãng đường đi lại hàng ngày",
+    "level": "B2",
+    "example": "My daily commute to the office takes forty minutes by train.",
+    "topic": "travel"
+  },
+  {
+    "word": "hospitality",
+    "ipa": "/ˌhɒs.pɪˈtæl.ə.ti/",
+    "meaning": "lòng hiếu khách, sự mến khách",
+    "level": "B2",
+    "example": "We were deeply touched by the warm hospitality of the villagers.",
+    "topic": "travel"
+  },
+  {
+    "word": "cosmopolitan",
+    "ipa": "/ˌkɒz.məˈpɒl.ɪ.tən/",
+    "meaning": "mang tính quốc tế, đa sắc tộc",
+    "level": "B2",
+    "example": "New York is an extremely cosmopolitan and diverse city.",
+    "topic": "travel"
+  },
+  {
+    "word": "heritage",
+    "ipa": "/ˈher.ɪ.tɪdʒ/",
+    "meaning": "di sản",
+    "level": "B2",
+    "example": "The ancient city is filled with rich architectural heritage.",
+    "topic": "travel"
+  },
+  {
+    "word": "spectacular",
+    "ipa": "/spekˈtæk.jə.lər/",
+    "meaning": "ngoạn mục, hùng vĩ",
+    "level": "B2",
+    "example": "The view from the top of the volcanic peak was spectacular.",
+    "topic": "travel"
+  },
+  {
+    "word": "picturesque",
+    "ipa": "/ˌpɪk.tʃərˈesk/",
+    "meaning": "đẹp như tranh vẽ",
+    "level": "B2",
+    "example": "We stayed in a picturesque fishing village along the coast.",
+    "topic": "travel"
+  },
+  {
+    "word": "stunning",
+    "ipa": "/ˈstʌn.ɪŋ/",
+    "meaning": "lộng lẫy, làm sững sờ",
+    "level": "B2",
+    "example": "She took some stunning photos of the sunset over the bay.",
+    "topic": "travel"
+  },
+  {
+    "word": "breathtaking",
+    "ipa": "/ˈbreθˌteɪ.kɪŋ/",
+    "meaning": "hấp dẫn đến ngạt thở, ngoạn mục",
+    "level": "B2",
+    "example": "The scenery in the national park was absolutely breathtaking.",
+    "topic": "travel"
+  },
+  {
+    "word": "remote",
+    "ipa": "/rɪˈməʊt/",
+    "meaning": "xa xôi, hẻo lánh",
+    "level": "B2",
+    "example": "The research station is in a highly remote area of the jungle.",
+    "topic": "travel"
+  },
+  {
+    "word": "isolated",
+    "ipa": "/ˈaɪ.sə.leɪ.tɪd/",
+    "meaning": "cô lập, tách biệt",
+    "level": "B2",
+    "example": "The small cabin is isolated from the rest of the town.",
+    "topic": "travel"
+  },
+  {
+    "word": "exotic",
+    "ipa": "/ɪɡˈzɒt.ɪk/",
+    "meaning": "ngoại lai, độc đáo, kỳ lạ",
+    "level": "B2",
+    "example": "I love discovering exotic spices and foods when traveling.",
+    "topic": "travel"
+  },
+  {
+    "word": "domestic",
+    "ipa": "/dəˈmes.tɪk/",
+    "meaning": "nội địa, trong nước",
+    "level": "B2",
+    "example": "The airport recently expanded its domestic terminal.",
+    "topic": "travel"
+  },
+  {
+    "word": "embark",
+    "ipa": "/ɪmˈbɑːk/",
+    "meaning": "lên tàu, máy bay",
+    "level": "B2",
+    "example": "The passengers began to embark on the cruise ship.",
+    "topic": "travel"
+  },
+  {
+    "word": "disembark",
+    "ipa": "/ˌdɪs.ɪmˈbɑːk/",
+    "meaning": "xuống tàu, máy bay",
+    "level": "B2",
+    "example": "Please have your luggage ready before you disembark.",
+    "topic": "travel"
+  },
+  {
+    "word": "connecting flight",
+    "ipa": "/kəˈnek.tɪŋ flaɪt/",
+    "meaning": "chuyến bay chuyển tiếp",
+    "level": "B2",
+    "example": "We had to run across the airport to catch our connecting flight.",
+    "topic": "travel"
+  },
+  {
+    "word": "layover",
+    "ipa": "/ˈleɪˌəʊ.vər/",
+    "meaning": "thời gian chờ chuyển tiếp",
+    "level": "B2",
+    "example": "We had a long five-hour layover in Tokyo before our flight.",
+    "topic": "travel"
+  },
+  {
+    "word": "charter flight",
+    "ipa": "/ˈtʃɑː.tər flaɪt/",
+    "meaning": "chuyến bay thuê trọn gói riêng",
+    "level": "B2",
+    "example": "The company organized a charter flight for the executives.",
+    "topic": "travel"
+  },
+  {
+    "word": "overbook",
+    "ipa": "/ˌəʊ.vəˈbʊk/",
+    "meaning": "đặt trước quá tải",
+    "level": "B2",
+    "example": "Since the airline overbooked the flight, they offered vouchers.",
+    "topic": "travel"
+  },
+  {
+    "word": "compensation",
+    "ipa": "/ˌkɒm.penˈseɪ.ʃən/",
+    "meaning": "khoản bồi thường",
+    "level": "B2",
+    "example": "He received financial compensation for the flight cancellation.",
+    "topic": "travel"
+  },
+  {
+    "word": "low-cost carrier",
+    "ipa": "/ləʊ ˌkɒst ˈkær.i.ər/",
+    "meaning": "hãng hàng không giá rẻ",
+    "level": "B2",
+    "example": "Low-cost carriers have made international travel much cheaper.",
+    "topic": "travel"
+  },
+  {
+    "word": "high season",
+    "ipa": "/haɪ ˈsiː.zən/",
+    "meaning": "mùa cao điểm",
+    "level": "B2",
+    "example": "Hotel rooms are very hard to find during the high season.",
+    "topic": "travel"
+  },
+  {
+    "word": "off-peak",
+    "ipa": "/ˌɒfˈpiːk/",
+    "meaning": "ngoài giờ cao điểm",
+    "level": "B2",
+    "example": "Traveling during off-peak times helps you avoid crowds.",
+    "topic": "travel"
+  },
+  {
+    "word": "travel agency",
+    "ipa": "/ˈtræv.əl ˌeɪ.dʒən.si/",
+    "meaning": "đại lý du lịch",
+    "level": "B2",
+    "example": "We asked the travel agency to plan our entire itinerary.",
+    "topic": "travel"
+  },
+  {
+    "word": "tour operator",
+    "ipa": "/tʊər ˈɒp.ər.eɪ.tər/",
+    "meaning": "nhà điều hành tour du lịch",
+    "level": "B2",
+    "example": "The tour operator resolved our transport issue quickly.",
+    "topic": "travel"
+  },
+  {
+    "word": "hotspot",
+    "ipa": "/ˈhɒt.spɒt/",
+    "meaning": "điểm nóng du lịch, điểm thu hút",
+    "level": "B2",
+    "example": "This beautiful beach is a famous hotspot for surfers.",
+    "topic": "travel"
+  },
+  {
+    "word": "wilderness",
+    "ipa": "/ˈwɪl.də.nəs/",
+    "meaning": "vùng hoang dã",
+    "level": "B2",
+    "example": "They spent a week hiking through the mountain wilderness.",
+    "topic": "travel"
+  },
+  {
+    "word": "sanctuary",
+    "ipa": "/ˈsæŋk.tʃʊə.ri/",
+    "meaning": "khu bảo tồn thiên nhiên",
+    "level": "B2",
+    "example": "The tropical island is a natural sanctuary for birds.",
+    "topic": "travel"
+  },
+  {
+    "word": "preserve",
+    "ipa": "/prɪˈzɜːv/",
+    "meaning": "khu bảo tồn, bảo tồn",
+    "level": "B2",
+    "example": "We must protect and preserve our cultural monuments.",
+    "topic": "travel"
+  },
+  {
+    "word": "conservation",
+    "ipa": "/ˌkɒn.səˈveɪ.ʃən/",
+    "meaning": "sự bảo tồn thiên nhiên",
+    "level": "B2",
+    "example": "The national park is highly dedicated to wildlife conservation.",
+    "topic": "travel"
+  },
+  {
+    "word": "pristine",
+    "ipa": "/ˈprɪs.tiːn/",
+    "meaning": "nguyên sơ, tinh khôi",
+    "level": "B2",
+    "example": "The island is famous for its pristine sandy beaches.",
+    "topic": "travel"
+  },
+  {
+    "word": "unspoilt",
+    "ipa": "/uʌnˈspɔɪlt/",
+    "meaning": "chưa bị hoang hóa, tự nhiên",
+    "level": "B2",
+    "example": "The mountain valley remains completely natural and unspoilt.",
+    "topic": "travel"
+  },
+  {
+    "word": "self-catering",
+    "ipa": "/ˌselfˈkeɪ.tər.ɪŋ/",
+    "meaning": "tự phục vụ ăn uống (căn hộ)",
+    "level": "B2",
+    "example": "We rented a self-catering apartment near the beach.",
+    "topic": "travel"
+  },
+  {
+    "word": "full board",
+    "ipa": "/ˌfʊl ˈbɔːd/",
+    "meaning": "bao gồm tất cả bữa ăn (trọn gói)",
+    "level": "B2",
+    "example": "Our hotel booking includes full board options.",
+    "topic": "travel"
+  },
+  {
+    "word": "half board",
+    "ipa": "/ˌhɑːf ˈbɔːd/",
+    "meaning": "bao gồm bữa sáng và tối",
+    "level": "B2",
+    "example": "We chose half board so we could eat lunch outdoors.",
+    "topic": "travel"
+  },
+  {
+    "word": "all-inclusive",
+    "ipa": "/ˌɔːl.ɪnˈkluː.sɪv/",
+    "meaning": "trọn gói dịch vụ",
+    "level": "B2",
+    "example": "They enjoyed an all-inclusive stay at the resort.",
+    "topic": "travel"
+  },
+  {
+    "word": "voucher",
+    "ipa": "/ˈvaʊ.tʃər/",
+    "meaning": "phiếu mua hàng, phiếu dịch vụ",
+    "level": "B2",
+    "example": "You must present the travel voucher to board the bus.",
+    "topic": "travel"
+  },
+  {
+    "word": "insurance policy",
+    "ipa": "/ɪnˈʃɔː.rəns ˈpɒl.ə.si/",
+    "meaning": "hợp đồng bảo hiểm",
+    "level": "B2",
+    "example": "Please read your travel insurance policy thoroughly.",
+    "topic": "travel"
+  },
+  {
+    "word": "visa requirement",
+    "ipa": "/ˈviː.zə rɪˈkwaɪə.mənt/",
+    "meaning": "yêu cầu thị thực",
+    "level": "B2",
+    "example": "Check the visa requirement of your destination country.",
+    "topic": "travel"
+  },
+  {
+    "word": "exchange rate",
+    "ipa": "/ɪksˈtʃeɪndʒ ˌreɪt/",
+    "meaning": "tỷ giá hối đoái",
+    "level": "B2",
+    "example": "The exchange rate for the dollar has improved recently.",
+    "topic": "travel"
+  },
+  {
+    "word": "bureau de change",
+    "ipa": "/ˌbjʊə.rəʊ de ˈʃɒ̃ʒ/",
+    "meaning": "quầy đổi ngoại tệ",
+    "level": "B2",
+    "example": "I need to visit a bureau de change before my flight.",
+    "topic": "travel"
+  },
+  {
+    "word": "traveler's check",
+    "ipa": "/ˈtræv.əl.əz tʃek/",
+    "meaning": "séc du lịch",
+    "level": "B2",
+    "example": "Traveler's checks are rarely accepted in local shops.",
+    "topic": "travel"
+  },
+  {
+    "word": "declare",
+    "ipa": "/dɪˈkleər/",
+    "meaning": "khai báo thuế/hải quan",
+    "level": "B2",
+    "example": "Do you have any items to declare to customs today?",
+    "topic": "travel"
+  },
+  {
+    "word": "confiscate",
+    "ipa": "/ˈkɒn.fɪ.skeɪt/",
+    "meaning": "tịch thu",
+    "level": "B2",
+    "example": "Airport security will confiscate any large liquid bottles.",
+    "topic": "travel"
+  },
+  {
+    "word": "deport",
+    "ipa": "/dɪˈpɔːt/",
+    "meaning": "trục xuất",
+    "level": "B2",
+    "example": "He was deported for entering the nation illegally.",
+    "topic": "travel"
+  },
+  {
+    "word": "wayfarer",
+    "ipa": "/ˈweɪˌfeə.rər/",
+    "meaning": "người lữ hành, khách đi bộ",
+    "level": "B2",
+    "example": "The friendly old inn offered shelter to weary wayfarers.",
+    "topic": "travel"
+  },
+  {
+    "word": "globetrotter",
+    "ipa": "/ˈɡləʊbˌtrɒt.ər/",
+    "meaning": "người đi du lịch khắp thế giới",
+    "level": "C1",
+    "example": "As an experienced globetrotter, she travels with very light bags.",
+    "topic": "travel"
+  },
+  {
+    "word": "microadventure",
+    "ipa": "/ˈmaɪ.krəʊ.ədˈven.tʃər/",
+    "meaning": "chuyến dã ngoại ngắn ngày, vi mô",
+    "level": "C1",
+    "example": "A microadventure is a cheap way to explore your own province.",
+    "topic": "travel"
+  },
+  {
+    "word": "voluntourism",
+    "ipa": "/ˌvɒl.ənˈtʊə.rɪ.zəm/",
+    "meaning": "du lịch kết hợp tình nguyện",
+    "level": "C1",
+    "example": "Voluntourism lets travelers build schools for local children.",
+    "topic": "travel"
+  },
+  {
+    "word": "overtourism",
+    "ipa": "/ˌəʊ.vəˈtʊə.rɪ.zəm/",
+    "meaning": "tình trạng quá tải khách du lịch",
+    "level": "C1",
+    "example": "Overtourism is threatening the local heritage of Venice.",
+    "topic": "travel"
+  },
+  {
+    "word": "staycation",
+    "ipa": "/ˌsteɪˈkeɪ.ʃən/",
+    "meaning": "kỳ nghỉ tại nhà hoặc vùng lân cận",
+    "level": "C1",
+    "example": "They opted for a staycation rather than booking flights abroad.",
+    "topic": "travel"
+  },
+  {
+    "word": "glamping",
+    "ipa": "/ˈɡlæm.pɪŋ/",
+    "meaning": "cắm trại kiểu sang trọng, cao cấp",
+    "level": "C1",
+    "example": "Glamping combines outdoor nature experiences with hotel luxury.",
+    "topic": "travel"
+  },
+  {
+    "word": "slow travel",
+    "ipa": "/sləʊ ˈtræv.əl/",
+    "meaning": "du lịch chậm, trải nghiệm chiều sâu",
+    "level": "C1",
+    "example": "Slow travel emphasizes authentic connections with local history.",
+    "topic": "travel"
+  },
+  {
+    "word": "dark tourism",
+    "ipa": "/dɑːk ˈtʊə.rɪ.zəm/",
+    "meaning": "du lịch đen, tham quan nơi thảm họa",
+    "level": "C1",
+    "example": "Dark tourism includes visits to old battlefields and prisons.",
+    "topic": "travel"
+  },
+  {
+    "word": "culinary tourism",
+    "ipa": "/ˈkʌl.ɪ.nər.i ˈtʊə.rɪ.zəm/",
+    "meaning": "du lịch ẩm thực",
+    "level": "C1",
+    "example": "Culinary tourism is growing among food lovers worldwide.",
+    "topic": "travel"
+  },
+  {
+    "word": "digital nomad",
+    "ipa": "/ˌdɪdʒ.ɪ.təl ˈnəʊ.mæd/",
+    "meaning": "người du mục kỹ thuật số",
+    "level": "C1",
+    "example": "Working as a digital nomad requires only a laptop and Wi-Fi.",
+    "topic": "travel"
+  },
+  {
+    "word": "off the beaten track",
+    "ipa": "/ɒf ðə ˈbiː.tən træk/",
+    "meaning": "nơi hẻo lánh, ít ai biết tới",
+    "level": "C1",
+    "example": "We loved finding quiet spots that were off the beaten track.",
+    "topic": "travel"
+  },
+  {
+    "word": "transit oasis",
+    "ipa": "/ˈtræn.zɪt əʊˈeɪ.sɪs/",
+    "meaning": "không gian thư giãn khi quá cảnh",
+    "level": "C1",
+    "example": "The airport botanical garden served as a peaceful transit oasis.",
+    "topic": "travel"
+  },
+  {
+    "word": "fly-drive",
+    "ipa": "/ˌflaɪ ˈdraɪv/",
+    "meaning": "gói bay kết hợp thuê ô tô tự lái",
+    "level": "C1",
+    "example": "A fly-drive package is ideal for exploring huge national parks.",
+    "topic": "travel"
+  },
+  {
+    "word": "red-eye flight",
+    "ipa": "/ˌred.aɪ ˈflaɪt/",
+    "meaning": "chuyến bay đêm muộn, bay mắt đỏ",
+    "level": "C1",
+    "example": "The red-eye flight was cheap but made me extremely tired.",
+    "topic": "travel"
+  },
+  {
+    "word": "outbound travel",
+    "ipa": "/ˌaʊt.baʊnd ˈtræv.əl/",
+    "meaning": "du lịch ra nước ngoài",
+    "level": "C1",
+    "example": "Outbound travel has risen dramatically due to rising incomes.",
+    "topic": "travel"
+  },
+  {
+    "word": "inbound travel",
+    "ipa": "/ˌɪn.baʊnd ˈtræv.əl/",
+    "meaning": "du lịch đón khách quốc tế vào",
+    "level": "C1",
+    "example": "The state has launched a campaign to boost inbound travel.",
+    "topic": "travel"
+  },
+  {
+    "word": "greenwashing",
+    "ipa": "/ˈɡriːnˌwɒʃ.ɪŋ/",
+    "meaning": "tẩy xanh (quảng cáo sinh thái giả tạo)",
+    "level": "C1",
+    "example": "The resort was accused of greenwashing its carbon output claim.",
+    "topic": "travel"
+  },
+  {
+    "word": "cultural appropriation",
+    "ipa": "/ˈkʌl.tʃər.əl əˌprəʊ.priˈeɪ.ʃən/",
+    "meaning": "chiếm đoạt văn hóa, chiếm dụng văn hóa",
+    "level": "C1",
+    "example": "Wearing sacred tribal dress as a costume is cultural appropriation.",
+    "topic": "travel"
+  },
+  {
+    "word": "carbon footprint",
+    "ipa": "/ˌkɑː.bən ˈfʊt.prɪnt/",
+    "meaning": "dấu chân carbon, khí thải cá nhân",
+    "level": "C1",
+    "example": "You can calculate your carbon footprint before booking a flight.",
+    "topic": "travel"
+  },
+  {
+    "word": "carbon offsetting",
+    "ipa": "/ˌkɑː.bən ˈɒf.set.ɪŋ/",
+    "meaning": "bù đắp lượng phát thải carbon",
+    "level": "C1",
+    "example": "Many airlines now offer carbon offsetting programs to passengers.",
+    "topic": "travel"
+  },
+  {
+    "word": "carrying capacity",
+    "ipa": "/ˈkær.i.ɪŋ kəˈpæs.ə.ti/",
+    "meaning": "sức chứa, giới hạn khách tối đa",
+    "level": "C1",
+    "example": "The historic sanctuary has exceeded its daily carrying capacity.",
+    "topic": "travel"
+  },
+  {
+    "word": "sustainable tourism",
+    "ipa": "/səˈsteɪ.nə.bəl ˈtʊə.rɪ.zəm/",
+    "meaning": "du lịch bền vũg",
+    "level": "C1",
+    "example": "Sustainable tourism seeks to preserve nature for future generations.",
+    "topic": "travel"
+  },
+  {
+    "word": "regenerative travel",
+    "ipa": "/rɪˈdʒen.ər.ə.tɪv ˈtræv.əl/",
+    "meaning": "du lịch tái tạo, phục hồi môi trường",
+    "level": "C1",
+    "example": "Regenerative travel encourages tourists to plant native trees.",
+    "topic": "travel"
+  },
+  {
+    "word": "indigenous tourism",
+    "ipa": "/ɪnˈdɪdʒ.ɪ.nəs ˈtʊə.rɪ.zəm/",
+    "meaning": "du lịch tìm hiểu cộng đồng bản địa",
+    "level": "C1",
+    "example": "Indigenous tourism supports tribal art preservation projects.",
+    "topic": "travel"
+  },
+  {
+    "word": "cultural immersion",
+    "ipa": "/ˈkʌl.tʃər.əl ɪˈmɜː.ʃən/",
+    "meaning": "sự hòa nhập văn hóa sâu sắc",
+    "level": "C1",
+    "example": "Living with a local family provides deep cultural immersion.",
+    "topic": "travel"
+  },
+  {
+    "word": "transient",
+    "ipa": "/ˈtræn.zi.ənt/",
+    "meaning": "mang tính nhất thời, lưu trú ngắn ngày",
+    "level": "C1",
+    "example": "The coastal town relies heavily on its transient summer visitors.",
+    "topic": "travel"
+  },
+  {
+    "word": "wanderer",
+    "ipa": "/ˈwɒn.dər.ər/",
+    "meaning": "kẻ lãng du, người đi đó đi đây",
+    "level": "C1",
+    "example": "The lonely wanderer walked through the misty mountain valleys.",
+    "topic": "travel"
+  },
+  {
+    "word": "sojourn",
+    "ipa": "/ˈsɒdʒ.ɜːn/",
+    "meaning": "sự ở lại tạm thời, lưu trú tạm",
+    "level": "C1",
+    "example": "Her brief sojourn in Rome inspired her to paint historic ruins.",
+    "topic": "travel"
+  },
+  {
+    "word": "peripatetic",
+    "ipa": "/ˌper.i.pəˈtet.ɪk/",
+    "meaning": "lưu động, đi đây đi đó liên tục",
+    "level": "C1",
+    "example": "He leads a highly peripatetic life as a global travel writer.",
+    "topic": "travel"
+  },
+  {
+    "word": "nomadic",
+    "ipa": "/nəʊˈmæd.ɪk/",
+    "meaning": "thuộc du mục, nay đây mai đó",
+    "level": "C1",
+    "example": "The nomadic shepherds move their tents with the changing seasons.",
+    "topic": "travel"
+  },
+  {
+    "word": "expatriate",
+    "ipa": "/ekˈspæt.ri.ət/",
+    "meaning": "kiều dân, người sống ở nước ngoài",
+    "level": "C1",
+    "example": "There is a massive expatriate community living in this coastal city.",
+    "topic": "travel"
+  },
+  {
+    "word": "repatriate",
+    "ipa": "/ˌriːˈpæt.ri.eɪt/",
+    "meaning": "hồi hương, đưa về nước",
+    "level": "C1",
+    "example": "The government worked hard to repatriate tourists during the storm.",
+    "topic": "travel"
+  },
+  {
+    "word": "visa-exempt",
+    "ipa": "/ˈviː.zə ɪɡˈzempt/",
+    "meaning": "được miễn thị thực",
+    "level": "C1",
+    "example": "European citizens are visa-exempt for short tourist stays.",
+    "topic": "travel"
+  },
+  {
+    "word": "visa on arrival",
+    "ipa": "/ˈviː.zə ɒn əˈraɪ.vəl/",
+    "meaning": "thị thực tại cửa khẩu, visa tại sân bay",
+    "level": "C1",
+    "example": "You can queue to receive your visa on arrival at the gate.",
+    "topic": "travel"
+  },
+  {
+    "word": "biometric passport",
+    "ipa": "/ˌbaɪ.əʊˈmet.rɪk ˈpɑːs.pɔːt/",
+    "meaning": "hộ chiếu sinh trắc học",
+    "level": "C1",
+    "example": "The biometric passport stores the traveler's facial details.",
+    "topic": "travel"
+  },
+  {
+    "word": "en route",
+    "ipa": "/ˌɒ̃ ˈruːt/",
+    "meaning": "trên đường đi, đang trên đường",
+    "level": "C1",
+    "example": "We stopped for lunch at a historic town en route to Paris.",
+    "topic": "travel"
+  },
+  {
+    "word": "embarkation",
+    "ipa": "/ˌem.bɑːˈkeɪ.ʃən/",
+    "meaning": "sự lên tàu, sự lên máy bay",
+    "level": "C1",
+    "example": "Please proceed to the embarkation gate immediately.",
+    "topic": "travel"
+  },
+  {
+    "word": "disembarkation",
+    "ipa": "/ˌdɪs.em.bɑːˈkeɪ.ʃən/",
+    "meaning": "sự xuống tàu, sự xuống máy bay",
+    "level": "C1",
+    "example": "All passengers must show health declarations upon disembarkation.",
+    "topic": "travel"
+  },
+  {
+    "word": "waypoint",
+    "ipa": "/ˈweɪ.pɔɪnt/",
+    "meaning": "điểm trung chuyển, tọa độ hành trình",
+    "level": "C1",
+    "example": "We marked several gorgeous waypoints along our highway route.",
+    "topic": "travel"
+  },
+  {
+    "word": "charter",
+    "ipa": "/ˈtʃɑː.tər/",
+    "meaning": "thuê trọn chuyến tàu/xe/máy bay",
+    "level": "C1",
+    "example": "The tourist group decided to charter a yacht for the afternoon.",
+    "topic": "travel"
+  },
+  {
+    "word": "concierge",
+    "ipa": "/ˌkɒ̃.siˈeəʒ/",
+    "meaning": "nhân viên hỗ trợ khách hàng khách sạn",
+    "level": "C1",
+    "example": "The hotel concierge booked premium tickets for our opera show.",
+    "topic": "travel"
+  },
+  {
+    "word": "hospitality industry",
+    "ipa": "/ˌhɒs.pɪˈtæl.ə.ti ˈɪn.də.stri/",
+    "meaning": "ngành công nghiệp dịch vụ khách sạn",
+    "level": "C1",
+    "example": "The pandemic caused massive job losses in the hospitality industry.",
+    "topic": "travel"
+  },
+  {
+    "word": "high-end tourism",
+    "ipa": "/haɪ end ˈtʊə.rɪ.zəm/",
+    "meaning": "du lịch phân khúc cao cấp",
+    "level": "C1",
+    "example": "High-end tourism brings substantial revenue to coastal cities.",
+    "topic": "travel"
+  },
+  {
+    "word": "niche market",
+    "ipa": "/niːʃ ˈmɑː.kɪt/",
+    "meaning": "thị trường ngách",
+    "level": "C1",
+    "example": "Sailing vacations serve as a profitable niche market for travel agencies.",
+    "topic": "travel"
+  },
+  {
+    "word": "travelogue",
+    "ipa": "/ˈtræv.əl.ɒɡ/",
+    "meaning": "ký sự du lịch, phim tài liệu du lịch",
+    "level": "C1",
+    "example": "She wrote an inspiring travelogue detailing her walks in Asia.",
+    "topic": "travel"
+  },
+  {
+    "word": "unmapped",
+    "ipa": "/ʌnˈmæpt/",
+    "meaning": "chưa được thám hiểm, chưa vẽ bản đồ",
+    "level": "C1",
+    "example": "They sailed away into completely unmapped areas of the ocean.",
+    "topic": "travel"
+  },
+  {
+    "word": "pristine wilderness",
+    "ipa": "/ˈprɪs.tiːn ˈwɪl.də.nəs/",
+    "meaning": "vùng hoang dã nguyên sơ",
+    "level": "C1",
+    "example": "He spent two years photographing the pristine wilderness of Alaska.",
+    "topic": "travel"
+  },
+  {
+    "word": "carbon neutrality",
+    "ipa": "/ˌkɑː.bən njuːˈtræl.ə.ti/",
+    "meaning": "trung hòa carbon, giảm khí thải ròng",
+    "level": "C1",
+    "example": "Major airlines aim to achieve total carbon neutrality by 2050.",
+    "topic": "travel"
+  },
+  {
+    "word": "heritage site",
+    "ipa": "/ˈher.ɪ.tɪdʒ saɪt/",
+    "meaning": "di sản văn hóa/thiên nhiên thế giới",
+    "level": "C1",
+    "example": "The ancient citadel was declared a UNESCO world heritage site.",
+    "topic": "travel"
+  },
+  {
+    "word": "culinary tour",
+    "ipa": "/ˈkʌl.ɪ.nər.i tʊər/",
+    "meaning": "tour du lịch ẩm thực trải nghiệm",
+    "level": "C1",
+    "example": "They joined a culinary tour to discover local street foods.",
+    "topic": "travel"
+  }
+]

@@ -4024,20 +4024,8 @@ def get_vocabulary_by_topic(
     fallback_level_items = fallback_topic.get(user_level, fallback_topic.get("B1", []))
     expected_count = len(fallback_level_items)
     
-    # Kiểm tra xem từ vựng trong DB có thực sự khớp với bộ từ chuẩn của topic đó không
-    db_word_set = {v.word.lower() for v in vocab_items}
-    expected_word_set = {item["word"].lower() for item in fallback_level_items}
-    
-    is_mismatched = False
-    if vocab_items:
-        # Nếu có bất kỳ từ nào trong DB không thuộc danh sách từ chuẩn của chủ đề này, đánh dấu bị mismatch
-        for w_low in db_word_set:
-            if w_low not in expected_word_set:
-                is_mismatched = True
-                break
-    
-    # Nếu DB chỉ chứa ít hơn dữ liệu chuẩn (thiếu hụt) hoặc dữ liệu bị sai lệch chủ đề (mismatched), tự động xóa sạch để sinh lại 100% chuẩn xác
-    if is_mismatched or (vocab_items and len(vocab_items) < expected_count):
+    # Nếu DB chỉ chứa ít hơn dữ liệu chuẩn (thiếu hụt), tự động xóa sạch để sinh lại 100% chuẩn xác
+    if vocab_items and len(vocab_items) < expected_count:
         db.query(Vocabulary).filter(
             Vocabulary.topic == topic_code,
             Vocabulary.level == user_level

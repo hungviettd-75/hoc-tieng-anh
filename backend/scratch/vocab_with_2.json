@@ -1,0 +1,875 @@
+[
+    {
+        "id": 25,
+        "word": "innovation 2",
+        "ipa": "/ˌɪn.əˈveɪ.ʃən/",
+        "meaning": "sự đổi mới, sáng tạo",
+        "level": "B1",
+        "example": "Innovation drives the technology industry forward.",
+        "topic": "tech"
+    },
+    {
+        "id": 26,
+        "word": "bandwidth 2",
+        "ipa": "/ˈbænd.wɪdθ/",
+        "meaning": "băng thông",
+        "level": "B1",
+        "example": "We need more bandwidth to stream high-quality videos.",
+        "topic": "tech"
+    },
+    {
+        "id": 27,
+        "word": "cybersecurity 2",
+        "ipa": "/ˌsaɪ.bə.sɪˈkjʊə.rə.ti/",
+        "meaning": "an ninh mạng",
+        "level": "B1",
+        "example": "Cybersecurity is essential for protecting personal data.",
+        "topic": "tech"
+    },
+    {
+        "id": 28,
+        "word": "cloud computing 2",
+        "ipa": "/klaʊd kəmˈpjuː.tɪŋ/",
+        "meaning": "điện toán đám mây",
+        "level": "B1",
+        "example": "Many companies use cloud computing to store their data.",
+        "topic": "tech"
+    },
+    {
+        "id": 29,
+        "word": "virtual reality 2",
+        "ipa": "/ˌvɜː.tʃu.əl riˈæl.ə.ti/",
+        "meaning": "thực tế ảo",
+        "level": "B1",
+        "example": "Virtual reality games make you feel like you are inside the game.",
+        "topic": "tech"
+    },
+    {
+        "id": 30,
+        "word": "wearable 2",
+        "ipa": "/ˈweə.rə.bəl/",
+        "meaning": "thiết bị đeo được",
+        "level": "B1",
+        "example": "Smartwatches are the most common type of wearable technology.",
+        "topic": "tech"
+    },
+    {
+        "id": 31,
+        "word": "streaming 2",
+        "ipa": "/ˈstriː.mɪŋ/",
+        "meaning": "phát trực tuyến",
+        "level": "B1",
+        "example": "Music streaming services have changed how we listen to songs.",
+        "topic": "tech"
+    },
+    {
+        "id": 32,
+        "word": "gadget 2",
+        "ipa": "/ˈɡædʒ.ɪt/",
+        "meaning": "thiết bị điện tử nhỏ",
+        "level": "B1",
+        "example": "He loves buying the latest gadgets from tech stores.",
+        "topic": "tech"
+    },
+    {
+        "id": 75,
+        "word": "phone 2",
+        "ipa": "/fəʊn/",
+        "meaning": "điện thoại",
+        "level": "A1",
+        "example": "I use my phone to call my friends.",
+        "topic": "tech"
+    },
+    {
+        "id": 76,
+        "word": "screen 2",
+        "ipa": "/skriːn/",
+        "meaning": "màn hình",
+        "level": "A1",
+        "example": "The screen on this laptop is very bright.",
+        "topic": "tech"
+    },
+    {
+        "id": 77,
+        "word": "camera 2",
+        "ipa": "/ˈkæm.ər.ə/",
+        "meaning": "máy ảnh, máy quay",
+        "level": "A1",
+        "example": "She took a photo with her camera.",
+        "topic": "tech"
+    },
+    {
+        "id": 78,
+        "word": "tablet 2",
+        "ipa": "/ˈtæb.lɪt/",
+        "meaning": "máy tính bảng",
+        "level": "A1",
+        "example": "He reads books on his tablet.",
+        "topic": "tech"
+    },
+    {
+        "id": 79,
+        "word": "video 2",
+        "ipa": "/ˈvɪd.i.əʊ/",
+        "meaning": "video, phim",
+        "level": "A1",
+        "example": "We watched a funny video online.",
+        "topic": "tech"
+    },
+    {
+        "id": 80,
+        "word": "game 2",
+        "ipa": "/ɡeɪm/",
+        "meaning": "trò chơi",
+        "level": "A1",
+        "example": "This game is very popular with children.",
+        "topic": "tech"
+    },
+    {
+        "id": 81,
+        "word": "internet 2",
+        "ipa": "/ˈɪn.tə.net/",
+        "meaning": "mạng Internet",
+        "level": "A1",
+        "example": "I need the internet to do my homework.",
+        "topic": "tech"
+    },
+    {
+        "id": 82,
+        "word": "email 2",
+        "ipa": "/ˈiː.meɪl/",
+        "meaning": "thư điện tử",
+        "level": "A1",
+        "example": "Please send me an email with the details.",
+        "topic": "tech"
+    },
+    {
+        "id": 125,
+        "word": "smartphone 2",
+        "ipa": "/ˈsmɑːt.fəʊn/",
+        "meaning": "điện thoại thông minh",
+        "level": "A2",
+        "example": "Most people have a smartphone these days.",
+        "topic": "tech"
+    },
+    {
+        "id": 126,
+        "word": "battery 2",
+        "ipa": "/ˈbæt.ər.i/",
+        "meaning": "pin",
+        "level": "A2",
+        "example": "My battery is low, I need to charge my phone.",
+        "topic": "tech"
+    },
+    {
+        "id": 127,
+        "word": "download 2",
+        "ipa": "/ˌdaʊnˈləʊd/",
+        "meaning": "tải xuống",
+        "level": "A2",
+        "example": "You can download the app for free.",
+        "topic": "tech"
+    },
+    {
+        "id": 128,
+        "word": "website 2",
+        "ipa": "/ˈweb.saɪt/",
+        "meaning": "trang web",
+        "level": "A2",
+        "example": "Visit our website for more information.",
+        "topic": "tech"
+    },
+    {
+        "id": 129,
+        "word": "password 2",
+        "ipa": "/ˈpɑːs.wɜːd/",
+        "meaning": "mật khẩu",
+        "level": "A2",
+        "example": "Don't share your password with anyone.",
+        "topic": "tech"
+    },
+    {
+        "id": 130,
+        "word": "update 2",
+        "ipa": "/ʌpˈdeɪt/",
+        "meaning": "cập nhật",
+        "level": "A2",
+        "example": "You should update your software regularly.",
+        "topic": "tech"
+    },
+    {
+        "id": 131,
+        "word": "connect 2",
+        "ipa": "/kəˈnekt/",
+        "meaning": "kết nối",
+        "level": "A2",
+        "example": "I can't connect to the Wi-Fi network.",
+        "topic": "tech"
+    },
+    {
+        "id": 132,
+        "word": "message 2",
+        "ipa": "/ˈmes.ɪdʒ/",
+        "meaning": "tin nhắn",
+        "level": "A2",
+        "example": "She sent me a message on social media.",
+        "topic": "tech"
+    },
+    {
+        "id": 191,
+        "word": "target audience 2",
+        "ipa": "/ˌtɑː.ɡɪt ˈɔː.di.əns/",
+        "meaning": "đối tượng mục tiêu",
+        "level": "B1",
+        "example": "The target audience for this product is young professionals.",
+        "topic": "marketing"
+    },
+    {
+        "id": 192,
+        "word": "campaign 2",
+        "ipa": "/kæmˈpeɪn/",
+        "meaning": "chiến dịch",
+        "level": "B1",
+        "example": "The marketing campaign increased sales by 30 percent.",
+        "topic": "marketing"
+    },
+    {
+        "id": 193,
+        "word": "branding 2",
+        "ipa": "/ˈbræn.dɪŋ/",
+        "meaning": "xây dựng thương hiệu",
+        "level": "B1",
+        "example": "Good branding helps customers remember your company.",
+        "topic": "marketing"
+    },
+    {
+        "id": 194,
+        "word": "analytics 2",
+        "ipa": "/ˌæn.əˈlɪt.ɪks/",
+        "meaning": "phân tích dữ liệu",
+        "level": "B1",
+        "example": "We use analytics to track how visitors use our website.",
+        "topic": "marketing"
+    },
+    {
+        "id": 195,
+        "word": "conversion 2",
+        "ipa": "/kənˈvɜː.ʃən/",
+        "meaning": "chuyển đổi (khách thành người mua)",
+        "level": "B1",
+        "example": "The conversion rate improved after we redesigned the landing page.",
+        "topic": "marketing"
+    },
+    {
+        "id": 196,
+        "word": "engagement 2",
+        "ipa": "/ɪnˈɡeɪdʒ.mənt/",
+        "meaning": "mức độ tương tác",
+        "level": "B1",
+        "example": "Social media engagement is higher when we post videos.",
+        "topic": "marketing"
+    },
+    {
+        "id": 197,
+        "word": "influencer 2",
+        "ipa": "/ˈɪn.flu.ən.sər/",
+        "meaning": "người có ảnh hưởng",
+        "level": "B1",
+        "example": "The brand partnered with an influencer to promote its new collection.",
+        "topic": "marketing"
+    },
+    {
+        "id": 198,
+        "word": "content marketing 2",
+        "ipa": "/ˌkɒn.tent ˈmɑː.kɪ.tɪŋ/",
+        "meaning": "tiếp thị nội dung",
+        "level": "B1",
+        "example": "Content marketing focuses on creating valuable articles and videos for customers.",
+        "topic": "marketing"
+    },
+    {
+        "id": 241,
+        "word": "career 2",
+        "ipa": "/kəˈrɪər/",
+        "meaning": "sự nghiệp",
+        "level": "B1",
+        "example": "She has built a successful career in finance.",
+        "topic": "job"
+    },
+    {
+        "id": 242,
+        "word": "promotion 2",
+        "ipa": "/prəˈməʊ.ʃən/",
+        "meaning": "thăng chức",
+        "level": "B1",
+        "example": "He received a promotion after three years of hard work.",
+        "topic": "job"
+    },
+    {
+        "id": 243,
+        "word": "freelancer 2",
+        "ipa": "/ˈfriː.lɑːn.sər/",
+        "meaning": "người làm tự do",
+        "level": "B1",
+        "example": "As a freelancer, she can choose her own working hours.",
+        "topic": "job"
+    },
+    {
+        "id": 244,
+        "word": "remote work 2",
+        "ipa": "/rɪˌməʊt ˈwɜːk/",
+        "meaning": "làm việc từ xa",
+        "level": "B1",
+        "example": "Remote work has become more common since the pandemic.",
+        "topic": "job"
+    },
+    {
+        "id": 245,
+        "word": "networking 2",
+        "ipa": "/ˈnet.wɜː.kɪŋ/",
+        "meaning": "xây dựng quan hệ nghề nghiệp",
+        "level": "B1",
+        "example": "Networking events are great opportunities to meet industry professionals.",
+        "topic": "job"
+    },
+    {
+        "id": 246,
+        "word": "skill set 2",
+        "ipa": "/ˈskɪl set/",
+        "meaning": "bộ kỹ năng",
+        "level": "B1",
+        "example": "The job requires a diverse skill set including communication and analysis.",
+        "topic": "job"
+    },
+    {
+        "id": 247,
+        "word": "reference 2",
+        "ipa": "/ˈref.ər.əns/",
+        "meaning": "người giới thiệu, tham chiếu",
+        "level": "B1",
+        "example": "Please provide two professional references with your application.",
+        "topic": "job"
+    },
+    {
+        "id": 248,
+        "word": "workplace 2",
+        "ipa": "/ˈwɜːk.pleɪs/",
+        "meaning": "nơi làm việc",
+        "level": "B1",
+        "example": "A positive workplace environment improves employee satisfaction.",
+        "topic": "job"
+    },
+    {
+        "id": 784,
+        "word": "social media marketing 2",
+        "ipa": "/ˈsəʊ.ʃəl ˈmiː.di.ə ˈmɑː.kɪ.tɪŋ/",
+        "meaning": "tiếp thị qua mạng xã hội",
+        "level": "B1",
+        "example": "Social media marketing is now essential for every brand.",
+        "topic": "social_media"
+    },
+    {
+        "id": 793,
+        "word": "Destination 2",
+        "ipa": "/ˌdestɪˈneɪʃn/",
+        "meaning": "Điểm đến",
+        "level": "B1",
+        "example": "What is your final travel destination?",
+        "topic": "travel"
+    },
+    {
+        "id": 794,
+        "word": "Itinerary 2",
+        "ipa": "/aɪˈtɪnərəri/",
+        "meaning": "Lịch trình chuyến đi",
+        "level": "B1",
+        "example": "We planned our itinerary in detail.",
+        "topic": "travel"
+    },
+    {
+        "id": 795,
+        "word": "Accommodation 2",
+        "ipa": "/əˌkɒməˈdeɪʃn/",
+        "meaning": "Chỗ ở, nơi lưu trú",
+        "level": "B1",
+        "example": "The hostel offers cheap accommodation.",
+        "topic": "travel"
+    },
+    {
+        "id": 796,
+        "word": "Explore 2",
+        "ipa": "/ɪkˈsplɔː(r)/",
+        "meaning": "Khám phá, thám hiểm",
+        "level": "B1",
+        "example": "We spent the afternoon exploring the ancient temple.",
+        "topic": "travel"
+    },
+    {
+        "id": 797,
+        "word": "Reservation 2",
+        "ipa": "/ˌrezəˈveɪʃn/",
+        "meaning": "Sự đặt trước",
+        "level": "B1",
+        "example": "I made a hotel reservation online.",
+        "topic": "travel"
+    },
+    {
+        "id": 798,
+        "word": "Adventure 2",
+        "ipa": "/ədˈventʃə(r)/",
+        "meaning": "Cuộc phiêu lưu",
+        "level": "B1",
+        "example": "He wrote a book about his desert adventure.",
+        "topic": "travel"
+    },
+    {
+        "id": 799,
+        "word": "Excursion 2",
+        "ipa": "/ɪkˈskɜːʃn/",
+        "meaning": "Chuyến tham quan ngắn",
+        "level": "B1",
+        "example": "We went on a day excursion to the island.",
+        "topic": "travel"
+    },
+    {
+        "id": 800,
+        "word": "Passenger 2",
+        "ipa": "/ˈpæsɪndʒə(r)/",
+        "meaning": "Hành khách",
+        "level": "B1",
+        "example": "All passengers must fasten their seatbelts.",
+        "topic": "travel"
+    },
+    {
+        "id": 843,
+        "word": "Automation 2",
+        "ipa": "/ˌɔːtəˈmeɪʃn/",
+        "meaning": "Tự động hóa",
+        "level": "B1",
+        "example": "Automation will change the future of work.",
+        "topic": "ai"
+    },
+    {
+        "id": 844,
+        "word": "Database 2",
+        "ipa": "/ˈdeɪtəbeɪs/",
+        "meaning": "Cơ sở dữ liệu",
+        "level": "B1",
+        "example": "The customer records are in the database.",
+        "topic": "ai"
+    },
+    {
+        "id": 845,
+        "word": "Software 2",
+        "ipa": "/ˈsɒftweə(r)/",
+        "meaning": "Phần mềm",
+        "level": "B1",
+        "example": "They design software for language learning.",
+        "topic": "ai"
+    },
+    {
+        "id": 846,
+        "word": "Interface 2",
+        "ipa": "/ˈɪntəfeɪs/",
+        "meaning": "Giao diện",
+        "level": "B1",
+        "example": "The user interface is very clean.",
+        "topic": "ai"
+    },
+    {
+        "id": 847,
+        "word": "Assistant 2",
+        "ipa": "/əˈsɪstənt/",
+        "meaning": "Trợ lý",
+        "level": "B1",
+        "example": "Siri is a virtual assistant on iOS.",
+        "topic": "ai"
+    },
+    {
+        "id": 848,
+        "word": "Analyze 2",
+        "ipa": "/ˈænəlaɪz/",
+        "meaning": "Phân tích",
+        "level": "B1",
+        "example": "We use AI to analyze pronunciation.",
+        "topic": "ai"
+    },
+    {
+        "id": 849,
+        "word": "Prediction 2",
+        "ipa": "/prɪˈdɪkʃn/",
+        "meaning": "Sự dự đoán",
+        "level": "B1",
+        "example": "AI makes a prediction based on trends.",
+        "topic": "ai"
+    },
+    {
+        "id": 850,
+        "word": "Algorithm 2",
+        "ipa": "/ˈælɡərɪðəm/",
+        "meaning": "Thuật toán",
+        "level": "B1",
+        "example": "The search engine uses a complex algorithm.",
+        "topic": "ai"
+    },
+    {
+        "id": 893,
+        "word": "Robot 2",
+        "ipa": "/ˈrəʊbɒt/",
+        "meaning": "Người máy",
+        "level": "A1",
+        "example": "The factory uses robots to build cars.",
+        "topic": "ai"
+    },
+    {
+        "id": 894,
+        "word": "Smart 2",
+        "ipa": "/smɑːt/",
+        "meaning": "Thông minh",
+        "level": "A1",
+        "example": "He has a smart TV in his living room.",
+        "topic": "ai"
+    },
+    {
+        "id": 895,
+        "word": "Data 2",
+        "ipa": "/ˈdeɪtə/",
+        "meaning": "Dữ liệu",
+        "level": "A1",
+        "example": "All customer data is encrypted.",
+        "topic": "ai"
+    },
+    {
+        "id": 896,
+        "word": "Code 2",
+        "ipa": "/kəʊd/",
+        "meaning": "Mã lập trình",
+        "level": "A1",
+        "example": "I wrote a few lines of code today.",
+        "topic": "ai"
+    },
+    {
+        "id": 897,
+        "word": "App 2",
+        "ipa": "/æp/",
+        "meaning": "Ứng dụng",
+        "level": "A1",
+        "example": "You can download the app for free.",
+        "topic": "ai"
+    },
+    {
+        "id": 898,
+        "word": "User 2",
+        "ipa": "/ˈjuːzə(r)/",
+        "meaning": "Người dùng",
+        "level": "A1",
+        "example": "The system has active users globally.",
+        "topic": "ai"
+    },
+    {
+        "id": 899,
+        "word": "Web 2",
+        "ipa": "/web/",
+        "meaning": "Trang mạng, mạng lưới",
+        "level": "A1",
+        "example": "We search the web for answers.",
+        "topic": "ai"
+    },
+    {
+        "id": 900,
+        "word": "Fast 2",
+        "ipa": "/fɑːst/",
+        "meaning": "Nhanh",
+        "level": "A1",
+        "example": "This computer is extremely fast.",
+        "topic": "ai"
+    },
+    {
+        "id": 943,
+        "word": "Computer 2",
+        "ipa": "/kəmˈpjuːtə(r)/",
+        "meaning": "Máy tính",
+        "level": "A2",
+        "example": "I use my computer for coding.",
+        "topic": "ai"
+    },
+    {
+        "id": 944,
+        "word": "System 2",
+        "ipa": "/ˈsɪstəm/",
+        "meaning": "Hệ thống",
+        "level": "A2",
+        "example": "The computer system needs an update.",
+        "topic": "ai"
+    },
+    {
+        "id": 945,
+        "word": "Network 2",
+        "ipa": "/ˈnetwɜːk/",
+        "meaning": "Mạng lưới, mạng kết nối",
+        "level": "A2",
+        "example": "The social network connects millions of people.",
+        "topic": "ai"
+    },
+    {
+        "id": 946,
+        "word": "Program 2",
+        "ipa": "/ˈprəʊɡræm/",
+        "meaning": "Chương trình máy tính",
+        "level": "A2",
+        "example": "This program helps detect grammar errors.",
+        "topic": "ai"
+    },
+    {
+        "id": 947,
+        "word": "Digital 2",
+        "ipa": "/ˈdɪdʒɪtl/",
+        "meaning": "Kỹ thuật số",
+        "level": "A2",
+        "example": "We are living in a digital age.",
+        "topic": "ai"
+    },
+    {
+        "id": 948,
+        "word": "Device 2",
+        "ipa": "/dɪˈvaɪs/",
+        "meaning": "Thiết bị",
+        "level": "A2",
+        "example": "Smartphones are essential mobile devices.",
+        "topic": "ai"
+    },
+    {
+        "id": 949,
+        "word": "Storage 2",
+        "ipa": "/ˈstɔːrɪdʒ/",
+        "meaning": "Bộ nhớ lưu trữ",
+        "level": "A2",
+        "example": "This cloud storage is highly secure.",
+        "topic": "ai"
+    },
+    {
+        "id": 950,
+        "word": "Process 2",
+        "ipa": "/ˈprəʊses/",
+        "meaning": "Xử lý, quy trình",
+        "level": "A2",
+        "example": "The CPU processes information quickly.",
+        "topic": "ai"
+    },
+    {
+        "id": 993,
+        "word": "Neural network 2",
+        "ipa": "/ˈnjʊərəl ˈnetwɜːk/",
+        "meaning": "Mạng nơ-ron",
+        "level": "B2",
+        "example": "AI is built on neural networks.",
+        "topic": "ai"
+    },
+    {
+        "id": 994,
+        "word": "Machine learning 2",
+        "ipa": "/məˈʃiːn ˈlɜːnɪŋ/",
+        "meaning": "Học máy",
+        "level": "B2",
+        "example": "Machine learning is a subset of AI.",
+        "topic": "ai"
+    },
+    {
+        "id": 995,
+        "word": "Dataset 2",
+        "ipa": "/ˈdeɪtəset/",
+        "meaning": "Tập dữ liệu",
+        "level": "B2",
+        "example": "The model was trained on a massive dataset.",
+        "topic": "ai"
+    },
+    {
+        "id": 996,
+        "word": "Optimization 2",
+        "ipa": "/ˌɒptɪmaɪˈzeɪʃn/",
+        "meaning": "Sự tối ưu hóa",
+        "level": "B2",
+        "example": "We perform optimization on the search logic.",
+        "topic": "ai"
+    },
+    {
+        "id": 997,
+        "word": "Classification 2",
+        "ipa": "/ˌklæsɪfɪˈkeɪʃn/",
+        "meaning": "Sự phân loại",
+        "level": "B2",
+        "example": "The algorithm handles image classification.",
+        "topic": "ai"
+    },
+    {
+        "id": 998,
+        "word": "Framework 2",
+        "ipa": "/ˈfreɪmwɜːk/",
+        "meaning": "Khung làm việc, thư viện mẫu",
+        "level": "B2",
+        "example": "TensorFlow is a popular framework for deep learning.",
+        "topic": "ai"
+    },
+    {
+        "id": 999,
+        "word": "Generative 2",
+        "ipa": "/ˈdʒenərətɪv/",
+        "meaning": "Tạo sinh",
+        "level": "B2",
+        "example": "ChatGPT is a popular generative AI application.",
+        "topic": "ai"
+    },
+    {
+        "id": 1000,
+        "word": "Autonomous 2",
+        "ipa": "/ɔːˈtɒnəməs/",
+        "meaning": "Tự trị, tự lái",
+        "level": "B2",
+        "example": "Autonomous vehicles are being tested on public roads.",
+        "topic": "ai"
+    },
+    {
+        "id": 1043,
+        "word": "Cognitive computing 2",
+        "ipa": "/ˈkɒɡnətɪv kəmˈpjuːtɪŋ/",
+        "meaning": "Điện toán nhận thức",
+        "level": "C1",
+        "example": "Cognitive computing mimics human thought.",
+        "topic": "ai"
+    },
+    {
+        "id": 1044,
+        "word": "Deep learning 2",
+        "ipa": "/diːp ˈlɜːnɪŋ/",
+        "meaning": "Học sâu",
+        "level": "C1",
+        "example": "Deep learning achieves state of the art results.",
+        "topic": "ai"
+    },
+    {
+        "id": 1045,
+        "word": "Reinforcement 2",
+        "ipa": "/ˌriːɪnˈfɔːsmənt/",
+        "meaning": "Sự tăng cường",
+        "level": "C1",
+        "example": "AlphaGo uses reinforcement learning.",
+        "topic": "ai"
+    },
+    {
+        "id": 1046,
+        "word": "Transformers 2",
+        "ipa": "/trænsˈfɔːməs/",
+        "meaning": "Mô hình Transformer",
+        "level": "C1",
+        "example": "Modern LLMs are built on the Transformer architecture.",
+        "topic": "ai"
+    },
+    {
+        "id": 1047,
+        "word": "Supervised 2",
+        "ipa": "/ˈsuːpəvaɪzd/",
+        "meaning": "Có giám sát",
+        "level": "C1",
+        "example": "Supervised learning requires labeled training data.",
+        "topic": "ai"
+    },
+    {
+        "id": 1048,
+        "word": "Natural Language 2",
+        "ipa": "/ˈnætʃrəl ˈlæŋɡwɪdʒ/",
+        "meaning": "Ngôn ngữ tự nhiên",
+        "level": "C1",
+        "example": "Natural Language Processing makes chatbots smarter.",
+        "topic": "ai"
+    },
+    {
+        "id": 1049,
+        "word": "Hyperparameters 2",
+        "ipa": "/ˌhaɪpəpəˈræmɪtəz/",
+        "meaning": "Siêu tham số",
+        "level": "C1",
+        "example": "Tuning hyperparameters is essential for model training.",
+        "topic": "ai"
+    },
+    {
+        "id": 1050,
+        "word": "Backpropagation 2",
+        "ipa": "/ˌbækprɒpəˈɡeɪʃn/",
+        "meaning": "Lan truyền ngược",
+        "level": "C1",
+        "example": "Backpropagation is used to train deep neural networks.",
+        "topic": "ai"
+    },
+    {
+        "id": 1093,
+        "word": "Ticket 2",
+        "ipa": "/ˈtɪkɪt/",
+        "meaning": "Vé xe/tàu/máy bay",
+        "level": "A1",
+        "example": "Please show your ticket at the gate.",
+        "topic": "travel"
+    },
+    {
+        "id": 1094,
+        "word": "Hotel 2",
+        "ipa": "/həʊˈtel/",
+        "meaning": "Khách sạn",
+        "level": "A1",
+        "example": "We booked a room at the central hotel.",
+        "topic": "travel"
+    },
+    {
+        "id": 1095,
+        "word": "Bus 2",
+        "ipa": "/bʌs/",
+        "meaning": "Xe buýt",
+        "level": "A1",
+        "example": "I go to school by bus every day.",
+        "topic": "travel"
+    },
+    {
+        "id": 1096,
+        "word": "Map 2",
+        "ipa": "/mæp/",
+        "meaning": "Bản đồ",
+        "level": "A1",
+        "example": "We need a map to find our way.",
+        "topic": "travel"
+    },
+    {
+        "id": 1097,
+        "word": "Passport 2",
+        "ipa": "/ˈpɑːspɔːt/",
+        "meaning": "Hộ chiếu",
+        "level": "A1",
+        "example": "Don't forget to pack your passport.",
+        "topic": "travel"
+    },
+    {
+        "id": 1098,
+        "word": "Fly 2",
+        "ipa": "/flaɪ/",
+        "meaning": "Bay, đi máy bay",
+        "level": "A1",
+        "example": "I will fly to Paris tomorrow.",
+        "topic": "travel"
+    },
+    {
+        "id": 1099,
+        "word": "Beach 2",
+        "ipa": "/biːtʃ/",
+        "meaning": "Bãi biển",
+        "level": "A1",
+        "example": "We played soccer on the beach.",
+        "topic": "travel"
+    },
+    {
+        "id": 1100,
+        "word": "Bag 2",
+        "ipa": "/bæɡ/",
+        "meaning": "Túi xách, ba lô",
+        "level": "A1",
+        "example": "Put your camera in the bag.",
+        "topic": "travel"
+    }
+]

@@ -1,0 +1,2798 @@
+{
+  "smartphone": {
+    "topic": "tech",
+    "level": "A2"
+  },
+  "battery": {
+    "topic": "tech",
+    "level": "A2"
+  },
+  "download": {
+    "topic": "tech",
+    "level": "A2"
+  },
+  "website": {
+    "topic": "tech",
+    "level": "A2"
+  },
+  "password": {
+    "topic": "tech",
+    "level": "A2"
+  },
+  "update": {
+    "topic": "tech",
+    "level": "A2"
+  },
+  "connect": {
+    "topic": "tech",
+    "level": "A2"
+  },
+  "message": {
+    "topic": "tech",
+    "level": "A2"
+  },
+  "cellphone": {
+    "topic": "tech",
+    "level": "A2"
+  },
+  "charger": {
+    "topic": "tech",
+    "level": "A2"
+  },
+  "upload": {
+    "topic": "tech",
+    "level": "A2"
+  },
+  "webpage": {
+    "topic": "tech",
+    "level": "A2"
+  },
+  "passcode": {
+    "topic": "tech",
+    "level": "A2"
+  },
+  "upgrade": {
+    "topic": "tech",
+    "level": "A2"
+  },
+  "link": {
+    "topic": "tech",
+    "level": "A2"
+  },
+  "notice": {
+    "topic": "tech",
+    "level": "A2"
+  },
+  "target audience": {
+    "topic": "marketing",
+    "level": "B1"
+  },
+  "campaign": {
+    "topic": "marketing",
+    "level": "B1"
+  },
+  "branding": {
+    "topic": "marketing",
+    "level": "B1"
+  },
+  "analytics": {
+    "topic": "marketing",
+    "level": "B1"
+  },
+  "conversion": {
+    "topic": "marketing",
+    "level": "B1"
+  },
+  "engagement": {
+    "topic": "marketing",
+    "level": "B1"
+  },
+  "influencer": {
+    "topic": "marketing",
+    "level": "B1"
+  },
+  "content marketing": {
+    "topic": "marketing",
+    "level": "B1"
+  },
+  "potential customer": {
+    "topic": "marketing",
+    "level": "B1"
+  },
+  "drive": {
+    "topic": "marketing",
+    "level": "B1"
+  },
+  "identity": {
+    "topic": "marketing",
+    "level": "B1"
+  },
+  "statistics": {
+    "topic": "marketing",
+    "level": "B1"
+  },
+  "acquisition": {
+    "topic": "marketing",
+    "level": "B1"
+  },
+  "interaction": {
+    "topic": "marketing",
+    "level": "B1"
+  },
+  "celebrity": {
+    "topic": "marketing",
+    "level": "B1"
+  },
+  "direct marketing": {
+    "topic": "marketing",
+    "level": "B1"
+  },
+  "entrepreneur": {
+    "topic": "business",
+    "level": "B1"
+  },
+  "startup": {
+    "topic": "business",
+    "level": "B1"
+  },
+  "strategy": {
+    "topic": "business",
+    "level": "B1"
+  },
+  "revenue": {
+    "topic": "business",
+    "level": "B1"
+  },
+  "stakeholder": {
+    "topic": "business",
+    "level": "B1"
+  },
+  "venture capital": {
+    "topic": "business",
+    "level": "B1"
+  },
+  "merger": {
+    "topic": "business",
+    "level": "B1"
+  },
+  "franchise": {
+    "topic": "business",
+    "level": "B1"
+  },
+  "negotiation": {
+    "topic": "business",
+    "level": "B1"
+  },
+  "profit margin": {
+    "topic": "business",
+    "level": "B1"
+  },
+  "market share": {
+    "topic": "business",
+    "level": "B1"
+  },
+  "supply chain": {
+    "topic": "business",
+    "level": "B1"
+  },
+  "cash flow": {
+    "topic": "business",
+    "level": "B1"
+  },
+  "business model": {
+    "topic": "business",
+    "level": "B1"
+  },
+  "partnership": {
+    "topic": "business",
+    "level": "B1"
+  },
+  "trademark": {
+    "topic": "business",
+    "level": "B1"
+  },
+  "patent": {
+    "topic": "business",
+    "level": "B1"
+  },
+  "subsidiary": {
+    "topic": "business",
+    "level": "B1"
+  },
+  "shareholder": {
+    "topic": "business",
+    "level": "B1"
+  },
+  "dividend": {
+    "topic": "business",
+    "level": "B1"
+  },
+  "audit": {
+    "topic": "business",
+    "level": "B1"
+  },
+  "compliance": {
+    "topic": "business",
+    "level": "B1"
+  },
+  "outsourcing": {
+    "topic": "business",
+    "level": "B1"
+  },
+  "overhead": {
+    "topic": "business",
+    "level": "B1"
+  },
+  "scalable": {
+    "topic": "business",
+    "level": "B1"
+  },
+  "competitive advantage": {
+    "topic": "business",
+    "level": "B1"
+  },
+  "market research": {
+    "topic": "business",
+    "level": "B1"
+  },
+  "brand awareness": {
+    "topic": "business",
+    "level": "B1"
+  },
+  "customer retention": {
+    "topic": "business",
+    "level": "B1"
+  },
+  "product launch": {
+    "topic": "business",
+    "level": "B1"
+  },
+  "value proposition": {
+    "topic": "business",
+    "level": "B1"
+  },
+  "break-even point": {
+    "topic": "business",
+    "level": "B1"
+  },
+  "gross profit": {
+    "topic": "business",
+    "level": "B1"
+  },
+  "return on investment": {
+    "topic": "business",
+    "level": "B1"
+  },
+  "business ethics": {
+    "topic": "business",
+    "level": "B1"
+  },
+  "corporate governance": {
+    "topic": "business",
+    "level": "B1"
+  },
+  "risk assessment": {
+    "topic": "business",
+    "level": "B1"
+  },
+  "performance indicator": {
+    "topic": "business",
+    "level": "B1"
+  },
+  "annual report": {
+    "topic": "business",
+    "level": "B1"
+  },
+  "board of directors": {
+    "topic": "business",
+    "level": "B1"
+  },
+  "joint venture": {
+    "topic": "business",
+    "level": "B1"
+  },
+  "business development": {
+    "topic": "business",
+    "level": "B1"
+  },
+  "cost reduction": {
+    "topic": "business",
+    "level": "B1"
+  },
+  "distribution channel": {
+    "topic": "business",
+    "level": "B1"
+  },
+  "financial forecast": {
+    "topic": "business",
+    "level": "B1"
+  },
+  "competitive analysis": {
+    "topic": "business",
+    "level": "B1"
+  },
+  "operational efficiency": {
+    "topic": "business",
+    "level": "B1"
+  },
+  "product development": {
+    "topic": "business",
+    "level": "B1"
+  },
+  "market penetration": {
+    "topic": "business",
+    "level": "B1"
+  },
+  "benchmark": {
+    "topic": "business",
+    "level": "B1"
+  },
+  "endurance": {
+    "topic": "sports",
+    "level": "B1"
+  },
+  "stamina": {
+    "topic": "sports",
+    "level": "B1"
+  },
+  "sportsmanship": {
+    "topic": "sports",
+    "level": "B1"
+  },
+  "relay race": {
+    "topic": "sports",
+    "level": "B1"
+  },
+  "knockout": {
+    "topic": "sports",
+    "level": "B1"
+  },
+  "qualifying round": {
+    "topic": "sports",
+    "level": "B1"
+  },
+  "overtime": {
+    "topic": "sports",
+    "level": "B1"
+  },
+  "underdog": {
+    "topic": "sports",
+    "level": "B1"
+  },
+  "aggregate score": {
+    "topic": "sports",
+    "level": "B1"
+  },
+  "relegation": {
+    "topic": "sports",
+    "level": "B1"
+  },
+  "squad": {
+    "topic": "job",
+    "level": "A1"
+  },
+  "fixture": {
+    "topic": "sports",
+    "level": "B1"
+  },
+  "clean sheet": {
+    "topic": "sports",
+    "level": "B1"
+  },
+  "hat-trick": {
+    "topic": "sports",
+    "level": "B1"
+  },
+  "offsides trap": {
+    "topic": "sports",
+    "level": "B1"
+  },
+  "possession": {
+    "topic": "sports",
+    "level": "B1"
+  },
+  "counterattack": {
+    "topic": "sports",
+    "level": "B1"
+  },
+  "set piece": {
+    "topic": "sports",
+    "level": "B1"
+  },
+  "injury time": {
+    "topic": "sports",
+    "level": "B1"
+  },
+  "debut": {
+    "topic": "sports",
+    "level": "B1"
+  },
+  "veteran": {
+    "topic": "sports",
+    "level": "B1"
+  },
+  "personal best": {
+    "topic": "sports",
+    "level": "B1"
+  },
+  "sports nutrition": {
+    "topic": "sports",
+    "level": "B1"
+  },
+  "physiotherapy": {
+    "topic": "sports",
+    "level": "B1"
+  },
+  "scouting": {
+    "topic": "sports",
+    "level": "B1"
+  },
+  "transfer fee": {
+    "topic": "sports",
+    "level": "B1"
+  },
+  "contract extension": {
+    "topic": "sports",
+    "level": "B1"
+  },
+  "concede": {
+    "topic": "sports",
+    "level": "B1"
+  },
+  "attacking midfielder": {
+    "topic": "sports",
+    "level": "B1"
+  },
+  "defensive line": {
+    "topic": "sports",
+    "level": "B1"
+  },
+  "free kick": {
+    "topic": "sports",
+    "level": "B1"
+  },
+  "corner kick": {
+    "topic": "sports",
+    "level": "B1"
+  },
+  "offside": {
+    "topic": "sports",
+    "level": "B1"
+  },
+  "yellow card": {
+    "topic": "sports",
+    "level": "B1"
+  },
+  "red card": {
+    "topic": "sports",
+    "level": "B1"
+  },
+  "extra time": {
+    "topic": "sports",
+    "level": "B1"
+  },
+  "penalty shootout": {
+    "topic": "sports",
+    "level": "B1"
+  },
+  "formation": {
+    "topic": "sports",
+    "level": "B1"
+  },
+  "pressing": {
+    "topic": "sports",
+    "level": "B1"
+  },
+  "tiki-taka": {
+    "topic": "sports",
+    "level": "B1"
+  },
+  "sweeper": {
+    "topic": "sports",
+    "level": "B1"
+  },
+  "winger": {
+    "topic": "sports",
+    "level": "B1"
+  },
+  "striker": {
+    "topic": "sports",
+    "level": "B1"
+  },
+  "man-to-man marking": {
+    "topic": "sports",
+    "level": "B1"
+  },
+  "throw-in": {
+    "topic": "sports",
+    "level": "B1"
+  },
+  "header": {
+    "topic": "sports",
+    "level": "B1"
+  },
+  "pace": {
+    "topic": "sports",
+    "level": "B1"
+  },
+  "agility": {
+    "topic": "sports",
+    "level": "B1"
+  },
+  "muscle cramp": {
+    "topic": "sports",
+    "level": "B1"
+  },
+  "training camp": {
+    "topic": "sports",
+    "level": "B1"
+  },
+  "symphony": {
+    "topic": "music",
+    "level": "B1"
+  },
+  "composition": {
+    "topic": "music",
+    "level": "B1"
+  },
+  "harmonize": {
+    "topic": "music",
+    "level": "B1"
+  },
+  "improvise": {
+    "topic": "music",
+    "level": "B1"
+  },
+  "chord progression": {
+    "topic": "music",
+    "level": "B1"
+  },
+  "dynamics": {
+    "topic": "music",
+    "level": "B1"
+  },
+  "scale": {
+    "topic": "music",
+    "level": "B1"
+  },
+  "major key": {
+    "topic": "music",
+    "level": "B1"
+  },
+  "minor key": {
+    "topic": "music",
+    "level": "B1"
+  },
+  "arrangement": {
+    "topic": "music",
+    "level": "B1"
+  },
+  "music notation": {
+    "topic": "music",
+    "level": "B1"
+  },
+  "countermelody": {
+    "topic": "music",
+    "level": "B1"
+  },
+  "syncopation": {
+    "topic": "music",
+    "level": "B1"
+  },
+  "modulation": {
+    "topic": "music",
+    "level": "B1"
+  },
+  "coda": {
+    "topic": "music",
+    "level": "B1"
+  },
+  "interval": {
+    "topic": "music",
+    "level": "B1"
+  },
+  "staccato": {
+    "topic": "music",
+    "level": "B1"
+  },
+  "legato": {
+    "topic": "music",
+    "level": "B1"
+  },
+  "vibrato": {
+    "topic": "music",
+    "level": "B1"
+  },
+  "sight-reading": {
+    "topic": "music",
+    "level": "B1"
+  },
+  "music theory": {
+    "topic": "music",
+    "level": "B1"
+  },
+  "call and response": {
+    "topic": "music",
+    "level": "B1"
+  },
+  "ostinato": {
+    "topic": "music",
+    "level": "B1"
+  },
+  "rubato": {
+    "topic": "music",
+    "level": "B1"
+  },
+  "time signature": {
+    "topic": "music",
+    "level": "B1"
+  },
+  "fermata": {
+    "topic": "music",
+    "level": "B1"
+  },
+  "key signature": {
+    "topic": "music",
+    "level": "B1"
+  },
+  "transposition": {
+    "topic": "music",
+    "level": "B1"
+  },
+  "pentatonic scale": {
+    "topic": "music",
+    "level": "B1"
+  },
+  "diatonic scale": {
+    "topic": "music",
+    "level": "B1"
+  },
+  "music production": {
+    "topic": "music",
+    "level": "B1"
+  },
+  "beat drop": {
+    "topic": "music",
+    "level": "B1"
+  },
+  "looping": {
+    "topic": "music",
+    "level": "B1"
+  },
+  "layering": {
+    "topic": "music",
+    "level": "B1"
+  },
+  "recording session": {
+    "topic": "music",
+    "level": "B1"
+  },
+  "acoustic treatment": {
+    "topic": "music",
+    "level": "B1"
+  },
+  "mixing board": {
+    "topic": "music",
+    "level": "B1"
+  },
+  "backing track": {
+    "topic": "music",
+    "level": "B1"
+  },
+  "reverb": {
+    "topic": "music",
+    "level": "B1"
+  },
+  "eq (equalization)": {
+    "topic": "music",
+    "level": "B1"
+  },
+  "mastering": {
+    "topic": "music",
+    "level": "B1"
+  },
+  "overdubbing": {
+    "topic": "music",
+    "level": "B1"
+  },
+  "music licensing": {
+    "topic": "music",
+    "level": "B1"
+  },
+  "royalties": {
+    "topic": "music",
+    "level": "B1"
+  },
+  "copyright": {
+    "topic": "music",
+    "level": "B1"
+  },
+  "music streaming": {
+    "topic": "music",
+    "level": "B1"
+  },
+  "music charts": {
+    "topic": "music",
+    "level": "B1"
+  },
+  "genre blending": {
+    "topic": "music",
+    "level": "B1"
+  },
+  "a cappella": {
+    "topic": "music",
+    "level": "B1"
+  },
+  "music educator": {
+    "topic": "music",
+    "level": "B1"
+  },
+  "cardiovascular": {
+    "topic": "health",
+    "level": "B1"
+  },
+  "metabolism": {
+    "topic": "health",
+    "level": "B1"
+  },
+  "chronic disease": {
+    "topic": "health",
+    "level": "B1"
+  },
+  "diagnosis": {
+    "topic": "health",
+    "level": "B1"
+  },
+  "preventive care": {
+    "topic": "health",
+    "level": "B1"
+  },
+  "prognosis": {
+    "topic": "health",
+    "level": "B1"
+  },
+  "rehabilitation": {
+    "topic": "health",
+    "level": "B1"
+  },
+  "chronic pain": {
+    "topic": "health",
+    "level": "B1"
+  },
+  "inflammatory response": {
+    "topic": "health",
+    "level": "B1"
+  },
+  "autoimmune disease": {
+    "topic": "health",
+    "level": "B1"
+  },
+  "hormone": {
+    "topic": "health",
+    "level": "B1"
+  },
+  "cholesterol": {
+    "topic": "health",
+    "level": "B1"
+  },
+  "obesity management": {
+    "topic": "health",
+    "level": "B1"
+  },
+  "mental wellness": {
+    "topic": "health",
+    "level": "B1"
+  },
+  "mindfulness": {
+    "topic": "health",
+    "level": "B1"
+  },
+  "insomnia": {
+    "topic": "health",
+    "level": "B1"
+  },
+  "clinical trial": {
+    "topic": "health",
+    "level": "B1"
+  },
+  "placebo": {
+    "topic": "health",
+    "level": "B1"
+  },
+  "blood test": {
+    "topic": "health",
+    "level": "B1"
+  },
+  "biopsy": {
+    "topic": "health",
+    "level": "B1"
+  },
+  "oncology": {
+    "topic": "health",
+    "level": "B1"
+  },
+  "chemotherapy": {
+    "topic": "health",
+    "level": "B1"
+  },
+  "radiation therapy": {
+    "topic": "health",
+    "level": "B1"
+  },
+  "immunotherapy": {
+    "topic": "health",
+    "level": "B1"
+  },
+  "epidemiology": {
+    "topic": "health",
+    "level": "B1"
+  },
+  "pandemic": {
+    "topic": "health",
+    "level": "B1"
+  },
+  "endemic": {
+    "topic": "health",
+    "level": "B1"
+  },
+  "herd immunity": {
+    "topic": "health",
+    "level": "B1"
+  },
+  "public health": {
+    "topic": "health",
+    "level": "B1"
+  },
+  "healthcare system": {
+    "topic": "health",
+    "level": "B1"
+  },
+  "primary care": {
+    "topic": "health",
+    "level": "B1"
+  },
+  "specialist": {
+    "topic": "health",
+    "level": "B1"
+  },
+  "outpatient": {
+    "topic": "health",
+    "level": "B1"
+  },
+  "inpatient": {
+    "topic": "health",
+    "level": "B1"
+  },
+  "telemedicine": {
+    "topic": "health",
+    "level": "B1"
+  },
+  "health insurance": {
+    "topic": "health",
+    "level": "B1"
+  },
+  "palliative care": {
+    "topic": "health",
+    "level": "B1"
+  },
+  "organ donation": {
+    "topic": "health",
+    "level": "B1"
+  },
+  "transplant": {
+    "topic": "health",
+    "level": "B1"
+  },
+  "dialysis": {
+    "topic": "health",
+    "level": "B1"
+  },
+  "hospice": {
+    "topic": "health",
+    "level": "B1"
+  },
+  "genetic testing": {
+    "topic": "health",
+    "level": "B1"
+  },
+  "biomarker": {
+    "topic": "health",
+    "level": "B1"
+  },
+  "vaccination program": {
+    "topic": "health",
+    "level": "B1"
+  },
+  "screening program": {
+    "topic": "health",
+    "level": "B1"
+  },
+  "risk factor": {
+    "topic": "health",
+    "level": "B1"
+  },
+  "complication": {
+    "topic": "health",
+    "level": "B1"
+  },
+  "remission": {
+    "topic": "health",
+    "level": "B1"
+  },
+  "relapse": {
+    "topic": "health",
+    "level": "B1"
+  },
+  "side effect": {
+    "topic": "health",
+    "level": "B1"
+  },
+  "sous vide": {
+    "topic": "cooking",
+    "level": "B1"
+  },
+  "blanch": {
+    "topic": "cooking",
+    "level": "B1"
+  },
+  "deglaze": {
+    "topic": "cooking",
+    "level": "B1"
+  },
+  "render": {
+    "topic": "cooking",
+    "level": "B1"
+  },
+  "emulsify": {
+    "topic": "cooking",
+    "level": "B1"
+  },
+  "reduction": {
+    "topic": "cooking",
+    "level": "B1"
+  },
+  "caramelize": {
+    "topic": "cooking",
+    "level": "B1"
+  },
+  "sauté": {
+    "topic": "cooking",
+    "level": "B1"
+  },
+  "braise": {
+    "topic": "cooking",
+    "level": "B1"
+  },
+  "poach": {
+    "topic": "cooking",
+    "level": "B1"
+  },
+  "cure": {
+    "topic": "cooking",
+    "level": "B1"
+  },
+  "smoke": {
+    "topic": "cooking",
+    "level": "B1"
+  },
+  "ferment": {
+    "topic": "cooking",
+    "level": "B1"
+  },
+  "pickle": {
+    "topic": "cooking",
+    "level": "B1"
+  },
+  "infuse": {
+    "topic": "cooking",
+    "level": "B1"
+  },
+  "tempering": {
+    "topic": "cooking",
+    "level": "B1"
+  },
+  "mise en place": {
+    "topic": "cooking",
+    "level": "B1"
+  },
+  "julienne": {
+    "topic": "cooking",
+    "level": "B1"
+  },
+  "brunoise": {
+    "topic": "cooking",
+    "level": "B1"
+  },
+  "chiffonade": {
+    "topic": "cooking",
+    "level": "B1"
+  },
+  "macerate": {
+    "topic": "cooking",
+    "level": "B1"
+  },
+  "fold": {
+    "topic": "cooking",
+    "level": "B1"
+  },
+  "proof": {
+    "topic": "cooking",
+    "level": "B1"
+  },
+  "score": {
+    "topic": "cooking",
+    "level": "B1"
+  },
+  "truss": {
+    "topic": "cooking",
+    "level": "B1"
+  },
+  "baste": {
+    "topic": "cooking",
+    "level": "B1"
+  },
+  "resting meat": {
+    "topic": "cooking",
+    "level": "B1"
+  },
+  "food safety": {
+    "topic": "cooking",
+    "level": "B1"
+  },
+  "cross-contamination": {
+    "topic": "cooking",
+    "level": "B1"
+  },
+  "food allergy": {
+    "topic": "cooking",
+    "level": "B1"
+  },
+  "dietary restriction": {
+    "topic": "cooking",
+    "level": "B1"
+  },
+  "umami": {
+    "topic": "cooking",
+    "level": "B1"
+  },
+  "maillard reaction": {
+    "topic": "cooking",
+    "level": "B1"
+  },
+  "pastry": {
+    "topic": "cooking",
+    "level": "B1"
+  },
+  "gluten": {
+    "topic": "cooking",
+    "level": "B1"
+  },
+  "yeast": {
+    "topic": "cooking",
+    "level": "B1"
+  },
+  "baking powder": {
+    "topic": "cooking",
+    "level": "B1"
+  },
+  "gelatin": {
+    "topic": "cooking",
+    "level": "B1"
+  },
+  "vinaigrette": {
+    "topic": "cooking",
+    "level": "B1"
+  },
+  "gastrique": {
+    "topic": "cooking",
+    "level": "B1"
+  },
+  "coulis": {
+    "topic": "cooking",
+    "level": "B1"
+  },
+  "mousse": {
+    "topic": "cooking",
+    "level": "B1"
+  },
+  "soufflé": {
+    "topic": "cooking",
+    "level": "B1"
+  },
+  "crème brûlée": {
+    "topic": "cooking",
+    "level": "B1"
+  },
+  "terrine": {
+    "topic": "cooking",
+    "level": "B1"
+  },
+  "pâté": {
+    "topic": "cooking",
+    "level": "B1"
+  },
+  "tapenade": {
+    "topic": "cooking",
+    "level": "B1"
+  },
+  "mise en scène (plating)": {
+    "topic": "cooking",
+    "level": "B1"
+  },
+  "pairing": {
+    "topic": "cooking",
+    "level": "B1"
+  },
+  "tasting menu": {
+    "topic": "cooking",
+    "level": "B1"
+  },
+  "algorithm": {
+    "topic": "software",
+    "level": "B1"
+  },
+  "api": {
+    "topic": "software",
+    "level": "B1"
+  },
+  "backend": {
+    "topic": "software",
+    "level": "B1"
+  },
+  "frontend": {
+    "topic": "software",
+    "level": "B1"
+  },
+  "framework": {
+    "topic": "software",
+    "level": "B1"
+  },
+  "library": {
+    "topic": "software",
+    "level": "B1"
+  },
+  "repository": {
+    "topic": "software",
+    "level": "B1"
+  },
+  "version control": {
+    "topic": "software",
+    "level": "B1"
+  },
+  "deployment": {
+    "topic": "software",
+    "level": "B1"
+  },
+  "sprint": {
+    "topic": "software",
+    "level": "B1"
+  },
+  "agile methodology": {
+    "topic": "software",
+    "level": "B1"
+  },
+  "scrum": {
+    "topic": "software",
+    "level": "B1"
+  },
+  "user story": {
+    "topic": "software",
+    "level": "B1"
+  },
+  "backlog": {
+    "topic": "software",
+    "level": "B1"
+  },
+  "pull request": {
+    "topic": "software",
+    "level": "B1"
+  },
+  "merge": {
+    "topic": "software",
+    "level": "B1"
+  },
+  "branch": {
+    "topic": "software",
+    "level": "B1"
+  },
+  "commit": {
+    "topic": "software",
+    "level": "B1"
+  },
+  "unit testing": {
+    "topic": "software",
+    "level": "B1"
+  },
+  "integration testing": {
+    "topic": "software",
+    "level": "B1"
+  },
+  "code review": {
+    "topic": "software",
+    "level": "B1"
+  },
+  "refactoring": {
+    "topic": "software",
+    "level": "B1"
+  },
+  "scalability": {
+    "topic": "software",
+    "level": "B1"
+  },
+  "performance optimization": {
+    "topic": "software",
+    "level": "B1"
+  },
+  "microservices": {
+    "topic": "software",
+    "level": "B1"
+  },
+  "monolith": {
+    "topic": "software",
+    "level": "B1"
+  },
+  "containerization": {
+    "topic": "software",
+    "level": "B1"
+  },
+  "ci/cd pipeline": {
+    "topic": "software",
+    "level": "B1"
+  },
+  "load balancer": {
+    "topic": "software",
+    "level": "B1"
+  },
+  "cdn (content delivery network)": {
+    "topic": "software",
+    "level": "B1"
+  },
+  "rest api": {
+    "topic": "software",
+    "level": "B1"
+  },
+  "json": {
+    "topic": "software",
+    "level": "B1"
+  },
+  "authentication": {
+    "topic": "software",
+    "level": "B1"
+  },
+  "authorization": {
+    "topic": "software",
+    "level": "B1"
+  },
+  "sql": {
+    "topic": "software",
+    "level": "B1"
+  },
+  "nosql": {
+    "topic": "software",
+    "level": "B1"
+  },
+  "devops": {
+    "topic": "software",
+    "level": "B1"
+  },
+  "debugging tools": {
+    "topic": "software",
+    "level": "B1"
+  },
+  "responsive design": {
+    "topic": "software",
+    "level": "B1"
+  },
+  "ux design": {
+    "topic": "software",
+    "level": "B1"
+  },
+  "ui design": {
+    "topic": "software",
+    "level": "B1"
+  },
+  "wireframe": {
+    "topic": "software",
+    "level": "B1"
+  },
+  "prototype": {
+    "topic": "software",
+    "level": "B1"
+  },
+  "user acceptance testing": {
+    "topic": "software",
+    "level": "B1"
+  },
+  "regression testing": {
+    "topic": "software",
+    "level": "B1"
+  },
+  "open source": {
+    "topic": "software",
+    "level": "B1"
+  },
+  "documentation": {
+    "topic": "software",
+    "level": "B1"
+  },
+  "tech debt": {
+    "topic": "software",
+    "level": "B1"
+  },
+  "release candidate": {
+    "topic": "software",
+    "level": "B1"
+  },
+  "saas (software as a service)": {
+    "topic": "software",
+    "level": "B1"
+  },
+  "competency": {
+    "topic": "interview",
+    "level": "B1"
+  },
+  "behavioral interview": {
+    "topic": "interview",
+    "level": "B1"
+  },
+  "star method": {
+    "topic": "interview",
+    "level": "B1"
+  },
+  "transferable skills": {
+    "topic": "interview",
+    "level": "B1"
+  },
+  "elevator pitch": {
+    "topic": "interview",
+    "level": "B1"
+  },
+  "career trajectory": {
+    "topic": "interview",
+    "level": "B1"
+  },
+  "gap year": {
+    "topic": "interview",
+    "level": "B1"
+  },
+  "cover letter": {
+    "topic": "interview",
+    "level": "B1"
+  },
+  "job description": {
+    "topic": "interview",
+    "level": "B1"
+  },
+  "key performance indicators": {
+    "topic": "interview",
+    "level": "B1"
+  },
+  "soft skills": {
+    "topic": "interview",
+    "level": "B1"
+  },
+  "hard skills": {
+    "topic": "interview",
+    "level": "B1"
+  },
+  "headhunter": {
+    "topic": "interview",
+    "level": "B1"
+  },
+  "recruiter": {
+    "topic": "interview",
+    "level": "B1"
+  },
+  "panel interview": {
+    "topic": "interview",
+    "level": "B1"
+  },
+  "follow-up email": {
+    "topic": "interview",
+    "level": "B1"
+  },
+  "rejection": {
+    "topic": "interview",
+    "level": "B1"
+  },
+  "offer letter": {
+    "topic": "interview",
+    "level": "B1"
+  },
+  "probation period": {
+    "topic": "interview",
+    "level": "B1"
+  },
+  "onboarding": {
+    "topic": "interview",
+    "level": "B1"
+  },
+  "salary negotiation": {
+    "topic": "interview",
+    "level": "B1"
+  },
+  "notice period": {
+    "topic": "interview",
+    "level": "B1"
+  },
+  "body language": {
+    "topic": "interview",
+    "level": "B1"
+  },
+  "eye contact": {
+    "topic": "interview",
+    "level": "B1"
+  },
+  "active listening": {
+    "topic": "interview",
+    "level": "B1"
+  },
+  "structured interview": {
+    "topic": "interview",
+    "level": "B1"
+  },
+  "unstructured interview": {
+    "topic": "interview",
+    "level": "B1"
+  },
+  "case interview": {
+    "topic": "interview",
+    "level": "B1"
+  },
+  "technical interview": {
+    "topic": "interview",
+    "level": "B1"
+  },
+  "aptitude test": {
+    "topic": "interview",
+    "level": "B1"
+  },
+  "psychometric test": {
+    "topic": "interview",
+    "level": "B1"
+  },
+  "group discussion": {
+    "topic": "interview",
+    "level": "B1"
+  },
+  "assessment center": {
+    "topic": "interview",
+    "level": "B1"
+  },
+  "role play": {
+    "topic": "interview",
+    "level": "B1"
+  },
+  "presentation skills": {
+    "topic": "interview",
+    "level": "B1"
+  },
+  "critical thinking": {
+    "topic": "interview",
+    "level": "B1"
+  },
+  "time management": {
+    "topic": "interview",
+    "level": "B1"
+  },
+  "conflict resolution": {
+    "topic": "interview",
+    "level": "B1"
+  },
+  "emotional intelligence": {
+    "topic": "interview",
+    "level": "B1"
+  },
+  "cultural fit": {
+    "topic": "interview",
+    "level": "B1"
+  },
+  "work ethic": {
+    "topic": "interview",
+    "level": "B1"
+  },
+  "resilience": {
+    "topic": "interview",
+    "level": "B1"
+  },
+  "growth mindset": {
+    "topic": "interview",
+    "level": "B1"
+  },
+  "self-awareness": {
+    "topic": "interview",
+    "level": "B1"
+  },
+  "mentoring": {
+    "topic": "interview",
+    "level": "B1"
+  },
+  "upskilling": {
+    "topic": "interview",
+    "level": "B1"
+  },
+  "long-term vision": {
+    "topic": "interview",
+    "level": "B1"
+  },
+  "company values": {
+    "topic": "interview",
+    "level": "B1"
+  },
+  "asset allocation": {
+    "topic": "finance",
+    "level": "B1"
+  },
+  "diversification": {
+    "topic": "finance",
+    "level": "B1"
+  },
+  "liquidity": {
+    "topic": "finance",
+    "level": "B1"
+  },
+  "mutual fund": {
+    "topic": "finance",
+    "level": "B1"
+  },
+  "index fund": {
+    "topic": "finance",
+    "level": "B1"
+  },
+  "etf (exchange-traded fund)": {
+    "topic": "finance",
+    "level": "B1"
+  },
+  "bull market": {
+    "topic": "finance",
+    "level": "B1"
+  },
+  "bear market": {
+    "topic": "finance",
+    "level": "B1"
+  },
+  "market correction": {
+    "topic": "finance",
+    "level": "B1"
+  },
+  "dollar-cost averaging": {
+    "topic": "finance",
+    "level": "B1"
+  },
+  "rebalancing": {
+    "topic": "finance",
+    "level": "B1"
+  },
+  "capital gains tax": {
+    "topic": "finance",
+    "level": "B1"
+  },
+  "tax-advantaged account": {
+    "topic": "finance",
+    "level": "B1"
+  },
+  "net asset value": {
+    "topic": "finance",
+    "level": "B1"
+  },
+  "expense ratio": {
+    "topic": "finance",
+    "level": "B1"
+  },
+  "brokerage account": {
+    "topic": "finance",
+    "level": "B1"
+  },
+  "stock exchange": {
+    "topic": "finance",
+    "level": "B1"
+  },
+  "market capitalization": {
+    "topic": "finance",
+    "level": "B1"
+  },
+  "p/e ratio": {
+    "topic": "finance",
+    "level": "B1"
+  },
+  "earnings per share": {
+    "topic": "finance",
+    "level": "B1"
+  },
+  "fundamental analysis": {
+    "topic": "finance",
+    "level": "B1"
+  },
+  "technical analysis": {
+    "topic": "finance",
+    "level": "B1"
+  },
+  "short selling": {
+    "topic": "finance",
+    "level": "B1"
+  },
+  "margin trading": {
+    "topic": "finance",
+    "level": "B1"
+  },
+  "options trading": {
+    "topic": "finance",
+    "level": "B1"
+  },
+  "futures contract": {
+    "topic": "finance",
+    "level": "B1"
+  },
+  "commodity": {
+    "topic": "finance",
+    "level": "B1"
+  },
+  "real estate investment": {
+    "topic": "finance",
+    "level": "B1"
+  },
+  "cryptocurrency": {
+    "topic": "finance",
+    "level": "B1"
+  },
+  "blockchain": {
+    "topic": "finance",
+    "level": "B1"
+  },
+  "fintech": {
+    "topic": "finance",
+    "level": "B1"
+  },
+  "robo-advisor": {
+    "topic": "finance",
+    "level": "B1"
+  },
+  "financial planning": {
+    "topic": "finance",
+    "level": "B1"
+  },
+  "estate planning": {
+    "topic": "finance",
+    "level": "B1"
+  },
+  "will (legal)": {
+    "topic": "finance",
+    "level": "B1"
+  },
+  "trust fund": {
+    "topic": "finance",
+    "level": "B1"
+  },
+  "bankruptcy": {
+    "topic": "finance",
+    "level": "B1"
+  },
+  "insolvency": {
+    "topic": "finance",
+    "level": "B1"
+  },
+  "cash reserve": {
+    "topic": "finance",
+    "level": "B1"
+  },
+  "working capital management": {
+    "topic": "finance",
+    "level": "B1"
+  },
+  "accounts receivable": {
+    "topic": "finance",
+    "level": "B1"
+  },
+  "accounts payable": {
+    "topic": "finance",
+    "level": "B1"
+  },
+  "payroll": {
+    "topic": "finance",
+    "level": "B1"
+  },
+  "fiscal year": {
+    "topic": "finance",
+    "level": "B1"
+  },
+  "quarterly earnings": {
+    "topic": "finance",
+    "level": "B1"
+  },
+  "revenue recognition": {
+    "topic": "finance",
+    "level": "B1"
+  },
+  "cash flow statement": {
+    "topic": "finance",
+    "level": "B1"
+  },
+  "balance sheet": {
+    "topic": "finance",
+    "level": "B1"
+  },
+  "income statement": {
+    "topic": "finance",
+    "level": "B1"
+  },
+  "accrual accounting": {
+    "topic": "finance",
+    "level": "B1"
+  },
+  "depreciation": {
+    "topic": "finance",
+    "level": "B1"
+  },
+  "haute couture": {
+    "topic": "fashion",
+    "level": "B1"
+  },
+  "prêt-à-porter": {
+    "topic": "fashion",
+    "level": "B1"
+  },
+  "fast fashion": {
+    "topic": "fashion",
+    "level": "B1"
+  },
+  "slow fashion": {
+    "topic": "fashion",
+    "level": "B1"
+  },
+  "sustainable fashion": {
+    "topic": "fashion",
+    "level": "B1"
+  },
+  "upcycling (fashion)": {
+    "topic": "fashion",
+    "level": "B1"
+  },
+  "capsule collection": {
+    "topic": "fashion",
+    "level": "B1"
+  },
+  "lookbook": {
+    "topic": "fashion",
+    "level": "B1"
+  },
+  "editorial (fashion)": {
+    "topic": "fashion",
+    "level": "B1"
+  },
+  "silhouette": {
+    "topic": "fashion",
+    "level": "B1"
+  },
+  "drape": {
+    "topic": "fashion",
+    "level": "B1"
+  },
+  "fit and flare": {
+    "topic": "fashion",
+    "level": "B1"
+  },
+  "a-line": {
+    "topic": "fashion",
+    "level": "B1"
+  },
+  "peplum": {
+    "topic": "fashion",
+    "level": "B1"
+  },
+  "midi": {
+    "topic": "fashion",
+    "level": "B1"
+  },
+  "maxi": {
+    "topic": "fashion",
+    "level": "B1"
+  },
+  "mini": {
+    "topic": "fashion",
+    "level": "B1"
+  },
+  "cropped": {
+    "topic": "fashion",
+    "level": "B1"
+  },
+  "oversized": {
+    "topic": "fashion",
+    "level": "B1"
+  },
+  "tailored": {
+    "topic": "fashion",
+    "level": "B1"
+  },
+  "bespoke": {
+    "topic": "fashion",
+    "level": "B1"
+  },
+  "off-the-rack": {
+    "topic": "fashion",
+    "level": "B1"
+  },
+  "athleisure": {
+    "topic": "fashion",
+    "level": "B1"
+  },
+  "streetwear": {
+    "topic": "fashion",
+    "level": "B1"
+  },
+  "boho": {
+    "topic": "fashion",
+    "level": "B1"
+  },
+  "minimalist fashion": {
+    "topic": "fashion",
+    "level": "B1"
+  },
+  "maximalist fashion": {
+    "topic": "fashion",
+    "level": "B1"
+  },
+  "gender-neutral fashion": {
+    "topic": "fashion",
+    "level": "B1"
+  },
+  "androgynous style": {
+    "topic": "fashion",
+    "level": "B1"
+  },
+  "capsule wardrobe planning": {
+    "topic": "fashion",
+    "level": "B1"
+  },
+  "color theory (fashion)": {
+    "topic": "fashion",
+    "level": "B1"
+  },
+  "complementary colors": {
+    "topic": "fashion",
+    "level": "B1"
+  },
+  "personal shopper": {
+    "topic": "fashion",
+    "level": "B1"
+  },
+  "fashion stylist": {
+    "topic": "fashion",
+    "level": "B1"
+  },
+  "fashion photographer": {
+    "topic": "fashion",
+    "level": "B1"
+  },
+  "fashion week": {
+    "topic": "fashion",
+    "level": "B1"
+  },
+  "catwalk": {
+    "topic": "fashion",
+    "level": "B1"
+  },
+  "sample sale": {
+    "topic": "fashion",
+    "level": "B1"
+  },
+  "preloved": {
+    "topic": "fashion",
+    "level": "B1"
+  },
+  "thrift shop": {
+    "topic": "fashion",
+    "level": "B1"
+  },
+  "fashion influencer": {
+    "topic": "fashion",
+    "level": "B1"
+  },
+  "outfit of the day (ootd)": {
+    "topic": "fashion",
+    "level": "B1"
+  },
+  "fashion blogger": {
+    "topic": "fashion",
+    "level": "B1"
+  },
+  "subscription box (fashion)": {
+    "topic": "fashion",
+    "level": "B1"
+  },
+  "rental fashion": {
+    "topic": "fashion",
+    "level": "B1"
+  },
+  "fashion archive": {
+    "topic": "fashion",
+    "level": "B1"
+  },
+  "heritage brand": {
+    "topic": "fashion",
+    "level": "B1"
+  },
+  "logomania": {
+    "topic": "fashion",
+    "level": "B1"
+  },
+  "athleisure trend": {
+    "topic": "fashion",
+    "level": "B1"
+  },
+  "fashion tech": {
+    "topic": "fashion",
+    "level": "B1"
+  },
+  "social media marketing": {
+    "topic": "social_media",
+    "level": "B1"
+  },
+  "content strategy": {
+    "topic": "social_media",
+    "level": "B1"
+  },
+  "brand voice": {
+    "topic": "social_media",
+    "level": "B1"
+  },
+  "social listening": {
+    "topic": "social_media",
+    "level": "B1"
+  },
+  "sentiment analysis": {
+    "topic": "social_media",
+    "level": "B1"
+  },
+  "community management": {
+    "topic": "social_media",
+    "level": "B1"
+  },
+  "reputation management": {
+    "topic": "social_media",
+    "level": "B1"
+  },
+  "crisis communication": {
+    "topic": "social_media",
+    "level": "B1"
+  },
+  "paid media": {
+    "topic": "social_media",
+    "level": "B1"
+  },
+  "organic reach": {
+    "topic": "social_media",
+    "level": "B1"
+  },
+  "paid reach": {
+    "topic": "social_media",
+    "level": "B1"
+  },
+  "boosted post": {
+    "topic": "social_media",
+    "level": "B1"
+  },
+  "demographic targeting": {
+    "topic": "social_media",
+    "level": "B1"
+  },
+  "behavioral targeting": {
+    "topic": "social_media",
+    "level": "B1"
+  },
+  "retargeting": {
+    "topic": "social_media",
+    "level": "B1"
+  },
+  "lookalike audience": {
+    "topic": "social_media",
+    "level": "B1"
+  },
+  "a/b testing (social media)": {
+    "topic": "social_media",
+    "level": "B1"
+  },
+  "roi (return on investment)": {
+    "topic": "social_media",
+    "level": "B1"
+  },
+  "social proof": {
+    "topic": "social_media",
+    "level": "B1"
+  },
+  "fomo (fear of missing out)": {
+    "topic": "social_media",
+    "level": "B1"
+  },
+  "doomscrolling": {
+    "topic": "social_media",
+    "level": "B1"
+  },
+  "digital wellness": {
+    "topic": "social_media",
+    "level": "B1"
+  },
+  "screen time": {
+    "topic": "social_media",
+    "level": "B1"
+  },
+  "social media detox": {
+    "topic": "social_media",
+    "level": "B1"
+  },
+  "attention economy": {
+    "topic": "social_media",
+    "level": "B1"
+  },
+  "echo chamber": {
+    "topic": "social_media",
+    "level": "B1"
+  },
+  "filter bubble": {
+    "topic": "social_media",
+    "level": "B1"
+  },
+  "viral marketing": {
+    "topic": "social_media",
+    "level": "B1"
+  },
+  "guerrilla marketing": {
+    "topic": "social_media",
+    "level": "B1"
+  },
+  "social commerce": {
+    "topic": "social_media",
+    "level": "B1"
+  },
+  "shoppable content": {
+    "topic": "social_media",
+    "level": "B1"
+  },
+  "influencer marketing": {
+    "topic": "social_media",
+    "level": "B1"
+  },
+  "affiliate marketing": {
+    "topic": "social_media",
+    "level": "B1"
+  },
+  "monetization": {
+    "topic": "social_media",
+    "level": "B1"
+  },
+  "creator economy": {
+    "topic": "social_media",
+    "level": "B1"
+  },
+  "brand deal": {
+    "topic": "social_media",
+    "level": "B1"
+  },
+  "content moderation": {
+    "topic": "social_media",
+    "level": "B1"
+  },
+  "algorithm update": {
+    "topic": "social_media",
+    "level": "B1"
+  },
+  "platform dependency": {
+    "topic": "social_media",
+    "level": "B1"
+  },
+  "multi-platform strategy": {
+    "topic": "social_media",
+    "level": "B1"
+  },
+  "content pillars": {
+    "topic": "social_media",
+    "level": "B1"
+  },
+  "evergreen content": {
+    "topic": "social_media",
+    "level": "B1"
+  },
+  "trending topic": {
+    "topic": "social_media",
+    "level": "B1"
+  },
+  "seo (social)": {
+    "topic": "social_media",
+    "level": "B1"
+  },
+  "keyword optimization": {
+    "topic": "social_media",
+    "level": "B1"
+  },
+  "collaboration post": {
+    "topic": "social_media",
+    "level": "B1"
+  },
+  "pinned post": {
+    "topic": "social_media",
+    "level": "B1"
+  },
+  "online advertising": {
+    "topic": "social_media",
+    "level": "B1"
+  },
+  "automation": {
+    "topic": "ai",
+    "level": "B1"
+  },
+  "database": {
+    "topic": "ai",
+    "level": "B1"
+  },
+  "software": {
+    "topic": "ai",
+    "level": "B1"
+  },
+  "interface": {
+    "topic": "ai",
+    "level": "B1"
+  },
+  "assistant": {
+    "topic": "ai",
+    "level": "B1"
+  },
+  "analyze": {
+    "topic": "ai",
+    "level": "B1"
+  },
+  "prediction": {
+    "topic": "ai",
+    "level": "B1"
+  },
+  "mechanization": {
+    "topic": "ai",
+    "level": "B1"
+  },
+  "repository_1": {
+    "topic": "ai",
+    "level": "B1"
+  },
+  "application": {
+    "topic": "ai",
+    "level": "B1"
+  },
+  "dashboard": {
+    "topic": "ai",
+    "level": "B1"
+  },
+  "helper": {
+    "topic": "ai",
+    "level": "B1"
+  },
+  "examine": {
+    "topic": "ai",
+    "level": "B1"
+  },
+  "forecast": {
+    "topic": "ai",
+    "level": "B1"
+  },
+  "procedure": {
+    "topic": "ai",
+    "level": "B1"
+  },
+  "robot": {
+    "topic": "ai",
+    "level": "A1"
+  },
+  "smart": {
+    "topic": "ai",
+    "level": "A1"
+  },
+  "data": {
+    "topic": "ai",
+    "level": "A1"
+  },
+  "code": {
+    "topic": "ai",
+    "level": "A1"
+  },
+  "app": {
+    "topic": "ai",
+    "level": "A1"
+  },
+  "user": {
+    "topic": "ai",
+    "level": "A1"
+  },
+  "web": {
+    "topic": "ai",
+    "level": "A1"
+  },
+  "fast": {
+    "topic": "ai",
+    "level": "A1"
+  },
+  "machine": {
+    "topic": "ai",
+    "level": "A1"
+  },
+  "clever": {
+    "topic": "ai",
+    "level": "A1"
+  },
+  "facts": {
+    "topic": "ai",
+    "level": "A1"
+  },
+  "script": {
+    "topic": "ai",
+    "level": "A1"
+  },
+  "tool": {
+    "topic": "ai",
+    "level": "A1"
+  },
+  "client": {
+    "topic": "ai",
+    "level": "A1"
+  },
+  "net": {
+    "topic": "tech",
+    "level": "A1"
+  },
+  "quick": {
+    "topic": "ai",
+    "level": "A1"
+  },
+  "computer": {
+    "topic": "ai",
+    "level": "A2"
+  },
+  "system": {
+    "topic": "ai",
+    "level": "A2"
+  },
+  "network": {
+    "topic": "ai",
+    "level": "A2"
+  },
+  "program": {
+    "topic": "ai",
+    "level": "A2"
+  },
+  "digital": {
+    "topic": "ai",
+    "level": "A2"
+  },
+  "device": {
+    "topic": "tech",
+    "level": "B1"
+  },
+  "storage": {
+    "topic": "ai",
+    "level": "A2"
+  },
+  "process": {
+    "topic": "ai",
+    "level": "A2"
+  },
+  "processor": {
+    "topic": "ai",
+    "level": "A2"
+  },
+  "structure": {
+    "topic": "ai",
+    "level": "A2"
+  },
+  "connection": {
+    "topic": "ai",
+    "level": "A2"
+  },
+  "application_1": {
+    "topic": "ai",
+    "level": "A2"
+  },
+  "electronic": {
+    "topic": "ai",
+    "level": "A2"
+  },
+  "equipment": {
+    "topic": "ai",
+    "level": "A2"
+  },
+  "memory": {
+    "topic": "ai",
+    "level": "A2"
+  },
+  "handle": {
+    "topic": "ai",
+    "level": "A2"
+  },
+  "neural network": {
+    "topic": "ai",
+    "level": "B2"
+  },
+  "machine learning": {
+    "topic": "ai",
+    "level": "B2"
+  },
+  "dataset": {
+    "topic": "ai",
+    "level": "B2"
+  },
+  "optimization": {
+    "topic": "ai",
+    "level": "B2"
+  },
+  "classification": {
+    "topic": "ai",
+    "level": "B2"
+  },
+  "generative": {
+    "topic": "ai",
+    "level": "B2"
+  },
+  "autonomous": {
+    "topic": "ai",
+    "level": "B2"
+  },
+  "deep network": {
+    "topic": "ai",
+    "level": "B2"
+  },
+  "pattern recognition": {
+    "topic": "ai",
+    "level": "B2"
+  },
+  "corpus": {
+    "topic": "ai",
+    "level": "B2"
+  },
+  "tuning": {
+    "topic": "ai",
+    "level": "B2"
+  },
+  "categorization": {
+    "topic": "ai",
+    "level": "B2"
+  },
+  "library_1": {
+    "topic": "ai",
+    "level": "B2"
+  },
+  "creative": {
+    "topic": "ai",
+    "level": "B2"
+  },
+  "self-driving": {
+    "topic": "ai",
+    "level": "B2"
+  },
+  "cognitive computing": {
+    "topic": "ai",
+    "level": "C1"
+  },
+  "deep learning": {
+    "topic": "ai",
+    "level": "C1"
+  },
+  "reinforcement": {
+    "topic": "ai",
+    "level": "C1"
+  },
+  "transformers": {
+    "topic": "ai",
+    "level": "C1"
+  },
+  "supervised": {
+    "topic": "ai",
+    "level": "C1"
+  },
+  "natural language": {
+    "topic": "ai",
+    "level": "C1"
+  },
+  "hyperparameters": {
+    "topic": "ai",
+    "level": "C1"
+  },
+  "backpropagation": {
+    "topic": "ai",
+    "level": "C1"
+  },
+  "artificial brain": {
+    "topic": "ai",
+    "level": "C1"
+  },
+  "representation learning": {
+    "topic": "ai",
+    "level": "C1"
+  },
+  "feedback loops": {
+    "topic": "ai",
+    "level": "C1"
+  },
+  "attention mechanisms": {
+    "topic": "ai",
+    "level": "C1"
+  },
+  "labeled learning": {
+    "topic": "ai",
+    "level": "C1"
+  },
+  "human speech": {
+    "topic": "ai",
+    "level": "C1"
+  },
+  "model settings": {
+    "topic": "ai",
+    "level": "C1"
+  },
+  "error propagation": {
+    "topic": "ai",
+    "level": "C1"
+  },
+  "destination": {
+    "topic": "travel",
+    "level": "B1"
+  },
+  "itinerary": {
+    "topic": "travel",
+    "level": "B1"
+  },
+  "accommodation": {
+    "topic": "travel",
+    "level": "B1"
+  },
+  "explore": {
+    "topic": "travel",
+    "level": "B1"
+  },
+  "reservation": {
+    "topic": "travel",
+    "level": "B1"
+  },
+  "adventure": {
+    "topic": "travel",
+    "level": "B1"
+  },
+  "excursion": {
+    "topic": "travel",
+    "level": "B1"
+  },
+  "passenger": {
+    "topic": "travel",
+    "level": "B1"
+  },
+  "attraction": {
+    "topic": "travel",
+    "level": "B1"
+  },
+  "schedule": {
+    "topic": "travel",
+    "level": "B1"
+  },
+  "lodging": {
+    "topic": "travel",
+    "level": "B1"
+  },
+  "discover": {
+    "topic": "travel",
+    "level": "B1"
+  },
+  "booking": {
+    "topic": "travel",
+    "level": "B1"
+  },
+  "journey": {
+    "topic": "travel",
+    "level": "B1"
+  },
+  "outing": {
+    "topic": "travel",
+    "level": "B1"
+  },
+  "traveler": {
+    "topic": "travel",
+    "level": "B1"
+  },
+  "ticket": {
+    "topic": "travel",
+    "level": "A1"
+  },
+  "hotel": {
+    "topic": "travel",
+    "level": "A1"
+  },
+  "bus": {
+    "topic": "travel",
+    "level": "A1"
+  },
+  "map": {
+    "topic": "travel",
+    "level": "A1"
+  },
+  "passport": {
+    "topic": "travel",
+    "level": "A1"
+  },
+  "fly": {
+    "topic": "travel",
+    "level": "A1"
+  },
+  "beach": {
+    "topic": "travel",
+    "level": "A1"
+  },
+  "bag": {
+    "topic": "travel",
+    "level": "A1"
+  },
+  "pass": {
+    "topic": "travel",
+    "level": "A1"
+  },
+  "inn": {
+    "topic": "travel",
+    "level": "A1"
+  },
+  "coach": {
+    "topic": "travel",
+    "level": "A1"
+  },
+  "atlas": {
+    "topic": "travel",
+    "level": "A1"
+  },
+  "visa": {
+    "topic": "travel",
+    "level": "A1"
+  },
+  "travel": {
+    "topic": "travel",
+    "level": "A1"
+  },
+  "coast": {
+    "topic": "travel",
+    "level": "A1"
+  },
+  "luggage": {
+    "topic": "travel",
+    "level": "A1"
+  },
+  "innovation": {
+    "topic": "tech",
+    "level": "B1"
+  },
+  "bandwidth": {
+    "topic": "tech",
+    "level": "B1"
+  },
+  "cybersecurity": {
+    "topic": "tech",
+    "level": "B1"
+  },
+  "cloud computing": {
+    "topic": "tech",
+    "level": "B1"
+  },
+  "virtual reality": {
+    "topic": "tech",
+    "level": "B1"
+  },
+  "wearable": {
+    "topic": "tech",
+    "level": "B1"
+  },
+  "streaming": {
+    "topic": "tech",
+    "level": "B1"
+  },
+  "gadget": {
+    "topic": "tech",
+    "level": "B1"
+  },
+  "invention": {
+    "topic": "tech",
+    "level": "B1"
+  },
+  "capacity": {
+    "topic": "tech",
+    "level": "B1"
+  },
+  "it security": {
+    "topic": "tech",
+    "level": "B1"
+  },
+  "cloud tech": {
+    "topic": "tech",
+    "level": "B1"
+  },
+  "vr": {
+    "topic": "tech",
+    "level": "B1"
+  },
+  "smart tech": {
+    "topic": "tech",
+    "level": "B1"
+  },
+  "broadcasting": {
+    "topic": "tech",
+    "level": "B1"
+  },
+  "phone": {
+    "topic": "tech",
+    "level": "A1"
+  },
+  "screen": {
+    "topic": "tech",
+    "level": "A1"
+  },
+  "camera": {
+    "topic": "tech",
+    "level": "A1"
+  },
+  "tablet": {
+    "topic": "tech",
+    "level": "A1"
+  },
+  "video": {
+    "topic": "tech",
+    "level": "A1"
+  },
+  "game": {
+    "topic": "tech",
+    "level": "A1"
+  },
+  "internet": {
+    "topic": "tech",
+    "level": "A1"
+  },
+  "email": {
+    "topic": "tech",
+    "level": "A1"
+  },
+  "telephone": {
+    "topic": "tech",
+    "level": "A1"
+  },
+  "display": {
+    "topic": "tech",
+    "level": "A1"
+  },
+  "lens": {
+    "topic": "tech",
+    "level": "A1"
+  },
+  "pad": {
+    "topic": "tech",
+    "level": "A1"
+  },
+  "clip": {
+    "topic": "tech",
+    "level": "A1"
+  },
+  "match": {
+    "topic": "tech",
+    "level": "A1"
+  },
+  "electronic mail": {
+    "topic": "tech",
+    "level": "A1"
+  },
+  "career": {
+    "topic": "job",
+    "level": "B1"
+  },
+  "promotion": {
+    "topic": "job",
+    "level": "B1"
+  },
+  "freelancer": {
+    "topic": "job",
+    "level": "B1"
+  },
+  "remote work": {
+    "topic": "job",
+    "level": "B1"
+  },
+  "networking": {
+    "topic": "job",
+    "level": "B1"
+  },
+  "skill set": {
+    "topic": "job",
+    "level": "B1"
+  },
+  "reference": {
+    "topic": "job",
+    "level": "B1"
+  },
+  "workplace": {
+    "topic": "job",
+    "level": "A1"
+  },
+  "profession": {
+    "topic": "job",
+    "level": "B1"
+  },
+  "marketing": {
+    "topic": "job",
+    "level": "B1"
+  },
+  "independent contractor": {
+    "topic": "job",
+    "level": "B1"
+  },
+  "telecommuting": {
+    "topic": "job",
+    "level": "B1"
+  },
+  "connecting": {
+    "topic": "job",
+    "level": "B1"
+  },
+  "expertise": {
+    "topic": "job",
+    "level": "B1"
+  },
+  "recommendation": {
+    "topic": "job",
+    "level": "B1"
+  },
+  "workspace": {
+    "topic": "job",
+    "level": "B1"
+  },
+  "work": {
+    "topic": "job",
+    "level": "A1"
+  },
+  "job": {
+    "topic": "job",
+    "level": "A1"
+  },
+  "boss": {
+    "topic": "job",
+    "level": "A1"
+  },
+  "office": {
+    "topic": "job",
+    "level": "A1"
+  },
+  "team": {
+    "topic": "job",
+    "level": "A1"
+  },
+  "meeting": {
+    "topic": "job",
+    "level": "A1"
+  },
+  "money": {
+    "topic": "job",
+    "level": "A1"
+  },
+  "break": {
+    "topic": "job",
+    "level": "A1"
+  },
+  "labor": {
+    "topic": "job",
+    "level": "A1"
+  },
+  "occupation": {
+    "topic": "job",
+    "level": "A1"
+  },
+  "manager": {
+    "topic": "job",
+    "level": "A1"
+  },
+  "gathering": {
+    "topic": "job",
+    "level": "A1"
+  },
+  "cash": {
+    "topic": "job",
+    "level": "A1"
+  },
+  "pause": {
+    "topic": "job",
+    "level": "A1"
+  }
+}
