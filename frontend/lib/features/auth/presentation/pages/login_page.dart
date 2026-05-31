@@ -153,7 +153,15 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                   Align(
                     alignment: Alignment.centerRight,
                     child: TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text('Tính năng khôi phục mật khẩu đang được phát triển. Vui lòng liên hệ Admin.'),
+                            backgroundColor: AppColors.primary,
+                            duration: Duration(seconds: 3),
+                          ),
+                        );
+                      },
                       child: const Text('Quên mật khẩu?', style: TextStyle(color: AppColors.primary)),
                     ),
                   ),
