@@ -59,8 +59,24 @@ def save_roleplay_session(
         db.add(db_score)
         
     # 3. Tạo ActivityLog
-    # Tính toán XP: 50 base XP + (sentence_count * 2) (tối đa 100 XP)
-    xp_earned = min(100, 50 + session_data.sentence_count * 2)
+    # Tính toán XP thực tế dựa trên đóng góp & nỗ lực thực tế của học viên:
+    # - Mỗi câu nói (sentence_count) hoàn chỉnh: +6 XP (học viên phải động não và phát âm)
+    # - Mỗi phút học (duration_minutes): +5 XP
+    # - Phạt nhẹ dựa trên lỗi sai nhưng đảm bảo vẫn khuyến khích: -1 XP cho mỗi lỗi ngữ pháp/phát âm
+    # - Thưởng điểm chất lượng nếu điểm trung bình phát âm/lưu loát/tự tin > 80: +20 XP
+    # - Giới hạn: Tối thiểu 15 XP (nếu có tham gia), Tối đa 150 XP.
+    base_xp = 10
+    sentence_xp = session_data.sentence_count * 6
+    duration_xp = session_data.duration_minutes * 5
+    penalty_xp = (session_data.pronunciation_errors_count + session_data.grammar_errors_count) * 1
+    
+    quality_bonus = 0
+    if overall > 80.0:
+        quality_bonus = 20
+        
+    xp_calculated = base_xp + sentence_xp + duration_xp - penalty_xp + quality_bonus
+    xp_earned = max(15, min(150, xp_calculated))
+    
     db_activity = ActivityLog(
         user_id=current_user.id,
         activity_type="roleplay",
@@ -73,6 +89,36 @@ def save_roleplay_session(
     from app.services.gamification_service import gamification_service
     user_xp, leveled_up = gamification_service.add_xp(db, current_user.id, xp_earned)
     
+    # 5. Cập nhật UserSkillLevel của User dựa trên buổi học thực tế
+    skill_level = db.query(UserSkillLevel).filter(UserSkillLevel.user_id == current_user.id).first()
+    if not skill_level:
+        skill_level = UserSkillLevel(
+            user_id=current_user.id,
+            vocabulary=30.0,
+            grammar=30.0,
+            pronunciation=30.0,
+            listening=30.0,
+            fluency=30.0
+        )
+        db.add(skill_level)
+        db.flush()
+    
+    # Cập nhật theo moving average (70% cũ, 30% mới) để phản ánh đúng thực tế
+    def update_score(old, new):
+        return round((old * 0.7) + (new * 0.3), 1)
+        
+    skill_level.pronunciation = update_score(skill_level.pronunciation, session_data.pronunciation_score)
+    skill_level.fluency = update_score(skill_level.fluency, session_data.fluency_score)
+    # Ngữ pháp (grammar): có thể ước lượng tăng nhẹ hoặc giảm nhẹ tùy lỗi sai
+    # Nếu grammar_errors_count ít thì nâng grammar skill lên
+    if session_data.sentence_count > 0:
+        grammar_performance = (100.0 - (session_data.grammar_errors_count * 10.0 / session_data.sentence_count * 10.0)).clamp(50.0, 100.0) if hasattr(float, 'clamp') else max(50.0, min(100.0, 100.0 - (session_data.grammar_errors_count / session_data.sentence_count) * 100.0))
+        skill_level.grammar = update_score(skill_level.grammar, grammar_performance)
+        # Nâng nhẹ từ vựng
+        skill_level.vocabulary = min(100.0, skill_level.vocabulary + 0.3)
+        # Nâng nhẹ kĩ năng nghe do nghe AI nói
+        skill_level.listening = min(100.0, skill_level.listening + 0.2)
+        
     db.commit()
     
     return {
