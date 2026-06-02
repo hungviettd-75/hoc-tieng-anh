@@ -260,10 +260,12 @@ async function loadUsers() {
                     <td><span class="plan-badge ${u.subscription_plan}">${u.subscription_plan}</span></td>
                     <td><span class="status-badge ${u.is_active ? 'active' : 'banned'}">${u.is_active ? '✅ Active' : '🚫 Banned'}</span></td>
                     <td>
-                        <button class="btn-action" onclick="viewUser(${u.id})">👁️</button>
+                        <button class="btn-action" onclick="viewUser(${u.id})" title="Xem chi tiết">👁️</button>
+                        ${!u.is_admin ? `<button class="btn-action" onclick="openResetPasswordModal(${u.id}, '${(u.full_name || u.email).replace(/'/g, "\\'")}')" title="Đổi mật khẩu">🔑</button>` : ''}
                         ${u.is_active
-                            ? `<button class="btn-action danger" onclick="toggleUserStatus(${u.id}, false)">🚫</button>`
-                            : `<button class="btn-action success" onclick="toggleUserStatus(${u.id}, true)">✅</button>`}
+                            ? `<button class="btn-action danger" onclick="toggleUserStatus(${u.id}, false)" title="Khóa tài khoản">🚫</button>`
+                            : `<button class="btn-action success" onclick="toggleUserStatus(${u.id}, true)" title="Kích hoạt">✅</button>`}
+                        ${!u.is_admin ? `<button class="btn-action danger" onclick="deleteUser(${u.id}, '${(u.full_name || u.email).replace(/'/g, "\\'")}')" title="Xóa tài khoản">🗑️</button>` : ''}
                     </td>
                 </tr>
             `).join('');
@@ -322,6 +324,89 @@ async function toggleUserStatus(id, active) {
         });
         loadUsers();
     } catch (e) { alert('Lỗi: ' + e.message); }
+}
+
+// ============================================================
+// RESET PASSWORD
+// ============================================================
+function openResetPasswordModal(userId, userName) {
+    document.getElementById('resetPasswordModal').style.display = 'flex';
+    document.getElementById('resetPwUserId').value = userId;
+    document.getElementById('resetPwUserName').textContent = userName;
+    document.getElementById('resetPwNew').value = '';
+    document.getElementById('resetPwConfirm').value = '';
+    document.getElementById('resetPwError').style.display = 'none';
+}
+
+function closeResetPasswordModal() {
+    document.getElementById('resetPasswordModal').style.display = 'none';
+}
+
+function togglePasswordVisibility(inputId, btn) {
+    const input = document.getElementById(inputId);
+    if (input.type === 'password') {
+        input.type = 'text';
+        btn.textContent = '🙈';
+    } else {
+        input.type = 'password';
+        btn.textContent = '👁️';
+    }
+}
+
+async function submitResetPassword(e) {
+    e.preventDefault();
+    const userId = document.getElementById('resetPwUserId').value;
+    const newPw = document.getElementById('resetPwNew').value;
+    const confirmPw = document.getElementById('resetPwConfirm').value;
+    const errEl = document.getElementById('resetPwError');
+
+    // Validate
+    if (newPw.length < 6) {
+        errEl.textContent = 'Mật khẩu phải có ít nhất 6 ký tự';
+        errEl.style.display = 'block';
+        return;
+    }
+    if (newPw !== confirmPw) {
+        errEl.textContent = 'Mật khẩu xác nhận không khớp';
+        errEl.style.display = 'block';
+        return;
+    }
+    errEl.style.display = 'none';
+
+    const btn = document.getElementById('resetPwSubmitBtn');
+    btn.disabled = true;
+    btn.textContent = '⏳ Đang xử lý...';
+
+    try {
+        const res = await apiFetch(`/admin/users/${userId}/password`, {
+            method: 'PUT',
+            body: JSON.stringify({ new_password: newPw })
+        });
+        closeResetPasswordModal();
+        alert(`✅ ${res.message}`);
+    } catch (error) {
+        errEl.textContent = 'Lỗi: ' + error.message;
+        errEl.style.display = 'block';
+    } finally {
+        btn.disabled = false;
+        btn.textContent = '🔑 Đổi mật khẩu';
+    }
+}
+
+// ============================================================
+// DELETE USER
+// ============================================================
+async function deleteUser(userId, userName) {
+    if (!confirm(`⚠️ Bạn có chắc chắn muốn XÓA VĨNH VIỄN tài khoản "${userName}" (ID #${userId})?\n\nTất cả dữ liệu học tập, hội thoại, điểm số... của học viên này sẽ bị xóa và KHÔNG THỂ KHÔI PHỤC.`)) return;
+    if (!confirm(`🚨 XÁC NHẬN LẦN CUỐI: Xóa tài khoản "${userName}"?\n\nHành động này KHÔNG THỂ hoàn tác!`)) return;
+
+    try {
+        const res = await apiFetch(`/admin/users/${userId}`, { method: 'DELETE' });
+        alert(`✅ ${res.message}`);
+        loadUsers();
+    } catch (error) {
+        alert('❌ Lỗi khi xóa tài khoản: ' + error.message);
+    }
 }
 
 // ============================================================

@@ -84,6 +84,48 @@ def update_user_status(
     return {"message": f"User {'activated' if status_update.is_active else 'banned'}", "user_id": user_id}
 
 
+@router.put("/users/{user_id}/password")
+def admin_reset_password(
+    user_id: int,
+    password_data: schemas.admin.AdminResetPassword,
+    db: Session = Depends(deps.get_db),
+    admin: models.models.User = Depends(deps.get_current_admin),
+) -> Any:
+    """Admin đặt lại mật khẩu cho học viên."""
+    from app.core import security
+    user = db.query(models.models.User).filter(models.models.User.id == user_id).first()
+    if not user:
+        raise HTTPException(status_code=404, detail="User not found")
+    if user.is_admin:
+        raise HTTPException(status_code=403, detail="Không thể thay đổi mật khẩu tài khoản admin khác")
+    if len(password_data.new_password) < 6:
+        raise HTTPException(status_code=400, detail="Mật khẩu phải có ít nhất 6 ký tự")
+    user.hashed_password = security.get_password_hash(password_data.new_password)
+    # Thu hồi tất cả refresh tokens của user
+    db.query(models.models.RefreshToken).filter(
+        models.models.RefreshToken.user_id == user_id
+    ).update({"is_revoked": True})
+    db.commit()
+    return {"message": f"Đã đặt lại mật khẩu cho user #{user_id}", "user_id": user_id}
+
+
+@router.delete("/users/{user_id}")
+def delete_user(
+    user_id: int,
+    db: Session = Depends(deps.get_db),
+    admin: models.models.User = Depends(deps.get_current_admin),
+) -> Any:
+    """Xóa tài khoản học viên đã nghỉ học (cascade xóa tất cả dữ liệu liên quan)."""
+    user = db.query(models.models.User).filter(models.models.User.id == user_id).first()
+    if not user:
+        raise HTTPException(status_code=404, detail="User not found")
+    if user.is_admin:
+        raise HTTPException(status_code=403, detail="Không thể xóa tài khoản admin")
+    db.delete(user)
+    db.commit()
+    return {"message": f"Đã xóa tài khoản user #{user_id} thành công", "user_id": user_id}
+
+
 # ============================================================
 # ANALYTICS ENDPOINTS
 # ============================================================

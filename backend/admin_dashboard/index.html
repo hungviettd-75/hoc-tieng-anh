@@ -232,7 +232,7 @@
                                     <th>Streak</th>
                                     <th>Plan</th>
                                     <th>Status</th>
-                                    <th>Actions</th>
+                                    <th>Hành động</th>
                                 </tr>
                             </thead>
                             <tbody id="usersTableBody">
@@ -566,6 +566,45 @@
             </div>
             <div class="modal-body" id="userDetailBody">
                 <div class="loading-cell">Đang tải...</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- RESET PASSWORD MODAL -->
+    <div id="resetPasswordModal" class="modal" style="display:none;">
+        <div class="modal-overlay" onclick="closeResetPasswordModal()"></div>
+        <div class="modal-content" style="max-width: 450px;">
+            <div class="modal-header">
+                <h2>🔑 Đổi mật khẩu học viên</h2>
+                <button class="modal-close" onclick="closeResetPasswordModal()">✕</button>
+            </div>
+            <div class="modal-body">
+                <div id="resetPwUserInfo" style="margin-bottom: 1.2rem; padding: 0.8rem; background: rgba(0,212,255,0.08); border-radius: 10px; border: 1px solid rgba(0,212,255,0.15);">
+                    <span style="color: var(--text-muted); font-size: 0.85rem;">Đang đổi mật khẩu cho:</span>
+                    <div style="color: #fff; font-weight: 600; margin-top: 4px;" id="resetPwUserName">—</div>
+                </div>
+                <form id="resetPasswordForm" onsubmit="submitResetPassword(event)">
+                    <input type="hidden" id="resetPwUserId">
+                    <div class="form-group">
+                        <label for="resetPwNew">Mật khẩu mới</label>
+                        <div class="input-wrapper" style="position: relative;">
+                            <input type="password" id="resetPwNew" required minlength="6" class="form-control" placeholder="Tối thiểu 6 ký tự">
+                            <button type="button" class="btn-toggle-pw" onclick="togglePasswordVisibility('resetPwNew', this)" title="Hiện/ẩn mật khẩu" style="position:absolute;right:10px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;font-size:1.2rem;">👁️</button>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="resetPwConfirm">Xác nhận mật khẩu mới</label>
+                        <div class="input-wrapper" style="position: relative;">
+                            <input type="password" id="resetPwConfirm" required minlength="6" class="form-control" placeholder="Nhập lại mật khẩu">
+                            <button type="button" class="btn-toggle-pw" onclick="togglePasswordVisibility('resetPwConfirm', this)" title="Hiện/ẩn mật khẩu" style="position:absolute;right:10px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;font-size:1.2rem;">👁️</button>
+                        </div>
+                    </div>
+                    <p id="resetPwError" class="error-text" style="display:none; color: #ef4444; margin-top: 0.5rem;"></p>
+                    <div class="modal-footer" style="margin-top: 1.5rem; text-align: right; display: flex; gap: 0.8rem; justify-content: flex-end;">
+                        <button type="button" class="btn-secondary" onclick="closeResetPasswordModal()">Hủy</button>
+                        <button type="submit" class="btn-primary" id="resetPwSubmitBtn">🔑 Đổi mật khẩu</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

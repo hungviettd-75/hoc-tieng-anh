@@ -56,6 +56,10 @@ class UserStatusUpdate(BaseModel):
     is_active: bool
 
 
+class AdminResetPassword(BaseModel):
+    new_password: str
+
+
 # --- Analytics Charts ---
 class TimeSeriesPoint(BaseModel):
     date: str
