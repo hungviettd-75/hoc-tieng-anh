@@ -5,7 +5,7 @@ from app.services.ai_router import ai_router
 from app.services.conversation_memory import conversation_memory
 from app.services.vietnamese_tutor_engine import vietnamese_tutor
 from app.db.session import SessionLocal
-from app.models.models import Conversation, Message as DBMessage, PronunciationSession, PronunciationScore, ActivityLog, User
+from app.models.models import Conversation, Message as DBMessage, PronunciationSession, PronunciationScore, ActivityLog, User, UserSkillLevel
 from app.api import deps
 from sqlalchemy.orm import Session
 from pydantic import BaseModel
@@ -26,7 +26,7 @@ class RoleplaySessionCreate(BaseModel):
 
 router = APIRouter()
 
-@router.post("/roleplay/session")
+@router.post("/chat/roleplay/session")
 def save_roleplay_session(
     session_data: RoleplaySessionCreate,
     db: Session = Depends(deps.get_db),
@@ -65,17 +65,20 @@ def save_roleplay_session(
     # - Phạt nhẹ dựa trên lỗi sai nhưng đảm bảo vẫn khuyến khích: -1 XP cho mỗi lỗi ngữ pháp/phát âm
     # - Thưởng điểm chất lượng nếu điểm trung bình phát âm/lưu loát/tự tin > 80: +20 XP
     # - Giới hạn: Tối thiểu 15 XP (nếu có tham gia), Tối đa 150 XP.
-    base_xp = 10
-    sentence_xp = session_data.sentence_count * 6
-    duration_xp = session_data.duration_minutes * 5
-    penalty_xp = (session_data.pronunciation_errors_count + session_data.grammar_errors_count) * 1
-    
-    quality_bonus = 0
-    if overall > 80.0:
-        quality_bonus = 20
+    if session_data.sentence_count == 0:
+        xp_earned = 0
+    else:
+        base_xp = 10
+        sentence_xp = session_data.sentence_count * 6
+        duration_xp = session_data.duration_minutes * 5
+        penalty_xp = (session_data.pronunciation_errors_count + session_data.grammar_errors_count) * 1
         
-    xp_calculated = base_xp + sentence_xp + duration_xp - penalty_xp + quality_bonus
-    xp_earned = max(15, min(150, xp_calculated))
+        quality_bonus = 0
+        if overall > 80.0:
+            quality_bonus = 20
+            
+        xp_calculated = base_xp + sentence_xp + duration_xp - penalty_xp + quality_bonus
+        xp_earned = max(15, min(150, xp_calculated))
     
     db_activity = ActivityLog(
         user_id=current_user.id,
@@ -692,8 +695,31 @@ async def realtime_voice_endpoint(
                 
                 # === STEP 1: Professional LLM Correction Analysis with Fallback ===
                 async def get_and_send_corrections():
-                    # ĐÃ LOẠI BỎ TÍNH NĂNG AI CORRECTION THEO YÊU CẦU NGƯỜI DÙNG
-                    # Điều này giúp tăng gấp đôi tốc độ phản hồi và tiết kiệm 100% tài nguyên API
+                    try:
+                        ai_corrections = await gemini_service.get_structured_correction(user_message)
+                        if ai_corrections:
+                            # Gửi kết quả sửa lỗi về cho frontend đếm và hiển thị
+                            import json
+                            # Lọc bỏ các phần tử lỗi hoặc không đúng định dạng
+                            valid_corrections = []
+                            for c in ai_corrections:
+                                if isinstance(c, dict) and "original" in c and "correction" in c:
+                                    valid_corrections.append(c)
+                            
+                            if valid_corrections:
+                                formatted_text = ""
+                                for idx, c in enumerate(valid_corrections):
+                                    err_lbl = "Phát âm" if c.get("error_type") == "pronunciation" else "Ngữ pháp"
+                                    formatted_text += f"[{err_lbl}] Bạn nói: '{c['original']}' -> Nên nói: '{c['correction']}' ({c.get('explanation_vi', '')})\n"
+                                
+                                await manager.send_json({
+                                    "type": "realtime_correction",
+                                    "corrections": valid_corrections,
+                                    "formatted_text": formatted_text.strip()
+                                }, websocket)
+                                return valid_corrections, "gemini_api"
+                    except Exception as e:
+                        print(f"ERROR getting realtime corrections: {e}")
                     return [], "disabled"
 
                 correction_task = asyncio.create_task(get_and_send_corrections())
