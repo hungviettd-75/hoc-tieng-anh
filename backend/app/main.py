@@ -41,6 +41,10 @@ app.add_middleware(
 async def root():
     return {"message": "Welcome to AI English Coach API", "status": "online"}
 
+@app.get("/health")
+async def health_check():
+    return {"status": "healthy"}
+
 app.include_router(api_router, prefix=settings.API_V1_STR)
 
 # Mount admin dashboard static files
